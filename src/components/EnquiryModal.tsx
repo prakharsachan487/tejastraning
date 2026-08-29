@@ -155,10 +155,7 @@ export function EnquiryModal() {
       setServerError('');
 
       try {
-        // Try relative endpoint (via Vite proxy) or direct backend URL
-        const apiUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-          ? 'http://localhost:3001/api/enquiries'
-          : '/api/enquiries';
+        const apiUrl = 'https://tejastraning-api.onrender.com/api/enquiries';
 
         const res = await fetch(apiUrl, {
           method: 'POST',
