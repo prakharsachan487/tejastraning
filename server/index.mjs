@@ -5,7 +5,7 @@ import rateLimit from 'express-rate-limit';
 import enquiriesRouter from './routes/enquiries.mjs';
 
 const app = express();
-const PORT = process.env.API_PORT || 3001;
+const PORT = process.env.PORT || process.env.API_PORT || 3001;
 
 // ─── Middleware ─────────────────────────────────────────
 
@@ -43,7 +43,7 @@ app.get('/api/health', (_req, res) => {
 
 // ─── Start ──────────────────────────────────────────────
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`[SERVER] Tejas API running on http://localhost:${PORT}`);
 });
 
