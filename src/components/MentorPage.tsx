@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Sparkles, 
@@ -190,6 +190,13 @@ const faqs = [
 export function MentorPage({ onBackToHome }: MentorPageProps) {
   const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+
+  // Instantly scroll to top when page opens
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }, []);
 
   const scrollToSection = (id: string) => {
     const elem = document.getElementById(id);

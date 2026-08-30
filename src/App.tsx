@@ -24,15 +24,23 @@ function App() {
     const handleHashChange = () => {
       if (window.location.hash === '#mentor' || window.location.hash === '#become-a-mentor') {
         setCurrentPage('mentor');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
       } else {
         setCurrentPage('home');
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
       }
     };
 
     // Check initial hash
     if (window.location.hash === '#mentor' || window.location.hash === '#become-a-mentor') {
       setCurrentPage('mentor');
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
     }
 
     window.addEventListener('hashchange', handleHashChange);
@@ -42,7 +50,9 @@ function App() {
   const handleBackToHome = () => {
     window.location.hash = '';
     setCurrentPage('home');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
   };
 
   return (
