@@ -1,338 +1,324 @@
-import { useRef, useState, useCallback, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Flame, Sparkles, Terminal } from 'lucide-react';
 import { useEnquiry } from '../context/EnquiryContext';
 
-/* ─────────────────────────────────────────────
-   INTERACTIVE 3D-STYLE ECOSYSTEM (CSS-based)
-   ───────────────────────────────────────────── */
-
-interface EcoNode {
-  label: string;
-  shortLabel: string;
-  x: number;
-  y: number;
-  delay: number;
+interface ShatterWordProps {
+  word: string;
+  startIndex: number;
+  totalGradientLength?: number;
+  isGradient?: boolean;
 }
 
-const ecosystemNodes: EcoNode[] = [
-  { label: 'Practical Training', shortLabel: 'TRAINING', x: -220, y: -140, delay: 0.2 },
-  { label: 'Certifications', shortLabel: 'CERTIFY', x: 220, y: -150, delay: 0.35 },
-  { label: 'Live Projects', shortLabel: 'PROJECTS', x: -250, y: 40, delay: 0.5 },
-  { label: 'Interview Prep', shortLabel: 'INTERVIEW', x: 250, y: 30, delay: 0.65 },
-  { label: 'Aptitude', shortLabel: 'APTITUDE', x: -160, y: 170, delay: 0.8 },
-  { label: 'Placement Support', shortLabel: 'PLACEMENT', x: 180, y: 170, delay: 0.95 },
-];
-
-function EcosystemVisual() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [hoveredNode, setHoveredNode] = useState<number | null>(null);
-
-  const handleMouseMove = useCallback((e: React.MouseEvent) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
-    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
-    setMousePos({ x, y });
-  }, []);
-
-  const handleMouseLeave = useCallback(() => {
-    setMousePos({ x: 0, y: 0 });
-  }, []);
-
+function ShatterWord({
+  word,
+  startIndex,
+  totalGradientLength = 16,
+  isGradient = false,
+}: ShatterWordProps) {
   return (
-    <div
-      ref={containerRef}
-      className="ecosystem-container relative w-full aspect-square max-w-[560px] mx-auto"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-    >
-      {/* Grid background */}
-      <div
-        className="absolute inset-0 opacity-30"
-        style={{
-          backgroundImage:
-            'linear-gradient(rgba(215,38,56,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(215,38,56,0.08) 1px, transparent 1px)',
-          backgroundSize: '40px 40px',
-          transform: `translate(${mousePos.x * -3}px, ${mousePos.y * -3}px)`,
-          transition: 'transform 0.3s ease-out',
-        }}
-      />
+    <span className="inline-flex mr-[0.28em] last:mr-0">
+      {word.split('').map((char, charIdx) => {
+        const globalIdx = startIndex + charIdx;
 
-      {/* Orbital rings */}
-      <svg
-        className="absolute inset-0 w-full h-full"
-        viewBox="-300 -250 600 500"
-        fill="none"
-        style={{
-          transform: `rotateX(${mousePos.y * 3}deg) rotateY(${mousePos.x * 3}deg)`,
-          transition: 'transform 0.2s ease-out',
-        }}
-      >
-        {/* Dashed concentric circles */}
-        <ellipse
-          cx="0" cy="0" rx="140" ry="90"
-          stroke="rgba(215,38,56,0.15)"
-          strokeWidth="1"
-          strokeDasharray="6 4"
-          fill="none"
-        />
-        <ellipse
-          cx="0" cy="0" rx="230" ry="160"
-          stroke="rgba(0,0,0,0.06)"
-          strokeWidth="1"
-          strokeDasharray="4 6"
-          fill="none"
-        />
+        // Deterministic scatter trajectory for slow shatter effect
+        const xOffset = ((globalIdx * 37 + 11) % 60) - 30; // -30px to +30px
+        const yOffset = ((globalIdx * 43 + 17) % 50) - 25; // -25px to +25px
+        const rotOffset = ((globalIdx * 59 + 23) % 40) - 20; // -20deg to +20deg
+        const scaleStart = 0.5 + ((globalIdx * 19) % 6) * 0.1; // 0.5 to 1.1
 
-        {/* Connection lines from center to nodes */}
-        {ecosystemNodes.map((node, i) => (
-          <line
-            key={i}
-            x1="0" y1="0"
-            x2={node.x * 0.85} y2={node.y * 0.85}
-            stroke={hoveredNode === i ? 'rgba(215,38,56,0.4)' : 'rgba(0,0,0,0.08)'}
-            strokeWidth="1"
-            strokeDasharray="3 3"
-            style={{ transition: 'stroke 0.3s ease' }}
-          />
-        ))}
+        // Precise mathematical RGB interpolation from #FF4500 (255, 69, 0) to #FFA000 (255, 160, 0)
+        let charColor = '#FFFFFF';
+        if (isGradient) {
+          // Interpolate between #FF4500 (R:255, G:69, B:0) and #FFA000 (R:255, G:160, B:0)
+          const g = Math.round(69 + (160 - 69) * ((startIndex + charIdx - 20) / Math.max(totalGradientLength - 1, 1)));
+          charColor = `rgb(255, ${Math.min(Math.max(g, 69), 160)}, 0)`;
+        }
 
-        {/* Center registration marks */}
-        <line x1="-12" y1="0" x2="12" y2="0" stroke="rgba(215,38,56,0.3)" strokeWidth="1" />
-        <line x1="0" y1="-12" x2="0" y2="12" stroke="rgba(215,38,56,0.3)" strokeWidth="1" />
-        <circle cx="0" cy="0" r="6" stroke="rgba(215,38,56,0.3)" strokeWidth="1" fill="none" />
-      </svg>
-
-      {/* Center element */}
-      <motion.div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10"
-        style={{
-          transform: `translate(calc(-50% + ${mousePos.x * 5}px), calc(-50% + ${mousePos.y * 5}px))`,
-          transition: 'transform 0.2s ease-out',
-        }}
-        initial={{ scale: 0, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ delay: 0.3, duration: 0.6, type: 'spring' }}
-      >
-        <div className="relative">
-          {/* Outer ring */}
-          <div className="w-28 h-28 border border-tejas-red/20 flex items-center justify-center relative">
-            <div className="w-20 h-20 bg-tejas-red flex items-center justify-center">
-              <span className="text-white font-black text-lg tracking-[0.1em]">TEJAS</span>
-            </div>
-            {/* Corner registration marks */}
-            <div className="absolute -top-1 -left-1 w-2 h-2 border-t border-l border-tejas-red/40" />
-            <div className="absolute -top-1 -right-1 w-2 h-2 border-t border-r border-tejas-red/40" />
-            <div className="absolute -bottom-1 -left-1 w-2 h-2 border-b border-l border-tejas-red/40" />
-            <div className="absolute -bottom-1 -right-1 w-2 h-2 border-b border-r border-tejas-red/40" />
-          </div>
-        </div>
-      </motion.div>
-
-      {/* Ecosystem nodes */}
-      {ecosystemNodes.map((node, i) => (
-        <motion.div
-          key={i}
-          className="absolute z-10 cursor-pointer group"
-          style={{
-            top: `calc(50% + ${node.y * 0.55}px + ${mousePos.y * (8 + i * 2)}px)`,
-            left: `calc(50% + ${node.x * 0.55}px + ${mousePos.x * (8 + i * 2)}px)`,
-            transform: 'translate(-50%, -50%)',
-            transition: 'top 0.2s ease-out, left 0.2s ease-out',
-          }}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: node.delay + 0.4, duration: 0.5 }}
-          onMouseEnter={() => setHoveredNode(i)}
-          onMouseLeave={() => setHoveredNode(null)}
-        >
-          <div
-            className={`relative px-3 py-2 border transition-all duration-300 ${
-              hoveredNode === i
-                ? 'border-tejas-red/40 bg-tejas-red/5 shadow-lg shadow-tejas-red/10'
-                : 'border-ink-200 bg-white/80'
-            }`}
+        return (
+          <motion.span
+            key={`${char}-${charIdx}`}
+            initial={{
+              opacity: 0,
+              x: xOffset,
+              y: yOffset,
+              rotate: rotOffset,
+              scale: scaleStart,
+            }}
+            animate={{
+              opacity: 1,
+              x: 0,
+              y: 0,
+              rotate: 0,
+              scale: 1,
+            }}
+            transition={{
+              duration: 1.2, // Cinematic slow shatter assembly
+              delay: 0.1 + globalIdx * 0.035, // Cascading reassembly
+              ease: [0.16, 1, 0.3, 1], // Magnetic snap easing
+            }}
+            style={{ color: charColor }}
+            className="inline-block font-extrabold select-none will-change-transform"
           >
-            {/* Technical label */}
-            <div className="font-mono text-[9px] tracking-[0.15em] uppercase text-ink-400 mb-0.5">
-              {`FIG.${String(i + 1).padStart(2, '0')}`}
-            </div>
-            <div
-              className={`font-semibold text-xs tracking-wide uppercase transition-colors duration-300 ${
-                hoveredNode === i ? 'text-tejas-red' : 'text-ink-800'
-              }`}
-            >
-              {node.label}
-            </div>
-            {/* Connector dot */}
-            <div
-              className={`absolute w-1.5 h-1.5 transition-colors duration-300 ${
-                hoveredNode === i ? 'bg-tejas-red' : 'bg-ink-300'
-              }`}
-              style={{
-                top: '50%',
-                [node.x < 0 ? 'right' : 'left']: '-6px',
-                transform: 'translateY(-50%)',
-              }}
-            />
-          </div>
-        </motion.div>
-      ))}
-
-      {/* Corner technical annotations */}
-      <div className="absolute top-2 left-2 font-mono text-[8px] text-ink-300 tracking-[0.15em] uppercase">
-        SYS.DIAGRAM.01
-      </div>
-      <div className="absolute bottom-2 right-2 font-mono text-[8px] text-ink-300 tracking-[0.15em] uppercase">
-        TEJAS ECOSYSTEM
-      </div>
-    </div>
+            {char}
+          </motion.span>
+        );
+      })}
+    </span>
   );
 }
 
-/* ─────────────────────────────────────────────
-   HERO SECTION
-   ───────────────────────────────────────────── */
-
-const stats = [
-  { value: '50+', label: 'College Partnerships' },
-  { value: '500+', label: 'Students Trained' },
-  { value: '200+', label: 'Projects Delivered' },
-  { value: '95%', label: 'Placement Readiness' },
-];
-
 export function Hero() {
   const { openEnquiry } = useEnquiry();
-  const [, setReady] = useState(false);
-  useEffect(() => setReady(true), []);
+  const [activeStep, setActiveStep] = useState(0);
+
+  // Stepped cycle animation for bottom steps (Learn -> Practice -> Achieve)
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveStep((prev) => (prev + 1) % 3);
+    }, 2200);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center pt-20 pb-10 overflow-hidden grid-bg">
-      {/* Subtle background accents */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-tejas-red/[0.02] rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-tejas-red/[0.03] rounded-full blur-[80px] pointer-events-none" />
-
-      {/* Top editorial bar */}
-      <div className="absolute top-20 left-0 right-0 border-b border-ink-100">
-        <div className="max-w-[1360px] mx-auto px-5 sm:px-8 lg:px-10 flex items-center justify-between py-2">
-          <span className="font-mono text-[10px] tracking-[0.15em] text-ink-300 uppercase hidden sm:block">
-            Industry-Focused. College-Partners.
-          </span>
-          <span className="font-mono text-[10px] tracking-[0.15em] text-ink-300 uppercase hidden sm:block">
-            SEC.01
-          </span>
-        </div>
-      </div>
-
-      <div className="max-w-[1360px] mx-auto px-5 sm:px-8 lg:px-10 w-full">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
-          {/* Left content */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            className="max-w-xl"
-          >
-            {/* Eyebrow tag */}
+    <section className="relative pt-32 pb-16 lg:pt-40 lg:pb-24 overflow-hidden obsidian-grid bg-[#0A0A0D]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          
+          {/* Left Column: Animated Entrance Headline, Paragraph & Buttons */}
+          <div className="lg:col-span-6 flex flex-col text-left">
+            
+            {/* 01. Eyebrow Tag Badge */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-              className="inline-flex items-center gap-2 mb-8"
+              initial={{ opacity: 0, y: -15, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.5, ease: 'easeOut' }}
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF4500]/10 border border-[#FF4500]/25 text-[#FFA000] text-xs font-semibold tracking-wide mb-6 w-max"
             >
-              <span className="tech-tag">
-                <span className="w-1.5 h-1.5 bg-tejas-red mr-2 animate-pulse" />
-                Industry-Focused Learning
-              </span>
+              <span className="w-2 h-2 rounded-full bg-[#FF4500] animate-ping" />
+              <span>The Placement Infrastructure for Colleges</span>
             </motion.div>
 
-            {/* Headline */}
-            <motion.h1
+            {/* 02. Slow Shatter Re-assembly Headline */}
+            <h1 className="text-3xl sm:text-4xl lg:text-[3.25rem] xl:text-[3.65rem] font-extrabold tracking-tight leading-[1.15]">
+              {/* Line 1: The Infrastructure for (Solid White) */}
+              <span className="block whitespace-nowrap overflow-visible">
+                <ShatterWord word="The" startIndex={0} />
+                <ShatterWord word="Infrastructure" startIndex={3} />
+                <ShatterWord word="for" startIndex={17} />
+              </span>
+
+              {/* Line 2: Campus Placements (Electric Flame Orange #FF4500 -> #FFA000) */}
+              <span className="block whitespace-nowrap overflow-visible mt-1">
+                <ShatterWord word="Campus" startIndex={20} isGradient totalGradientLength={16} />
+                <ShatterWord word="Placements" startIndex={26} isGradient totalGradientLength={16} />
+              </span>
+            </h1>
+
+            {/* 03. Subheadline Fade & Slide */}
+            <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.7 }}
-              className="heading-editorial text-4xl sm:text-5xl lg:text-[3.5rem] xl:text-6xl text-ink-900"
+              transition={{ delay: 0.85, duration: 0.6, ease: 'easeOut' }}
+              className="mt-6 text-base sm:text-lg text-slate-300 leading-relaxed font-normal max-w-xl"
             >
-              Turn Students Into{' '}
-              <br className="hidden sm:block" />
-              Industry-Ready{' '}
-              <br className="hidden sm:block" />
-              <span className="text-tejas-red">Professionals.</span>
-            </motion.h1>
-
-            {/* Supporting copy */}
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-              className="mt-6 text-base text-ink-500 leading-relaxed max-w-lg"
-            >
-              Tejas partners with colleges and universities to deliver practical training,
-              certifications, projects, aptitude preparation, interview preparation and
-              placement support that prepares students for the real world.
+              Industry-led training, AI-powered assessments, interview preparation and hiring support — everything your college needs to improve student employability and placement outcomes.
             </motion.p>
 
-            {/* CTAs */}
+            {/* 04. Pill CTAs with spring entrance */}
             <motion.div
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.5 }}
-              className="mt-8 flex flex-wrap gap-4"
+              transition={{ delay: 1.0, duration: 0.5, ease: 'easeOut' }}
+              className="mt-8 sm:mt-10 flex flex-wrap items-center gap-4"
             >
-              <button
-                onClick={() => openEnquiry('PARTNERSHIP')}
-                className="inline-flex items-center gap-2 px-7 py-3.5 bg-tejas-red text-white text-sm font-semibold hover:bg-tejas-red-dark hover:shadow-lg hover:shadow-tejas-red/20 transition-all duration-300 cursor-pointer magnetic-btn"
-              >
-                Partner with Tejas
-                <ArrowRight size={16} />
-              </button>
-              <button
+              <motion.button
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
                 onClick={() => openEnquiry('CONSULTATION')}
-                className="inline-flex items-center gap-2 px-7 py-3.5 border border-ink-200 text-ink-700 text-sm font-semibold hover:border-tejas-red hover:text-tejas-red transition-all duration-300 cursor-pointer"
+                className="btn-pill-primary cursor-pointer"
               >
-                Book a Campus Consultation
+                <Sparkles size={16} className="text-white" />
+                <span>Request Demo</span>
                 <ArrowRight size={16} />
-              </button>
+              </motion.button>
+
+              <motion.a
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                href="#programs"
+                className="btn-pill-secondary cursor-pointer"
+              >
+                <span>View Programs</span>
+                <ArrowRight size={16} className="text-slate-400" />
+              </motion.a>
             </motion.div>
 
-            {/* Stats */}
+            {/* 05. Trust bullet checks */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.8, duration: 0.5 }}
-              className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-6"
+              transition={{ delay: 1.15, duration: 0.6 }}
+              className="mt-8 flex flex-wrap items-center gap-y-2 gap-x-6 text-xs text-slate-400"
             >
-              {stats.map((stat, i) => (
-                <div key={i} className="relative">
-                  <div className="text-2xl font-bold text-ink-900 tracking-tight">{stat.value}</div>
-                  <div className="text-[11px] text-ink-400 mt-1 font-medium tracking-wide">
-                    {stat.label}
-                  </div>
-                  {i < stats.length - 1 && (
-                    <div className="absolute right-0 top-1 bottom-1 w-px bg-ink-100 hidden sm:block" />
-                  )}
-                </div>
-              ))}
+              <div className="flex items-center gap-1.5">
+                <CheckCircle2 size={14} className="text-[#FF4500]" />
+                <span>AI Mock Diagnostics</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <CheckCircle2 size={14} className="text-[#FF4500]" />
+                <span>Industry Mentorship</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <CheckCircle2 size={14} className="text-[#FF4500]" />
+                <span>Campus Hiring Drives</span>
+              </div>
             </motion.div>
-          </motion.div>
 
-          {/* Right - Interactive Ecosystem */}
+          </div>
+
+          {/* Right Column: 3D Animated Coder Terminal / Workstation Preview */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
-            className="hidden lg:block"
+            initial={{ opacity: 0, scale: 0.88, rotateX: 12, rotateY: -8, y: 40 }}
+            animate={{ opacity: 1, scale: 1, rotateX: 0, rotateY: 0, y: 0 }}
+            transition={{
+              duration: 0.85,
+              delay: 0.35,
+              ease: [0.16, 1, 0.3, 1],
+            }}
+            className="lg:col-span-6 relative perspective-1200"
           >
-            <EcosystemVisual />
-          </motion.div>
-        </div>
-      </div>
+            <div className="relative rounded-3xl bg-[#111116] border border-slate-700/80 p-5 sm:p-6 overflow-hidden">
+              
+              {/* Window Header */}
+              <div className="flex items-center justify-between pb-4 border-b border-slate-800 mb-5">
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-rose-500/80" />
+                  <div className="w-3 h-3 rounded-full bg-amber-500/80" />
+                  <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
+                  <span className="ml-2 text-xs font-medium text-slate-400 hidden sm:inline flex items-center gap-1.5">
+                    <Terminal size={12} className="text-slate-500" />
+                    tejas://student-terminal/workspace
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="px-2.5 py-0.5 rounded-full bg-[#FF4500]/15 text-[#FFA000] text-[10px] font-semibold border border-[#FF4500]/30 flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#FF4500] animate-pulse" />
+                    Live Session
+                  </span>
+                </div>
+              </div>
 
-      {/* Bottom section number */}
-      <div className="absolute bottom-6 right-10 font-mono text-[80px] font-bold text-ink-50 leading-none select-none hidden lg:block">
-        01
+              {/* Workstation Graphic / Coder Card */}
+              <div className="relative rounded-2xl bg-[#15151D] p-6 border border-slate-800 flex flex-col justify-between min-h-[320px]">
+                
+                {/* Floating Skill Badge with Bounce Reveal */}
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <motion.div
+                      initial={{ scale: 0, rotate: -20 }}
+                      animate={{ scale: 1, rotate: 0 }}
+                      transition={{ delay: 0.6, type: 'spring', stiffness: 260, damping: 18 }}
+                      className="w-12 h-12 rounded-2xl bg-[#FF4500]/15 border border-[#FF4500]/30 flex items-center justify-center text-[#FF4500]"
+                    >
+                      <Flame size={24} />
+                    </motion.div>
+                    <div>
+                      <div className="text-sm font-bold text-white">
+                        Full Stack & DSA Mastery
+                      </div>
+                      <div className="text-xs text-slate-400">
+                        Module 04: System Design
+                      </div>
+                    </div>
+                  </div>
+
+                  <motion.span
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ delay: 0.75, type: 'spring', stiffness: 300, damping: 20 }}
+                    className="text-xs font-bold text-[#FFA000] bg-[#FF4500]/15 px-2.5 py-1 rounded-lg border border-[#FF4500]/30"
+                  >
+                    94.2% Ready
+                  </motion.span>
+                </div>
+
+                {/* Animated Code Diagnostic Terminal Snippet */}
+                <motion.div
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.7, duration: 0.5 }}
+                  className="my-5 p-3.5 rounded-xl bg-[#0C0C10] border border-slate-800 text-xs text-slate-300 space-y-1.5"
+                >
+                  <div className="text-slate-500 flex items-center justify-between text-[11px]">
+                    <span>// Real-time AI Code Review & Feedback</span>
+                    <span className="text-[10px] text-emerald-400 font-semibold">● Compiled</span>
+                  </div>
+                  <div className="text-[#FF6A00] font-medium">class PlacementEvaluator &#123;</div>
+                  <div className="pl-4 text-emerald-300 font-medium">solve(DSA_Problem target, AudioStream mic) &#123;</div>
+                  <div className="pl-8 text-slate-400">
+                    optimality: <span className="text-[#FFA000] font-bold">O(N log N) [Passed]</span>
+                  </div>
+                  <div className="pl-8 text-slate-400">
+                    speechClarity: <span className="text-[#FF6A00] font-bold">98.5% [Articulate]</span>
+                  </div>
+                  <div className="pl-4 text-emerald-300 font-medium">&#125;</div>
+                  <div className="text-[#FF6A00] font-medium">&#125;</div>
+                </motion.div>
+
+                {/* Bottom Step Indicator with Live Cycling Pulse */}
+                <div className="pt-4 border-t border-slate-800 flex items-center justify-between text-xs">
+                  <div className="flex items-center gap-4">
+                    <span
+                      className={`font-bold flex items-center gap-1.5 transition-all duration-300 ${
+                        activeStep === 0 ? 'text-[#FF4500] scale-105' : 'text-slate-500'
+                      }`}
+                    >
+                      <span
+                        className={`w-2 h-2 rounded-full ${
+                          activeStep === 0 ? 'bg-[#FF4500] animate-ping' : 'bg-slate-700'
+                        }`}
+                      />{' '}
+                      Learn
+                    </span>
+
+                    <span
+                      className={`font-bold flex items-center gap-1.5 transition-all duration-300 ${
+                        activeStep === 1 ? 'text-[#FF8C00] scale-105' : 'text-slate-500'
+                      }`}
+                    >
+                      <span
+                        className={`w-2 h-2 rounded-full ${
+                          activeStep === 1 ? 'bg-[#FF8C00] animate-ping' : 'bg-slate-700'
+                        }`}
+                      />{' '}
+                      Practice
+                    </span>
+
+                    <span
+                      className={`font-bold flex items-center gap-1.5 transition-all duration-300 ${
+                        activeStep === 2 ? 'text-[#FACC15] scale-105' : 'text-slate-500'
+                      }`}
+                    >
+                      <span
+                        className={`w-2 h-2 rounded-full ${
+                          activeStep === 2 ? 'bg-[#FACC15] animate-ping' : 'bg-slate-700'
+                        }`}
+                      />{' '}
+                      Achieve
+                    </span>
+                  </div>
+                  <span className="text-slate-400 text-[11px] font-medium">
+                    Offer Track #TJ-2026
+                  </span>
+                </div>
+
+              </div>
+
+            </div>
+          </motion.div>
+
+        </div>
       </div>
     </section>
   );

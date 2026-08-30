@@ -1,183 +1,406 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { ArrowRight, Code2, Briefcase, BarChart3, Brain, Users, GraduationCap } from 'lucide-react';
-import { useInView } from '../hooks/useInView';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  Code2, 
+  Cpu, 
+  Sparkles, 
+  Briefcase, 
+  ArrowRight, 
+  CheckCircle2, 
+  Clock, 
+  Award,
+  Zap,
+  Terminal,
+  FileCode
+} from 'lucide-react';
 import { useEnquiry } from '../context/EnquiryContext';
 
-interface Program {
-  icon: React.ReactNode;
-  category: string;
-  description: string;
-  skills: string[];
-  deliveryMode: string;
+interface Track {
+  title: string;
+  duration: string;
+  level: string;
+  tags: string[];
+  outcome: string;
+  highlights: string[];
 }
 
-const programs: Program[] = [
+interface Category {
+  id: string;
+  name: string;
+  shortName: string;
+  badge: string;
+  icon: typeof Code2;
+  tagline: string;
+  stat: string;
+  tracks: Track[];
+}
+
+const categories: Category[] = [
   {
-    icon: <Code2 size={20} />,
-    category: 'Engineering Programs',
-    description:
-      'Industry-ready training aligned with B.Tech and engineering student requirements. Hands-on projects and real-world system design.',
-    skills: ['DSA', 'Web Development', 'Cloud Computing', 'System Design', 'Projects'],
-    deliveryMode: 'On-campus / Hybrid',
+    id: 'core',
+    name: 'Technology & Core CS',
+    shortName: 'Core CS & DSA',
+    badge: 'Tier-1 Mapped',
+    icon: Code2,
+    tagline: 'Algorithmic problem solving, scalable architecture, and computer science fundamentals.',
+    stat: '700+ LeetCode Patterns Solved',
+    tracks: [
+      {
+        title: 'DSA & Algorithmic Mastery',
+        duration: '4 Months',
+        level: 'Interview Ready',
+        tags: ['Dynamic Programming', 'Graph Theory', 'LeetCode Hard', 'Pattern Drills'],
+        outcome: 'Cracks Top Product Firm Technical Coding Rounds',
+        highlights: ['50+ Mock Technical Interviews', 'Optimal Time & Space Complexity Drills'],
+      },
+      {
+        title: 'System Design & Scalable Architectures',
+        duration: '3 Months',
+        level: 'Advanced',
+        tags: ['Microservices', 'Kafka Streams', 'Redis Caching', 'Database Sharding'],
+        outcome: 'Designs systems handling millions of concurrent users',
+        highlights: ['Real Architecture Case Studies', 'High-Availability Distributed Systems'],
+      },
+      {
+        title: 'Core CS Fundamentals (OS, DBMS & Networks)',
+        duration: '2 Months',
+        level: 'Foundation to Pro',
+        tags: ['Linux Concurrency', 'SQL Query Tuning', 'TCP/IP Stack', 'LLD & OOP'],
+        outcome: 'Clears core university syllabus & foundational interviews',
+        highlights: ['ACID & Transactions Deep Dive', 'SOLID Design Patterns'],
+      },
+    ],
   },
   {
-    icon: <Briefcase size={20} />,
-    category: 'Computer Applications',
-    description:
-      'Practical skills for BCA, MCA and IT students. Full-stack development, databases, and modern frameworks.',
-    skills: ['Full-Stack Dev', 'Database Design', 'API Development', 'DevOps', 'Testing'],
-    deliveryMode: 'On-campus / Online',
+    id: 'fullstack',
+    name: 'Full Stack & Cloud',
+    shortName: 'Full Stack & Cloud',
+    badge: 'Production Systems',
+    icon: Cpu,
+    tagline: 'Modern enterprise web development with production deployments on AWS & Vercel.',
+    stat: '15+ Live Production Capstones',
+    tracks: [
+      {
+        title: 'Full Stack MERN & Next.js 15',
+        duration: '4 Months',
+        level: 'Full Lifecycle',
+        tags: ['TypeScript', 'Next.js App Router', 'Node.js', 'MongoDB', 'Tailwind'],
+        outcome: 'Builds & deploys secure, high-speed web apps',
+        highlights: ['JWT & OAuth2 Security', 'Dockerized Deployment to AWS'],
+      },
+      {
+        title: 'Enterprise Java & Spring Boot',
+        duration: '4 Months',
+        level: 'Enterprise',
+        tags: ['Spring Boot 3', 'Hibernate JPA', 'Kafka', 'Microservices'],
+        outcome: 'Engineers fault-tolerant backend services',
+        highlights: ['Spring Cloud & Security', 'JUnit 5 & Mockito Unit Testing'],
+      },
+      {
+        title: 'Cloud DevOps & Infrastructure',
+        duration: '3 Months',
+        level: 'Industry Grade',
+        tags: ['AWS Architecture', 'Terraform', 'Docker', 'Kubernetes', 'CI/CD'],
+        outcome: 'Automates production cloud infrastructure',
+        highlights: ['GitHub Actions Automation', 'Prometheus & Grafana Monitoring'],
+      },
+    ],
   },
   {
-    icon: <BarChart3 size={20} />,
-    category: 'Management Programs',
-    description:
-      'Employability and soft skills for BBA, MBA students. Analytics, marketing, and communication training.',
-    skills: ['Business Analytics', 'Marketing', 'Communication', 'Leadership', 'Finance'],
-    deliveryMode: 'On-campus / Hybrid',
+    id: 'emerging',
+    name: 'AI & Emerging Tech',
+    shortName: 'Generative AI & Data',
+    badge: 'High Demand',
+    icon: Sparkles,
+    tagline: 'Generative AI, Large Language Models, Neural Networks, and modern Data BI.',
+    stat: '20+ Applied AI Models Built',
+    tracks: [
+      {
+        title: 'Generative AI & LLM Systems',
+        duration: '4 Months',
+        level: 'Cutting-Edge',
+        tags: ['LangChain', 'RAG Pipelines', 'Vector DBs', 'OpenAI & Claude API'],
+        outcome: 'Builds autonomous AI agents and enterprise chatbots',
+        highlights: ['Pinecone & ChromaDB Integration', 'Prompt Optimization & Fine-Tuning'],
+      },
+      {
+        title: 'Machine Learning & Data Science',
+        duration: '4 Months',
+        level: 'Applied AI',
+        tags: ['Python', 'PyTorch', 'Scikit-Learn', 'FastAPI Deployment'],
+        outcome: 'Solves complex business problems using deep learning',
+        highlights: ['Real-World Kaggle Case Studies', 'Model Deployment via REST APIs'],
+      },
+      {
+        title: 'Data Analytics & Power BI',
+        duration: '3 Months',
+        level: 'Analytical',
+        tags: ['Advanced SQL', 'PowerBI', 'Tableau', 'Data Warehousing'],
+        outcome: 'Transforms raw numbers into executive business dashboards',
+        highlights: ['Complex SQL Window Functions', 'Business KPI Storytelling'],
+      },
+    ],
   },
   {
-    icon: <Brain size={20} />,
-    category: 'Aptitude & Employability',
-    description:
-      'Quantitative, logical reasoning and verbal preparation. Comprehensive aptitude training for placement readiness.',
-    skills: ['Quantitative', 'Logical Reasoning', 'Verbal', 'Data Interpretation', 'Mock Tests'],
-    deliveryMode: 'On-campus / Online',
-  },
-  {
-    icon: <Users size={20} />,
-    category: 'Professional Skills',
-    description:
-      'Soft skill development, presentation skills, and workplace readiness training for all streams.',
-    skills: ['Communication', 'Presentations', 'Team Collaboration', 'Time Management', 'Email Writing'],
-    deliveryMode: 'On-campus',
-  },
-  {
-    icon: <GraduationCap size={20} />,
-    category: 'Placement Preparation',
-    description:
-      'Interview preparation, resume building, group discussion practice, and mock placement drives.',
-    skills: ['Mock Interviews', 'Resume Building', 'Group Discussion', 'HR Rounds', 'Company Research'],
-    deliveryMode: 'On-campus / Hybrid',
+    id: 'business',
+    name: 'Placement & Aptitude Prep',
+    shortName: 'Placement & Soft Skills',
+    badge: 'Campus Ready',
+    icon: Briefcase,
+    tagline: 'Company-specific test packs, quantitative reasoning, and interview communication.',
+    stat: '1,500+ Exam Questions Simulated',
+    tracks: [
+      {
+        title: 'Company-Specific Campus Test Packs',
+        duration: '2 Months',
+        level: 'Top Hirers',
+        tags: ['TCS NQT', 'Infosys DSE', 'Wipro Turbo', 'Top Tier Startups'],
+        outcome: 'Directly simulates exact test patterns of major recruiters',
+        highlights: ['Timed Speed Drills', 'Previous Year Question Analysis'],
+      },
+      {
+        title: 'Quantitative & Logical Aptitude',
+        duration: '2 Months',
+        level: 'Speed & Accuracy',
+        tags: ['Speed Math', 'Pattern Recognition', 'Verbal Ability', 'DI'],
+        outcome: 'Maximizes clearing rates in preliminary campus screening rounds',
+        highlights: ['Mental Math Shortcut Techniques', 'Adaptive Test Simulators'],
+      },
+      {
+        title: 'Corporate Soft Skills & Mock GD/HR',
+        duration: '1 Month',
+        level: 'Interview Mastery',
+        tags: ['STAR Technique', 'Group Discussions', 'ATS Resumes', 'Mock Panels'],
+        outcome: 'Empowers students to convert final stage HR & leadership interviews',
+        highlights: ['Video Recorded GD Simulations', '1-on-1 Behavioral Coaching'],
+      },
+    ],
   },
 ];
 
 export function ProgramsSection() {
-  const { ref, isInView } = useInView();
+  const [activeId, setActiveId] = useState('core');
   const { openEnquiry } = useEnquiry();
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const currentCategory = categories.find((c) => c.id === activeId) || categories[0];
 
   return (
-    <section id="programs" ref={ref} className="section-padding bg-surface-white relative">
-      {/* Section number */}
-      <div className="absolute top-6 right-10 font-mono text-[80px] font-bold text-ink-50 leading-none select-none hidden lg:block">
-        02
-      </div>
-
-      <div className="max-w-[1360px] mx-auto px-5 sm:px-8 lg:px-10">
-        {/* Section header */}
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16">
-          <div>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="section-label-accent">● Our Programs</span>
-            </div>
-            <h2 className="heading-editorial text-3xl sm:text-4xl lg:text-[2.75rem] text-ink-900">
-              Industry-Aligned Training{' '}
-              <br className="hidden sm:block" />
-              Programs for{' '}
-              <span className="text-tejas-red">Every Stream.</span>
-            </h2>
+    <section id="programs" className="py-20 lg:py-28 bg-[#0A0A0D] relative obsidian-grid overflow-hidden">
+      {/* Background Subtle Gradient Glows */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-gradient-to-br from-[#FF4500]/10 via-[#FF7A00]/5 to-transparent blur-[120px] pointer-events-none rounded-full" />
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center max-w-3xl mx-auto mb-12"
+        >
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF4500]/10 border border-[#FF4500]/25 text-[#FFA000] text-xs font-semibold tracking-wide mb-4 shadow-sm shadow-orange-500/10">
+            <Sparkles size={14} className="text-[#FF4500]" />
+            <span>Comprehensive Curriculum</span>
           </div>
-          <button
-            className="inline-flex items-center gap-2 text-sm font-medium text-ink-500 hover:text-tejas-red transition-colors cursor-pointer group"
-            onClick={() => openEnquiry('PROPOSAL')}
-          >
-            Explore All Programs
-            <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-          </button>
-        </div>
+          
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight font-[family-name:var(--font-display)]">
+            Industry-Ready Programs.{' '}
+            <span className="bg-gradient-to-r from-[#FF4500] via-[#FF7A00] to-[#FFA000] bg-clip-text text-transparent">
+              Built for Your Campus.
+            </span>
+          </h2>
+          
+          <p className="mt-4 text-sm sm:text-base text-slate-400 max-w-2xl mx-auto">
+            Practical, credit-mapped engineering & employability tracks tailored to your semester schedules and top hiring standards.
+          </p>
 
-        {/* Program cards grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {programs.map((program, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 24 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="card-hover group relative"
-              onMouseEnter={() => setHoveredIndex(i)}
-              onMouseLeave={() => setHoveredIndex(null)}
-            >
-              <div
-                className={`relative h-full border transition-all duration-400 p-6 ${
-                  hoveredIndex === i
-                    ? 'border-tejas-red/30 bg-white'
-                    : 'border-ink-100 bg-white/60'
-                }`}
-              >
-                {/* Corner marks */}
-                <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-ink-200 group-hover:border-tejas-red/40 transition-colors" />
-                <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-ink-200 group-hover:border-tejas-red/40 transition-colors" />
-                <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-ink-200 group-hover:border-tejas-red/40 transition-colors" />
-                <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-ink-200 group-hover:border-tejas-red/40 transition-colors" />
+          {/* Quick Value Badges */}
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-4 text-xs font-medium text-slate-300">
+            <div className="flex items-center gap-1.5 bg-[#14141C] px-3 py-1.5 rounded-full border border-white/10">
+              <Award size={14} className="text-[#FFA000]" />
+              <span>University Credit Aligned</span>
+            </div>
+            <div className="flex items-center gap-1.5 bg-[#14141C] px-3 py-1.5 rounded-full border border-white/10">
+              <Terminal size={14} className="text-[#38BDF8]" />
+              <span>Live Engineer Mentorship</span>
+            </div>
+            <div className="flex items-center gap-1.5 bg-[#14141C] px-3 py-1.5 rounded-full border border-white/10">
+              <Zap size={14} className="text-[#22C55E]" />
+              <span>Placement-Guaranteed Sprints</span>
+            </div>
+          </div>
+        </motion.div>
 
-                {/* Figure label */}
-                <div className="font-mono text-[9px] tracking-[0.15em] text-ink-300 uppercase mb-4">
-                  {`SEC.02 / FIG.${String(i + 1).padStart(2, '0')}`}
-                </div>
-
-                {/* Icon */}
-                <div
-                  className={`w-10 h-10 border flex items-center justify-center mb-4 transition-all duration-300 ${
-                    hoveredIndex === i
-                      ? 'border-tejas-red/30 text-tejas-red bg-tejas-red/5'
-                      : 'border-ink-200 text-ink-400'
+        {/* Interactive Category Navigation Tabs */}
+        <div className="flex justify-center mb-10">
+          <div className="inline-flex p-1.5 bg-[#121218] border border-white/10 rounded-2xl max-w-full overflow-x-auto no-scrollbar gap-1.5">
+            {categories.map((cat) => {
+              const Icon = cat.icon;
+              const isActive = activeId === cat.id;
+              return (
+                <button
+                  key={cat.id}
+                  onClick={() => setActiveId(cat.id)}
+                  className={`relative px-4 sm:px-6 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 flex items-center gap-2 cursor-pointer shrink-0 ${
+                    isActive ? 'text-white font-bold' : 'text-slate-400 hover:text-slate-200 hover:bg-white/5'
                   }`}
                 >
-                  {program.icon}
-                </div>
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeProgramTab"
+                      className="absolute inset-0 bg-gradient-to-r from-[#FF4500] to-[#FF7A00] rounded-xl shadow-lg shadow-orange-500/25 -z-10"
+                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                  <Icon size={16} className={isActive ? 'text-white' : 'text-slate-400'} />
+                  <span>{cat.shortName}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
 
-                {/* Category */}
-                <h3 className="text-base font-bold text-ink-900 tracking-tight mb-2">
-                  {program.category}
+        {/* Category Description Banner */}
+        <motion.div
+          key={currentCategory.id + '-banner'}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          className="mb-8 flex flex-col sm:flex-row items-center justify-between gap-4 p-4 sm:p-5 rounded-2xl bg-[#14141C] border border-white/10"
+        >
+          <div className="flex items-center gap-3.5 text-left">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#FF4500]/20 to-[#FFA000]/10 border border-[#FF4500]/30 flex items-center justify-center text-[#FFA000] shrink-0">
+              <currentCategory.icon size={20} />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <h3 className="text-base font-bold text-white">
+                  {currentCategory.name}
                 </h3>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/10 text-slate-300 font-medium">
+                  {currentCategory.badge}
+                </span>
+              </div>
+              <p className="text-xs text-slate-400 mt-0.5">
+                {currentCategory.tagline}
+              </p>
+            </div>
+          </div>
 
-                {/* Description */}
-                <p className="text-sm text-ink-400 leading-relaxed mb-4">
-                  {program.description}
-                </p>
+          <div className="shrink-0 px-3.5 py-1.5 rounded-xl bg-white/5 border border-white/10 text-xs font-mono text-[#FFA000] flex items-center gap-2">
+            <Sparkles size={13} className="text-[#FF4500]" />
+            <span>{currentCategory.stat}</span>
+          </div>
+        </motion.div>
 
-                {/* Skills tags */}
-                <div className="flex flex-wrap gap-1.5 mb-4">
-                  {program.skills.map((skill, j) => (
-                    <span
-                      key={j}
-                      className="tech-tag text-[9px]"
-                    >
-                      {skill}
+        {/* Animated 3-Card Grid for Tracks */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <AnimatePresence mode="wait">
+            {currentCategory.tracks.map((track, i) => (
+              <motion.div
+                key={`${currentCategory.id}-${track.title}`}
+                initial={{ opacity: 0, y: 20, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -15, scale: 0.98 }}
+                transition={{ duration: 0.35, delay: i * 0.08 }}
+                className="group relative rounded-2xl bg-[#111116] border border-white/10 p-6 flex flex-col justify-between hover:border-[#FF4500]/50 transition-all duration-300 hover:shadow-xl hover:shadow-orange-950/20"
+              >
+                <div>
+                  {/* Top Bar with Duration & Level */}
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-[#FFA000] bg-[#FF4500]/10 px-2.5 py-1 rounded-md border border-[#FF4500]/25">
+                      <Clock size={12} />
+                      <span>{track.duration}</span>
+                    </div>
+                    <span className="text-[11px] font-mono text-slate-400 bg-white/5 px-2 py-0.5 rounded border border-white/5">
+                      {track.level}
                     </span>
-                  ))}
+                  </div>
+
+                  {/* Track Title */}
+                  <h3 className="text-lg font-bold text-white group-hover:text-[#FFA000] transition-colors leading-snug mb-3 font-[family-name:var(--font-display)]">
+                    {track.title}
+                  </h3>
+
+                  {/* Tech Stack Pills */}
+                  <div className="flex flex-wrap gap-1.5 mb-5">
+                    {track.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-[#181822] text-slate-300 border border-white/10 group-hover:border-white/20 transition-colors"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Highlights with Icons */}
+                  <div className="space-y-2 mb-5">
+                    {track.highlights.map((item) => (
+                      <div key={item} className="flex items-start gap-2 text-xs text-slate-300">
+                        <CheckCircle2 size={13} className="text-[#22C55E] shrink-0 mt-0.5" />
+                        <span>{item}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
 
-                {/* Footer */}
-                <div className="flex items-center justify-between pt-4 border-t border-ink-50">
-                  <span className="font-mono text-[9px] text-ink-300 tracking-wider uppercase">
-                    {program.deliveryMode}
-                  </span>
+                {/* Bottom Outcome & CTA */}
+                <div className="pt-4 border-t border-white/10">
+                  <div className="mb-3.5 p-2.5 rounded-lg bg-white/[0.03] border border-white/5">
+                    <div className="text-[10px] uppercase font-mono tracking-wider text-slate-400 mb-0.5">
+                      Target Outcome
+                    </div>
+                    <div className="text-xs font-medium text-slate-200 leading-snug">
+                      {track.outcome}
+                    </div>
+                  </div>
+
                   <button
                     onClick={() => openEnquiry('PROPOSAL')}
-                    className="inline-flex items-center gap-1 text-xs font-semibold text-ink-500 group-hover:text-tejas-red transition-colors cursor-pointer"
+                    className="w-full py-2.5 px-4 rounded-xl bg-white/5 hover:bg-[#FF4500] text-slate-200 hover:text-white text-xs font-bold transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer group/btn"
                   >
-                    View Program
-                    <ArrowRight size={12} className="group-hover:translate-x-0.5 transition-transform" />
+                    <span>Request Syllabus</span>
+                    <ArrowRight size={13} className="transition-transform group-hover/btn:translate-x-1" />
                   </button>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </div>
+
+        {/* Bottom Custom Syllabus Banner */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mt-12 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-[#181824] via-[#14141C] to-[#121218] border border-white/10 flex flex-col md:flex-row items-center justify-between gap-6"
+        >
+          <div className="flex items-center gap-4 text-left">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#FF4500] to-[#FFA000] flex items-center justify-center text-white shrink-0 shadow-lg shadow-orange-500/20">
+              <FileCode size={24} />
+            </div>
+            <div>
+              <h3 className="text-lg font-bold text-white font-[family-name:var(--font-display)]">
+                Need a Custom Syllabus Aligned to Your University?
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-400 mt-1 max-w-xl">
+                We customize modules, practical lab exercises, and assessments according to your college branch, academic timetable, and semester exam dates.
+              </p>
+            </div>
+          </div>
+
+          <button
+            onClick={() => openEnquiry('CONSULTATION')}
+            className="btn-pill-primary shrink-0 py-3 px-6 text-xs sm:text-sm cursor-pointer whitespace-nowrap"
+          >
+            <Sparkles size={15} className="text-white" />
+            <span>Request Custom Syllabus</span>
+            <ArrowRight size={15} />
+          </button>
+        </motion.div>
+
       </div>
     </section>
   );

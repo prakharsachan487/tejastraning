@@ -1,15 +1,18 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ArrowRight } from 'lucide-react';
+import { Menu, X, ArrowRight, Sparkles, ChevronRight, LogIn } from 'lucide-react';
 import { useEnquiry } from '../context/EnquiryContext';
 
-const navLinks = [
+interface NavItem {
+  label: string;
+  href: string;
+}
+
+const navItems: NavItem[] = [
+  { label: 'Training', href: '#training' },
   { label: 'Programs', href: '#programs' },
-  { label: 'For Colleges', href: '#why-partner' },
-  { label: 'How We Work', href: '#how-we-work' },
-  { label: 'Impact', href: '#impact' },
-  { label: 'About', href: '#about' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Career Path', href: '#career-path' },
+  { label: 'About Us', href: '#about' },
 ];
 
 export function Navbar() {
@@ -20,124 +23,131 @@ export function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 15);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => {
-    const sections = navLinks.map((l) => l.href.replace('#', ''));
+    const sectionIds = navItems.map((item) => item.href.replace('#', ''));
     const observers: IntersectionObserver[] = [];
 
-    sections.forEach((id) => {
-      const el = document.getElementById(id);
-      if (!el) return;
+    sectionIds.forEach((id) => {
+      const element = document.getElementById(id);
+      if (!element) return;
       const observer = new IntersectionObserver(
         ([entry]) => {
-          if (entry.isIntersecting) setActiveSection(id);
+          if (entry.isIntersecting) {
+            setActiveSection(id);
+          }
         },
-        { threshold: 0.2, rootMargin: '-80px 0px -50% 0px' }
+        { threshold: 0.25, rootMargin: '-70px 0px -40% 0px' }
       );
-      observer.observe(el);
+      observer.observe(element);
       observers.push(observer);
     });
 
-    return () => observers.forEach((o) => o.disconnect());
+    return () => observers.forEach((obs) => obs.disconnect());
   }, []);
 
-  const handleClick = useCallback((href: string) => {
+  const handleNavClick = useCallback((href: string) => {
     setIsMobileOpen(false);
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
   }, []);
 
   return (
     <>
-      <motion.nav
-        initial={false}
-        animate={{
-          backgroundColor: isScrolled ? 'rgba(250,250,249,0.92)' : 'rgba(250,250,249,0)',
-          backdropFilter: isScrolled ? 'blur(20px)' : 'blur(0px)',
-        }}
-        transition={{ duration: 0.3 }}
-        className={`fixed top-0 left-0 right-0 z-50 ${
-          isScrolled ? 'border-b border-ink-100' : ''
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          isScrolled
+            ? 'bg-[#0A0A0D]/90 backdrop-blur-xl border-b border-white/10'
+            : 'bg-transparent'
         }`}
       >
-        <div
-          className={`max-w-[1360px] mx-auto px-5 sm:px-8 lg:px-10 flex items-center justify-between transition-all duration-300 ${
-            isScrolled ? 'h-16' : 'h-20'
-          }`}
-        >
-          {/* Logo */}
-          <a
-            href="#"
-            className="flex items-center gap-3 group"
-            onClick={(e) => {
-              e.preventDefault();
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div
+            className={`flex items-center justify-between transition-all duration-300 ${
+              isScrolled ? 'h-16' : 'h-20'
+            }`}
           >
-            {/* Logo mark */}
-            <div className="relative w-8 h-8">
-              <div className="w-8 h-8 bg-tejas-red flex items-center justify-center text-white font-black text-sm tracking-tight">
-                T
-              </div>
-            </div>
-            <div className="flex flex-col leading-none">
-              <span className="text-sm font-bold tracking-[0.08em] text-ink-900 uppercase">
-                Tejas
-              </span>
-              <span className="text-[9px] font-medium tracking-[0.15em] text-ink-400 uppercase mt-0.5">
-                Learning & Development
-              </span>
-            </div>
-          </a>
-
-          {/* Desktop navigation */}
-          <div className="hidden lg:flex items-center gap-0.5">
-            {navLinks.map((link) => {
-              const isActive = activeSection === link.href.replace('#', '');
-              return (
-                <button
-                  key={link.href}
-                  onClick={() => handleClick(link.href)}
-                  className={`px-3.5 py-2 text-xs font-medium tracking-wide uppercase transition-all duration-200 cursor-pointer ${
-                    isActive
-                      ? 'text-tejas-red'
-                      : 'text-ink-500 hover:text-ink-900'
-                  }`}
-                >
-                  {link.label}
-                </button>
-              );
-            })}
-          </div>
-
-          {/* CTA */}
-          <div className="hidden lg:flex items-center gap-3">
-            <button
-              onClick={() => openEnquiry('PARTNERSHIP')}
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-tejas-red text-white text-xs font-semibold tracking-wide uppercase hover:bg-tejas-red-dark transition-all duration-300 cursor-pointer"
+            {/* Brand Logo - TEJAS */}
+            <a
+              href="#"
+              className="flex items-center gap-3 group focus:outline-none"
+              onClick={(e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
             >
-              Partner With Us
-              <ArrowRight size={14} />
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#FF4500] via-[#FF6A00] to-[#FFA000] flex items-center justify-center text-white font-extrabold text-sm group-hover:scale-105 transition-transform duration-200">
+                TJ
+              </div>
+              <div className="flex flex-col leading-tight">
+                <span className="text-xl font-extrabold tracking-tight text-white font-[family-name:var(--font-display)]">
+                  TEJAS
+                </span>
+                <span className="text-[10px] font-medium text-slate-400 tracking-tight hidden sm:block">
+                  The Placement Infrastructure for Colleges
+                </span>
+              </div>
+            </a>
+
+            {/* Desktop Navigation Links */}
+            <nav className="hidden md:flex items-center gap-1.5 bg-[#14141C] p-1.5 rounded-full border border-white/10">
+              {navItems.map((item) => {
+                const isActive = activeSection === item.href.replace('#', '');
+                return (
+                  <button
+                    key={item.href}
+                    onClick={() => handleNavClick(item.href)}
+                    className={`px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-all cursor-pointer ${
+                      isActive
+                        ? 'bg-white/15 text-[#FF6A00] font-bold border border-[#FF4500]/40'
+                        : 'text-slate-300 hover:text-white hover:bg-white/5'
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                );
+              })}
+            </nav>
+
+            {/* Action Buttons */}
+            <div className="hidden lg:flex items-center gap-3">
+              <button
+                onClick={() => openEnquiry('CONSULTATION')}
+                className="text-xs font-bold text-slate-300 hover:text-[#FFA000] px-3.5 py-2 transition-colors cursor-pointer flex items-center gap-1.5"
+              >
+                <LogIn size={14} className="text-[#FF6A00]" />
+                <span>Login</span>
+              </button>
+              <button
+                onClick={() => openEnquiry('CONSULTATION')}
+                className="btn-pill-primary cursor-pointer active:scale-95 text-xs py-2.5 px-5"
+              >
+                <Sparkles size={14} className="text-white" />
+                <span>Request Demo</span>
+                <ArrowRight size={14} />
+              </button>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsMobileOpen(!isMobileOpen)}
+              className="md:hidden p-2 rounded-xl text-slate-300 hover:bg-white/10 focus:outline-none"
+              aria-label="Toggle Navigation"
+            >
+              {isMobileOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
-
-          {/* Mobile menu button */}
-          <button
-            className="lg:hidden p-2 text-ink-600 hover:text-ink-900 transition-colors"
-            onClick={() => setIsMobileOpen(!isMobileOpen)}
-            aria-label="Toggle menu"
-          >
-            {isMobileOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
         </div>
-      </motion.nav>
+      </header>
 
-      {/* Mobile drawer */}
+      {/* Mobile Drawer */}
       <AnimatePresence>
         {isMobileOpen && (
           <>
@@ -145,61 +155,70 @@ export function Navbar() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/20 z-40 lg:hidden"
+              className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 md:hidden"
               onClick={() => setIsMobileOpen(false)}
             />
             <motion.div
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-              className="fixed right-0 top-0 bottom-0 w-80 max-w-[85vw] bg-surface-white z-50 lg:hidden overflow-y-auto border-l border-ink-100"
+              transition={{ type: 'spring', damping: 28, stiffness: 280 }}
+              className="fixed right-0 top-0 bottom-0 w-80 max-w-[85vw] bg-[#111116] z-50 md:hidden flex flex-col justify-between p-6 border-l border-white/10"
             >
-              <div className="p-6">
-                <div className="flex justify-between items-center mb-10">
-                  <div className="flex items-center gap-3">
-                    <div className="w-7 h-7 bg-tejas-red flex items-center justify-center text-white font-black text-xs">
-                      T
+              <div>
+                <div className="flex items-center justify-between pb-6 border-b border-white/10">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#FF4500] to-[#FFA000] flex items-center justify-center text-white font-bold text-xs">
+                      TJ
                     </div>
-                    <div className="flex flex-col leading-none">
-                      <span className="text-sm font-bold tracking-[0.08em] text-ink-900 uppercase">
-                        Tejas
-                      </span>
-                      <span className="text-[8px] font-medium tracking-[0.15em] text-ink-400 uppercase mt-0.5">
-                        Learning & Development
-                      </span>
-                    </div>
+                    <span className="font-extrabold text-lg text-white font-[family-name:var(--font-display)]">
+                      TEJAS
+                    </span>
                   </div>
                   <button
                     onClick={() => setIsMobileOpen(false)}
-                    className="p-2 hover:bg-ink-50 text-ink-400"
-                    aria-label="Close menu"
+                    className="p-1.5 rounded-lg text-slate-400 hover:text-white"
                   >
                     <X size={20} />
                   </button>
                 </div>
 
-                <div className="flex flex-col gap-1">
-                  {navLinks.map((link) => (
+                <div className="py-6 flex flex-col gap-1">
+                  {navItems.map((item) => (
                     <button
-                      key={link.href}
-                      onClick={() => handleClick(link.href)}
-                      className="text-left px-4 py-3 text-sm font-medium text-ink-600 hover:text-tejas-red hover:bg-tejas-red/5 transition-all cursor-pointer tracking-wide uppercase"
+                      key={item.href}
+                      onClick={() => handleNavClick(item.href)}
+                      className="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-[#FFA000] hover:bg-white/5 transition-colors text-left"
                     >
-                      {link.label}
+                      <span>{item.label}</span>
+                      <ChevronRight size={16} className="text-slate-500" />
                     </button>
                   ))}
                 </div>
+              </div>
 
-                <div className="mt-8 pt-8 border-t border-ink-100">
-                  <button
-                    onClick={() => { setIsMobileOpen(false); openEnquiry('PARTNERSHIP'); }}
-                    className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-tejas-red text-white text-sm font-semibold tracking-wide uppercase hover:bg-tejas-red-dark transition-colors cursor-pointer"
-                  >
-                    Partner With Us
-                    <ArrowRight size={16} />
-                  </button>
-                </div>
+              <div className="pt-6 border-t border-white/10 flex flex-col gap-3">
+                <button
+                  onClick={() => {
+                    setIsMobileOpen(false);
+                    openEnquiry('CONSULTATION');
+                  }}
+                  className="btn-pill-secondary w-full justify-center text-xs py-3 flex items-center gap-2"
+                >
+                  <LogIn size={14} className="text-[#FF6A00]" />
+                  <span>Login</span>
+                </button>
+                <button
+                  onClick={() => {
+                    setIsMobileOpen(false);
+                    openEnquiry('CONSULTATION');
+                  }}
+                  className="btn-pill-primary w-full justify-center text-xs py-3"
+                >
+                  <Sparkles size={14} className="text-white" />
+                  <span>Request Demo</span>
+                  <ArrowRight size={14} />
+                </button>
               </div>
             </motion.div>
           </>

@@ -1,106 +1,67 @@
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
-import { useInView } from '../hooks/useInView';
+import { ArrowRight, CheckCircle2, Sparkles } from 'lucide-react';
 import { useEnquiry } from '../context/EnquiryContext';
 
 export function FinalCTA() {
-  const { ref, isInView } = useInView();
   const { openEnquiry } = useEnquiry();
 
   return (
-    <section
-      id="about"
-      ref={ref}
-      className="section-padding relative bg-surface-cream overflow-hidden"
-    >
-      {/* Background grid */}
-      <div
-        className="absolute inset-0 opacity-40"
-        style={{
-          backgroundImage:
-            'linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px)',
-          backgroundSize: '40px 40px',
-        }}
-      />
+    <section id="about" className="py-28 lg:py-36 bg-[#0A0A0D] relative overflow-hidden obsidian-grid">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="max-w-3xl mx-auto text-center"
+        >
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF4500]/10 border border-[#FF4500]/25 text-[#FFA000] text-xs font-semibold tracking-wide mb-6">
+            <Sparkles size={14} className="text-[#FF4500]" />
+            <span>Institutional Transformation</span>
+          </div>
 
-      <div className="max-w-[1360px] mx-auto px-5 sm:px-8 lg:px-10 relative z-10">
-        <div className="max-w-3xl mx-auto text-center">
-          {/* Section label */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.5 }}
-            className="flex items-center justify-center gap-3 mb-8"
-          >
-            <span className="section-label-accent">● Ready to Partner</span>
-          </motion.div>
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.1] font-[family-name:var(--font-display)]">
+            Ready to Build{' '}
+            <span className="bg-gradient-to-r from-[#FF4500] via-[#FF7A00] to-[#FFA000] bg-clip-text text-transparent">
+              Placement-Ready
+            </span>{' '}
+            Campuses?
+          </h2>
 
-          {/* Headline */}
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.2, duration: 0.6 }}
-            className="heading-editorial text-3xl sm:text-4xl lg:text-5xl text-ink-900 mb-6"
-          >
-            Ready to Build an{' '}
-            <br className="hidden sm:block" />
-            <span className="text-tejas-red">Industry-Ready</span> Campus?
-          </motion.h2>
+          <p className="mt-6 text-base sm:text-lg text-slate-300 leading-relaxed max-w-xl mx-auto">
+            Assess student competencies, deliver industry curriculum, track readiness in real time, and execute high-converting campus hiring drives.
+          </p>
 
-          {/* Supporting text */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.4, duration: 0.5 }}
-            className="text-base text-ink-400 leading-relaxed mb-10 max-w-lg mx-auto"
-          >
-            Let's design a training ecosystem that prepares your students for the careers ahead.
-          </motion.p>
-
-          {/* CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.5, duration: 0.5 }}
-            className="flex flex-wrap justify-center gap-4"
-          >
-            <button
-              onClick={() => openEnquiry('PARTNERSHIP')}
-              className="inline-flex items-center gap-2 px-8 py-4 bg-tejas-red text-white text-sm font-semibold hover:bg-tejas-red-dark hover:shadow-lg hover:shadow-tejas-red/20 transition-all duration-300 cursor-pointer magnetic-btn"
-            >
-              Partner With Tejas
-              <ArrowRight size={16} />
-            </button>
+          {/* Action Buttons */}
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <button
               onClick={() => openEnquiry('CONSULTATION')}
-              className="inline-flex items-center gap-2 px-8 py-4 border border-ink-200 text-ink-700 text-sm font-semibold hover:border-tejas-red hover:text-tejas-red transition-all duration-300 cursor-pointer"
+              className="btn-pill-primary cursor-pointer active:scale-95 text-sm py-3.5 px-8"
             >
-              Book a Campus Consultation
+              <Sparkles size={16} className="text-white" />
+              <span>Request Institutional Demo</span>
               <ArrowRight size={16} />
             </button>
-          </motion.div>
+            <a
+              href="#programs"
+              className="btn-pill-secondary cursor-pointer text-sm py-3.5 px-8"
+            >
+              <span>Explore Programs</span>
+              <ArrowRight size={16} className="text-slate-400" />
+            </a>
+          </div>
 
-          {/* Trust line */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.7, duration: 0.5 }}
-            className="mt-10 flex items-center justify-center gap-6 text-xs text-ink-400"
-          >
-            <span className="flex items-center gap-2">
-              <span className="w-1 h-1 bg-tejas-red rounded-full" />
-              Free consultation
-            </span>
-            <span className="flex items-center gap-2">
-              <span className="w-1 h-1 bg-tejas-red rounded-full" />
-              No commitment
-            </span>
-            <span className="flex items-center gap-2">
-              <span className="w-1 h-1 bg-tejas-red rounded-full" />
-              Custom proposals
-            </span>
-          </motion.div>
-        </div>
+          {/* Trust Guarantees */}
+          <div className="mt-12 flex flex-wrap items-center justify-center gap-y-2 gap-x-8 text-xs text-slate-400">
+            {['Zero disruption to academic timetable', 'Dedicated TPO Success Director', 'Customized college cohort pricing'].map((t) => (
+              <div key={t} className="flex items-center gap-2">
+                <CheckCircle2 size={14} className="text-[#FF4500]" />
+                <span>{t}</span>
+              </div>
+            ))}
+          </div>
+
+        </motion.div>
       </div>
     </section>
   );

@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect, type FormEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ArrowRight, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
+import { X, ArrowRight, CheckCircle2, AlertCircle, Loader2, Sparkles } from 'lucide-react';
 import { useEnquiry } from '../context/EnquiryContext';
 
 /* ─────────────────────────────────────────────
@@ -21,22 +21,21 @@ const DESIGNATIONS = [
 
 const TRAINING_INTERESTS = [
   'Technical Training',
-  'Aptitude & Employability',
-  'Certifications',
-  'Industry Projects',
-  'Interview Preparation',
+  'AI Mock Interviews',
+  'AI Assessments',
   'Placement Preparation',
-  'Soft Skills',
-  'Customized Training',
+  'Resume & ATS Optimization',
+  'Industry Projects',
+  'Customized Institutional Program',
 ];
 
 const TRAINING_MODES = ['On Campus', 'Online', 'Hybrid'];
 
 const SOURCE_TITLES: Record<string, string> = {
-  PARTNERSHIP: 'Partner with Tejas',
-  CONSULTATION: 'Book a Campus Consultation',
-  PROPOSAL: 'Request a Proposal',
-  CONTACT: 'Contact Us',
+  PARTNERSHIP: 'Partner with TEJAS',
+  CONSULTATION: 'Request an Institutional Demo',
+  PROPOSAL: 'Request Campus Training Proposal',
+  CONTACT: 'Contact TEJAS',
 };
 
 /* ─────────────────────────────────────────────
@@ -172,9 +171,10 @@ export function EnquiryModal() {
           setSubmitState('success');
         } else {
           setSubmitState('error');
-          const errorMsg = data.errors && data.errors.length > 0 
-            ? data.errors.join(', ') 
-            : (data.message || 'Something went wrong. Please try again or contact us directly.');
+          const errorMsg =
+            data.errors && data.errors.length > 0
+              ? data.errors.join(', ')
+              : data.message || 'Something went wrong. Please try again or contact us directly.';
           setServerError(errorMsg);
         }
       } catch (err) {
@@ -186,7 +186,7 @@ export function EnquiryModal() {
     [formData, source]
   );
 
-  const title = SOURCE_TITLES[source] || 'Get in Touch';
+  const title = SOURCE_TITLES[source] || 'Get in Touch with TEJAS';
 
   return (
     <AnimatePresence>
@@ -197,32 +197,35 @@ export function EnquiryModal() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/40 z-[100]"
+            className="fixed inset-0 bg-black/80 backdrop-blur-md z-[100]"
             onClick={closeEnquiry}
           />
 
-          {/* Modal panel */}
+          {/* Modal panel with Electric Flame Orange Accent */}
           <motion.div
-            initial={{ opacity: 0, y: 40, scale: 0.98 }}
+            initial={{ opacity: 0, y: 30, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 40, scale: 0.98 }}
-            transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
-            className="fixed inset-4 sm:inset-auto sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 sm:w-full sm:max-w-2xl sm:max-h-[90vh] bg-surface-white border border-ink-100 z-[101] overflow-y-auto"
+            exit={{ opacity: 0, y: 30, scale: 0.98 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-4 sm:inset-auto sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 sm:w-full sm:max-w-2xl sm:max-h-[90vh] bg-[#111116] rounded-3xl border border-white/10 z-[101] overflow-y-auto shadow-2xl"
           >
-            {/* Red accent bar */}
-            <div className="h-1 bg-tejas-red" />
+            {/* Top Flame Accent Strip */}
+            <div className="h-1.5 bg-gradient-to-r from-[#FF4500] via-[#FF7A00] to-[#FFA000]" />
 
             {/* Header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-ink-100">
+            <div className="flex items-center justify-between px-6 py-5 border-b border-white/10">
               <div>
-                <div className="font-mono text-[9px] tracking-[0.15em] text-tejas-red uppercase mb-1">
-                  ● Institutional Enquiry
+                <div className="inline-flex items-center gap-1.5 font-mono text-[10px] font-bold tracking-wider text-[#FF6A00] uppercase mb-1">
+                  <Sparkles size={12} className="text-[#FF4500]" />
+                  <span>Institutional Placement Infrastructure</span>
                 </div>
-                <h2 className="text-lg font-bold text-ink-900 tracking-tight">{title}</h2>
+                <h2 className="text-xl font-extrabold text-white tracking-tight font-[family-name:var(--font-display)]">
+                  {title}
+                </h2>
               </div>
               <button
                 onClick={closeEnquiry}
-                className="p-2 text-ink-400 hover:text-ink-700 hover:bg-ink-50 transition-colors cursor-pointer"
+                className="p-2 text-slate-400 hover:text-white hover:bg-white/10 rounded-xl transition-colors cursor-pointer"
                 aria-label="Close"
               >
                 <X size={20} />
@@ -230,25 +233,25 @@ export function EnquiryModal() {
             </div>
 
             {/* Content */}
-            <div className="px-6 py-6">
+            <div className="px-6 py-6 text-left">
               {submitState === 'success' ? (
                 <SuccessState onClose={closeEnquiry} />
               ) : (
                 <form onSubmit={handleSubmit} noValidate>
                   {/* Error display */}
                   {(clientErrors.length > 0 || serverError) && (
-                    <div className="mb-6 p-4 border border-red-200 bg-red-50 text-sm">
-                      <div className="flex items-center gap-2 text-red-700 font-semibold mb-2">
+                    <div className="mb-6 p-4 rounded-2xl border border-rose-500/30 bg-rose-950/40 text-sm">
+                      <div className="flex items-center gap-2 text-rose-400 font-semibold mb-2">
                         <AlertCircle size={16} />
                         Please fix the following:
                       </div>
                       {clientErrors.map((err, i) => (
-                        <div key={i} className="text-red-600 text-xs ml-6">
+                        <div key={i} className="text-rose-300 text-xs ml-6">
                           • {err}
                         </div>
                       ))}
                       {serverError && (
-                        <div className="text-red-600 text-xs ml-6">• {serverError}</div>
+                        <div className="text-rose-300 text-xs ml-6">• {serverError}</div>
                       )}
                     </div>
                   )}
@@ -260,14 +263,14 @@ export function EnquiryModal() {
                       required
                       value={formData.collegeName}
                       onChange={(v) => handleChange('collegeName', v)}
-                      placeholder="e.g. VIT University"
+                      placeholder="e.g. SRM Institute / VIT"
                     />
                     <FormField
                       label="Contact Person Name"
                       required
                       value={formData.contactName}
                       onChange={(v) => handleChange('contactName', v)}
-                      placeholder="Full name"
+                      placeholder="e.g. Dr. Rajesh Sharma"
                     />
                   </div>
 
@@ -287,7 +290,7 @@ export function EnquiryModal() {
                       type="email"
                       value={formData.email}
                       onChange={(v) => handleChange('email', v)}
-                      placeholder="name@college.edu"
+                      placeholder="placement@college.edu.in"
                     />
                   </div>
 
@@ -305,30 +308,30 @@ export function EnquiryModal() {
                       label="City"
                       value={formData.city}
                       onChange={(v) => handleChange('city', v)}
-                      placeholder="e.g. Bangalore"
+                      placeholder="e.g. Bengaluru / Chennai"
                     />
                   </div>
 
                   {/* Row 4: Students + Programs */}
                   <div className="grid sm:grid-cols-2 gap-4 mb-4">
                     <FormField
-                      label="Number of Students"
+                      label="Approximate Students to Train"
                       value={formData.studentCount}
                       onChange={(v) => handleChange('studentCount', v)}
-                      placeholder="Approximate count"
+                      placeholder="e.g. 500"
                     />
                     <FormField
-                      label="Programs / Departments"
+                      label="Target Departments"
                       value={formData.programs}
                       onChange={(v) => handleChange('programs', v)}
-                      placeholder="e.g. B.Tech CSE, BBA"
+                      placeholder="e.g. B.Tech CSE, ECE, MCA"
                     />
                   </div>
 
                   {/* Training interests */}
                   <div className="mb-4">
-                    <label className="block text-xs font-semibold text-ink-600 tracking-wide uppercase mb-2">
-                      Interested Training Solutions
+                    <label className="block text-xs font-bold text-slate-300 uppercase tracking-wide mb-2 font-mono">
+                      Modules of Interest
                     </label>
                     <div className="flex flex-wrap gap-2">
                       {TRAINING_INTERESTS.map((interest) => {
@@ -338,10 +341,11 @@ export function EnquiryModal() {
                             key={interest}
                             type="button"
                             onClick={() => toggleInterest(interest)}
-                            className={`px-3 py-1.5 text-xs font-medium border transition-all duration-200 cursor-pointer ${selected
-                                ? 'border-tejas-red text-tejas-red bg-tejas-red/5'
-                                : 'border-ink-200 text-ink-500 hover:border-ink-300'
-                              }`}
+                            className={`px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all cursor-pointer ${
+                              selected
+                                ? 'border-[#FF4500] text-[#FFA000] bg-[#FF4500]/15 shadow-xs'
+                                : 'border-slate-700/80 text-slate-400 hover:border-slate-600 bg-[#161620]'
+                            }`}
                           >
                             {interest}
                           </button>
@@ -352,8 +356,8 @@ export function EnquiryModal() {
 
                   {/* Training mode */}
                   <div className="mb-4">
-                    <label className="block text-xs font-semibold text-ink-600 tracking-wide uppercase mb-2">
-                      Preferred Training Mode
+                    <label className="block text-xs font-bold text-slate-300 uppercase tracking-wide mb-2 font-mono">
+                      Preferred Delivery Mode
                     </label>
                     <div className="flex gap-3">
                       {TRAINING_MODES.map((mode) => {
@@ -363,10 +367,11 @@ export function EnquiryModal() {
                             key={mode}
                             type="button"
                             onClick={() => handleChange('trainingMode', mode)}
-                            className={`px-4 py-2 text-xs font-medium border transition-all duration-200 cursor-pointer ${selected
-                                ? 'border-tejas-red text-tejas-red bg-tejas-red/5'
-                                : 'border-ink-200 text-ink-500 hover:border-ink-300'
-                              }`}
+                            className={`px-4 py-2 rounded-xl text-xs font-semibold border transition-all cursor-pointer ${
+                              selected
+                                ? 'border-[#FF4500] text-[#FFA000] bg-[#FF4500]/15 shadow-xs'
+                                : 'border-slate-700/80 text-slate-400 hover:border-slate-600 bg-[#161620]'
+                            }`}
                           >
                             {mode}
                           </button>
@@ -377,40 +382,40 @@ export function EnquiryModal() {
 
                   {/* Message */}
                   <div className="mb-6">
-                    <label className="block text-xs font-semibold text-ink-600 tracking-wide uppercase mb-2">
-                      Message
+                    <label className="block text-xs font-bold text-slate-300 uppercase tracking-wide mb-2 font-mono">
+                      Requirements &amp; Notes
                     </label>
                     <textarea
                       value={formData.message}
                       onChange={(e) => handleChange('message', e.target.value)}
-                      placeholder="Tell us about your requirements, goals or any specific questions..."
+                      placeholder="Share your batch timeline, target companies, or specific challenges..."
                       rows={3}
                       maxLength={2000}
-                      className="w-full px-4 py-3 border border-ink-200 text-sm text-ink-800 placeholder:text-ink-300 focus:border-tejas-red focus:outline-none transition-colors resize-none bg-white"
+                      className="w-full px-4 py-3 rounded-2xl border border-slate-700/80 text-sm text-slate-100 placeholder:text-slate-500 focus:border-[#FF4500] focus:outline-none transition-all resize-none bg-[#0C0C10]"
                     />
                   </div>
 
-                  {/* Submit */}
+                  {/* Submit with Pill Button */}
                   <button
                     type="submit"
                     disabled={submitState === 'submitting'}
-                    className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-tejas-red text-white text-sm font-semibold hover:bg-tejas-red-dark transition-all duration-300 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+                    className="btn-pill-primary w-full justify-center text-sm py-3.5 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
                   >
                     {submitState === 'submitting' ? (
                       <>
                         <Loader2 size={16} className="animate-spin" />
-                        Sending enquiry...
+                        <span>Transmitting institutional enquiry...</span>
                       </>
                     ) : (
                       <>
-                        Submit Enquiry
+                        <span>Submit Request</span>
                         <ArrowRight size={16} />
                       </>
                     )}
                   </button>
 
-                  <p className="mt-3 text-[10px] text-ink-400 text-center">
-                    Your information is secure and will only be used to respond to your enquiry.
+                  <p className="mt-3 text-[11px] text-slate-500 text-center font-mono">
+                    Your institutional details are securely handled under TEJAS privacy guidelines.
                   </p>
                 </form>
               )}
@@ -429,21 +434,20 @@ export function EnquiryModal() {
 function SuccessState({ onClose }: { onClose: () => void }) {
   return (
     <div className="text-center py-8">
-      <div className="w-16 h-16 mx-auto mb-6 border border-tejas-red/20 flex items-center justify-center bg-tejas-red/5">
-        <CheckCircle2 size={32} className="text-tejas-red" />
+      <div className="w-16 h-16 mx-auto mb-6 rounded-2xl border border-emerald-500/40 flex items-center justify-center bg-emerald-500/10 text-emerald-400 shadow-lg">
+        <CheckCircle2 size={32} />
       </div>
-      <h3 className="text-xl font-bold text-ink-900 tracking-tight mb-2">
-        Thank you for reaching out.
+      <h3 className="text-xl font-bold text-white tracking-tight mb-2 font-[family-name:var(--font-display)]">
+        Demo Request Received
       </h3>
-      <p className="text-sm text-ink-400 leading-relaxed max-w-md mx-auto mb-8">
-        Your partnership enquiry has been received. Our team will review your requirements and
-        contact you shortly.
+      <p className="text-sm text-slate-400 leading-relaxed max-w-md mx-auto mb-8">
+        Thank you for contacting TEJAS. Our Institutional Partnerships team will review your requirements and reach out within 1 business day.
       </p>
       <button
         onClick={onClose}
-        className="inline-flex items-center gap-2 px-6 py-3 border border-ink-200 text-ink-700 text-sm font-semibold hover:border-tejas-red hover:text-tejas-red transition-all cursor-pointer"
+        className="btn-pill-secondary px-6 py-3 cursor-pointer"
       >
-        Back to website
+        <span>Back to TEJAS</span>
       </button>
     </div>
   );
@@ -472,9 +476,9 @@ function FormField({
 }: FormFieldProps) {
   return (
     <div>
-      <label className="block text-xs font-semibold text-ink-600 tracking-wide uppercase mb-1.5">
+      <label className="block text-xs font-bold text-slate-300 uppercase tracking-wide mb-1.5 font-mono">
         {label}
-        {required && <span className="text-tejas-red ml-0.5">*</span>}
+        {required && <span className="text-[#FF4500] ml-0.5">*</span>}
       </label>
       <input
         type={type}
@@ -482,7 +486,7 @@ function FormField({
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         required={required}
-        className="w-full px-4 py-2.5 border border-ink-200 text-sm text-ink-800 placeholder:text-ink-300 focus:border-tejas-red focus:outline-none transition-colors bg-white"
+        className="w-full px-4 py-2.5 rounded-xl border border-slate-700/80 text-sm text-slate-100 placeholder:text-slate-500 focus:border-[#FF4500] focus:outline-none transition-all bg-[#0C0C10]"
       />
     </div>
   );
@@ -507,19 +511,19 @@ function FormSelect({
 }: FormSelectProps) {
   return (
     <div>
-      <label className="block text-xs font-semibold text-ink-600 tracking-wide uppercase mb-1.5">
+      <label className="block text-xs font-bold text-slate-300 uppercase tracking-wide mb-1.5 font-mono">
         {label}
-        {required && <span className="text-tejas-red ml-0.5">*</span>}
+        {required && <span className="text-[#FF4500] ml-0.5">*</span>}
       </label>
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
         required={required}
-        className="w-full px-4 py-2.5 border border-ink-200 text-sm text-ink-800 focus:border-tejas-red focus:outline-none transition-colors bg-white appearance-none cursor-pointer"
+        className="w-full px-4 py-2.5 rounded-xl border border-slate-700/80 text-sm text-slate-100 focus:border-[#FF4500] focus:outline-none transition-all bg-[#0C0C10] appearance-none cursor-pointer"
       >
-        <option value="">{placeholder}</option>
+        <option value="" className="bg-[#0C0C10] text-slate-400">{placeholder}</option>
         {options.map((opt) => (
-          <option key={opt} value={opt}>
+          <option key={opt} value={opt} className="bg-[#0C0C10] text-slate-100">
             {opt}
           </option>
         ))}
