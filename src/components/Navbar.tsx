@@ -19,7 +19,7 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
-  const { openAuth, user, logout } = useAuth();
+  const { user, logout } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -147,7 +147,9 @@ export function Navbar() {
                 </div>
               ) : (
                 <button
-                  onClick={() => openAuth('login')}
+                  onClick={() => {
+                    window.location.hash = '#login';
+                  }}
                   className="btn-pill-primary px-5 py-2.5 text-xs font-bold cursor-pointer flex items-center gap-1.5 shadow-md shadow-orange-500/20"
                 >
                   <LogIn size={14} className="text-white" />
@@ -252,7 +254,7 @@ export function Navbar() {
                   <button
                     onClick={() => {
                       setIsMobileOpen(false);
-                      openAuth('login');
+                      window.location.hash = '#login';
                     }}
                     className="btn-pill-secondary w-full justify-center text-xs py-3 flex items-center gap-2"
                   >

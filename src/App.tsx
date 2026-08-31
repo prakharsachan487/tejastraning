@@ -16,19 +16,23 @@ import { Footer } from './components/Footer';
 import { EnquiryProvider } from './context/EnquiryContext';
 import { AuthProvider } from './context/AuthContext';
 import { EnquiryModal } from './components/EnquiryModal';
-import { AuthModal } from './components/AuthModal';
 import { MentorPage } from './components/MentorPage';
 import { StudentDashboard } from './components/StudentDashboard';
 import { LegalPage } from './components/LegalPage';
+import { AuthPage } from './components/AuthPage';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'mentor' | 'dashboard' | 'privacy' | 'terms' | 'cookies'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'mentor' | 'login' | 'signup' | 'dashboard' | 'privacy' | 'terms' | 'cookies'>('home');
 
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash;
       if (hash === '#mentor' || hash === '#become-a-mentor') {
         setCurrentPage('mentor');
+      } else if (hash === '#login' || hash === '#signin' || hash === '#auth') {
+        setCurrentPage('login');
+      } else if (hash === '#signup' || hash === '#register') {
+        setCurrentPage('signup');
       } else if (hash === '#dashboard' || hash === '#profile') {
         setCurrentPage('dashboard');
       } else if (hash === '#privacy' || hash === '#privacy-policy') {
@@ -66,6 +70,8 @@ function App() {
         <div className="relative min-h-screen bg-[#0A0A0D] text-slate-100 font-sans selection:bg-[#FF4500] selection:text-white">
           {currentPage === 'mentor' ? (
             <MentorPage onBackToHome={handleBackToHome} />
+          ) : currentPage === 'login' || currentPage === 'signup' ? (
+            <AuthPage />
           ) : currentPage === 'dashboard' ? (
             <StudentDashboard onBackToHome={handleBackToHome} />
           ) : currentPage === 'privacy' || currentPage === 'terms' || currentPage === 'cookies' ? (
@@ -120,9 +126,6 @@ function App() {
 
           {/* 15. Working Institutional Enquiry & Demo Modal */}
           <EnquiryModal />
-
-          {/* 16. Working Auth / Login & Signup Modal */}
-          <AuthModal />
         </div>
       </AuthProvider>
     </EnquiryProvider>
