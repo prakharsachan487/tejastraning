@@ -122,10 +122,10 @@ export function Navbar() {
                 className="h-10 w-auto object-contain rounded-lg group-hover:scale-105 transition-transform"
               />
               <div className="flex flex-col leading-tight">
-                <span className="text-xl font-extrabold tracking-tight text-[#1A1D24] font-[family-name:var(--font-display)] flex items-center">
+                <span className="text-lg sm:text-xl font-extrabold tracking-tight text-[#1A1D24] font-[family-name:var(--font-display)] flex items-center">
                   GROW<span className="text-[#2563EB]">360°</span>
                 </span>
-                <span className="text-[10px] font-mono text-slate-500 tracking-wider hidden sm:block">
+                <span className="text-[8.5px] sm:text-[10px] font-mono text-slate-500 tracking-tight sm:tracking-wider block">
                   Decoding the corporate world
                 </span>
               </div>
@@ -237,11 +237,16 @@ export function Navbar() {
                     <img
                       src="/grow360-logo.png"
                       alt="Grow360 Logo"
-                      className="h-8 w-auto object-contain rounded-lg"
+                      className="h-9 w-auto object-contain rounded-lg"
                     />
-                    <span className="font-extrabold text-lg text-slate-900 font-[family-name:var(--font-display)] flex items-center">
-                      GROW<span className="text-[#2563EB]">360°</span>
-                    </span>
+                    <div className="flex flex-col leading-tight">
+                      <span className="font-extrabold text-lg text-slate-900 font-[family-name:var(--font-display)] flex items-center">
+                        GROW<span className="text-[#2563EB]">360°</span>
+                      </span>
+                      <span className="text-[9px] font-mono text-slate-500 tracking-wider">
+                        Decoding the corporate world
+                      </span>
+                    </div>
                   </div>
                   <button
                     onClick={() => setIsMobileOpen(false)}
