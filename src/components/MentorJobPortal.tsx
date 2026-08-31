@@ -1031,16 +1031,18 @@ export function MentorJobPortal() {
             {/* Left Info */}
             <div className="lg:col-span-6 space-y-4">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#FF4500] to-[#FFA000] flex items-center justify-center text-white font-extrabold text-sm shadow-lg shadow-orange-500/30">
-                  TJ
-                </div>
+                <img
+                  src="/grow360-logo.png"
+                  alt="Grow360 Logo"
+                  className="h-9 w-auto object-contain rounded-lg"
+                />
                 <h3 className="text-2xl sm:text-3xl font-black text-white font-[family-name:var(--font-display)]">
-                  Connect With <span className="italic font-serif text-[#FFA000]">Us</span>
+                  Connect With <span className="italic font-serif text-[#00B4D8]">Us</span>
                 </h3>
               </div>
 
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-lg">
-                At TEJAS, we believe great work happens when talented instructors and mentors are given the trust, tools, and environment they need to thrive. We are building something we are proud of, and we would love for you to be part of it.
+                At Grow360, we believe great work happens when talented instructors and mentors are given the trust, tools, and environment they need to thrive. We are building something we are proud of, and we would love for you to be part of it.
               </p>
 
               {/* Office & Website Details */}
@@ -1119,7 +1121,7 @@ export function MentorJobPortal() {
                 </div>
 
                 <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-slate-400">
-                  <span>Powered by TEJAS Engineering Guild</span>
+                  <span>Powered by Grow360 Engineering Guild</span>
                   <span className="text-slate-300">Updated Today</span>
                 </div>
               </div>

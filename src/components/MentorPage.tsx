@@ -75,7 +75,7 @@ const responsibilities = [
     icon: FileCode,
     title: 'Placement Readiness Evaluation',
     badge: 'Diagnostic',
-    desc: 'Evaluate student code performance, problem-solving speed, and communication depth using TEJAS scoring rubrics.',
+    desc: 'Evaluate student code performance, problem-solving speed, and communication depth using Grow360 scoring rubrics.',
     meta: 'Structured rubric provided',
   },
 ];
@@ -183,7 +183,7 @@ const faqs = [
   },
   {
     q: 'What tools and IDE are used for the sessions?',
-    a: 'TEJAS provides a built-in browser IDE with live code execution, audio/video conferencing, and real-time collaborative whiteboard. You do not need to install any third-party software.',
+    a: 'Grow360 provides a built-in browser IDE with live code execution, audio/video conferencing, and real-time collaborative whiteboard. You do not need to install any third-party software.',
   },
 ];
 
@@ -620,7 +620,7 @@ export function MentorPage({ onBackToHome }: MentorPageProps) {
                 You'll be in <span className="text-[#FFA000]">good company</span>
               </h2>
               <p className="mt-3 text-xs sm:text-sm text-slate-400">
-                Join senior engineers from tier-1 firms already guiding college cohorts on TEJAS.
+                Join senior engineers from tier-1 firms already guiding college cohorts on Grow360.
               </p>
             </div>
 
@@ -680,8 +680,8 @@ export function MentorPage({ onBackToHome }: MentorPageProps) {
                 <div className="lg:col-span-7">
                   <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-[family-name:var(--font-display)]">
                     Ready to mentor with{' '}
-                    <span className="bg-gradient-to-r from-[#FF4500] via-[#FF7A00] to-[#FFA000] bg-clip-text text-transparent">
-                      TEJAS?
+                    <span className="bg-gradient-to-r from-[#00B4D8] via-[#0077B6] to-[#90E0EF] bg-clip-text text-transparent">
+                      Grow360?
                     </span>
                   </h2>
                   <p className="mt-3 text-xs sm:text-sm text-slate-300 max-w-lg leading-relaxed mb-8">
@@ -733,7 +733,7 @@ export function MentorPage({ onBackToHome }: MentorPageProps) {
                 Frequently asked <span className="text-[#FFA000]">questions</span>
               </h2>
               <p className="mt-3 text-xs sm:text-sm text-slate-400">
-                Everything you need to know about becoming a mentor on TEJAS.
+                Everything you need to know about becoming a mentor on Grow360.
               </p>
             </div>
 

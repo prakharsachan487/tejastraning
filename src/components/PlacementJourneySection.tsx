@@ -451,7 +451,7 @@ export function PlacementJourneySection() {
                 <div className="flex items-center justify-between pb-3 border-b border-slate-800 mb-4 text-xs">
                   <div className="flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-emerald-400" />
-                    <span className="font-mono text-slate-300 font-bold">github.com/tejas-cohort/microservices-platform</span>
+                    <span className="font-mono text-slate-300 font-bold">github.com/grow360-cohort/microservices-platform</span>
                   </div>
                   <span className="px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-400 text-[10px] font-bold border border-emerald-500/30">
                     Deployed to AWS

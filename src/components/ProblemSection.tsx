@@ -153,7 +153,7 @@ export function ProblemSection() {
                     <div className="flex items-center gap-1.5 mb-2">
                       <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${item.accentBadgeColor} flex items-center gap-1`}>
                         <CheckCircle2 size={11} />
-                        <span>TEJAS Solution</span>
+                        <span>Grow360 Solution</span>
                       </span>
                     </div>
 

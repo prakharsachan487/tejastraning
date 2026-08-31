@@ -8,7 +8,7 @@ const testimonials = [
     icon: Building,
     quotes: [
       {
-        quote: 'TEJAS transformed our campus placements. We saw a 3x surge in product company offers within two consecutive semesters. The AI assessment diagnostics gave our placement cell clarity on exact student readiness.',
+        quote: 'Grow360 transformed our campus placements. We saw a 3x surge in product company offers within two consecutive semesters. The AI assessment diagnostics gave our placement cell clarity on exact student readiness.',
         author: 'Dr. Ramesh Kumar',
         designation: 'Training & Placement Officer',
         institution: 'SRM Institute of Science & Technology',
@@ -35,7 +35,7 @@ const testimonials = [
         stats: 'Offer Package: ₹28 LPA',
       },
       {
-        quote: 'I used to struggle with algorithmic system design questions. TEJAS mentors walked us through real microservice architectures. That directly helped me crack my dream company in just 60 days.',
+        quote: 'I used to struggle with algorithmic system design questions. Grow360 mentors walked us through real microservice architectures. That directly helped me crack my dream company in just 60 days.',
         author: 'Kavitha Menon',
         designation: 'Backend Cloud Engineer',
         institution: 'Placed at Adobe • 2025 Batch',
@@ -48,14 +48,14 @@ const testimonials = [
     icon: Briefcase,
     quotes: [
       {
-        quote: 'Candidates coming through TEJAS partner colleges are noticeably superior. Their system design fundamentals and live coding poise save our engineering interviewers dozens of wasted panel hours.',
+        quote: 'Candidates coming through Grow360 partner colleges are noticeably superior. Their system design fundamentals and live coding poise save our engineering interviewers dozens of wasted panel hours.',
         author: 'Sanjay Gupta',
         designation: 'Head of University Talent Acquisition',
         institution: 'Leading Global FinTech',
         stats: '60% Faster Drive Execution',
       },
       {
-        quote: 'The standardized readiness scorecard provided by TEJAS is the only metric we trust for pre-filtering campus talent before setting foot on university grounds.',
+        quote: 'The standardized readiness scorecard provided by Grow360 is the only metric we trust for pre-filtering campus talent before setting foot on university grounds.',
         author: 'Megha Srinivasan',
         designation: 'Director of Early Talent Hiring',
         institution: 'Top Enterprise SaaS Cloud',

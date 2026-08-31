@@ -61,7 +61,7 @@ export function PlatformSection() {
                 <span className="px-2 py-0.5 rounded-md bg-[#2563EB] text-white text-[10px] font-bold">
                   NEW
                 </span>
-                <span>TEJAS AI Interview Module</span>
+                <span>Grow360 AI Interview Module</span>
                 <ChevronRight size={14} className="text-slate-500 group-hover/btn:translate-x-0.5 transition-transform" />
               </button>
             </div>
@@ -76,7 +76,7 @@ export function PlatformSection() {
                   </div>
                   <div>
                     <div className="text-sm font-bold text-white leading-tight">AI Interviewer</div>
-                    <div className="text-[11px] text-slate-400">TEJAS Mock Round</div>
+                    <div className="text-[11px] text-slate-400">Grow360 Mock Round</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-rose-950/40 border border-rose-500/30 text-rose-400 text-[11px] font-medium">
@@ -380,7 +380,7 @@ export function PlatformSection() {
                   <div className="w-5 h-5 rounded-full bg-[#FFA000]/20 flex items-center justify-center text-[#FFA000]">
                     <Award size={12} />
                   </div>
-                  <span className="text-[10px] font-bold text-[#FFA000]">TEJAS Certified</span>
+                  <span className="text-[10px] font-bold text-[#FFA000]">Grow360 Certified</span>
                 </div>
                 <span className="px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-400 text-[8.5px] font-bold border border-emerald-500/30">
                   QR Verified
@@ -391,7 +391,7 @@ export function PlatformSection() {
                 Full Stack &amp; System Design
               </div>
               <div className="text-[9px] text-slate-400 mb-2.5">
-                Credential ID: TJ-2026-8942
+                Credential ID: G360-2026-8942
               </div>
 
               <div className="flex items-center justify-between text-[9px] pt-2 border-t border-white/10 text-slate-400">

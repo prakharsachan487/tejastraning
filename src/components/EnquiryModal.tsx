@@ -4,10 +4,10 @@ import { X, ArrowRight, CheckCircle2, AlertCircle, Loader2, Sparkles } from 'luc
 import { useEnquiry } from '../context/EnquiryContext';
 
 const SOURCE_TITLES: Record<string, string> = {
-  PARTNERSHIP: 'Partner with TEJAS',
+  PARTNERSHIP: 'Partner with Grow360',
   CONSULTATION: 'Request an Institutional Demo',
   PROPOSAL: 'Request Campus Training Proposal',
-  CONTACT: 'Contact TEJAS',
+  CONTACT: 'Contact Grow360',
 };
 
 /* ─────────────────────────────────────────────
@@ -276,7 +276,7 @@ export function EnquiryModal() {
                   </button>
 
                   <p className="mt-3 text-[11px] text-slate-500 text-center font-mono">
-                    Your institutional details are securely handled under TEJAS privacy guidelines.
+                    Your institutional details are securely handled under Grow360 privacy guidelines.
                   </p>
                 </form>
               )}
@@ -302,13 +302,13 @@ function SuccessState({ onClose }: { onClose: () => void }) {
         Demo Request Received
       </h3>
       <p className="text-sm text-slate-400 leading-relaxed max-w-md mx-auto mb-8">
-        Thank you for contacting TEJAS. Our Institutional Partnerships team will review your requirements and reach out within 1 business day.
+        Thank you for contacting Grow360. Our Institutional Partnerships team will review your requirements and reach out within 1 business day.
       </p>
       <button
         onClick={onClose}
         className="btn-pill-secondary px-6 py-3 cursor-pointer"
       >
-        <span>Back to TEJAS</span>
+        <span>Back to Grow360</span>
       </button>
     </div>
   );
