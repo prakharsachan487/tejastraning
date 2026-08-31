@@ -1,4 +1,7 @@
+import { useEnquiry } from '../context/EnquiryContext';
+
 export function Footer() {
+  const { openEnquiry } = useEnquiry();
   const nav = (href: string) => {
     if (!href || href === '#') {
       window.scrollTo({ top: 0, behavior: 'instant' });
@@ -183,6 +186,15 @@ export function Footer() {
                 >
                   partnerships@grow360.in
                 </a>
+              </div>
+              <div className="pt-1">
+                <button
+                  onClick={() => openEnquiry('CONTACT')}
+                  className="text-xs font-bold text-[#2563EB] hover:underline cursor-pointer flex items-center gap-1"
+                >
+                  <span>Open Contact Form</span>
+                  <span aria-hidden="true">→</span>
+                </button>
               </div>
             </div>
           </div>

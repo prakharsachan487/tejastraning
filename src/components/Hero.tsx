@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, CheckCircle2, Send, Loader2, Sparkles } from 'lucide-react';
 import { supabase } from '../lib/supabase';
+import { useEnquiry } from '../context/EnquiryContext';
 
 interface ShatterWordProps {
   word: string;
@@ -68,6 +69,7 @@ function ShatterWord({
 }
 
 export function Hero() {
+  const { openEnquiry } = useEnquiry();
   // Form State
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
@@ -184,22 +186,32 @@ export function Hero() {
               Industry-led training, AI-powered assessments, interview preparation and hiring support — everything your college needs to improve student employability and placement outcomes.
             </motion.p>
 
-            {/* 04. Action CTA */}
+            {/* 04. Action CTA Buttons with Direct Popup Triggers */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.0, duration: 0.5, ease: 'easeOut' }}
               className="mt-8 sm:mt-10 flex flex-wrap items-center gap-4"
             >
-              <motion.a
+              <motion.button
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                href="#training-programs"
-                className="btn-pill-primary cursor-pointer flex items-center gap-2 px-7 py-3 text-sm font-bold shadow-md"
+                onClick={() => openEnquiry('CONSULTATION')}
+                className="btn-pill-primary cursor-pointer flex items-center gap-2 px-7 py-3.5 text-sm font-bold shadow-md"
               >
-                <span>View Programs &amp; Curriculum</span>
+                <Sparkles size={16} />
+                <span>Request Institutional Demo</span>
                 <ArrowRight size={16} />
-              </motion.a>
+              </motion.button>
+
+              <motion.button
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                onClick={() => openEnquiry('CONTACT')}
+                className="btn-pill-secondary cursor-pointer flex items-center gap-2 px-6 py-3.5 text-sm font-semibold"
+              >
+                <span>Contact Us</span>
+              </motion.button>
             </motion.div>
 
             {/* 05. Trust bullet checks */}
