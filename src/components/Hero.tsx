@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, CheckCircle2, Search, Send, Loader2, Sparkles } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Send, Loader2, Sparkles } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 
 interface ShatterWordProps {
@@ -65,15 +65,12 @@ function ShatterWord({
 }
 
 export function Hero() {
-  // Form State (matching user reference)
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [workEmail, setWorkEmail] = useState('');
+  // Form State
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [organizationName, setOrganizationName] = useState('');
-  const [jobTitle, setJobTitle] = useState('');
+  const [collegeName, setCollegeName] = useState('');
   const [profession, setProfession] = useState('');
-  const [country, setCountry] = useState('India');
   const [requestDetails, setRequestDetails] = useState('');
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -86,16 +83,13 @@ export function Hero() {
     setErrorMsg('');
 
     try {
-      const fullName = `${firstName.trim()} ${lastName.trim()}`.trim();
       const payload = {
         source: 'HERO_REFERENCE_FORM',
-        full_name: fullName,
-        email: workEmail.trim(),
+        full_name: fullName.trim(),
+        email: email.trim(),
         phone: phoneNumber.trim(),
-        organization_name: organizationName.trim(),
-        job_title: jobTitle.trim(),
-        profession: profession || 'Institutional Partner',
-        country: country.trim() || 'India',
+        college_name: collegeName.trim(),
+        profession: profession.trim() || 'General Inquiry',
         message: requestDetails.trim() || null,
         created_at: new Date().toISOString(),
       };
@@ -104,10 +98,10 @@ export function Hero() {
       try {
         await supabase.from('enquiries').insert([
           {
-            college_name: organizationName.trim(),
-            contact_name: fullName,
-            designation: `${jobTitle.trim()} (${profession || 'General'})`,
-            email: workEmail.trim(),
+            college_name: collegeName.trim(),
+            contact_name: fullName.trim(),
+            designation: profession.trim() || 'General',
+            email: email.trim(),
             phone: phoneNumber.trim(),
             source: 'CONSULTATION'
           }
@@ -136,14 +130,11 @@ export function Hero() {
 
   const handleResetForm = () => {
     setIsSubmitted(false);
-    setFirstName('');
-    setLastName('');
-    setWorkEmail('');
+    setFullName('');
+    setEmail('');
     setPhoneNumber('');
-    setOrganizationName('');
-    setJobTitle('');
+    setCollegeName('');
     setProfession('');
-    setCountry('India');
     setRequestDetails('');
   };
 
@@ -275,7 +266,7 @@ export function Hero() {
                     Request Received Successfully!
                   </h4>
                   <p className="text-xs sm:text-sm text-slate-300 max-w-sm mx-auto leading-relaxed mb-6">
-                    Thank you, <strong className="text-white">{firstName} {lastName}</strong>. Our senior placement consultant will contact you within 24 hours.
+                    Thank you, <strong className="text-white">{fullName}</strong>. Our senior placement consultant will contact you within 24 hours.
                   </p>
                   <button
                     onClick={handleResetForm}
@@ -285,7 +276,7 @@ export function Hero() {
                   </button>
                 </div>
               ) : (
-                /* Main 2-Column Clean Form (Matching User Reference) */
+                /* Main 2-Column Clean Form */
                 <form onSubmit={handleSubmit} className="space-y-3.5">
                   {errorMsg && (
                     <div className="p-3 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-400 text-xs">
@@ -293,53 +284,39 @@ export function Hero() {
                     </div>
                   )}
 
-                  {/* Row 1: First Name & Last Name */}
+                  {/* Row 1: Full Name & Email */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                     <div>
                       <label className="block text-xs font-medium text-slate-300 mb-1">
-                        First Name <span className="text-[#FF4500] font-bold">*</span>
+                        Full Name <span className="text-[#FF4500] font-bold">*</span>
                       </label>
                       <input
                         type="text"
                         required
-                        value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
-                        placeholder="e.g. Rahul"
+                        value={fullName}
+                        onChange={(e) => setFullName(e.target.value)}
+                        placeholder="e.g. Rahul Sharma"
                         className="w-full px-3.5 py-2.5 rounded-xl bg-[#09090D] border border-white/15 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:border-[#00B4D8] transition-colors"
                       />
                     </div>
 
                     <div>
                       <label className="block text-xs font-medium text-slate-300 mb-1">
-                        Last Name <span className="text-[#FF4500] font-bold">*</span>
+                        Email <span className="text-[#FF4500] font-bold">*</span>
                       </label>
                       <input
-                        type="text"
+                        type="email"
                         required
-                        value={lastName}
-                        onChange={(e) => setLastName(e.target.value)}
-                        placeholder="e.g. Sharma"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="rahul@college.edu"
                         className="w-full px-3.5 py-2.5 rounded-xl bg-[#09090D] border border-white/15 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:border-[#00B4D8] transition-colors"
                       />
                     </div>
                   </div>
 
-                  {/* Row 2: Work Email & Phone Number */}
+                  {/* Row 2: Phone Number & College */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                    <div>
-                      <label className="block text-xs font-medium text-slate-300 mb-1">
-                        Work Email <span className="text-[#FF4500] font-bold">*</span>
-                      </label>
-                      <input
-                        type="email"
-                        required
-                        value={workEmail}
-                        onChange={(e) => setWorkEmail(e.target.value)}
-                        placeholder="rahul@college.edu"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#09090D] border border-white/15 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:border-[#00B4D8] transition-colors"
-                      />
-                    </div>
-
                     <div>
                       <label className="block text-xs font-medium text-slate-300 mb-1">
                         Phone Number <span className="text-[#FF4500] font-bold">*</span>
@@ -356,80 +333,38 @@ export function Hero() {
                         Please include country code.
                       </span>
                     </div>
-                  </div>
 
-                  {/* Row 3: Organization Name & Job Title */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                     <div>
                       <label className="block text-xs font-medium text-slate-300 mb-1">
-                        Organization Name <span className="text-[#FF4500] font-bold">*</span>
+                        College <span className="text-[#FF4500] font-bold">*</span>
                       </label>
                       <input
                         type="text"
                         required
-                        value={organizationName}
-                        onChange={(e) => setOrganizationName(e.target.value)}
-                        placeholder="e.g. SRM University / ABC Corp"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#09090D] border border-white/15 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:border-[#00B4D8] transition-colors"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-medium text-slate-300 mb-1">
-                        Job Title <span className="text-[#FF4500] font-bold">*</span>
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        value={jobTitle}
-                        onChange={(e) => setJobTitle(e.target.value)}
-                        placeholder="e.g. Head of Placement / Dean"
+                        value={collegeName}
+                        onChange={(e) => setCollegeName(e.target.value)}
+                        placeholder="e.g. SRM University / IIT Delhi"
                         className="w-full px-3.5 py-2.5 rounded-xl bg-[#09090D] border border-white/15 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:border-[#00B4D8] transition-colors"
                       />
                     </div>
                   </div>
 
-                  {/* Row 4: Profession & Country */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                    <div>
-                      <label className="block text-xs font-medium text-slate-300 mb-1">
-                        Profession <span className="text-[#FF4500] font-bold">*</span>
-                      </label>
-                      <select
-                        required
-                        value={profession}
-                        onChange={(e) => setProfession(e.target.value)}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#09090D] border border-white/15 text-xs text-white focus:outline-none focus:border-[#00B4D8] transition-colors cursor-pointer"
-                      >
-                        <option value="" disabled>Please select...</option>
-                        <option value="Training & Placement Officer (TPO)">Training &amp; Placement Officer (TPO)</option>
-                        <option value="College Dean / Director">College Dean / Director / Principal</option>
-                        <option value="Academic Faculty / Professor">Academic Faculty / Professor</option>
-                        <option value="Corporate HR / Recruiter">Corporate HR / Recruiter</option>
-                        <option value="Student / Candidate">Student / Graduate</option>
-                        <option value="Other">Other</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-medium text-slate-300 mb-1">
-                        Country <span className="text-[#FF4500] font-bold">*</span>
-                      </label>
-                      <div className="relative">
-                        <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
-                        <input
-                          type="text"
-                          required
-                          value={country}
-                          onChange={(e) => setCountry(e.target.value)}
-                          placeholder="Search or enter country..."
-                          className="w-full pl-9 pr-3.5 py-2.5 rounded-xl bg-[#09090D] border border-white/15 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:border-[#00B4D8] transition-colors"
-                        />
-                      </div>
-                    </div>
+                  {/* Row 3: Profession (Direct Fill Input) */}
+                  <div>
+                    <label className="block text-xs font-medium text-slate-300 mb-1">
+                      Profession <span className="text-[#FF4500] font-bold">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={profession}
+                      onChange={(e) => setProfession(e.target.value)}
+                      placeholder="e.g. TPO, Dean, Faculty, Student, Recruiter..."
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#09090D] border border-white/15 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:border-[#00B4D8] transition-colors"
+                    />
                   </div>
 
-                  {/* Row 5: Tell us more about your request */}
+                  {/* Row 4: Tell us more about your request */}
                   <div>
                     <label className="block text-xs font-medium text-slate-300 mb-1">
                       Tell us more about your request
