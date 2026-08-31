@@ -5,6 +5,7 @@ import { TrustStrip } from './components/TrustStrip';
 import { ProblemSection } from './components/ProblemSection';
 import { PlatformSection } from './components/PlatformSection';
 import { MentorsSection } from './components/MentorsSection';
+import { RollingGallerySection } from './components/RollingGallerySection';
 import { MetricsSection } from './components/MetricsSection';
 import { TestimonialsSection } from './components/TestimonialsSection';
 import { PartnersSection } from './components/PartnersSection';
@@ -103,6 +104,9 @@ function App() {
 
                 {/* 06. Meet Our Industry Leaders & Mentors */}
                 <MentorsSection />
+
+                {/* 06b. Horizontal Rolling Mentors & Leaders Gallery */}
+                <RollingGallerySection />
 
                 {/* 07. Institutional Performance & Animated Metrics */}
                 <MetricsSection />
