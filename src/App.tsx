@@ -70,7 +70,7 @@ function App() {
   return (
     <EnquiryProvider>
       <AuthProvider>
-        <div className="relative min-h-screen bg-[#0A0A0D] text-slate-100 font-sans selection:bg-[#FF4500] selection:text-white">
+        <div className="relative min-h-screen bg-[#0A0A0D] text-slate-100 font-sans selection:bg-[#7A9D96] selection:text-white">
           {currentPage === 'mentor' ? (
             <MentorPage onBackToHome={handleBackToHome} />
           ) : currentPage === 'career' ? (

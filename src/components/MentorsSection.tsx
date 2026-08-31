@@ -142,13 +142,13 @@ export function MentorsSection() {
             transition={{ duration: 0.5 }}
             className="max-w-3xl text-left"
           >
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF4500]/10 border border-[#FF4500]/25 text-[#FFA000] text-xs font-semibold tracking-wide mb-4">
-              <Sparkles size={14} className="text-[#FF4500]" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#7A9D96]/10 border border-[#7A9D96]/25 text-[#9CBDB7] text-xs font-semibold tracking-wide mb-4">
+              <Sparkles size={14} className="text-[#7A9D96]" />
               <span>Top Tier Engineering Faculty</span>
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
               Meet Our{' '}
-              <span className="bg-gradient-to-r from-[#FF4500] via-[#FF7A00] to-[#FFA000] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#7A9D96] via-[#9CBDB7] to-[#9CBDB7] bg-clip-text text-transparent">
                 Industry Leaders
               </span>
             </h2>
@@ -163,7 +163,7 @@ export function MentorsSection() {
               <button
                 onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
                 disabled={currentPage === 0}
-                className="w-10 h-10 rounded-full bg-[#14141C] border border-white/10 flex items-center justify-center text-white hover:border-[#FF4500]/50 transition-all disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
+                className="w-10 h-10 rounded-full bg-[#14141C] border border-white/10 flex items-center justify-center text-white hover:border-[#7A9D96]/50 transition-all disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
                 aria-label="Previous Mentors"
               >
                 <ChevronLeft size={18} />
@@ -174,7 +174,7 @@ export function MentorsSection() {
               <button
                 onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1))}
                 disabled={currentPage === totalPages - 1}
-                className="w-10 h-10 rounded-full bg-[#14141C] border border-white/10 flex items-center justify-center text-white hover:border-[#FF4500]/50 transition-all disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
+                className="w-10 h-10 rounded-full bg-[#14141C] border border-white/10 flex items-center justify-center text-white hover:border-[#7A9D96]/50 transition-all disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
                 aria-label="Next Mentors"
               >
                 <ChevronRight size={18} />
@@ -206,7 +206,7 @@ export function MentorsSection() {
               whileHover={{ y: -8, rotate: 0, transition: { duration: 0.25 } }}
               style={{ rotate: mentor.tilt }}
               transition={{ duration: 0.5 }}
-              className="bento-card overflow-hidden flex flex-col justify-between group hover:border-[#FF4500]/50 bg-[#111116] border border-white/10 rounded-2xl transition-all duration-300"
+              className="bento-card overflow-hidden flex flex-col justify-between group hover:border-[#7A9D96]/50 bg-[#111116] border border-white/10 rounded-2xl transition-all duration-300"
             >
               <div>
                 {/* Portrait Photo Container with Top Left Company Badge */}
@@ -261,7 +261,7 @@ export function MentorsSection() {
         {/* Bottom Callout to Become a Mentor */}
         <div className="mt-14 text-center">
           <div className="inline-flex items-center gap-3 p-2 pr-5 rounded-full bg-[#14141C] border border-white/10 text-xs text-slate-300">
-            <span className="px-3 py-1 rounded-full bg-[#FF4500]/15 text-[#FFA000] font-bold font-mono">
+            <span className="px-3 py-1 rounded-full bg-[#7A9D96]/15 text-[#9CBDB7] font-bold font-mono">
               Join Our Network
             </span>
             <span>Are you an engineering leader or senior developer?</span>
@@ -270,7 +270,7 @@ export function MentorsSection() {
                 window.location.hash = '#mentor';
                 window.scrollTo({ top: 0, behavior: 'instant' });
               }}
-              className="text-[#FF6A00] font-bold hover:text-white transition-colors cursor-pointer flex items-center gap-1 ml-1"
+              className="text-[#7A9D96] font-bold hover:text-white transition-colors cursor-pointer flex items-center gap-1 ml-1"
             >
               <span>Become a Mentor</span>
               <span aria-hidden="true">→</span>

@@ -17,13 +17,13 @@ export function PlatformSection() {
           transition={{ duration: 0.5 }}
           className="max-w-3xl mb-14 text-left"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF4500]/10 border border-[#FF4500]/25 text-[#FFA000] text-xs font-semibold tracking-wide mb-4">
-            <Sparkles size={14} className="text-[#FF4500]" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#7A9D96]/10 border border-[#7A9D96]/25 text-[#9CBDB7] text-xs font-semibold tracking-wide mb-4">
+            <Sparkles size={14} className="text-[#7A9D96]" />
             <span>Complete Placement Infrastructure</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
             One Platform.{' '}
-            <span className="bg-gradient-to-r from-[#FF4500] via-[#FF7A00] to-[#FFA000] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#7A9D96] via-[#9CBDB7] to-[#9CBDB7] bg-clip-text text-transparent">
               Complete Infrastructure.
             </span>
           </h2>
@@ -43,7 +43,7 @@ export function PlatformSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="bento-card p-7 sm:p-9 flex flex-col justify-between group hover:border-[#FF4500]/50"
+            className="bento-card p-7 sm:p-9 flex flex-col justify-between group hover:border-[#7A9D96]/50"
           >
             <div>
               <h3 className="text-2xl font-bold text-white mb-2">
@@ -56,7 +56,7 @@ export function PlatformSection() {
               {/* Tag Pill Link */}
               <button
                 onClick={() => openEnquiry('CONSULTATION')}
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1A1A26] border border-white/10 hover:border-[#FF4500]/40 transition-colors text-xs font-medium text-slate-300 mb-8 cursor-pointer group/btn"
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1A1A26] border border-white/10 hover:border-[#7A9D96]/40 transition-colors text-xs font-medium text-slate-300 mb-8 cursor-pointer group/btn"
               >
                 <span className="px-2 py-0.5 rounded-md bg-[#2563EB] text-white text-[10px] font-bold">
                   NEW
@@ -126,7 +126,7 @@ export function PlatformSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="bento-card p-7 sm:p-9 flex flex-col justify-between group hover:border-[#FF4500]/50"
+            className="bento-card p-7 sm:p-9 flex flex-col justify-between group hover:border-[#7A9D96]/50"
           >
             <div>
               <h3 className="text-2xl font-bold text-white mb-2">
@@ -207,7 +207,7 @@ export function PlatformSection() {
                   </div>
 
                   <div className="p-2 rounded-lg bg-amber-50 border border-amber-200">
-                    <div className="w-4 h-4 mx-auto mb-1 rounded-full bg-[#FF4500] text-white flex items-center justify-center text-[8px] font-bold">
+                    <div className="w-4 h-4 mx-auto mb-1 rounded-full bg-[#7A9D96] text-white flex items-center justify-center text-[8px] font-bold">
                       ★
                     </div>
                     <div className="font-bold text-amber-900 text-[9px]">Drive Ready</div>
@@ -240,7 +240,7 @@ export function PlatformSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.15 }}
-            className="bento-card p-6 flex flex-col justify-between group hover:border-[#FF4500]/50"
+            className="bento-card p-6 flex flex-col justify-between group hover:border-[#7A9D96]/50"
           >
             <div>
               <h3 className="text-lg font-bold text-white mb-1.5">
@@ -260,7 +260,7 @@ export function PlatformSection() {
               <div className="space-y-1.5 text-[10px]">
                 <div className="flex justify-between items-center text-slate-300">
                   <span>• Product Management</span>
-                  <span className="text-[#FFA000] font-bold">12 PRDs</span>
+                  <span className="text-[#9CBDB7] font-bold">12 PRDs</span>
                 </div>
                 <div className="flex justify-between items-center text-slate-300">
                   <span>• Data Analytics</span>
@@ -280,7 +280,7 @@ export function PlatformSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="bento-card p-6 flex flex-col justify-between group hover:border-[#FF4500]/50"
+            className="bento-card p-6 flex flex-col justify-between group hover:border-[#7A9D96]/50"
           >
             <div>
               <h3 className="text-lg font-bold text-white mb-1.5">
@@ -316,7 +316,7 @@ export function PlatformSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.25 }}
-            className="bento-card p-6 flex flex-col justify-between group hover:border-[#FF4500]/50"
+            className="bento-card p-6 flex flex-col justify-between group hover:border-[#7A9D96]/50"
           >
             <div>
               <h3 className="text-lg font-bold text-white mb-1.5">
@@ -335,7 +335,7 @@ export function PlatformSection() {
               
               {/* Company Logo Badges */}
               <div className="grid grid-cols-4 gap-1.5 mb-2.5">
-                <div className="p-1 rounded bg-[#14141C] border border-white/5 text-center text-[9px] font-bold text-[#FFA000]">
+                <div className="p-1 rounded bg-[#14141C] border border-white/5 text-center text-[9px] font-bold text-[#9CBDB7]">
                   Amazon
                 </div>
                 <div className="p-1 rounded bg-[#14141C] border border-white/5 text-center text-[9px] font-bold text-[#3B82F6]">
@@ -351,7 +351,7 @@ export function PlatformSection() {
 
               <div className="flex items-center justify-between text-[10px] text-slate-300 pt-1.5 border-t border-white/5">
                 <span>700+ LeetCode Patterns</span>
-                <span className="text-[#FFA000] font-bold">50+ Mocks</span>
+                <span className="text-[#9CBDB7] font-bold">50+ Mocks</span>
               </div>
             </div>
           </motion.div>
@@ -362,7 +362,7 @@ export function PlatformSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="bento-card p-6 flex flex-col justify-between group hover:border-[#FF4500]/50"
+            className="bento-card p-6 flex flex-col justify-between group hover:border-[#7A9D96]/50"
           >
             <div>
               <h3 className="text-lg font-bold text-white mb-1.5">
@@ -374,13 +374,13 @@ export function PlatformSection() {
             </div>
 
             {/* Inner Certificate Mockup Widget */}
-            <div className="rounded-xl bg-gradient-to-br from-[#161622] to-[#0D0D12] border border-[#FFA000]/30 p-3.5 text-xs shadow-md">
+            <div className="rounded-xl bg-gradient-to-br from-[#161622] to-[#0D0D12] border border-[#9CBDB7]/30 p-3.5 text-xs shadow-md">
               <div className="flex items-center justify-between pb-2 mb-2 border-b border-white/10">
                 <div className="flex items-center gap-1.5">
-                  <div className="w-5 h-5 rounded-full bg-[#FFA000]/20 flex items-center justify-center text-[#FFA000]">
+                  <div className="w-5 h-5 rounded-full bg-[#9CBDB7]/20 flex items-center justify-center text-[#9CBDB7]">
                     <Award size={12} />
                   </div>
-                  <span className="text-[10px] font-bold text-[#FFA000]">Grow360 Certified</span>
+                  <span className="text-[10px] font-bold text-[#9CBDB7]">Grow360 Certified</span>
                 </div>
                 <span className="px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-400 text-[8.5px] font-bold border border-emerald-500/30">
                   QR Verified
@@ -396,7 +396,7 @@ export function PlatformSection() {
 
               <div className="flex items-center justify-between text-[9px] pt-2 border-t border-white/10 text-slate-400">
                 <span>4 Academic Credits</span>
-                <span className="flex items-center gap-1 text-[#FFA000] font-semibold">
+                <span className="flex items-center gap-1 text-[#9CBDB7] font-semibold">
                   <Share2 size={10} /> LinkedIn
                 </span>
               </div>

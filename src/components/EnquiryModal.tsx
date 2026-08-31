@@ -161,13 +161,13 @@ export function EnquiryModal() {
             className="fixed inset-4 sm:inset-auto sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 sm:w-full sm:max-w-xl sm:max-h-[90vh] bg-[#111116] rounded-3xl border border-white/10 z-[101] overflow-y-auto shadow-2xl"
           >
             {/* Top Flame Accent Strip */}
-            <div className="h-1.5 bg-gradient-to-r from-[#FF4500] via-[#FF7A00] to-[#FFA000]" />
+            <div className="h-1.5 bg-gradient-to-r from-[#7A9D96] via-[#9CBDB7] to-[#9CBDB7]" />
 
             {/* Header */}
             <div className="flex items-center justify-between px-6 py-5 border-b border-white/10">
               <div>
-                <div className="inline-flex items-center gap-1.5 font-mono text-[10px] font-bold tracking-wider text-[#FF6A00] uppercase mb-1">
-                  <Sparkles size={12} className="text-[#FF4500]" />
+                <div className="inline-flex items-center gap-1.5 font-mono text-[10px] font-bold tracking-wider text-[#7A9D96] uppercase mb-1">
+                  <Sparkles size={12} className="text-[#7A9D96]" />
                   <span>Institutional Placement Infrastructure</span>
                 </div>
                 <h2 className="text-xl font-extrabold text-white tracking-tight font-[family-name:var(--font-display)]">
@@ -260,7 +260,7 @@ export function EnquiryModal() {
                   <button
                     type="submit"
                     disabled={submitState === 'submitting'}
-                    className="btn-pill-primary w-full justify-center text-sm py-3.5 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed shadow-lg shadow-orange-500/20"
+                    className="btn-pill-primary w-full justify-center text-sm py-3.5 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed shadow-lg shadow-[#7A9D96]/"
                   >
                     {submitState === 'submitting' ? (
                       <>
@@ -339,7 +339,7 @@ function FormField({
     <div>
       <label className="block text-xs font-bold text-slate-300 uppercase tracking-wide mb-1.5 font-mono">
         {label}
-        {required && <span className="text-[#FF4500] ml-0.5">*</span>}
+        {required && <span className="text-[#7A9D96] ml-0.5">*</span>}
       </label>
       <input
         type={type}
@@ -347,7 +347,7 @@ function FormField({
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         required={required}
-        className="w-full px-4 py-2.5 rounded-xl border border-slate-700/80 text-sm text-slate-100 placeholder:text-slate-500 focus:border-[#FF4500] focus:outline-none transition-all bg-[#0C0C10]"
+        className="w-full px-4 py-2.5 rounded-xl border border-slate-700/80 text-sm text-slate-100 placeholder:text-slate-500 focus:border-[#7A9D96] focus:outline-none transition-all bg-[#0C0C10]"
       />
     </div>
   );

@@ -11,12 +11,12 @@
   --color-bg-card-dark: #0D0D12;
   --color-bg-card-elevated: #181820;
   --color-border-subtle: rgba(255, 255, 255, 0.08);
-  --color-border-hover: rgba(255, 69, 0, 0.4);
+  --color-border-hover: rgba(122, 157, 150, 0.4);
 
-  /* ── Electric Flame Orange Accents ── */
-  --color-accent-orange: #FF4500;
-  --color-accent-flame: #FF3E00;
-  --color-accent-amber: #FF8C00;
+  /* ── Mist Green Accents (#7A9D96) ── */
+  --color-accent-orange: #7A9D96;
+  --color-accent-flame: #8FB1AA;
+  --color-accent-amber: #8FB1AA;
   --color-accent-yellow: #FACC15;
   --color-accent-emerald: #10B981;
 
@@ -85,13 +85,13 @@ body {
 }
 
 .bento-card:hover {
-  border-color: rgba(255, 69, 0, 0.5);
+  border-color: rgba(122, 157, 150, 0.5);
   transform: translateY(-2px);
 }
 
 .bento-card-highlight {
   background: #14141A;
-  border: 1px solid rgba(255, 69, 0, 0.4);
+  border: 1px solid rgba(122, 157, 150, 0.4);
 }
 
 /* ═══════════════════════════════════════
@@ -103,7 +103,7 @@ body {
   gap: 0.5rem;
   padding: 0.75rem 1.5rem;
   border-radius: 9999px;
-  background: #FF4500;
+  background: #7A9D96;
   color: #FFFFFF;
   font-size: 0.875rem;
   font-weight: 700;
@@ -111,7 +111,7 @@ body {
 }
 
 .btn-pill-primary:hover {
-  background: #FF5722;
+  background: #8FB1AA;
   transform: translateY(-1px);
 }
 
@@ -131,8 +131,8 @@ body {
 
 .btn-pill-secondary:hover {
   background-color: #1E1E26;
-  border-color: rgba(255, 69, 0, 0.5);
-  color: #FF8C00;
+  border-color: rgba(122, 157, 150, 0.5);
+  color: #8FB1AA;
   transform: translateY(-1px);
 }
 

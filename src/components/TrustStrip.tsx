@@ -129,7 +129,7 @@ export function TrustStrip() {
           {[...companyLogos, ...companyLogos, ...companyLogos].map((item, index) => (
             <div
               key={`${item.name}-${index}`}
-              className="flex items-center gap-3 px-4 sm:px-5 py-2.5 rounded-full bg-[#14141C] border border-white/10 hover:border-[#FF4500]/40 transition-all whitespace-nowrap select-none cursor-default group"
+              className="flex items-center gap-3 px-4 sm:px-5 py-2.5 rounded-full bg-[#14141C] border border-white/10 hover:border-[#7A9D96]/40 transition-all whitespace-nowrap select-none cursor-default group"
             >
               {item.logo}
               <span className="text-xs sm:text-sm font-semibold text-slate-200 group-hover:text-white">

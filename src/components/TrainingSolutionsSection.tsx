@@ -14,12 +14,12 @@ export function TrainingSolutionsSection() {
           transition={{ duration: 0.5 }}
           className="text-center max-w-3xl mx-auto mb-14"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF4500]/10 border border-[#FF4500]/25 text-[#FFA000] text-xs font-semibold tracking-wide mb-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#7A9D96]/10 border border-[#7A9D96]/25 text-[#9CBDB7] text-xs font-semibold tracking-wide mb-4">
             <span>Flagship Delivery Models</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
             Industry Engineers.{' '}
-            <span className="bg-gradient-to-r from-[#FF4500] via-[#FF7A00] to-[#FFA000] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#7A9D96] via-[#9CBDB7] to-[#9CBDB7] bg-clip-text text-transparent">
               On Your Campus.
             </span>
           </h2>

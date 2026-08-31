@@ -122,7 +122,7 @@ export function Navbar() {
                     onClick={() => handleNavClick(item.href)}
                     className={`px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-all cursor-pointer ${
                       isActive
-                        ? 'bg-white/15 text-[#FF6A00] font-bold border border-[#FF4500]/40'
+                        ? 'bg-white/15 text-[#7A9D96] font-bold border border-[#7A9D96]/40'
                         : 'text-slate-300 hover:text-white hover:bg-white/5'
                     }`}
                   >
@@ -154,11 +154,11 @@ export function Navbar() {
                     <img
                       src={user.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80'}
                       alt={user.name}
-                      className="w-7 h-7 rounded-full object-cover border border-amber-400/40 group-hover:scale-105 transition-transform"
+                      className="w-7 h-7 rounded-full object-cover border border-[#7A9D96]/40 group-hover:scale-105 transition-transform"
                     />
                     <div className="flex flex-col text-left">
-                      <span className="text-xs font-bold text-white leading-none group-hover:text-[#FFA000] transition-colors">{user.name}</span>
-                      <span className="text-[10px] text-[#FFA000] font-mono leading-none mt-0.5">{user.role}</span>
+                      <span className="text-xs font-bold text-white leading-none group-hover:text-[#9CBDB7] transition-colors">{user.name}</span>
+                      <span className="text-[10px] text-[#9CBDB7] font-mono leading-none mt-0.5">{user.role}</span>
                     </div>
                   </div>
                   <button
@@ -174,7 +174,7 @@ export function Navbar() {
                   onClick={() => {
                     window.location.hash = '#login';
                   }}
-                  className="btn-pill-primary px-5 py-2.5 text-xs font-bold cursor-pointer flex items-center gap-1.5 shadow-md shadow-orange-500/20"
+                  className="btn-pill-primary px-5 py-2.5 text-xs font-bold cursor-pointer flex items-center gap-1.5 shadow-md shadow-[#7A9D96]/"
                 >
                   <LogIn size={14} className="text-white" />
                   <span>Login</span>
@@ -237,7 +237,7 @@ export function Navbar() {
                     <button
                       key={item.href}
                       onClick={() => handleNavClick(item.href)}
-                      className="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-[#FFA000] hover:bg-white/5 transition-colors text-left"
+                      className="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-[#9CBDB7] hover:bg-white/5 transition-colors text-left"
                     >
                       <span>{item.label}</span>
                       <ChevronRight size={16} className="text-slate-500" />
@@ -270,11 +270,11 @@ export function Navbar() {
                       <img
                         src={user.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80'}
                         alt={user.name}
-                        className="w-8 h-8 rounded-full object-cover border border-amber-400/40"
+                        className="w-8 h-8 rounded-full object-cover border border-[#7A9D96]/40"
                       />
                       <div className="text-left">
                         <div className="text-xs font-bold text-white">{user.name}</div>
-                        <div className="text-[10px] text-[#FFA000] font-mono">{user.role} · Tap to open Dashboard</div>
+                        <div className="text-[10px] text-[#9CBDB7] font-mono">{user.role} · Tap to open Dashboard</div>
                       </div>
                     </div>
                     <button
@@ -293,7 +293,7 @@ export function Navbar() {
                       setIsMobileOpen(false);
                       window.location.hash = '#login';
                     }}
-                    className="btn-pill-primary w-full justify-center text-xs py-3 flex items-center gap-2 shadow-md shadow-orange-500/20"
+                    className="btn-pill-primary w-full justify-center text-xs py-3 flex items-center gap-2 shadow-md shadow-[#7A9D96]/"
                   >
                     <LogIn size={14} className="text-white" />
                     <span>Login / Sign Up</span>

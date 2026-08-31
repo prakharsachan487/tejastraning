@@ -65,7 +65,7 @@ export function LegalPage({ initialTab = 'privacy', onBackToHome }: LegalPagePro
                 className="h-8 w-auto object-contain rounded-lg"
               />
               <span className="text-lg font-extrabold text-white font-[family-name:var(--font-display)]">
-                GROW<span className="text-[#00B4D8]">360°</span> <span className="text-xs font-mono font-normal text-[#FFA000] ml-1">Legal</span>
+                GROW<span className="text-[#00B4D8]">360°</span> <span className="text-xs font-mono font-normal text-[#9CBDB7] ml-1">Legal</span>
               </span>
             </div>
           </div>
@@ -223,7 +223,7 @@ function PrivacyContent() {
 
       <section className="border-t border-white/10 pt-8">
         <div className="flex items-center gap-2.5 text-white font-bold text-base sm:text-lg mb-3">
-          <Lock size={18} className="text-[#FFA000]" />
+          <Lock size={18} className="text-[#9CBDB7]" />
           <h3>3. How We Use Information</h3>
         </div>
         <ul className="space-y-2 list-disc list-inside text-slate-300">
@@ -322,7 +322,7 @@ function TermsContent() {
 
       <section className="border-t border-white/10 pt-8">
         <div className="flex items-center gap-2.5 text-white font-bold text-base sm:text-lg mb-3">
-          <AlertCircle size={18} className="text-[#FFA000]" />
+          <AlertCircle size={18} className="text-[#9CBDB7]" />
           <h3>3. User Conduct & Acceptable Use</h3>
         </div>
         <p className="mb-3">When using Grow360, you agree not to:</p>
@@ -381,7 +381,7 @@ function CookiesContent() {
     >
       <section>
         <div className="flex items-center gap-2.5 text-white font-bold text-base sm:text-lg mb-3">
-          <Cookie size={18} className="text-[#FFA000]" />
+          <Cookie size={18} className="text-[#9CBDB7]" />
           <h3>1. What Are Cookies?</h3>
         </div>
         <p>

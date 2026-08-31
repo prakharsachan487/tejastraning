@@ -145,7 +145,7 @@ export function AuthModal() {
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                             placeholder="Amélie Laurent"
-                            className="w-full px-5 py-3.5 rounded-full bg-white/90 border border-black/10 text-xs sm:text-sm text-[#1E1E24] placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#FFB800] focus:border-transparent shadow-xs transition-all"
+                            className="w-full px-5 py-3.5 rounded-full bg-white/90 border border-black/10 text-xs sm:text-sm text-[#1E1E24] placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#A5C4BE] focus:border-transparent shadow-xs transition-all"
                           />
                         </div>
                       </div>
@@ -163,7 +163,7 @@ export function AuthModal() {
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           placeholder="amelielaurent7622@gmail.com"
-                          className="w-full px-5 py-3.5 rounded-full bg-white/90 border border-black/10 text-xs sm:text-sm text-[#1E1E24] placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#FFB800] focus:border-transparent shadow-xs transition-all"
+                          className="w-full px-5 py-3.5 rounded-full bg-white/90 border border-black/10 text-xs sm:text-sm text-[#1E1E24] placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#A5C4BE] focus:border-transparent shadow-xs transition-all"
                         />
                       </div>
                     </div>
@@ -175,7 +175,7 @@ export function AuthModal() {
                           Password
                         </label>
                         {!isSignUp && (
-                          <a href="#forgot" className="text-[11px] text-[#FF4500] hover:underline font-medium">
+                          <a href="#forgot" className="text-[11px] text-[#7A9D96] hover:underline font-medium">
                             Forgot?
                           </a>
                         )}
@@ -187,7 +187,7 @@ export function AuthModal() {
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
                           placeholder="••••••••••••••••"
-                          className="w-full pl-5 pr-12 py-3.5 rounded-full bg-white/90 border border-black/10 text-xs sm:text-sm text-[#1E1E24] placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#FFB800] focus:border-transparent shadow-xs transition-all"
+                          className="w-full pl-5 pr-12 py-3.5 rounded-full bg-white/90 border border-black/10 text-xs sm:text-sm text-[#1E1E24] placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#A5C4BE] focus:border-transparent shadow-xs transition-all"
                         />
                         <button
                           type="button"
@@ -204,7 +204,7 @@ export function AuthModal() {
                       <button
                         type="submit"
                         disabled={isLoading}
-                        className="w-full py-3.5 px-6 rounded-full bg-gradient-to-r from-[#FFCC4D] via-[#FFB800] to-[#FFA000] hover:from-[#FFD566] hover:to-[#FFB014] text-[#1E1E24] font-bold text-xs sm:text-sm shadow-md shadow-amber-500/20 active:scale-[0.99] transition-all duration-200 cursor-pointer flex items-center justify-center gap-2"
+                        className="w-full py-3.5 px-6 rounded-full bg-gradient-to-r from-[#B8D5CF] via-[#A5C4BE] to-[#9CBDB7] hover:from-[#CBE3DE] hover:to-[#7A9D96] text-[#1E1E24] font-bold text-xs sm:text-sm shadow-md shadow-[#7A9D96]/ active:scale-[0.99] transition-all duration-200 cursor-pointer flex items-center justify-center gap-2"
                       >
                         {isLoading ? (
                           <span className="inline-block w-4 h-4 border-2 border-black/20 border-t-black rounded-full animate-spin" />
@@ -311,7 +311,7 @@ export function AuthModal() {
                   className="absolute top-6 left-6 flex flex-col gap-1.5 z-20"
                 >
                   {/* Yellow Meeting Tag */}
-                  <div className="px-4 py-2.5 rounded-2xl bg-[#FFCC4D] text-[#1E1E24] shadow-lg shadow-black/20 flex items-center justify-between gap-4 font-semibold text-xs border border-amber-300">
+                  <div className="px-4 py-2.5 rounded-2xl bg-[#B8D5CF] text-[#1E1E24] shadow-lg shadow-black/20 flex items-center justify-between gap-4 font-semibold text-xs border border-amber-300">
                     <div>
                       <div className="font-bold">Task Review With Team</div>
                       <div className="text-[10px] opacity-80">09:30am-10:00am</div>
@@ -409,7 +409,7 @@ export function AuthModal() {
                         <div className="text-xs font-bold">Daily Meeting</div>
                         <div className="text-[10px] text-slate-500 font-mono">12:00pm-01:00pm</div>
                       </div>
-                      <span className="w-2 h-2 rounded-full bg-[#FFB800] shrink-0" />
+                      <span className="w-2 h-2 rounded-full bg-[#A5C4BE] shrink-0" />
                     </div>
 
                     {/* Participant Avatar Stack */}

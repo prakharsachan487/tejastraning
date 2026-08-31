@@ -59,7 +59,7 @@ export function MentorApplyModal({ isOpen, onClose }: MentorApplyModalProps) {
             className="relative w-full max-w-xl rounded-3xl bg-[#111116] border border-white/15 p-6 sm:p-8 shadow-2xl shadow-black z-10 text-slate-100 overflow-hidden"
           >
             {/* Ambient Background Glow */}
-            <div className="absolute top-0 right-0 w-72 h-72 bg-[#FF4500]/10 blur-[100px] pointer-events-none rounded-full" />
+            <div className="absolute top-0 right-0 w-72 h-72 bg-[#7A9D96]/10 blur-[100px] pointer-events-none rounded-full" />
 
             {/* Close Button */}
             <button
@@ -109,7 +109,7 @@ export function MentorApplyModal({ isOpen, onClose }: MentorApplyModalProps) {
                     {/* Full Name */}
                     <div>
                       <label className="block text-xs font-mono font-semibold text-slate-300 mb-1.5 flex items-center gap-1.5">
-                        <User size={13} className="text-[#FFA000]" />
+                        <User size={13} className="text-[#9CBDB7]" />
                         <span>Full Name *</span>
                       </label>
                       <input
@@ -118,14 +118,14 @@ export function MentorApplyModal({ isOpen, onClose }: MentorApplyModalProps) {
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
                         placeholder="e.g. Rahul Sharma"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#0A0A0E] border border-white/15 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-[#FF4500] transition-colors"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#0A0A0E] border border-white/15 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-[#7A9D96] transition-colors"
                       />
                     </div>
 
                     {/* Email */}
                     <div>
                       <label className="block text-xs font-mono font-semibold text-slate-300 mb-1.5 flex items-center gap-1.5">
-                        <Mail size={13} className="text-[#FFA000]" />
+                        <Mail size={13} className="text-[#9CBDB7]" />
                         <span>Work / Personal Email *</span>
                       </label>
                       <input
@@ -134,7 +134,7 @@ export function MentorApplyModal({ isOpen, onClose }: MentorApplyModalProps) {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="rahul@company.com"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#0A0A0E] border border-white/15 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-[#FF4500] transition-colors"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#0A0A0E] border border-white/15 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-[#7A9D96] transition-colors"
                       />
                     </div>
                   </div>
@@ -143,7 +143,7 @@ export function MentorApplyModal({ isOpen, onClose }: MentorApplyModalProps) {
                     {/* Company */}
                     <div>
                       <label className="block text-xs font-mono font-semibold text-slate-300 mb-1.5 flex items-center gap-1.5">
-                        <Briefcase size={13} className="text-[#FFA000]" />
+                        <Briefcase size={13} className="text-[#9CBDB7]" />
                         <span>Current Organization *</span>
                       </label>
                       <input
@@ -152,14 +152,14 @@ export function MentorApplyModal({ isOpen, onClose }: MentorApplyModalProps) {
                         value={company}
                         onChange={(e) => setCompany(e.target.value)}
                         placeholder="e.g. Google, Microsoft, Startup"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#0A0A0E] border border-white/15 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-[#FF4500] transition-colors"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#0A0A0E] border border-white/15 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-[#7A9D96] transition-colors"
                       />
                     </div>
 
                     {/* Role */}
                     <div>
                       <label className="block text-xs font-mono font-semibold text-slate-300 mb-1.5 flex items-center gap-1.5">
-                        <Award size={13} className="text-[#FFA000]" />
+                        <Award size={13} className="text-[#9CBDB7]" />
                         <span>Designation / Role *</span>
                       </label>
                       <input
@@ -168,7 +168,7 @@ export function MentorApplyModal({ isOpen, onClose }: MentorApplyModalProps) {
                         value={role}
                         onChange={(e) => setRole(e.target.value)}
                         placeholder="e.g. SDE II, Senior Engineer"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#0A0A0E] border border-white/15 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-[#FF4500] transition-colors"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#0A0A0E] border border-white/15 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-[#7A9D96] transition-colors"
                       />
                     </div>
                   </div>
@@ -187,7 +187,7 @@ export function MentorApplyModal({ isOpen, onClose }: MentorApplyModalProps) {
                       value={linkedin}
                       onChange={(e) => setLinkedin(e.target.value)}
                       placeholder="https://linkedin.com/in/yourprofile"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#0A0A0E] border border-white/15 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-[#FF4500] transition-colors"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#0A0A0E] border border-white/15 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-[#7A9D96] transition-colors"
                     />
                   </div>
 
@@ -200,7 +200,7 @@ export function MentorApplyModal({ isOpen, onClose }: MentorApplyModalProps) {
                       <select
                         value={domain}
                         onChange={(e) => setDomain(e.target.value)}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#0A0A0E] border border-white/15 text-xs text-white focus:outline-none focus:border-[#FF4500] transition-colors cursor-pointer"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#0A0A0E] border border-white/15 text-xs text-white focus:outline-none focus:border-[#7A9D96] transition-colors cursor-pointer"
                       >
                         <option value="DSA & Algorithms">DSA & Algorithms</option>
                         <option value="System Design & Backend">System Design & Backend</option>
@@ -214,13 +214,13 @@ export function MentorApplyModal({ isOpen, onClose }: MentorApplyModalProps) {
                     {/* Availability */}
                     <div>
                       <label className="block text-xs font-mono font-semibold text-slate-300 mb-1.5 flex items-center gap-1.5">
-                        <Clock size={13} className="text-[#FFA000]" />
+                        <Clock size={13} className="text-[#9CBDB7]" />
                         <span>Weekly Availability</span>
                       </label>
                       <select
                         value={availability}
                         onChange={(e) => setAvailability(e.target.value)}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#0A0A0E] border border-white/15 text-xs text-white focus:outline-none focus:border-[#FF4500] transition-colors cursor-pointer"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#0A0A0E] border border-white/15 text-xs text-white focus:outline-none focus:border-[#7A9D96] transition-colors cursor-pointer"
                       >
                         <option value="1-2 hrs / weekend">1-2 hrs / weekend</option>
                         <option value="2-4 hrs / weekend">2-4 hrs / weekend</option>

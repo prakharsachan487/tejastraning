@@ -287,8 +287,8 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
           </button>
 
           {/* Streak / XP Pill */}
-          <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border ${isDarkMode ? 'bg-amber-500/10 border-amber-500/30 text-amber-400' : 'bg-amber-50 border-amber-200 text-amber-600'} text-xs font-bold font-mono`}>
-            <Flame size={14} className="text-amber-500 fill-amber-500" />
+          <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border ${isDarkMode ? 'bg-[#7A9D96]/10 border-[#7A9D96]/30 text-[#9CBDB7]' : 'bg-amber-50 border-amber-200 text-amber-600'} text-xs font-bold font-mono`}>
+            <Flame size={14} className="text-[#7A9D96] fill-amber-500" />
             <span>0</span>
           </div>
 
@@ -297,7 +297,7 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
             <img
               src={selectedAvatar}
               alt="User"
-              className="w-8 h-8 rounded-full object-cover border-2 border-amber-400/50 shadow-xs"
+              className="w-8 h-8 rounded-full object-cover border-2 border-[#7A9D96]/50 shadow-xs"
             />
             <span className={`text-xs font-bold hidden md:inline-block ${isDarkMode ? 'text-slate-200' : 'text-slate-700'}`}>
               {firstName || 'Student'} {lastName}
@@ -470,7 +470,7 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
                   <img
                     src={selectedAvatar}
                     alt={firstName}
-                    className="w-16 h-16 rounded-2xl object-cover border-2 border-amber-400/40 shadow-xs"
+                    className="w-16 h-16 rounded-2xl object-cover border-2 border-[#7A9D96]/40 shadow-xs"
                   />
                   <button
                     onClick={() => setActiveTab('personal')}
@@ -523,7 +523,7 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
                     href={portfolioUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`w-8 h-8 rounded-full border ${isDarkMode ? 'bg-white/5 border-white/10 hover:bg-amber-500/20' : 'bg-slate-50 border-slate-200 hover:bg-amber-50'} flex items-center justify-center text-amber-500 transition-colors`}
+                    className={`w-8 h-8 rounded-full border ${isDarkMode ? 'bg-white/5 border-white/10 hover:bg-[#7A9D96]/20' : 'bg-slate-50 border-slate-200 hover:bg-amber-50'} flex items-center justify-center text-[#7A9D96] transition-colors`}
                   >
                     <Globe size={14} />
                   </a>
@@ -571,7 +571,7 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
                 {resumeUrl ? (
                   <span className="text-[10px] font-mono text-emerald-500 font-bold">Uploaded</span>
                 ) : (
-                  <span className="text-[10px] font-mono text-amber-500 font-bold">Pending</span>
+                  <span className="text-[10px] font-mono text-[#7A9D96] font-bold">Pending</span>
                 )}
               </div>
               
@@ -618,8 +618,8 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
               </div>
 
               {/* Profile Completeness Pill Dropdown */}
-              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400 text-xs font-bold font-mono">
-                <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#7A9D96]/10 border border-[#7A9D96]/30 text-amber-600 dark:text-[#9CBDB7] text-xs font-bold font-mono">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#7A9D96]" />
                 <span>Profile completeness: {profileCompletion}%</span>
                 <ChevronDown size={13} />
               </div>
@@ -1071,7 +1071,7 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
                         <span>Changes saved successfully!</span>
                       </span>
                     ) : hasChanges ? (
-                      <span className="text-amber-500 flex items-center gap-1 font-bold">
+                      <span className="text-[#7A9D96] flex items-center gap-1 font-bold">
                         <AlertCircle size={14} />
                         <span>Unsaved changes</span>
                       </span>

@@ -136,7 +136,7 @@ export function AuthPage() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Amélie Laurent"
-                    className="w-full px-5 py-3.5 rounded-full bg-white border border-black/10 text-sm text-[#1E1E24] placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#FFB800] focus:border-transparent shadow-xs transition-all"
+                    className="w-full px-5 py-3.5 rounded-full bg-white border border-black/10 text-sm text-[#1E1E24] placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#A5C4BE] focus:border-transparent shadow-xs transition-all"
                   />
                 </div>
               )}
@@ -152,7 +152,7 @@ export function AuthPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="amelielaurent7622@gmail.com"
-                  className="w-full px-5 py-3.5 rounded-full bg-white border border-black/10 text-sm text-[#1E1E24] placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#FFB800] focus:border-transparent shadow-xs transition-all"
+                  className="w-full px-5 py-3.5 rounded-full bg-white border border-black/10 text-sm text-[#1E1E24] placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#A5C4BE] focus:border-transparent shadow-xs transition-all"
                 />
               </div>
 
@@ -166,7 +166,7 @@ export function AuthPage() {
                     <button
                       type="button"
                       onClick={() => alert('Password reset link sent to your email!')}
-                      className="text-xs text-[#FF4500] hover:underline font-medium cursor-pointer"
+                      className="text-xs text-[#7A9D96] hover:underline font-medium cursor-pointer"
                     >
                       Forgot?
                     </button>
@@ -179,7 +179,7 @@ export function AuthPage() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••••••••••"
-                    className="w-full pl-5 pr-12 py-3.5 rounded-full bg-white border border-black/10 text-sm text-[#1E1E24] placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#FFB800] focus:border-transparent shadow-xs transition-all"
+                    className="w-full pl-5 pr-12 py-3.5 rounded-full bg-white border border-black/10 text-sm text-[#1E1E24] placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#A5C4BE] focus:border-transparent shadow-xs transition-all"
                   />
                   <button
                     type="button"
@@ -196,7 +196,7 @@ export function AuthPage() {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full py-4 px-6 rounded-full bg-gradient-to-r from-[#FFCC4D] via-[#FFB800] to-[#FFA000] hover:from-[#FFD566] hover:to-[#FFB014] text-[#1E1E24] font-bold text-sm shadow-md shadow-amber-500/20 active:scale-[0.99] transition-all duration-200 cursor-pointer flex items-center justify-center gap-2"
+                  className="w-full py-4 px-6 rounded-full bg-gradient-to-r from-[#B8D5CF] via-[#A5C4BE] to-[#9CBDB7] hover:from-[#CBE3DE] hover:to-[#7A9D96] text-[#1E1E24] font-bold text-sm shadow-md shadow-[#7A9D96]/ active:scale-[0.99] transition-all duration-200 cursor-pointer flex items-center justify-center gap-2"
                 >
                   {isLoading ? (
                     <span className="inline-block w-4 h-4 border-2 border-black/20 border-t-black rounded-full animate-spin" />
@@ -323,7 +323,7 @@ export function AuthPage() {
           transition={{ delay: 0.2 }}
           className="absolute top-10 left-10 flex flex-col gap-2 z-20"
         >
-          <div className="px-5 py-3 rounded-2xl bg-[#FFCC4D] text-[#1E1E24] shadow-xl shadow-black/40 flex items-center justify-between gap-6 font-semibold text-xs border border-amber-300">
+          <div className="px-5 py-3 rounded-2xl bg-[#B8D5CF] text-[#1E1E24] shadow-xl shadow-black/40 flex items-center justify-between gap-6 font-semibold text-xs border border-amber-300">
             <div>
               <div className="font-bold text-sm">Task Review With Team</div>
               <div className="text-xs opacity-80 mt-0.5">09:30am-10:00am</div>

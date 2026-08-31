@@ -80,13 +80,13 @@ export function TestimonialsSection() {
           transition={{ duration: 0.5 }}
           className="text-center max-w-3xl mx-auto mb-14"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF4500]/10 border border-[#FF4500]/25 text-[#FFA000] text-xs font-semibold tracking-wide mb-4">
-            <Sparkles size={14} className="text-[#FF4500]" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#7A9D96]/10 border border-[#7A9D96]/25 text-[#9CBDB7] text-xs font-semibold tracking-wide mb-4">
+            <Sparkles size={14} className="text-[#7A9D96]" />
             <span>Institutional Testimonials</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight font-[family-name:var(--font-display)]">
             What Our{' '}
-            <span className="bg-gradient-to-r from-[#FF4500] via-[#FF7A00] to-[#FFA000] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#7A9D96] via-[#9CBDB7] to-[#9CBDB7] bg-clip-text text-transparent">
               Partners Say
             </span>
           </h2>
@@ -107,7 +107,7 @@ export function TestimonialsSection() {
                   onClick={() => setActiveCategory(index)}
                   className={`flex items-center gap-2 px-4 sm:px-5 py-2 rounded-full text-xs font-semibold tracking-wide transition-all cursor-pointer ${
                     isActive
-                      ? 'bg-gradient-to-r from-[#FF4500] to-[#FF7A00] text-white font-bold shadow-md shadow-orange-500/25'
+                      ? 'bg-gradient-to-r from-[#7A9D96] to-[#9CBDB7] text-white font-bold shadow-md shadow-[#7A9D96]/'
                       : 'text-slate-400 hover:text-white'
                   }`}
                 >
@@ -127,10 +127,10 @@ export function TestimonialsSection() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.35, delay: i * 0.1 }}
-              className="bento-card p-8 sm:p-9 flex flex-col justify-between relative group hover:border-[#FF4500]/40"
+              className="bento-card p-8 sm:p-9 flex flex-col justify-between relative group hover:border-[#7A9D96]/40"
             >
               <div>
-                <Quote className="text-[#FF4500]/25 w-12 h-12 mb-4" />
+                <Quote className="text-[#7A9D96]/25 w-12 h-12 mb-4" />
                 <p className="text-sm sm:text-base text-slate-200 leading-relaxed italic mb-8">
                   "{q.quote}"
                 </p>
@@ -144,12 +144,12 @@ export function TestimonialsSection() {
                   <div className="text-xs text-slate-400 font-mono">
                     {q.designation}
                   </div>
-                  <div className="text-[11px] font-mono text-[#FFA000] mt-0.5">
+                  <div className="text-[11px] font-mono text-[#9CBDB7] mt-0.5">
                     {q.institution}
                   </div>
                 </div>
 
-                <span className="px-2.5 py-1 rounded-lg bg-[#FF4500]/15 text-[#FFA000] border border-[#FF4500]/30 text-[10px] font-mono font-bold">
+                <span className="px-2.5 py-1 rounded-lg bg-[#7A9D96]/15 text-[#9CBDB7] border border-[#7A9D96]/30 text-[10px] font-mono font-bold">
                   {q.stats}
                 </span>
               </div>

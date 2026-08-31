@@ -17,7 +17,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-[#050508] text-slate-400 pt-20 pb-12 relative overflow-hidden border-t border-white/5 selection:bg-[#FF4500] selection:text-white">
+    <footer className="bg-[#050508] text-slate-400 pt-20 pb-12 relative overflow-hidden border-t border-white/5 selection:bg-[#7A9D96] selection:text-white">
       {/* Background Subtle Gradient & Shadow */}
       <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent pointer-events-none" />
 

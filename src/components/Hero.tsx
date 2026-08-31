@@ -192,7 +192,7 @@ export function Hero() {
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
                 href="#training-programs"
-                className="btn-pill-primary cursor-pointer flex items-center gap-2 shadow-lg shadow-orange-500/20 px-7 py-3 text-sm font-bold"
+                className="btn-pill-primary cursor-pointer flex items-center gap-2 shadow-lg shadow-[#7A9D96]/ px-7 py-3 text-sm font-bold"
               >
                 <span>View Programs &amp; Curriculum</span>
                 <ArrowRight size={16} />
@@ -207,15 +207,15 @@ export function Hero() {
               className="mt-10 pt-6 border-t border-white/5 flex flex-wrap items-center gap-5 text-xs text-slate-400 font-mono"
             >
               <div className="flex items-center gap-1.5">
-                <CheckCircle2 size={14} className="text-[#FF4500]" />
+                <CheckCircle2 size={14} className="text-[#7A9D96]" />
                 <span>AI Mock Diagnostics</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <CheckCircle2 size={14} className="text-[#FF4500]" />
+                <CheckCircle2 size={14} className="text-[#7A9D96]" />
                 <span>Industry Mentorship</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <CheckCircle2 size={14} className="text-[#FF4500]" />
+                <CheckCircle2 size={14} className="text-[#7A9D96]" />
                 <span>Campus Hiring Drives</span>
               </div>
             </motion.div>
@@ -234,7 +234,7 @@ export function Hero() {
             className="lg:col-span-6 relative"
           >
             {/* Ambient subtle glow background */}
-            <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-[#00B4D8]/20 via-[#FF4500]/15 to-[#FFA000]/20 blur-xl opacity-60 pointer-events-none" />
+            <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-[#00B4D8]/20 via-[#7A9D96]/15 to-[#9CBDB7]/20 blur-xl opacity-60 pointer-events-none" />
 
             <div className="relative rounded-3xl bg-[#111116] border border-white/15 p-6 sm:p-7 shadow-2xl overflow-hidden backdrop-blur-xl">
               
@@ -288,7 +288,7 @@ export function Hero() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                     <div>
                       <label className="block text-xs font-medium text-slate-300 mb-1">
-                        Full Name <span className="text-[#FF4500] font-bold">*</span>
+                        Full Name <span className="text-[#7A9D96] font-bold">*</span>
                       </label>
                       <input
                         type="text"
@@ -302,7 +302,7 @@ export function Hero() {
 
                     <div>
                       <label className="block text-xs font-medium text-slate-300 mb-1">
-                        Email <span className="text-[#FF4500] font-bold">*</span>
+                        Email <span className="text-[#7A9D96] font-bold">*</span>
                       </label>
                       <input
                         type="email"
@@ -319,7 +319,7 @@ export function Hero() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                     <div>
                       <label className="block text-xs font-medium text-slate-300 mb-1">
-                        Phone Number <span className="text-[#FF4500] font-bold">*</span>
+                        Phone Number <span className="text-[#7A9D96] font-bold">*</span>
                       </label>
                       <input
                         type="tel"
@@ -377,7 +377,7 @@ export function Hero() {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full btn-pill-primary py-3.5 text-xs font-bold cursor-pointer justify-center flex items-center gap-2 shadow-lg shadow-orange-500/20 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full btn-pill-primary py-3.5 text-xs font-bold cursor-pointer justify-center flex items-center gap-2 shadow-lg shadow-[#7A9D96]/ disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {isSubmitting ? (
                         <>

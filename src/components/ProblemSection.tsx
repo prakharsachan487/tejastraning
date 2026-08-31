@@ -76,7 +76,7 @@ export function ProblemSection() {
   return (
     <section id="colleges" className="py-24 lg:py-32 bg-[#0A0A0D] relative border-b border-white/5 overflow-hidden">
       {/* Background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[400px] bg-[#FF4500]/5 blur-[160px] pointer-events-none rounded-full" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[400px] bg-[#7A9D96]/5 blur-[160px] pointer-events-none rounded-full" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
@@ -88,13 +88,13 @@ export function ProblemSection() {
           transition={{ duration: 0.5 }}
           className="text-center max-w-3xl mx-auto mb-16 sm:mb-20"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF4500]/10 border border-[#FF4500]/25 text-[#FFA000] text-xs font-semibold tracking-wide mb-4">
-            <Sparkles size={14} className="text-[#FF4500]" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#7A9D96]/10 border border-[#7A9D96]/25 text-[#9CBDB7] text-xs font-semibold tracking-wide mb-4">
+            <Sparkles size={14} className="text-[#7A9D96]" />
             <span>Institutional Diagnostic</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
             Your Students Learn. But Are They{' '}
-            <span className="bg-gradient-to-r from-[#FF4500] via-[#FF7A00] to-[#FFA000] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#7A9D96] via-[#9CBDB7] to-[#9CBDB7] bg-clip-text text-transparent">
               Placement Ready?
             </span>
           </h2>
@@ -115,7 +115,7 @@ export function ProblemSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, delay: index * 0.08 }}
-                className="group relative rounded-[32px] bg-[#F8FAFC] text-slate-900 p-4 sm:p-5 flex flex-col justify-between shadow-2xl transition-all duration-300 hover:-translate-y-1.5 hover:shadow-orange-500/10 border border-white/80"
+                className="group relative rounded-[32px] bg-[#F8FAFC] text-slate-900 p-4 sm:p-5 flex flex-col justify-between shadow-2xl transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[#7A9D96]/ border border-white/80"
               >
                 {/* ── TOP HALF: THE PROBLEM ── */}
                 <div className="p-2 sm:p-2.5">
@@ -125,7 +125,7 @@ export function ProblemSection() {
                       {item.tag}
                     </span>
 
-                    <div className="w-8 h-8 rounded-full bg-white shadow-sm border border-slate-200/80 flex items-center justify-center text-slate-700 group-hover:bg-[#FF4500] group-hover:text-white group-hover:border-[#FF4500] transition-colors">
+                    <div className="w-8 h-8 rounded-full bg-white shadow-sm border border-slate-200/80 flex items-center justify-center text-slate-700 group-hover:bg-[#7A9D96] group-hover:text-white group-hover:border-[#7A9D96] transition-colors">
                       <ArrowUpRight size={16} />
                     </div>
                   </div>
