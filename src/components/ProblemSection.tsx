@@ -93,9 +93,9 @@ export function ProblemSection() {
             <span>Institutional Diagnostic</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#12151B] leading-tight font-[family-name:var(--font-display)]">
-            Your Students Learn. But Are They{' '}
+            We Don't Just Train.{' '}
             <span className="text-[#2563EB]">
-              Placement Ready?
+              We Transform Outcomes.
             </span>
           </h2>
           <p className="mt-4 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto font-normal">
