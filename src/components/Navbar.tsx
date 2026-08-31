@@ -10,8 +10,7 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   { label: 'About Us', href: '#about' },
-  { label: 'Training', href: '#training' },
-  { label: 'Programs', href: '#programs' },
+  { label: 'Training & Programs', href: '#training-programs' },
   { label: 'Career Path', href: '#career-path' },
 ];
 
@@ -53,9 +52,15 @@ export function Navbar() {
 
   const handleNavClick = useCallback((href: string) => {
     setIsMobileOpen(false);
+    if (href === '#training-programs' || href === '#become-a-mentor' || href === '#careers' || href === '#login') {
+      window.location.hash = href;
+      return;
+    }
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: 'instant' });
+    } else {
+      window.location.hash = href;
     }
   }, []);
 

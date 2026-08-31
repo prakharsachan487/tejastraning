@@ -4,9 +4,15 @@ export function Footer() {
       window.scrollTo({ top: 0, behavior: 'instant' });
       return;
     }
+    if (href === '#training' || href === '#programs') {
+      window.location.hash = '#training-programs';
+      return;
+    }
     const elem = document.querySelector(href);
     if (elem) {
       elem.scrollIntoView({ behavior: 'instant' });
+    } else {
+      window.location.hash = href;
     }
   };
 
