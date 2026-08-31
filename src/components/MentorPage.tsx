@@ -15,7 +15,7 @@ import {
   Star,
   FileCode
 } from 'lucide-react';
-import { MentorApplyModal } from './MentorApplyModal';
+import { MentorJobPortal } from './MentorJobPortal';
 import { Footer } from './Footer';
 
 interface MentorPageProps {
@@ -188,7 +188,6 @@ const faqs = [
 ];
 
 export function MentorPage({ onBackToHome }: MentorPageProps) {
-  const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
 
   // Instantly scroll to top when page opens
@@ -238,6 +237,10 @@ export function MentorPage({ onBackToHome }: MentorPageProps) {
 
           {/* Quick Anchor Links */}
           <nav className="hidden lg:flex items-center gap-6 text-xs font-medium text-slate-400">
+            <button onClick={() => scrollToSection('open-roles')} className="hover:text-white text-[#FFA000] font-semibold transition-colors cursor-pointer flex items-center gap-1">
+              <Sparkles size={12} />
+              <span>Open Roles</span>
+            </button>
             <button onClick={() => scrollToSection('how-it-works')} className="hover:text-white transition-colors cursor-pointer">
               Process
             </button>
@@ -255,10 +258,10 @@ export function MentorPage({ onBackToHome }: MentorPageProps) {
             </button>
           </nav>
 
-          {/* Apply Button */}
+          {/* Action Buttons */}
           <div className="flex items-center gap-3">
             <button
-              onClick={() => setIsApplyModalOpen(true)}
+              onClick={() => scrollToSection('open-roles')}
               className="btn-pill-primary text-xs py-2.5 px-5 cursor-pointer shadow-lg shadow-orange-500/20"
             >
               <Sparkles size={14} className="text-white" />
@@ -308,7 +311,7 @@ export function MentorPage({ onBackToHome }: MentorPageProps) {
                 {/* Action Buttons */}
                 <div className="flex flex-wrap items-center gap-4 mb-10">
                   <button
-                    onClick={() => setIsApplyModalOpen(true)}
+                    onClick={() => scrollToSection('open-roles')}
                     className="btn-pill-primary py-3.5 px-8 text-xs sm:text-sm font-bold cursor-pointer"
                   >
                     <span>Apply as Mentor</span>
@@ -441,13 +444,19 @@ export function MentorPage({ onBackToHome }: MentorPageProps) {
               ))}
             </div>
 
-            <div className="text-center">
+            <div className="text-center flex flex-wrap items-center justify-center gap-4">
               <button
-                onClick={() => setIsApplyModalOpen(true)}
+                onClick={() => scrollToSection('open-roles')}
                 className="btn-pill-primary py-3 px-8 text-xs sm:text-sm cursor-pointer"
               >
-                <span>Apply as Mentor</span>
+                <span>Browse Open Positions</span>
                 <ArrowRight size={15} />
+              </button>
+              <button
+                onClick={() => scrollToSection('open-roles')}
+                className="btn-pill-secondary py-3 px-6 text-xs sm:text-sm cursor-pointer"
+              >
+                <span>View All Openings</span>
               </button>
             </div>
 
@@ -455,7 +464,12 @@ export function MentorPage({ onBackToHome }: MentorPageProps) {
         </section>
 
         {/* ========================================================
-            03. WHAT YOU ACTUALLY DO (RESPONSIBILITIES)
+            03. OPEN POSITIONS & MENTOR OPENINGS (JOB PORTAL)
+        ======================================================== */}
+        <MentorJobPortal />
+
+        {/* ========================================================
+            04. WHAT YOU ACTUALLY DO (RESPONSIBILITIES)
         ======================================================== */}
         <section id="what-you-do" className="py-20 bg-[#07070A] border-t border-white/5 relative">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -672,10 +686,10 @@ export function MentorPage({ onBackToHome }: MentorPageProps) {
                     Apply in 2 minutes. Start taking flexible mock interviews and empower the next generation of engineers.
                   </p>
                   <button
-                    onClick={() => setIsApplyModalOpen(true)}
+                    onClick={() => scrollToSection('open-roles')}
                     className="btn-pill-primary py-3.5 px-8 text-xs sm:text-sm font-bold cursor-pointer"
                   >
-                    <span>Apply Now</span>
+                    <span>Browse All Open Roles</span>
                     <ArrowRight size={16} />
                   </button>
                 </div>
@@ -769,12 +783,6 @@ export function MentorPage({ onBackToHome }: MentorPageProps) {
 
       {/* Footer */}
       <Footer />
-
-      {/* Mentor Application Modal */}
-      <MentorApplyModal
-        isOpen={isApplyModalOpen}
-        onClose={() => setIsApplyModalOpen(false)}
-      />
 
     </div>
   );

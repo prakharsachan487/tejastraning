@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ArrowRight, Sparkles, ChevronRight, LogIn } from 'lucide-react';
+import { Menu, X, ArrowRight, Sparkles, ChevronRight, LogIn, LogOut } from 'lucide-react';
 import { useEnquiry } from '../context/EnquiryContext';
+import { useAuth } from '../context/AuthContext';
 
 interface NavItem {
   label: string;
@@ -20,6 +21,7 @@ export function Navbar() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const { openEnquiry } = useEnquiry();
+  const { openAuth, user, logout } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -118,13 +120,43 @@ export function Navbar() {
 
             {/* Action Buttons */}
             <div className="hidden lg:flex items-center gap-3">
-              <button
-                onClick={() => openEnquiry('CONSULTATION')}
-                className="text-xs font-bold text-slate-300 hover:text-[#FFA000] px-3.5 py-2 transition-colors cursor-pointer flex items-center gap-1.5"
-              >
-                <LogIn size={14} className="text-[#FF6A00]" />
-                <span>Login</span>
-              </button>
+              {user ? (
+                <div className="flex items-center gap-2.5 bg-[#14141C] pl-2 pr-3 py-1.5 rounded-full border border-white/10 shadow-sm">
+                  <div
+                    onClick={() => {
+                      window.location.hash = '#dashboard';
+                    }}
+                    className="flex items-center gap-2 cursor-pointer group"
+                    title="Go to Dashboard"
+                  >
+                    <img
+                      src={user.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80'}
+                      alt={user.name}
+                      className="w-7 h-7 rounded-full object-cover border border-amber-400/40 group-hover:scale-105 transition-transform"
+                    />
+                    <div className="flex flex-col text-left">
+                      <span className="text-xs font-bold text-white leading-none group-hover:text-[#FFA000] transition-colors">{user.name}</span>
+                      <span className="text-[10px] text-[#FFA000] font-mono leading-none mt-0.5">{user.role}</span>
+                    </div>
+                  </div>
+                  <button
+                    onClick={logout}
+                    title="Sign Out"
+                    className="ml-1 p-1 hover:text-red-400 text-slate-400 transition-colors cursor-pointer"
+                  >
+                    <LogOut size={13} />
+                  </button>
+                </div>
+              ) : (
+                <button
+                  onClick={() => openAuth('login')}
+                  className="text-xs font-bold text-slate-300 hover:text-[#FFA000] px-3.5 py-2 transition-colors cursor-pointer flex items-center gap-1.5"
+                >
+                  <LogIn size={14} className="text-[#FF6A00]" />
+                  <span>Login</span>
+                </button>
+              )}
+
               <button
                 onClick={() => openEnquiry('CONSULTATION')}
                 className="btn-pill-primary cursor-pointer active:scale-95 text-xs py-2.5 px-5"
@@ -198,16 +230,47 @@ export function Navbar() {
               </div>
 
               <div className="pt-6 border-t border-white/10 flex flex-col gap-3">
-                <button
-                  onClick={() => {
-                    setIsMobileOpen(false);
-                    openEnquiry('CONSULTATION');
-                  }}
-                  className="btn-pill-secondary w-full justify-center text-xs py-3 flex items-center gap-2"
-                >
-                  <LogIn size={14} className="text-[#FF6A00]" />
-                  <span>Login</span>
-                </button>
+                {user ? (
+                  <div className="flex items-center justify-between p-3 rounded-2xl bg-[#09090D] border border-white/10">
+                    <div
+                      onClick={() => {
+                        window.location.hash = '#dashboard';
+                        setIsMobileOpen(false);
+                      }}
+                      className="flex items-center gap-2.5 cursor-pointer flex-1"
+                    >
+                      <img
+                        src={user.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80'}
+                        alt={user.name}
+                        className="w-8 h-8 rounded-full object-cover border border-amber-400/40"
+                      />
+                      <div className="text-left">
+                        <div className="text-xs font-bold text-white">{user.name}</div>
+                        <div className="text-[10px] text-[#FFA000] font-mono">{user.role} · Tap to open Dashboard</div>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => {
+                        logout();
+                        setIsMobileOpen(false);
+                      }}
+                      className="p-2 text-slate-400 hover:text-red-400 transition-colors"
+                    >
+                      <LogOut size={16} />
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    onClick={() => {
+                      setIsMobileOpen(false);
+                      openAuth('login');
+                    }}
+                    className="btn-pill-secondary w-full justify-center text-xs py-3 flex items-center gap-2"
+                  >
+                    <LogIn size={14} className="text-[#FF6A00]" />
+                    <span>Login / Sign Up</span>
+                  </button>
+                )}
                 <button
                   onClick={() => {
                     setIsMobileOpen(false);

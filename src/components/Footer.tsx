@@ -1,8 +1,4 @@
-import { useEnquiry } from '../context/EnquiryContext';
-
 export function Footer() {
-  const { openEnquiry } = useEnquiry();
-
   const nav = (href: string) => {
     if (!href || href === '#') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -189,7 +185,10 @@ export function Footer() {
             <ul className="space-y-3.5 text-xs sm:text-sm">
               <li>
                 <button
-                  onClick={() => openEnquiry('CONTACT')}
+                  onClick={() => {
+                    window.location.hash = '#privacy';
+                    window.scrollTo({ top: 0, behavior: 'instant' });
+                  }}
                   className="text-slate-400 hover:text-white transition-colors cursor-pointer text-left"
                 >
                   Privacy Policy
@@ -197,7 +196,10 @@ export function Footer() {
               </li>
               <li>
                 <button
-                  onClick={() => openEnquiry('CONTACT')}
+                  onClick={() => {
+                    window.location.hash = '#terms';
+                    window.scrollTo({ top: 0, behavior: 'instant' });
+                  }}
                   className="text-slate-400 hover:text-white transition-colors cursor-pointer text-left"
                 >
                   Terms of Service
@@ -205,7 +207,10 @@ export function Footer() {
               </li>
               <li>
                 <button
-                  onClick={() => openEnquiry('CONTACT')}
+                  onClick={() => {
+                    window.location.hash = '#cookies';
+                    window.scrollTo({ top: 0, behavior: 'instant' });
+                  }}
                   className="text-slate-400 hover:text-white transition-colors cursor-pointer text-left"
                 >
                   Cookie Policy

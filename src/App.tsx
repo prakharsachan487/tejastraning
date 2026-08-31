@@ -14,34 +14,39 @@ import { PartnersSection } from './components/PartnersSection';
 import { FinalCTA } from './components/FinalCTA';
 import { Footer } from './components/Footer';
 import { EnquiryProvider } from './context/EnquiryContext';
+import { AuthProvider } from './context/AuthContext';
 import { EnquiryModal } from './components/EnquiryModal';
+import { AuthModal } from './components/AuthModal';
 import { MentorPage } from './components/MentorPage';
+import { StudentDashboard } from './components/StudentDashboard';
+import { LegalPage } from './components/LegalPage';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'mentor'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'mentor' | 'dashboard' | 'privacy' | 'terms' | 'cookies'>('home');
 
   useEffect(() => {
     const handleHashChange = () => {
-      if (window.location.hash === '#mentor' || window.location.hash === '#become-a-mentor') {
+      const hash = window.location.hash;
+      if (hash === '#mentor' || hash === '#become-a-mentor') {
         setCurrentPage('mentor');
-        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-        document.documentElement.scrollTop = 0;
-        document.body.scrollTop = 0;
+      } else if (hash === '#dashboard' || hash === '#profile') {
+        setCurrentPage('dashboard');
+      } else if (hash === '#privacy' || hash === '#privacy-policy') {
+        setCurrentPage('privacy');
+      } else if (hash === '#terms' || hash === '#terms-of-service') {
+        setCurrentPage('terms');
+      } else if (hash === '#cookies' || hash === '#cookie-policy') {
+        setCurrentPage('cookies');
       } else {
         setCurrentPage('home');
-        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-        document.documentElement.scrollTop = 0;
-        document.body.scrollTop = 0;
       }
-    };
-
-    // Check initial hash
-    if (window.location.hash === '#mentor' || window.location.hash === '#become-a-mentor') {
-      setCurrentPage('mentor');
       window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
       document.documentElement.scrollTop = 0;
       document.body.scrollTop = 0;
-    }
+    };
+
+    // Check initial hash
+    handleHashChange();
 
     window.addEventListener('hashchange', handleHashChange);
     return () => window.removeEventListener('hashchange', handleHashChange);
@@ -57,60 +62,69 @@ function App() {
 
   return (
     <EnquiryProvider>
-      <div className="relative min-h-screen bg-[#0A0A0D] text-slate-100 font-sans selection:bg-[#FF4500] selection:text-white">
-        {currentPage === 'mentor' ? (
-          <MentorPage onBackToHome={handleBackToHome} />
-        ) : (
-          <>
-            {/* 01. Floating Dark Header */}
-            <Navbar />
+      <AuthProvider>
+        <div className="relative min-h-screen bg-[#0A0A0D] text-slate-100 font-sans selection:bg-[#FF4500] selection:text-white">
+          {currentPage === 'mentor' ? (
+            <MentorPage onBackToHome={handleBackToHome} />
+          ) : currentPage === 'dashboard' ? (
+            <StudentDashboard onBackToHome={handleBackToHome} />
+          ) : currentPage === 'privacy' || currentPage === 'terms' || currentPage === 'cookies' ? (
+            <LegalPage initialTab={currentPage} onBackToHome={handleBackToHome} />
+          ) : (
+            <>
+              {/* 01. Floating Dark Header */}
+              <Navbar />
 
-            <main>
-              {/* 02. Hero with Dynamic On-Load Entrance & Code Typing Animation */}
-              <Hero />
+              <main>
+                {/* 02. Hero with Dynamic On-Load Entrance & Code Typing Animation */}
+                <Hero />
 
-              {/* 03. Engineering Curriculum Trust Strip */}
-              <TrustStrip />
+                {/* 03. Engineering Curriculum Trust Strip */}
+                <TrustStrip />
 
-              {/* 04. Problem vs. Solution Diagnostic Bento Grid */}
-              <ProblemSection />
+                {/* 04. Problem vs. Solution Diagnostic Bento Grid */}
+                <ProblemSection />
 
-              {/* 05. Platform Suite (6 Bento Cards with Live UI Visualizers) */}
-              <PlatformSection />
+                {/* 05. Platform Suite (6 Bento Cards with Live UI Visualizers) */}
+                <PlatformSection />
 
-              {/* 06. Flagship Training Solutions (Impact & MARQUEE) */}
-              <TrainingSolutionsSection />
+                {/* 06. Flagship Training Solutions (Impact & MARQUEE) */}
+                <TrainingSolutionsSection />
 
-              {/* 07. Meet Our Industry Leaders & Mentors */}
-              <MentorsSection />
+                {/* 07. Meet Our Industry Leaders & Mentors */}
+                <MentorsSection />
 
-              {/* 08. The 7-Stage Placement Journey Roadmap */}
-              <PlacementJourneySection />
+                {/* 08. The 7-Stage Placement Journey Roadmap */}
+                <PlacementJourneySection />
 
-              {/* 09. Industry-Ready Programs Interactive Catalog */}
-              <ProgramsSection />
+                {/* 09. Industry-Ready Programs Interactive Catalog */}
+                <ProgramsSection />
 
-              {/* 10. Institutional Performance & Animated Metrics */}
-              <MetricsSection />
+                {/* 10. Institutional Performance & Animated Metrics */}
+                <MetricsSection />
 
-              {/* 11. Testimonials (Editorial Quotation Treatment) */}
-              <TestimonialsSection />
+                {/* 11. Testimonials (Editorial Quotation Treatment) */}
+                <TestimonialsSection />
 
-              {/* 12. 35+ Campus Hiring Partners 2-Row Logo Marquee */}
-              <PartnersSection />
+                {/* 12. 35+ Campus Hiring Partners 2-Row Logo Marquee */}
+                <PartnersSection />
 
-              {/* 13. Cinematic Final CTA */}
-              <FinalCTA />
-            </main>
+                {/* 13. Cinematic Final CTA */}
+                <FinalCTA />
+              </main>
 
-            {/* 14. Spacious Dark Minimal Footer */}
-            <Footer />
-          </>
-        )}
+              {/* 14. Spacious Dark Minimal Footer */}
+              <Footer />
+            </>
+          )}
 
-        {/* 15. Working Institutional Enquiry & Demo Modal */}
-        <EnquiryModal />
-      </div>
+          {/* 15. Working Institutional Enquiry & Demo Modal */}
+          <EnquiryModal />
+
+          {/* 16. Working Auth / Login & Signup Modal */}
+          <AuthModal />
+        </div>
+      </AuthProvider>
     </EnquiryProvider>
   );
 }

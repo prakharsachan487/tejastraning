@@ -3,34 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, ArrowRight, CheckCircle2, AlertCircle, Loader2, Sparkles } from 'lucide-react';
 import { useEnquiry } from '../context/EnquiryContext';
 
-/* ─────────────────────────────────────────────
-   FORM OPTIONS
-   ───────────────────────────────────────────── */
-
-const DESIGNATIONS = [
-  'Principal',
-  'Director',
-  'Dean',
-  'Training & Placement Officer',
-  'Placement Cell',
-  'HOD',
-  'Faculty',
-  'Management',
-  'Other',
-];
-
-const TRAINING_INTERESTS = [
-  'Technical Training',
-  'AI Mock Interviews',
-  'AI Assessments',
-  'Placement Preparation',
-  'Resume & ATS Optimization',
-  'Industry Projects',
-  'Customized Institutional Program',
-];
-
-const TRAINING_MODES = ['On Campus', 'Online', 'Hybrid'];
-
 const SOURCE_TITLES: Record<string, string> = {
   PARTNERSHIP: 'Partner with TEJAS',
   CONSULTATION: 'Request an Institutional Demo',
@@ -39,7 +11,7 @@ const SOURCE_TITLES: Record<string, string> = {
 };
 
 /* ─────────────────────────────────────────────
-   FORM STATE
+   FORM STATE (5 Essential Fields with Typed Designation)
    ───────────────────────────────────────────── */
 
 interface FormData {
@@ -48,12 +20,6 @@ interface FormData {
   designation: string;
   email: string;
   phone: string;
-  city: string;
-  studentCount: string;
-  programs: string;
-  interests: string[];
-  trainingMode: string;
-  message: string;
 }
 
 const initialFormData: FormData = {
@@ -62,12 +28,6 @@ const initialFormData: FormData = {
   designation: '',
   email: '',
   phone: '',
-  city: '',
-  studentCount: '',
-  programs: '',
-  interests: [],
-  trainingMode: '',
-  message: '',
 };
 
 type SubmitState = 'idle' | 'submitting' | 'success' | 'error';
@@ -79,8 +39,8 @@ type SubmitState = 'idle' | 'submitting' | 'success' | 'error';
 function validateClient(data: FormData): string[] {
   const errors: string[] = [];
   if (!data.collegeName.trim()) errors.push('College / University Name is required.');
-  if (!data.contactName.trim()) errors.push('Contact Person Name is required.');
-  if (!data.designation) errors.push('Designation is required.');
+  if (!data.contactName.trim()) errors.push('Person Name is required.');
+  if (!data.designation.trim()) errors.push('Designation is required.');
   if (!data.email.trim()) errors.push('Official Email is required.');
   else if (!/^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/.test(data.email.trim())) {
     errors.push('Please enter a valid email address.');
@@ -123,21 +83,12 @@ export function EnquiryModal() {
   }, [isOpen, closeEnquiry]);
 
   const handleChange = useCallback(
-    (field: keyof FormData, value: string | string[]) => {
+    (field: keyof FormData, value: string) => {
       setFormData((prev) => ({ ...prev, [field]: value }));
       setClientErrors([]);
     },
     []
   );
-
-  const toggleInterest = useCallback((interest: string) => {
-    setFormData((prev) => {
-      const interests = prev.interests.includes(interest)
-        ? prev.interests.filter((i) => i !== interest)
-        : [...prev.interests, interest];
-      return { ...prev, interests };
-    });
-  }, []);
 
   const handleSubmit = useCallback(
     async (e: FormEvent) => {
@@ -207,7 +158,7 @@ export function EnquiryModal() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 30, scale: 0.98 }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-4 sm:inset-auto sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 sm:w-full sm:max-w-2xl sm:max-h-[90vh] bg-[#111116] rounded-3xl border border-white/10 z-[101] overflow-y-auto shadow-2xl"
+            className="fixed inset-4 sm:inset-auto sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 sm:w-full sm:max-w-xl sm:max-h-[90vh] bg-[#111116] rounded-3xl border border-white/10 z-[101] overflow-y-auto shadow-2xl"
           >
             {/* Top Flame Accent Strip */}
             <div className="h-1.5 bg-gradient-to-r from-[#FF4500] via-[#FF7A00] to-[#FFA000]" />
@@ -256,17 +207,17 @@ export function EnquiryModal() {
                     </div>
                   )}
 
-                  {/* Row 1: College + Contact */}
+                  {/* Row 1: College Name & Person Name */}
                   <div className="grid sm:grid-cols-2 gap-4 mb-4">
                     <FormField
                       label="College / University Name"
                       required
                       value={formData.collegeName}
                       onChange={(v) => handleChange('collegeName', v)}
-                      placeholder="e.g. SRM Institute / VIT"
+                      placeholder="e.g. SRM Institute / AKTU College"
                     />
                     <FormField
-                      label="Contact Person Name"
+                      label="Person Name"
                       required
                       value={formData.contactName}
                       onChange={(v) => handleChange('contactName', v)}
@@ -274,124 +225,34 @@ export function EnquiryModal() {
                     />
                   </div>
 
-                  {/* Row 2: Designation + Email */}
+                  {/* Row 2: Designation (Typed Input) & Phone Number */}
                   <div className="grid sm:grid-cols-2 gap-4 mb-4">
-                    <FormSelect
+                    <FormField
                       label="Designation"
                       required
                       value={formData.designation}
                       onChange={(v) => handleChange('designation', v)}
-                      options={DESIGNATIONS}
-                      placeholder="Select your role"
+                      placeholder="e.g. TPO / Principal / Dean / HOD"
                     />
-                    <FormField
-                      label="Official Email"
-                      required
-                      type="email"
-                      value={formData.email}
-                      onChange={(v) => handleChange('email', v)}
-                      placeholder="placement@college.edu.in"
-                    />
-                  </div>
-
-                  {/* Row 3: Phone + City */}
-                  <div className="grid sm:grid-cols-2 gap-4 mb-4">
                     <FormField
                       label="Phone Number"
                       required
                       type="tel"
                       value={formData.phone}
                       onChange={(v) => handleChange('phone', v)}
-                      placeholder="+91 98765 43210"
-                    />
-                    <FormField
-                      label="City"
-                      value={formData.city}
-                      onChange={(v) => handleChange('city', v)}
-                      placeholder="e.g. Bengaluru / Chennai"
+                      placeholder="e.g. +91 98765 43210"
                     />
                   </div>
 
-                  {/* Row 4: Students + Programs */}
-                  <div className="grid sm:grid-cols-2 gap-4 mb-4">
-                    <FormField
-                      label="Approximate Students to Train"
-                      value={formData.studentCount}
-                      onChange={(v) => handleChange('studentCount', v)}
-                      placeholder="e.g. 500"
-                    />
-                    <FormField
-                      label="Target Departments"
-                      value={formData.programs}
-                      onChange={(v) => handleChange('programs', v)}
-                      placeholder="e.g. B.Tech CSE, ECE, MCA"
-                    />
-                  </div>
-
-                  {/* Training interests */}
-                  <div className="mb-4">
-                    <label className="block text-xs font-bold text-slate-300 uppercase tracking-wide mb-2 font-mono">
-                      Modules of Interest
-                    </label>
-                    <div className="flex flex-wrap gap-2">
-                      {TRAINING_INTERESTS.map((interest) => {
-                        const selected = formData.interests.includes(interest);
-                        return (
-                          <button
-                            key={interest}
-                            type="button"
-                            onClick={() => toggleInterest(interest)}
-                            className={`px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all cursor-pointer ${
-                              selected
-                                ? 'border-[#FF4500] text-[#FFA000] bg-[#FF4500]/15 shadow-xs'
-                                : 'border-slate-700/80 text-slate-400 hover:border-slate-600 bg-[#161620]'
-                            }`}
-                          >
-                            {interest}
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
-
-                  {/* Training mode */}
-                  <div className="mb-4">
-                    <label className="block text-xs font-bold text-slate-300 uppercase tracking-wide mb-2 font-mono">
-                      Preferred Delivery Mode
-                    </label>
-                    <div className="flex gap-3">
-                      {TRAINING_MODES.map((mode) => {
-                        const selected = formData.trainingMode === mode;
-                        return (
-                          <button
-                            key={mode}
-                            type="button"
-                            onClick={() => handleChange('trainingMode', mode)}
-                            className={`px-4 py-2 rounded-xl text-xs font-semibold border transition-all cursor-pointer ${
-                              selected
-                                ? 'border-[#FF4500] text-[#FFA000] bg-[#FF4500]/15 shadow-xs'
-                                : 'border-slate-700/80 text-slate-400 hover:border-slate-600 bg-[#161620]'
-                            }`}
-                          >
-                            {mode}
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
-
-                  {/* Message */}
+                  {/* Row 3: Email Address */}
                   <div className="mb-6">
-                    <label className="block text-xs font-bold text-slate-300 uppercase tracking-wide mb-2 font-mono">
-                      Requirements &amp; Notes
-                    </label>
-                    <textarea
-                      value={formData.message}
-                      onChange={(e) => handleChange('message', e.target.value)}
-                      placeholder="Share your batch timeline, target companies, or specific challenges..."
-                      rows={3}
-                      maxLength={2000}
-                      className="w-full px-4 py-3 rounded-2xl border border-slate-700/80 text-sm text-slate-100 placeholder:text-slate-500 focus:border-[#FF4500] focus:outline-none transition-all resize-none bg-[#0C0C10]"
+                    <FormField
+                      label="Email Address"
+                      required
+                      type="email"
+                      value={formData.email}
+                      onChange={(v) => handleChange('email', v)}
+                      placeholder="e.g. placement@college.edu.in"
                     />
                   </div>
 
@@ -399,12 +260,12 @@ export function EnquiryModal() {
                   <button
                     type="submit"
                     disabled={submitState === 'submitting'}
-                    className="btn-pill-primary w-full justify-center text-sm py-3.5 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+                    className="btn-pill-primary w-full justify-center text-sm py-3.5 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed shadow-lg shadow-orange-500/20"
                   >
                     {submitState === 'submitting' ? (
                       <>
                         <Loader2 size={16} className="animate-spin" />
-                        <span>Transmitting institutional enquiry...</span>
+                        <span>Transmitting enquiry...</span>
                       </>
                     ) : (
                       <>
@@ -492,42 +353,4 @@ function FormField({
   );
 }
 
-interface FormSelectProps {
-  label: string;
-  value: string;
-  onChange: (value: string) => void;
-  options: string[];
-  placeholder?: string;
-  required?: boolean;
-}
 
-function FormSelect({
-  label,
-  value,
-  onChange,
-  options,
-  placeholder = 'Select...',
-  required = false,
-}: FormSelectProps) {
-  return (
-    <div>
-      <label className="block text-xs font-bold text-slate-300 uppercase tracking-wide mb-1.5 font-mono">
-        {label}
-        {required && <span className="text-[#FF4500] ml-0.5">*</span>}
-      </label>
-      <select
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        required={required}
-        className="w-full px-4 py-2.5 rounded-xl border border-slate-700/80 text-sm text-slate-100 focus:border-[#FF4500] focus:outline-none transition-all bg-[#0C0C10] appearance-none cursor-pointer"
-      >
-        <option value="" className="bg-[#0C0C10] text-slate-400">{placeholder}</option>
-        {options.map((opt) => (
-          <option key={opt} value={opt} className="bg-[#0C0C10] text-slate-100">
-            {opt}
-          </option>
-        ))}
-      </select>
-    </div>
-  );
-}
