@@ -18,17 +18,17 @@ const mentors = [
     tilt: '-0.8deg',
   },
   {
-    name: 'Ashish Sachan',
-    company: 'Product Leadership',
-    companyColor: '#2563EB',
+    name: 'Vishal Motlani',
+    company: 'J&J MedTech',
+    companyColor: '#D51900',
     companyLogo: (
-      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="#2563EB">
-        <path d="M12 2L2 7l10 5 10-5-10-5zm0 9l-8-4v6l8 4 8-4v-6l-8 4zm0 6l-8-4v6l8 4 8-4v-6l-8 4z"/>
+      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="#D51900">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-4-4 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z"/>
       </svg>
     ),
-    role: 'Product & Program Management · 10+ Yrs Exp',
-    quote: '10+ years of experience across web technologies, AI systems, project execution, and cross-functional leadership for high-impact tech products.',
-    image: '/mentors/ashish_sachan.jpg',
+    role: "SIBM P'27 · Ex-Deloitte USI · Ex-Urban Company",
+    quote: 'National Winner of J&J Imagivators 2025 and CISI Level 1 certified with deep experience in business strategy, financial advisory, and risk consulting.',
+    image: '/mentors/vishal_motlani.jpg',
     tilt: '0.6deg',
   },
   {
@@ -46,17 +46,17 @@ const mentors = [
     tilt: '-1.2deg',
   },
   {
-    name: 'Vishal Motlani',
-    company: 'J&J MedTech',
-    companyColor: '#D51900',
+    name: 'Ashish Sachan',
+    company: 'Product Leadership',
+    companyColor: '#2563EB',
     companyLogo: (
-      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="#D51900">
-        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-4-4 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z"/>
+      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="#2563EB">
+        <path d="M12 2L2 7l10 5 10-5-10-5zm0 9l-8-4v6l8 4 8-4v-6l-8 4zm0 6l-8-4v6l8 4 8-4v-6l-8 4z"/>
       </svg>
     ),
-    role: "SIBM P'27 · Ex-Deloitte USI · Ex-Urban Company",
-    quote: 'National Winner of J&J Imagivators 2025 and CISI Level 1 certified with deep experience in business strategy, financial advisory, and risk consulting.',
-    image: '/mentors/vishal_motlani.jpg',
+    role: 'Product & Program Management · 10+ Yrs Exp',
+    quote: '10+ years of experience across web technologies, AI systems, project execution, and cross-functional leadership for high-impact tech products.',
+    image: '/mentors/ashish_sachan.jpg',
     tilt: '0.9deg',
   },
   {
