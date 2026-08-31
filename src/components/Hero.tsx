@@ -229,7 +229,7 @@ export function Hero() {
             >
               <div className="flex items-center gap-1.5">
                 <CheckCircle2 size={14} className="text-[#2563EB]" />
-                <span>AI Mock Diagnostics</span>
+                <span>Expert Mock Interviews</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <CheckCircle2 size={14} className="text-[#2563EB]" />

@@ -37,7 +37,7 @@ export function PlatformSection() {
             ══════════════════════════════════════════════════════════════════ */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           
-          {/* Card 1: AI Mock Interviews */}
+          {/* Card 1: Mock Interviews by Industry Experts */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -47,10 +47,10 @@ export function PlatformSection() {
           >
             <div>
               <h3 className="text-2xl font-bold text-slate-900 mb-2">
-                AI Mock Interviews
+                Mock Interviews by Industry Experts
               </h3>
               <p className="text-sm text-slate-600 leading-relaxed max-w-lg mb-4">
-                Scale mock interviews across batches with AI feedback on communication, technical depth, and confidence before drives begin.
+                1-on-1 rigorous mock rounds conducted by senior engineers, product leaders, and hiring managers with actionable feedback before placement drives begin.
               </p>
 
               {/* Tag Pill Link */}
@@ -58,64 +58,66 @@ export function PlatformSection() {
                 onClick={() => openEnquiry('CONSULTATION')}
                 className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 border border-black/10 hover:border-[#2563EB]/40 transition-colors text-xs font-medium text-slate-700 mb-8 cursor-pointer group/btn"
               >
-                <span className="px-2 py-0.5 rounded-md bg-[#2563EB] text-slate-900 text-[10px] font-bold">
-                  NEW
+                <span className="px-2 py-0.5 rounded-md bg-[#2563EB] text-white text-[10px] font-bold">
+                  1-ON-1
                 </span>
-                <span>Grow360 AI Interview Module</span>
+                <span>Grow360 Expert Interview Panel</span>
                 <ChevronRight size={14} className="text-slate-500 group-hover/btn:translate-x-0.5 transition-transform" />
               </button>
             </div>
 
-            {/* Inner Interactive Widget: AI Voice Interview Simulator */}
+            {/* Inner Interactive Widget: Live 1-on-1 Expert Interview Simulator */}
             <div className="rounded-2xl bg-slate-50 border border-black/10 p-5 sm:p-6 shadow-2xl">
               {/* Header */}
-              <div className="flex items-center justify-between pb-4 border-b border-black/5 mb-5">
+              <div className="flex items-center justify-between pb-4 border-b border-black/5 mb-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[#2563EB] flex items-center justify-center text-slate-900 font-bold text-xs">
-                    AI
+                  <div className="w-10 h-10 rounded-full bg-[#2563EB] flex items-center justify-center text-white font-bold text-xs shadow-md">
+                    EXP
                   </div>
                   <div>
-                    <div className="text-sm font-bold text-slate-900 leading-tight">AI Interviewer</div>
-                    <div className="text-[11px] text-slate-600">Grow360 Mock Round</div>
+                    <div className="text-sm font-bold text-slate-900 leading-tight">Senior Industry Mentor</div>
+                    <div className="text-[11px] text-slate-600">Tier-1 Tech &amp; Consulting Panel</div>
                   </div>
                 </div>
-                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-rose-950/40 border border-rose-500/30 text-rose-400 text-[11px] font-medium">
-                  <span className="w-2 h-2 rounded-full bg-rose-500 animate-pulse" />
-                  <span>Recording...</span>
+                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-300 text-emerald-700 text-[11px] font-semibold">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  <span>Live Evaluation</span>
                 </div>
               </div>
 
               {/* Prompt Box */}
-              <div className="p-4 rounded-xl bg-white border border-black/5 text-sm text-slate-800 mb-5 italic">
-                "Tell me about a project you're proud of."
+              <div className="p-3.5 rounded-xl bg-white border border-black/5 text-sm text-slate-800 mb-4 italic">
+                "Walk me through how you optimize distributed caching for high concurrency."
               </div>
 
-              {/* Audio Waveform Equalizer */}
-              <div className="flex items-center justify-center gap-1.5 h-10 px-3 bg-slate-100 rounded-xl border border-black/5 mb-5">
-                {[18, 28, 40, 24, 38, 52, 30, 48, 60, 42, 28, 36, 50, 26, 44, 58, 32, 22].map((h, i) => (
-                  <div
-                    key={i}
-                    className="flex-1 bg-[#3B82F6] rounded-full animate-wave"
-                    style={{
-                      height: `${h}%`,
-                      animationDelay: `${i * 0.07}s`,
-                    }}
-                  />
-                ))}
+              {/* Evaluation Metrics Pillars */}
+              <div className="grid grid-cols-3 gap-2 mb-4">
+                <div className="p-2.5 rounded-xl bg-white border border-black/5 text-center">
+                  <div className="text-[10px] text-slate-500 uppercase font-bold tracking-wider mb-0.5">Problem Solving</div>
+                  <div className="text-sm font-extrabold text-emerald-600">94% · Top 5%</div>
+                </div>
+                <div className="p-2.5 rounded-xl bg-white border border-black/5 text-center">
+                  <div className="text-[10px] text-slate-500 uppercase font-bold tracking-wider mb-0.5">Architecture</div>
+                  <div className="text-sm font-extrabold text-[#2563EB]">90% · Strong</div>
+                </div>
+                <div className="p-2.5 rounded-xl bg-white border border-black/5 text-center">
+                  <div className="text-[10px] text-slate-500 uppercase font-bold tracking-wider mb-0.5">Communication</div>
+                  <div className="text-sm font-extrabold text-emerald-600">96% · Fluent</div>
+                </div>
               </div>
 
               {/* Bottom Status Bar */}
               <div className="flex items-center justify-between text-xs text-slate-600 mb-2">
                 <div className="flex items-center gap-1.5 text-slate-700">
                   <Mic size={14} className="text-[#3B82F6]" />
-                  <span>Listening</span>
+                  <span>Real-time Rubric &amp; Feedback</span>
                 </div>
-                <span>Question 3 / 10</span>
+                <span className="font-semibold text-slate-800">Round 2 / 3</span>
               </div>
 
               {/* Progress Track */}
-              <div className="w-full h-1 bg-slate-800 rounded-full overflow-hidden">
-                <div className="w-[30%] h-full bg-[#3B82F6] rounded-full" />
+              <div className="w-full h-1 bg-slate-200 rounded-full overflow-hidden">
+                <div className="w-[68%] h-full bg-[#2563EB] rounded-full" />
               </div>
             </div>
           </motion.div>
