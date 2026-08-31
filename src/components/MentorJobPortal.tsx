@@ -8,9 +8,6 @@ import {
   RotateCcw,
   CheckCircle2,
   Sparkles,
-  Building2,
-  Globe,
-  Mail,
   Send,
   ArrowRight,
   Upload,
@@ -1089,114 +1086,6 @@ export function MentorJobPortal() {
             })}
           </div>
 
-        </div>
-
-        {/* ========================================================
-            03. CONNECT WITH US SECTION (Bottom Banner)
-        ======================================================== */}
-        <div className="mt-16 rounded-3xl bg-white shadow-xl border border-black/8 p-8 sm:p-10 shadow-2xl relative overflow-hidden">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            
-            {/* Left Info */}
-            <div className="lg:col-span-6 space-y-4">
-              <div className="flex items-center gap-3">
-                <img
-                  src="/grow360-logo.png"
-                  alt="Grow360 Logo"
-                  className="h-9 w-auto object-contain rounded-lg"
-                />
-                <h3 className="text-2xl sm:text-3xl font-black text-slate-900 font-[family-name:var(--font-display)]">
-                  Connect With <span className="italic font-serif text-[#2563EB]">Us</span>
-                </h3>
-              </div>
-
-              <p className="text-xs sm:text-sm text-slate-700 leading-relaxed max-w-lg">
-                At Grow360, we believe great work happens when talented instructors and mentors are given the trust, tools, and environment they need to thrive. We are building something we are proud of, and we would love for you to be part of it.
-              </p>
-
-              {/* Office & Website Details */}
-              <div className="space-y-3 pt-2">
-                <div className="flex items-start gap-3 p-3 rounded-2xl bg-slate-50 border border-black/8">
-                  <div className="w-8 h-8 rounded-xl bg-white/5 flex items-center justify-center text-[#2563EB] shrink-0">
-                    <Building2 size={16} />
-                  </div>
-                  <div>
-                    <div className="text-xs font-bold text-slate-900">Main Office</div>
-                    <div className="text-[11px] text-slate-600">Gurugram / Noida, National Capital Region (NCR), India</div>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3 p-3 rounded-2xl bg-slate-50 border border-black/8">
-                  <div className="w-8 h-8 rounded-xl bg-white/5 flex items-center justify-center text-[#38BDF8] shrink-0">
-                    <Globe size={16} />
-                  </div>
-                  <div>
-                    <div className="text-xs font-bold text-slate-900">Website &amp; Mentor Portal</div>
-                    <a
-                      href="https://grow360.in"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[11px] text-[#38BDF8] hover:underline"
-                    >
-                      https://grow360.in
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3 p-3 rounded-2xl bg-slate-50 border border-black/8">
-                  <div className="w-8 h-8 rounded-xl bg-white/5 flex items-center justify-center text-[#22C55E] shrink-0">
-                    <Mail size={16} />
-                  </div>
-                  <div>
-                    <div className="text-xs font-bold text-slate-900">Direct Recruitment Contact</div>
-                    <div className="text-[11px] text-slate-700 font-mono">careers@grow360.in</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Interactive Campus Map / Hub Network Visualizer */}
-            <div className="lg:col-span-6">
-              <div className="p-6 rounded-2xl bg-slate-50 border border-black/8 relative overflow-hidden">
-                <div className="flex items-center justify-between pb-4 border-b border-black/8 mb-4">
-                  <div className="flex items-center gap-2">
-                    <MapPin size={16} className="text-[#2563EB]" />
-                    <span className="text-xs font-bold text-slate-900">Active Training Hubs in India</span>
-                  </div>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                    50+ Campuses
-                  </span>
-                </div>
-
-                {/* Hub Pills Grid */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
-                  {[
-                    { city: 'Noida Hub', state: 'Uttar Pradesh', status: 'Active Training', color: '#00B4D8' },
-                    { city: 'Phagwara', state: 'Punjab Hub', status: 'Batch #14 Live', color: '#38BDF8' },
-                    { city: 'Vadodara', state: 'Gujarat Hub', status: 'Analytics Lab', color: '#3B82F6' },
-                    { city: 'Bareilly', state: 'UP East Hub', status: 'Campus Program', color: '#22C55E' },
-                    { city: 'Kolhapur', state: 'Maharashtra Hub', status: 'Aptitude & DSA', color: '#8B5CF6' },
-                    { city: 'Remote Cohort', state: 'Pan-India', status: '1-on-1 Mocks', color: '#EC4899' },
-                  ].map((hub, idx) => (
-                    <div key={idx} className="p-3 rounded-xl bg-white shadow-sm border border-black/8 hover:border-white/20 transition-all">
-                      <div className="flex items-center gap-1.5 mb-1">
-                        <span className="w-2 h-2 rounded-full" style={{ backgroundColor: hub.color }} />
-                        <span className="text-xs font-bold text-slate-900">{hub.city}</span>
-                      </div>
-                      <div className="text-[10px] text-slate-600">{hub.state}</div>
-                      <div className="text-[9px] font-mono text-slate-500 mt-1">{hub.status}</div>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="mt-4 pt-3 border-t border-black/5 flex items-center justify-between text-[10px] font-mono text-slate-600">
-                  <span>Powered by Grow360 Engineering Guild</span>
-                  <span className="text-slate-700">Updated Today</span>
-                </div>
-              </div>
-            </div>
-
-          </div>
         </div>
 
       </div>
