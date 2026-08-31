@@ -186,7 +186,7 @@ export function Hero() {
               Industry-led training, AI-powered assessments, interview preparation and hiring support — everything your college needs to improve student employability and placement outcomes.
             </motion.p>
 
-            {/* 04. Action CTA Buttons with Direct Popup Triggers */}
+            {/* 04. Action CTA Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -207,10 +207,14 @@ export function Hero() {
               <motion.button
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                onClick={() => openEnquiry('CONTACT')}
+                onClick={() => {
+                  window.location.hash = '#training-programs';
+                  window.scrollTo({ top: 0, behavior: 'instant' });
+                }}
                 className="btn-pill-secondary cursor-pointer flex items-center gap-2 px-6 py-3.5 text-sm font-semibold"
               >
-                <span>Contact Us</span>
+                <span>View Programs</span>
+                <ArrowRight size={16} className="text-slate-500" />
               </motion.button>
             </motion.div>
 
