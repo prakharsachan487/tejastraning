@@ -11,6 +11,7 @@ interface NavItem {
 const navItems: NavItem[] = [
   { label: 'About Us', href: '#about' },
   { label: 'Training & Programs', href: '#training-programs' },
+  { label: 'Become a Mentor', href: '#become-a-mentor' },
 ];
 
 export function Navbar() {
@@ -51,7 +52,14 @@ export function Navbar() {
 
   const handleNavClick = useCallback((href: string) => {
     setIsMobileOpen(false);
-    if (href === '#training-programs' || href === '#become-a-mentor' || href === '#careers' || href === '#login') {
+    if (
+      href === '#training-programs' ||
+      href === '#become-a-mentor' ||
+      href === '#mentor' ||
+      href === '#careers' ||
+      href === '#career' ||
+      href === '#login'
+    ) {
       window.location.hash = href;
       return;
     }
