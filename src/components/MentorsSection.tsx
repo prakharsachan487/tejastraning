@@ -71,7 +71,7 @@ const mentors = [
     ),
     role: 'Analytics Consultant · Commercial Analytics',
     quote: 'Analytics Consultant specialized in commercial analytics, incentive compensation modeling, Power BI, SQL, and US pharma healthcare analytics.',
-    image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&q=80',
+    image: '/mentors/mohit_khandelwal.png',
     tilt: '-0.6deg',
   },
   {

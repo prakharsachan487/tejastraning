@@ -165,7 +165,7 @@ const fellowMentors = [
     role: 'Analytics Consultant · Commercial Analytics',
     rating: '4.97',
     sessions: '75+ Sessions',
-    image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80',
+    image: '/mentors/mohit_khandelwal.png',
     color: '#005A9C',
   },
   {
