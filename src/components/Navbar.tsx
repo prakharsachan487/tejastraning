@@ -11,7 +11,6 @@ interface NavItem {
 const navItems: NavItem[] = [
   { label: 'About Us', href: '#about' },
   { label: 'Training & Programs', href: '#training-programs' },
-  { label: 'Career Path', href: '#career-path' },
 ];
 
 export function Navbar() {
