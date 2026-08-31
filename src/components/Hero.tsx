@@ -183,9 +183,9 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.85, duration: 0.6, ease: 'easeOut' }}
-              className="mt-5 text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-xl"
+              className="mt-5 text-sm sm:text-base text-slate-600 leading-relaxed font-normal max-w-2xl"
             >
-              Industry-led training, AI-powered assessments, interview preparation and hiring support — everything your college needs to improve student employability and placement outcomes.
+              We partner with colleges and universities to build industry-ready talent through practical training, certifications, projects, assessments, aptitude and interview preparation, and end-to-end hiring and placement support. We bridge the gap between education and industry, empowering students with the skills, confidence, and career readiness needed to succeed in the real world.
             </motion.p>
 
             {/* 04. Action CTA Buttons */}
