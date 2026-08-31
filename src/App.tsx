@@ -70,26 +70,26 @@ function App() {
   return (
     <EnquiryProvider>
       <AuthProvider>
-        <div className="relative min-h-screen bg-[#0A0A0D] text-slate-100 font-sans selection:bg-[#7A9D96] selection:text-white">
-          {currentPage === 'mentor' ? (
-            <MentorPage onBackToHome={handleBackToHome} />
-          ) : currentPage === 'career' ? (
-            <CareerPage onBackToHome={handleBackToHome} />
-          ) : currentPage === 'training-programs' ? (
-            <TrainingProgramsPage onBackToHome={handleBackToHome} />
-          ) : currentPage === 'login' || currentPage === 'signup' ? (
-            <AuthPage />
-          ) : currentPage === 'dashboard' ? (
-            <StudentDashboard onBackToHome={handleBackToHome} />
-          ) : currentPage === 'privacy' || currentPage === 'terms' || currentPage === 'cookies' ? (
-            <LegalPage initialTab={currentPage} onBackToHome={handleBackToHome} />
-          ) : (
-            <>
-              {/* 01. Floating Dark Header */}
-              <Navbar />
+        <div className="relative min-h-screen bg-[#0A0A0D] text-slate-100 font-sans selection:bg-[#7A9D96] selection:text-white flex flex-col">
+          {/* Universal Header across every single page */}
+          <Navbar />
 
+          <div className="flex-1">
+            {currentPage === 'mentor' ? (
+              <MentorPage onBackToHome={handleBackToHome} />
+            ) : currentPage === 'career' ? (
+              <CareerPage onBackToHome={handleBackToHome} />
+            ) : currentPage === 'training-programs' ? (
+              <TrainingProgramsPage onBackToHome={handleBackToHome} />
+            ) : currentPage === 'login' || currentPage === 'signup' ? (
+              <AuthPage />
+            ) : currentPage === 'dashboard' ? (
+              <StudentDashboard onBackToHome={handleBackToHome} />
+            ) : currentPage === 'privacy' || currentPage === 'terms' || currentPage === 'cookies' ? (
+              <LegalPage initialTab={currentPage} onBackToHome={handleBackToHome} />
+            ) : (
               <main>
-                {/* 02. Hero with Dynamic On-Load Entrance & Code Typing Animation */}
+                {/* 02. Hero with Dynamic On-Load Entrance & Reference Consultation Form */}
                 <Hero />
 
                 {/* 03. Engineering Curriculum Trust Strip */}
@@ -116,13 +116,15 @@ function App() {
                 {/* 10. Cinematic Final CTA */}
                 <FinalCTA />
               </main>
+            )}
+          </div>
 
-              {/* 11. Spacious Dark Minimal Footer */}
-              <Footer />
-            </>
+          {/* Footer on landing page, legal, and other views if not already in subcomponent */}
+          {currentPage !== 'training-programs' && currentPage !== 'career' && currentPage !== 'dashboard' && currentPage !== 'login' && currentPage !== 'signup' && (
+            <Footer />
           )}
 
-          {/* 15. Working Institutional Enquiry & Demo Modal */}
+          {/* Institutional Enquiry & Demo Modal */}
           <EnquiryModal />
         </div>
       </AuthProvider>

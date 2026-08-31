@@ -4,7 +4,6 @@ import {
   ShieldCheck,
   FileText,
   Cookie,
-  ArrowLeft,
   Lock,
   Eye,
   Database,
@@ -19,10 +18,10 @@ export type LegalTab = 'privacy' | 'terms' | 'cookies';
 
 interface LegalPageProps {
   initialTab?: LegalTab;
-  onBackToHome: () => void;
+  onBackToHome?: () => void;
 }
 
-export function LegalPage({ initialTab = 'privacy', onBackToHome }: LegalPageProps) {
+export function LegalPage({ initialTab = 'privacy', onBackToHome: _ }: LegalPageProps) {
   const [activeTab, setActiveTab] = useState<LegalTab>(initialTab);
 
   useEffect(() => {
@@ -43,87 +42,61 @@ export function LegalPage({ initialTab = 'privacy', onBackToHome }: LegalPagePro
   };
 
   return (
-    <div className="min-h-screen bg-[#07070A] text-slate-100 font-sans selection:bg-[#00B4D8] selection:text-white">
-      {/* Top Sticky Header */}
-      <header className="fixed top-0 left-0 right-0 z-40 bg-[#07070A]/90 backdrop-blur-xl border-b border-white/10 h-18 flex items-center">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex items-center justify-between">
-          <div className="flex items-center gap-6">
-            <button
-              onClick={onBackToHome}
-              className="flex items-center gap-2 text-xs font-semibold text-slate-400 hover:text-white transition-colors cursor-pointer group"
-            >
-              <ArrowLeft size={16} className="transition-transform group-hover:-translate-x-1" />
-              <span>Back to Home</span>
-            </button>
-
-            <div className="h-4 w-px bg-white/10 hidden sm:block" />
-
-            <div className="flex items-center gap-2.5">
-              <img
-                src="/grow360-logo.png"
-                alt="Grow360 Logo"
-                className="h-8 w-auto object-contain rounded-lg"
-              />
-              <span className="text-lg font-extrabold text-white font-[family-name:var(--font-display)]">
-                GROW<span className="text-[#00B4D8]">360°</span> <span className="text-xs font-mono font-normal text-[#9CBDB7] ml-1">Legal</span>
-              </span>
-            </div>
-          </div>
-
-          {/* Tab Selector Buttons */}
-          <div className="flex items-center gap-1.5 p-1 bg-white/5 border border-white/10 rounded-2xl">
-            <button
-              onClick={() => handleTabChange('privacy')}
-              className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all cursor-pointer flex items-center gap-1.5 ${
-                activeTab === 'privacy'
-                  ? 'bg-gradient-to-r from-[#00B4D8] to-[#0077B6] text-white font-bold shadow-md'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              <ShieldCheck size={13} />
-              <span className="hidden sm:inline">Privacy Policy</span>
-              <span className="sm:hidden">Privacy</span>
-            </button>
-            <button
-              onClick={() => handleTabChange('terms')}
-              className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all cursor-pointer flex items-center gap-1.5 ${
-                activeTab === 'terms'
-                  ? 'bg-gradient-to-r from-[#00B4D8] to-[#0077B6] text-white font-bold shadow-md'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              <FileText size={13} />
-              <span className="hidden sm:inline">Terms of Service</span>
-              <span className="sm:hidden">Terms</span>
-            </button>
-            <button
-              onClick={() => handleTabChange('cookies')}
-              className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all cursor-pointer flex items-center gap-1.5 ${
-                activeTab === 'cookies'
-                  ? 'bg-gradient-to-r from-[#00B4D8] to-[#0077B6] text-white font-bold shadow-md'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              <Cookie size={13} />
-              <span className="hidden sm:inline">Cookie Policy</span>
-              <span className="sm:hidden">Cookies</span>
-            </button>
-          </div>
-        </div>
-      </header>
-
+    <div className="min-h-screen bg-[#07070A] text-slate-100 font-sans selection:bg-[#7A9D96] selection:text-white">
       {/* Main Container */}
       <main className="pt-28 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           
           {/* Header Title Card */}
           <div className="mb-10 p-6 sm:p-8 rounded-3xl bg-[#111116] border border-white/10 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-[#00B4D8]/10 to-transparent blur-3xl pointer-events-none" />
+            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-[#7A9D96]/10 to-transparent blur-3xl pointer-events-none" />
 
             <div className="relative z-10">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-[#00B4D8] mb-4">
-                <Sparkles size={12} />
-                <span>Grow360 Trust & Compliance</span>
+              <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-[#7A9D96]">
+                  <Sparkles size={12} />
+                  <span>Grow360 Trust &amp; Compliance</span>
+                </div>
+
+                {/* Tab Selector Buttons */}
+                <div className="flex items-center gap-1.5 p-1 bg-white/5 border border-white/10 rounded-2xl">
+                  <button
+                    onClick={() => handleTabChange('privacy')}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all cursor-pointer flex items-center gap-1.5 ${
+                      activeTab === 'privacy'
+                        ? 'bg-gradient-to-r from-[#7A9D96] to-[#6B8E87] text-white font-bold shadow-md'
+                        : 'text-slate-400 hover:text-white'
+                    }`}
+                  >
+                    <ShieldCheck size={13} />
+                    <span className="hidden sm:inline">Privacy Policy</span>
+                    <span className="sm:hidden">Privacy</span>
+                  </button>
+                  <button
+                    onClick={() => handleTabChange('terms')}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all cursor-pointer flex items-center gap-1.5 ${
+                      activeTab === 'terms'
+                        ? 'bg-gradient-to-r from-[#7A9D96] to-[#6B8E87] text-white font-bold shadow-md'
+                        : 'text-slate-400 hover:text-white'
+                    }`}
+                  >
+                    <FileText size={13} />
+                    <span className="hidden sm:inline">Terms of Service</span>
+                    <span className="sm:hidden">Terms</span>
+                  </button>
+                  <button
+                    onClick={() => handleTabChange('cookies')}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all cursor-pointer flex items-center gap-1.5 ${
+                      activeTab === 'cookies'
+                        ? 'bg-gradient-to-r from-[#7A9D96] to-[#6B8E87] text-white font-bold shadow-md'
+                        : 'text-slate-400 hover:text-white'
+                    }`}
+                  >
+                    <Cookie size={13} />
+                    <span className="hidden sm:inline">Cookie Policy</span>
+                    <span className="sm:hidden">Cookies</span>
+                  </button>
+                </div>
               </div>
 
               <h1 className="text-2xl sm:text-4xl font-extrabold text-white font-[family-name:var(--font-display)] tracking-tight mb-3">

@@ -7,7 +7,6 @@ import {
   Clock, 
   ChevronDown, 
   Code2, 
-  ArrowLeft,
   Video,
   Layers,
   Terminal,
@@ -18,7 +17,7 @@ import {
 import { Footer } from './Footer';
 
 interface MentorPageProps {
-  onBackToHome: () => void;
+  onBackToHome?: () => void;
 }
 
 const steps = [
@@ -186,7 +185,7 @@ const faqs = [
   },
 ];
 
-export function MentorPage({ onBackToHome }: MentorPageProps) {
+export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
 
   // Instantly scroll to top when page opens
@@ -205,74 +204,6 @@ export function MentorPage({ onBackToHome }: MentorPageProps) {
 
   return (
     <div className="min-h-screen bg-[#07070A] text-slate-100 font-sans selection:bg-[#7A9D96] selection:text-white">
-      
-      {/* ========================================================
-          STICKY MENTOR HEADER
-      ======================================================== */}
-      <header className="fixed top-0 left-0 right-0 z-40 bg-[#07070A]/90 backdrop-blur-xl border-b border-white/10 h-18 flex items-center">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex items-center justify-between">
-          
-          {/* Brand & Back Button */}
-          <div className="flex items-center gap-6">
-            <button
-              onClick={onBackToHome}
-              className="flex items-center gap-2 text-xs font-semibold text-slate-400 hover:text-white transition-colors cursor-pointer group"
-            >
-              <ArrowLeft size={16} className="transition-transform group-hover:-translate-x-1" />
-              <span>Back to Campus Home</span>
-            </button>
-
-            <div className="h-4 w-px bg-white/10 hidden sm:block" />
-
-            <div className="flex items-center gap-2.5">
-              <img
-                src="/grow360-logo.png"
-                alt="Grow360 Logo"
-                className="h-8 w-auto object-contain rounded-lg"
-              />
-              <span className="text-lg font-extrabold text-white font-[family-name:var(--font-display)]">
-                GROW<span className="text-[#00B4D8]">360°</span> <span className="text-xs font-mono font-normal text-[#9CBDB7] ml-1">Mentors</span>
-              </span>
-            </div>
-          </div>
-
-          {/* Quick Anchor Links */}
-          <nav className="hidden lg:flex items-center gap-6 text-xs font-medium text-slate-400">
-            <button onClick={() => { window.location.hash = '#careers'; }} className="hover:text-white text-[#00B4D8] font-semibold transition-colors cursor-pointer flex items-center gap-1">
-              <Sparkles size={12} />
-              <span>Careers &amp; Open Roles</span>
-            </button>
-            <button onClick={() => scrollToSection('how-it-works')} className="hover:text-white transition-colors cursor-pointer">
-              Process
-            </button>
-            <button onClick={() => scrollToSection('what-you-do')} className="hover:text-white transition-colors cursor-pointer">
-              Role
-            </button>
-            <button onClick={() => scrollToSection('benefits')} className="hover:text-white transition-colors cursor-pointer">
-              Benefits
-            </button>
-            <button onClick={() => scrollToSection('mentors')} className="hover:text-white transition-colors cursor-pointer">
-              Fellow Mentors
-            </button>
-            <button onClick={() => scrollToSection('faq')} className="hover:text-white transition-colors cursor-pointer">
-              FAQ
-            </button>
-          </nav>
-
-          {/* Action Buttons */}
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => { window.location.hash = '#careers'; }}
-              className="btn-pill-primary text-xs py-2.5 px-5 cursor-pointer shadow-lg shadow-[#7A9D96]/"
-            >
-              <Sparkles size={14} className="text-white" />
-              <span>Apply as Mentor</span>
-              <ArrowRight size={14} />
-            </button>
-          </div>
-
-        </div>
-      </header>
 
       {/* Main Content */}
       <main className="pt-24">

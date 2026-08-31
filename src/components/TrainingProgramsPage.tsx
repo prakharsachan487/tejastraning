@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Sparkles, GraduationCap, Code2, Award, Users, CheckCircle2, ArrowRight } from 'lucide-react';
+import { Sparkles, GraduationCap, Code2, Award, Users, CheckCircle2, ArrowRight } from 'lucide-react';
 import { TrainingSolutionsSection } from './TrainingSolutionsSection';
 import { ProgramsSection } from './ProgramsSection';
 import { PlacementJourneySection } from './PlacementJourneySection';
@@ -11,7 +11,7 @@ interface TrainingProgramsPageProps {
   onBackToHome?: () => void;
 }
 
-export function TrainingProgramsPage({ onBackToHome }: TrainingProgramsPageProps) {
+export function TrainingProgramsPage({ onBackToHome: _ }: TrainingProgramsPageProps) {
   const { openEnquiry } = useEnquiry();
 
   useEffect(() => {
@@ -20,89 +20,8 @@ export function TrainingProgramsPage({ onBackToHome }: TrainingProgramsPageProps
     document.body.scrollTop = 0;
   }, []);
 
-  const handleBack = () => {
-    if (onBackToHome) {
-      onBackToHome();
-    } else {
-      window.location.hash = '';
-    }
-  };
-
-  const scrollToSection = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
     <div className="min-h-screen bg-[#0A0A0D] text-slate-100 font-sans selection:bg-[#7A9D96] selection:text-white">
-      
-      {/* ── 01. Top Sticky Navigation Bar ── */}
-      <header className="fixed top-0 left-0 right-0 z-40 bg-[#0A0A0D]/90 backdrop-blur-xl border-b border-white/10 h-18 flex items-center">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex items-center justify-between">
-          
-          {/* Left: Back + Brand Logo */}
-          <div className="flex items-center gap-6">
-            <button
-              onClick={handleBack}
-              className="flex items-center gap-2 text-xs font-semibold text-slate-400 hover:text-white transition-colors cursor-pointer group"
-            >
-              <ArrowLeft size={16} className="transition-transform group-hover:-translate-x-1" />
-              <span>Back to Home</span>
-            </button>
-
-            <div className="h-4 w-px bg-white/10 hidden sm:block" />
-
-            <div 
-              className="flex items-center gap-2.5 cursor-pointer"
-              onClick={() => { window.location.hash = ''; }}
-            >
-              <img
-                src="/grow360-logo.png"
-                alt="Grow360 Logo"
-                className="h-8 w-auto object-contain rounded-lg"
-              />
-              <span className="text-lg font-extrabold text-white font-[family-name:var(--font-display)]">
-                GROW<span className="text-[#7A9D96]">360°</span>
-                <span className="text-xs font-mono font-normal text-slate-400 ml-1.5 hidden md:inline">
-                  Training &amp; Programs
-                </span>
-              </span>
-            </div>
-          </div>
-
-          {/* Center: Quick Section Links */}
-          <nav className="hidden lg:flex items-center gap-1">
-            {[
-              { label: 'Delivery Models', id: 'training' },
-              { label: 'Programs Catalog', id: 'programs' },
-              { label: 'Placement Journey', id: 'placement-roadmap' },
-            ].map((link) => (
-              <button
-                key={link.id}
-                onClick={() => scrollToSection(link.id)}
-                className="px-3.5 py-1.5 text-xs font-medium text-slate-300 hover:text-white hover:bg-white/5 rounded-full transition-colors cursor-pointer"
-              >
-                {link.label}
-              </button>
-            ))}
-          </nav>
-
-          {/* Right Action */}
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => openEnquiry('CONSULTATION')}
-              className="btn-pill-primary text-xs py-2 px-5 font-bold cursor-pointer flex items-center gap-2"
-            >
-              <Sparkles size={13} />
-              <span>Enquire for Campus</span>
-            </button>
-          </div>
-
-        </div>
-      </header>
-
       {/* ── 02. Hero Banner ── */}
       <section className="pt-32 pb-16 lg:pt-36 lg:pb-20 relative overflow-hidden border-b border-white/5 bg-gradient-to-b from-[#0F0F16] via-[#0A0A0D] to-[#0A0A0D]">
         {/* Glow Spheres */}
@@ -212,7 +131,7 @@ export function TrainingProgramsPage({ onBackToHome }: TrainingProgramsPageProps
             </button>
 
             <button
-              onClick={handleBack}
+              onClick={() => { window.location.hash = ''; }}
               className="btn-pill-secondary text-xs py-3.5 px-6 font-bold cursor-pointer"
             >
               <span>Return to Home</span>

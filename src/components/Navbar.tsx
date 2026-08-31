@@ -65,6 +65,21 @@ export function Navbar() {
       window.location.hash = href;
       return;
     }
+
+    if (href === '#about') {
+      if (window.location.hash && window.location.hash !== '#about') {
+        window.location.hash = '#about';
+        return;
+      }
+      const element = document.getElementById('about') || document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'instant' });
+      } else {
+        window.location.hash = '#about';
+      }
+      return;
+    }
+
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: 'instant' });
@@ -78,8 +93,8 @@ export function Navbar() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? 'bg-[#0A0A0D]/90 backdrop-blur-xl border-b border-white/10'
-            : 'bg-transparent'
+            ? 'bg-[#0A0A0D]/95 backdrop-blur-xl border-b border-white/10'
+            : 'bg-[#0A0A0D]/80 backdrop-blur-md border-b border-white/5'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -94,7 +109,11 @@ export function Navbar() {
               className="flex items-center gap-3 group focus:outline-none"
               onClick={(e) => {
                 e.preventDefault();
-                window.scrollTo({ top: 0, behavior: 'instant' });
+                if (window.location.hash) {
+                  window.location.hash = '';
+                } else {
+                  window.scrollTo({ top: 0, behavior: 'instant' });
+                }
               }}
             >
               <img
@@ -104,7 +123,7 @@ export function Navbar() {
               />
               <div className="flex flex-col leading-tight">
                 <span className="text-xl font-extrabold tracking-tight text-white font-[family-name:var(--font-display)] flex items-center">
-                  GROW<span className="text-[#00B4D8]">360°</span>
+                  GROW<span className="text-[#7A9D96]">360°</span>
                 </span>
                 <span className="text-[10px] font-mono text-slate-400 tracking-wider hidden sm:block">
                   Decoding the corporate world
@@ -138,7 +157,7 @@ export function Navbar() {
                 onClick={() => openEnquiry('CONTACT')}
                 className="btn-pill-secondary px-4 py-2 text-xs font-semibold cursor-pointer flex items-center gap-1.5 hover:text-white"
               >
-                <Mail size={13} className="text-[#00B4D8]" />
+                <Mail size={13} className="text-[#7A9D96]" />
                 <span>Contact Us</span>
               </button>
 
@@ -174,7 +193,7 @@ export function Navbar() {
                   onClick={() => {
                     window.location.hash = '#login';
                   }}
-                  className="btn-pill-primary px-5 py-2.5 text-xs font-bold cursor-pointer flex items-center gap-1.5 shadow-md shadow-[#7A9D96]/"
+                  className="btn-pill-primary px-5 py-2.5 text-xs font-bold cursor-pointer flex items-center gap-1.5 shadow-md shadow-[#7A9D96]/20"
                 >
                   <LogIn size={14} className="text-white" />
                   <span>Login</span>
@@ -221,7 +240,7 @@ export function Navbar() {
                       className="h-8 w-auto object-contain rounded-lg"
                     />
                     <span className="font-extrabold text-lg text-white font-[family-name:var(--font-display)] flex items-center">
-                      GROW<span className="text-[#00B4D8]">360°</span>
+                      GROW<span className="text-[#7A9D96]">360°</span>
                     </span>
                   </div>
                   <button
@@ -254,7 +273,7 @@ export function Navbar() {
                   }}
                   className="btn-pill-secondary w-full justify-center text-xs py-2.5 flex items-center gap-2"
                 >
-                  <Mail size={14} className="text-[#00B4D8]" />
+                  <Mail size={14} className="text-[#7A9D96]" />
                   <span>Contact Us</span>
                 </button>
 
