@@ -1,8 +1,12 @@
+import { useState } from 'react';
 import { useEnquiry } from '../context/EnquiryContext';
-import { MapPin, Phone, Mail } from 'lucide-react';
+import { MapPin, Phone, Mail, Send, CheckCircle2, BookOpen } from 'lucide-react';
 
 export function Footer() {
   const { openEnquiry } = useEnquiry();
+  const [newsletterEmail, setNewsletterEmail] = useState('');
+  const [isSubscribed, setIsSubscribed] = useState(false);
+
   const nav = (href: string) => {
     if (!href || href === '#') {
       window.scrollTo({ top: 0, behavior: 'instant' });
@@ -10,6 +14,11 @@ export function Footer() {
     }
     if (href === '#training' || href === '#programs') {
       window.location.hash = '#training-programs';
+      return;
+    }
+    if (href === '#blog' || href === '#blogs' || href === '#articles') {
+      window.location.hash = '#blog';
+      window.scrollTo({ top: 0, behavior: 'instant' });
       return;
     }
     const elem = document.querySelector(href);
@@ -34,7 +43,7 @@ export function Footer() {
         {/* Main Grid: 4 Columns */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 mb-20">
           
-          {/* Column 1: Brand & Backed By (4 cols) */}
+          {/* Column 1: Brand, Newsletter & Backed By (4 cols) */}
           <div className="lg:col-span-4 flex flex-col justify-between">
             <div>
               {/* Grow360 Brand Logo */}
@@ -57,14 +66,49 @@ export function Footer() {
                 </div>
               </div>
 
-              {/* Tagline */}
-              <p className="text-xs sm:text-sm text-slate-600 max-w-sm leading-relaxed mb-8">
-                The comprehensive corporate training, AI-powered interview diagnostics, and campus placement infrastructure.
-              </p>
+              {/* Newsletter Subscription Box */}
+              <div className="mt-3 mb-7 max-w-sm">
+                <p className="text-xs font-bold text-slate-900 mb-1 flex items-center gap-1.5 font-[family-name:var(--font-display)]">
+                  <Send size={13} className="text-[#2563EB]" />
+                  <span>Placement &amp; Industry Newsletter</span>
+                </p>
+                <p className="text-[11px] text-slate-500 mb-2.5 leading-relaxed">
+                  Get weekly corporate hiring rubrics, curriculum guides, and placement trends.
+                </p>
+                {isSubscribed ? (
+                  <div className="p-2.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold flex items-center gap-2">
+                    <CheckCircle2 size={15} className="text-emerald-600 shrink-0" />
+                    <span>Subscribed! Welcome to Grow360 insights.</span>
+                  </div>
+                ) : (
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      if (newsletterEmail.trim()) setIsSubscribed(true);
+                    }}
+                    className="flex items-center gap-1.5"
+                  >
+                    <input
+                      type="email"
+                      required
+                      value={newsletterEmail}
+                      onChange={(e) => setNewsletterEmail(e.target.value)}
+                      placeholder="Enter college or work email"
+                      className="bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] w-full shadow-2xs"
+                    />
+                    <button
+                      type="submit"
+                      className="btn-pill-primary text-xs px-3.5 py-2 font-bold shrink-0 cursor-pointer"
+                    >
+                      Subscribe
+                    </button>
+                  </form>
+                )}
+              </div>
 
               {/* Backed By Developers From */}
               <div>
-                <p className="text-[10px] sm:text-[11px] uppercase tracking-wider font-semibold text-slate-500 mb-4 font-mono">
+                <p className="text-[10px] sm:text-[11px] uppercase tracking-wider font-semibold text-slate-500 mb-3 font-mono">
                   BACKED BY DEVELOPERS FROM
                 </p>
                 <div className="flex items-center gap-5">
@@ -106,10 +150,10 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Column 2: Platform (3 cols) */}
+          {/* Column 2: Platform & Resources (3 cols) */}
           <div className="lg:col-span-3">
             <h4 className="text-sm font-bold text-slate-900 tracking-tight mb-5 font-[family-name:var(--font-display)]">
-              Platform
+              Platform &amp; Resources
             </h4>
             <ul className="space-y-3.5 text-xs sm:text-sm">
               <li>
@@ -126,6 +170,16 @@ export function Footer() {
                   className="text-slate-600 hover:text-[#2563EB] transition-colors cursor-pointer text-left font-medium"
                 >
                   Placements
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => nav('#blog')}
+                  className="text-slate-600 hover:text-[#2563EB] transition-colors cursor-pointer text-left font-medium flex items-center gap-1.5"
+                >
+                  <BookOpen size={13} className="text-[#2563EB]" />
+                  <span>Blog &amp; Articles</span>
+                  <span className="text-[9px] font-bold text-[#2563EB] bg-[#2563EB]/10 px-1.5 py-0.5 rounded-full">New</span>
                 </button>
               </li>
               <li>

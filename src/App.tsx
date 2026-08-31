@@ -20,9 +20,10 @@ import { LegalPage } from './components/LegalPage';
 import { AuthPage } from './components/AuthPage';
 import { CareerPage } from './components/CareerPage';
 import { TrainingProgramsPage } from './components/TrainingProgramsPage';
+import { BlogPage } from './components/BlogPage';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'mentor' | 'career' | 'training-programs' | 'login' | 'signup' | 'dashboard' | 'privacy' | 'terms' | 'cookies'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'mentor' | 'career' | 'training-programs' | 'login' | 'signup' | 'dashboard' | 'privacy' | 'terms' | 'cookies' | 'blog'>('home');
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -33,6 +34,8 @@ function App() {
         setCurrentPage('career');
       } else if (hash === '#training-programs' || hash === '#training' || hash === '#programs' || hash === '#courses') {
         setCurrentPage('training-programs');
+      } else if (hash === '#blog' || hash === '#blogs' || hash === '#articles') {
+        setCurrentPage('blog');
       } else if (hash === '#login' || hash === '#signin' || hash === '#auth') {
         setCurrentPage('login');
       } else if (hash === '#signup' || hash === '#register') {
@@ -88,6 +91,8 @@ function App() {
               <StudentDashboard onBackToHome={handleBackToHome} />
             ) : currentPage === 'privacy' || currentPage === 'terms' || currentPage === 'cookies' ? (
               <LegalPage initialTab={currentPage} onBackToHome={handleBackToHome} />
+            ) : currentPage === 'blog' ? (
+              <BlogPage onBackToHome={handleBackToHome} />
             ) : (
               <main>
                 {/* 02. Hero with Dynamic On-Load Entrance & Reference Consultation Form */}
