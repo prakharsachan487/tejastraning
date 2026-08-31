@@ -1,14 +1,12 @@
 import { useState, useMemo, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
   Search,
   MapPin,
   Briefcase,
   IndianRupee,
-  ExternalLink,
   RotateCcw,
   CheckCircle2,
-  X,
   Sparkles,
   Building2,
   Globe,
@@ -18,7 +16,11 @@ import {
   SlidersHorizontal,
   Upload,
   AlertCircle,
-  Loader2
+  Loader2,
+  ArrowLeft,
+  Calendar,
+  Layers,
+  Award
 } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 
@@ -98,155 +100,155 @@ const JOB_LISTINGS: JobOpening[] = [
     salary: '₹5,00,000 - ₹7,00,000 / year',
     postedDate: '24 hrs ago',
     postedDaysAgo: 1,
-    skills: ['Python', 'SQL', 'Excel', 'Data Analysis', 'Presentation', 'Business Intelligence', 'Tableau'],
-    summary: 'Instruct students in data-driven business analytics, financial modeling, SQL reporting, and executive client presentations for management and consulting roles.',
+    skills: ['Data Visualization', 'SQL', 'Tableau', 'Power BI', 'Advanced Excel', 'Financial Modeling', 'Business Strategy'],
+    summary: 'Instruct pre-placement cohorts in data-driven decision making, business analytics workflows, SQL querying, and executive KPI dashboard creation.',
     responsibilities: [
-      'Teach real-world business case studies, KPI modeling, and automated Excel reporting.',
-      'Train students to query relational databases with SQL and build dashboard presentations.',
-      'Organize business pitch competitions and mock interview prep.'
+      'Deliver case study-driven lectures on business analytics and financial modeling.',
+      'Mentor students on creating compelling portfolio dashboards in Tableau & Power BI.',
+      'Simulate client-facing presentation rounds and business case interviews.'
     ],
     requirements: [
-      '1+ years experience in Business Analytics, Product Operations, or Consulting.',
-      'Expertise in Advanced Excel, SQL, and business storytelling.',
-      'Strong presentation skills and patience to mentor freshers.'
-    ],
-    openings: 2
-  },
-  {
-    id: 'job-4',
-    title: 'Technical Trainer (Full-Stack MERN)',
-    domain: 'Tech',
-    type: 'Full-time',
-    location: 'India (Onsite / Hybrid)',
-    locationCategory: 'Noida',
-    salary: '₹5,00,000 - ₹7,50,000 / year',
-    postedDate: '7 days ago',
-    postedDaysAgo: 7,
-    skills: ['MERN', 'React.js', 'Node.js', 'Express', 'MongoDB', 'Java', 'REST APIs', 'Tailwind CSS'],
-    summary: 'Educate student batches on building full-stack cloud applications, full-lifecycle product architecture, and deploying portfolio-worthy SaaS projects.',
-    responsibilities: [
-      'Deliver structured classroom training on MongoDB, Express.js, React, and Node.js.',
-      'Oversee capstone project development and production cloud deployments.',
-      'Conduct weekly coding labs and debug student architecture blockers.'
-    ],
-    requirements: [
-      'Hands-on experience delivering MERN stack applications.',
-      'Proficiency in React Hooks, state management, and async Node.js APIs.',
-      'Prior corporate or bootcamp training experience is a strong plus.'
-    ],
-    openings: 4
-  },
-  {
-    id: 'job-5',
-    title: 'Data Analytics Instructor',
-    domain: 'Tech',
-    type: 'Contract',
-    location: 'India, Gujarat (Vadodara / Onsite)',
-    locationCategory: 'Vadodara',
-    salary: '₹4,00,000 - ₹6,00,000 / year',
-    postedDate: '3 days ago',
-    postedDaysAgo: 3,
-    skills: ['Tableau', 'Data Visualization', 'Power BI', 'Statistical Analysis', 'Data Analytics', 'Python', 'Pandas'],
-    summary: 'Deliver high-impact hands-on workshops in business intelligence tools, statistical analytics, ETL pipelines, and executive dashboards.',
-    responsibilities: [
-      'Teach data cleaning, exploratory data analysis, and dashboard design using Power BI and Tableau.',
-      'Guide students through industry datasets (E-commerce, Healthcare, FinTech).',
-      'Provide structured assignment evaluation and feedback.'
-    ],
-    requirements: [
-      'Strong command of Power BI, Tableau, SQL, and Python for data analytics.',
-      'Experience working with real-world business datasets and KPI dashboards.',
-      'Great communication and student engagement skills.'
-    ],
-    openings: 2
-  },
-  {
-    id: 'job-6',
-    title: 'Software Development Facilitator (P)',
-    domain: 'Tech',
-    type: 'Full-time',
-    location: 'India, Punjab (Onsite)',
-    locationCategory: 'Phagwara',
-    salary: '₹9,00,000 - ₹14,00,000 / year',
-    postedDate: '7 days ago',
-    postedDaysAgo: 7,
-    skills: ['Data structures and algorithm', 'DSA', 'Competitive programming', 'System Design', 'Code Optimization'],
-    summary: 'Senior role to spearhead university tech curriculum excellence, lead elite coding batches, and interface with tier-1 campus hiring partners.',
-    responsibilities: [
-      'Design master-level curricula for campus placement bootcamps.',
-      'Lead top 5% student cohorts through FAANG-grade hard algorithm problems.',
-      'Mentor junior trainers and calibrate evaluation benchmarks.'
-    ],
-    requirements: [
-      '3+ years in software development or technical training.',
-      'Outstanding track record in algorithm design and mentoring outcomes.',
-      'Leadership quality with a student-first pedagogy.'
+      '1+ years experience in business analysis, consulting, or analytics.',
+      'Hands-on expertise with SQL, Power BI/Tableau, and Advanced Excel modeling.',
+      'Strong problem-solving orientation and storytelling ability.'
     ],
     openings: 1
   },
   {
-    id: 'job-7',
-    title: 'Technical Recruiter & Talent Liaison',
-    domain: 'Non-Tech',
+    id: 'job-4',
+    title: 'Technical Trainer (Java & Cloud Ecosystem)',
+    domain: 'Tech',
     type: 'Full-time',
-    location: 'Remote',
-    locationCategory: 'Remote',
-    salary: '₹25,000 - ₹40,000 / month',
-    postedDate: '24 hrs ago',
-    postedDaysAgo: 1,
-    skills: ['Applicant Tracking Systems', 'Technical Sourcing', 'IT Recruitment', 'Boolean Search', 'Technical Screening', 'Candidate Relationship Management', 'Talent Pipeline Management'],
-    summary: 'Manage student placement pipelines, coordinate campus recruitment drives with hiring partners, and match top graduates to tier-1 tech openings.',
+    location: 'India, Gujarat (Vadodara / Onsite)',
+    locationCategory: 'Vadodara',
+    salary: '₹6,00,000 - ₹8,50,000 / year',
+    postedDate: '7 days ago',
+    postedDaysAgo: 7,
+    skills: ['Java', 'Spring Boot', 'AWS', 'Microservices', 'REST APIs', 'MySQL', 'Hibernate', 'Docker'],
+    summary: 'Anchor the enterprise Java training track, teaching Spring Boot microservices, cloud deployments, and production backend best practices to pre-final year students.',
     responsibilities: [
-      'Source, screen, and schedule candidates for partner hiring pipelines.',
-      'Liaise between university training heads and corporate HR teams.',
-      'Maintain recruiter relationships and organize campus placement drives.'
+      'Teach Java fundamentals, OOP, Spring Boot, and enterprise cloud architecture.',
+      'Build end-to-end full stack capstone projects with student teams.',
+      'Evaluate campus batch coding challenges and provide automated test feedback.'
     ],
     requirements: [
-      '1+ years experience in tech recruitment or talent acquisition.',
-      'Familiarity with software engineering terminology and role requirements.',
-      'Proactive communicator with exceptional relationship-building abilities.'
+      '2+ years backend engineering or technical instruction experience with Java/Spring.',
+      'Solid command over RDBMS, JPA/Hibernate, and cloud basics on AWS.',
+      'Good pedagogical instincts and student empathy.'
     ],
-    openings: 3
+    openings: 2
+  },
+  {
+    id: 'job-5',
+    title: 'Full Stack Web Development Mentor',
+    domain: 'Tech',
+    type: 'Full-time',
+    location: 'India, Uttar Pradesh (Noida / Hybrid)',
+    locationCategory: 'Noida',
+    salary: '₹7,00,000 - ₹11,00,000 / year',
+    postedDate: '24 hrs ago',
+    postedDaysAgo: 1,
+    skills: ['React.js', 'Next.js', 'Node.js', 'TypeScript', 'TailwindCSS', 'PostgreSQL', 'Prisma', 'GraphQL', 'Vercel'],
+    summary: 'Lead our modern web development track, guiding college developers from JavaScript fundamentals to full-stack Next.js production deployments.',
+    responsibilities: [
+      'Deliver interactive live coding sessions covering modern full-stack web stacks.',
+      'Review student GitHub pull requests and coach clean architecture principles.',
+      'Conduct mock system architecture interviews for product startup roles.'
+    ],
+    requirements: [
+      'Strong portfolio of shipped web applications with React/Next.js and Node.js.',
+      'Fluency in TypeScript and modern frontend/backend patterns.',
+      'Active open source presence or mentorship track record is a strong plus.'
+    ],
+    openings: 4
+  },
+  {
+    id: 'job-6',
+    title: 'Aptitude & Logical Reasoning Trainer',
+    domain: 'Academics',
+    type: 'Contract',
+    location: 'Remote',
+    locationCategory: 'Remote',
+    salary: '₹35,000 - ₹60,000 / month',
+    postedDate: '30 days ago',
+    postedDaysAgo: 28,
+    skills: ['Quantitative Aptitude', 'Logical Reasoning', 'Verbal Ability', 'Speed Math', 'TCS NQT Prep', 'Campus Filtering Tests'],
+    summary: 'Prepare engineering students for national campus screening tests (AMCAT, CoCubes, TCS NQT, eLitmus) with high-speed mental math and shortcut strategies.',
+    responsibilities: [
+      'Conduct daily speed problem-solving webinars across multiple college batches.',
+      'Create high-yield question sets and timed diagnostic mock tests.',
+      'Identify speed bottlenecks and teach shortcut reasoning frameworks.'
+    ],
+    requirements: [
+      'Top percentiles in CAT, GRE, or national competitive aptitude exams.',
+      'Demonstrated experience boosting student clearing rates in placement tests.',
+      'High-energy, engaging online delivery style.'
+    ],
+    openings: 5
+  },
+  {
+    id: 'job-7',
+    title: 'Campus Institutional Sales Manager',
+    domain: 'Sales',
+    type: 'Full-time',
+    location: 'India, Karnataka (Bangalore / Onsite)',
+    locationCategory: 'Bangalore',
+    salary: '₹8,00,000 - ₹14,00,000 / year',
+    postedDate: '3 days ago',
+    postedDaysAgo: 3,
+    skills: ['B2B Sales', 'EdTech', 'Campus Outreach', 'College TPO Relations', 'Lead Generation', 'Contract Negotiation'],
+    summary: 'Expand Grow360 placement infrastructure footprint across leading university colleges, polytechnics, and engineering institutions across South India.',
+    responsibilities: [
+      'Partner with College Directors, Deans, and TPOs to integrate Grow360 training platforms.',
+      'Manage the institutional sales pipeline from discovery demos to contract closure.',
+      'Coordinate with academic operations for smooth campus onboarding.'
+    ],
+    requirements: [
+      '3+ years B2B institutional sales experience in Higher Education or EdTech.',
+      'Established network with engineering college placement directors.',
+      'Excellent negotiation and relationship-building skills.'
+    ],
+    openings: 2
   },
   {
     id: 'job-8',
-    title: 'DSA + Aptitude Instructor',
+    title: 'Python & AI/ML Curriculum Specialist',
     domain: 'Tech',
     type: 'Full-time',
-    location: 'India, Maharashtra (Kolhapur / Hybrid)',
+    location: 'Remote',
     locationCategory: 'Remote',
-    salary: '₹4,50,000 - ₹6,50,000 / year',
-    postedDate: '30 days ago',
-    postedDaysAgo: 20,
-    skills: ['DSA', 'Quantitative Aptitude', 'Logical Reasoning', 'C++', 'Java', 'Problem Solving'],
-    summary: 'Deliver blended training covering foundational algorithmic thinking, data structures, and quantitative aptitude for first-round university placement tests.',
+    salary: '₹7,50,000 - ₹12,00,000 / year',
+    postedDate: '24 hrs ago',
+    postedDaysAgo: 1,
+    skills: ['Python', 'PyTorch', 'TensorFlow', 'Scikit-Learn', 'GenAI', 'Prompt Engineering', 'LangChain', 'Computer Vision'],
+    summary: 'Design cutting-edge machine learning and applied Generative AI projects that help college students stand out during tech placement drives.',
     responsibilities: [
-      'Cover aptitude tricks, speed math, logical puzzles, and fundamental coding.',
-      'Conduct timed mock exams replicating TCS NQT, Capgemini, and Infosys formats.',
-      'Provide targeted weak-area remediation for students.'
+      'Build hands-on ML and LLM application workshops for campus cohorts.',
+      'Mentor students on publishing open-source models, Hugging Face spaces, and AI apps.',
+      'Evaluate capstone ML implementations and guide architecture refinements.'
     ],
     requirements: [
-      'Solid command over quantitative aptitude and foundational DSA.',
-      'Proven ability to explain complex mathematical logic with simplicity.',
-      'Enthusiastic and motivating classroom presence.'
+      'Strong foundation in Python, mathematics for ML, and modern neural architectures.',
+      'Experience building with LangChain, OpenAI APIs, or open-source LLMs.',
+      'Passionate about simplifying complex concepts for undergraduates.'
     ],
     openings: 2
   },
   {
     id: 'job-9',
-    title: 'DSA + React.js Instructor',
+    title: 'Frontend React Development Instructor',
     domain: 'Tech',
-    type: 'Full-time',
-    location: 'India, Uttar Pradesh (Lucknow / Remote)',
+    type: 'Part-time',
+    location: 'Remote',
     locationCategory: 'Remote',
-    salary: '₹5,00,000 - ₹8,00,000 / year',
-    postedDate: '30 days ago',
-    postedDaysAgo: 25,
-    skills: ['DSA', 'React.js', 'JavaScript', 'TypeScript', 'Frontend Architecture', 'Redux', 'Live Coding'],
-    summary: 'Teach modern frontend engineering alongside foundational data structures to prepare students for modern frontend and full-stack SDE hiring tracks.',
+    salary: '₹40,000 - ₹75,000 / month',
+    postedDate: '7 days ago',
+    postedDaysAgo: 7,
+    skills: ['React.js', 'JavaScript ES6+', 'HTML5', 'CSS3', 'TailwindCSS', 'Redux Toolkit', 'REST APIs', 'UI/UX Principles'],
+    summary: 'Teach frontend engineering fundamentals, UI state management, and modern component architecture in flexible evening/weekend batches.',
     responsibilities: [
-      'Instruct students on React component lifecycle, custom hooks, and modern JavaScript ES6+.',
-      'Integrate frontend system design and coding mock sessions.',
+      'Conduct live component breakdown walkthroughs and code reviews.',
+      'Teach industry best practices for accessibility, performance, and responsive layout.',
       'Guide students in building responsive, production-ready portfolio projects.'
     ],
     requirements: [
@@ -319,14 +321,13 @@ function mapSupabaseJob(row: any): JobOpening {
           return val.slice(1, -1).split(',').map((s: string) => s.replace(/^"|"$/g, '').trim());
         }
       }
-      return [val];
     }
     return [];
   };
 
   return {
     id: row.id,
-    title: row.title || 'Untitled Role',
+    title: row.title || 'Instructor / Mentor Role',
     domain: (row.domain as JobOpening['domain']) || 'Tech',
     type: (row.job_type || row.type as JobOpening['type']) || 'Full-time',
     location: row.location || 'Remote',
@@ -355,9 +356,8 @@ export function MentorJobPortal() {
   const [selectedLocation, setSelectedLocation] = useState<string>('All');
   const [selectedSkill, setSelectedSkill] = useState<string>('All');
 
-  // Modal / Drawer States
+  // Selected Job for Full Page View
   const [selectedJob, setSelectedJob] = useState<JobOpening | null>(null);
-  const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
   const [applySuccess, setApplySuccess] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
@@ -422,11 +422,11 @@ export function MentorJobPortal() {
       // Search match
       if (searchQuery.trim()) {
         const q = searchQuery.toLowerCase();
-        const matchesTitle = job.title.toLowerCase().includes(q);
-        const matchesSkills = job.skills.some(s => s.toLowerCase().includes(q));
-        const matchesLocation = job.location.toLowerCase().includes(q);
-        const matchesDomain = job.domain.toLowerCase().includes(q);
-        if (!matchesTitle && !matchesSkills && !matchesLocation && !matchesDomain) {
+        const titleMatch = job.title.toLowerCase().includes(q);
+        const descMatch = job.summary.toLowerCase().includes(q);
+        const locationMatch = job.location.toLowerCase().includes(q);
+        const skillMatch = job.skills.some(s => s.toLowerCase().includes(q));
+        if (!titleMatch && !descMatch && !locationMatch && !skillMatch) {
           return false;
         }
       }
@@ -486,9 +486,24 @@ export function MentorJobPortal() {
 
   const handleOpenJobApply = (job: JobOpening) => {
     setSelectedJob(job);
-    setIsApplyModalOpen(true);
     setApplySuccess(false);
     setSubmitError('');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    document.documentElement.scrollTop = 0;
+  };
+
+  const handleCloseJobDetail = () => {
+    setSelectedJob(null);
+    setApplySuccess(false);
+    setSubmitError('');
+    setApplicantName('');
+    setApplicantEmail('');
+    setApplicantPhone('');
+    setResumeFileName('');
+    setResumeFileObject(null);
+    setResumeLink('');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    document.documentElement.scrollTop = 0;
   };
 
   const handleFormSubmit = async (e: React.FormEvent) => {
@@ -571,297 +586,533 @@ export function MentorJobPortal() {
     }
   };
 
-  const handleCloseModal = () => {
-    setIsApplyModalOpen(false);
-    setSelectedJob(null);
-    setApplySuccess(false);
-    setApplicantName('');
-    setApplicantEmail('');
-    setApplicantPhone('');
-    setResumeFileName('');
-    setResumeFileObject(null);
-    setResumeLink('');
-    setSubmitError('');
-  };
-
-  return (
-    <section id="open-roles" className="py-20 bg-[#07070A] border-t border-white/10 relative">
-      {/* Background radial glow */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-br from-[#FF4500]/10 via-[#FFA000]/5 to-transparent blur-[160px] pointer-events-none rounded-full" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        {/* ========================================================
-            01. SECTION HERO BANNER (Layout ref: Top Banner with World Map)
-        ======================================================== */}
-        <div className="rounded-3xl bg-gradient-to-br from-[#111116] via-[#0E0E14] to-[#0A0A0D] border border-white/10 p-8 sm:p-10 mb-12 shadow-2xl relative overflow-hidden">
+  // =========================================================================
+  // VIEW A: DEDICATED FULL-PAGE JOB DESCRIPTION & APPLICATION VIEW
+  // =========================================================================
+  if (selectedJob) {
+    return (
+      <section className="py-8 bg-[#07070A] text-slate-100 min-h-screen">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          {/* Accent corner light */}
-          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-[#FF4500]/15 via-transparent to-transparent pointer-events-none" />
+          {/* Top Breadcrumb & Navigation Bar */}
+          <div className="flex flex-wrap items-center justify-between gap-4 mb-8 pb-6 border-b border-white/10">
+            <button
+              onClick={handleCloseJobDetail}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 text-xs font-semibold text-slate-300 hover:text-white border border-white/10 transition-all cursor-pointer group"
+            >
+              <ArrowLeft size={15} className="transition-transform group-hover:-translate-x-1" />
+              <span>Back to All Openings</span>
+            </button>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="flex items-center gap-2 text-xs font-mono">
+              <span className="text-slate-500">Careers</span>
+              <span className="text-slate-600">/</span>
+              <span className="text-slate-400">{selectedJob.domain}</span>
+              <span className="text-slate-600">/</span>
+              <span className="text-[#00B4D8] font-bold truncate max-w-[200px] sm:max-w-none">{selectedJob.title}</span>
+            </div>
+          </div>
+
+          {/* Main 2-Column Dedicated Page Layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             
-            {/* Left Content */}
-            <div className="lg:col-span-7">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF4500]/10 border border-[#FF4500]/25 text-[#FFA000] text-xs font-mono font-semibold mb-4">
-                <Sparkles size={13} className="text-[#FF4500]" />
-                <span>Careers & Mentor Openings</span>
+            {/* ── LEFT COLUMN (7 Cols): FULL JOB DESCRIPTION & REQUIREMENTS ── */}
+            <div className="lg:col-span-7 space-y-8">
+              
+              {/* Job Header Hero Box */}
+              <div className="p-6 sm:p-8 rounded-3xl bg-[#111116] border border-white/10 shadow-xl relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-[#00B4D8]/10 via-transparent to-transparent pointer-events-none blur-2xl" />
+
+                {/* Domain & Type Badges */}
+                <div className="flex flex-wrap items-center gap-2 mb-4">
+                  <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-[#FF4500]/15 text-[#FFA000] border border-[#FF4500]/30">
+                    {selectedJob.domain}
+                  </span>
+                  <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+                    {selectedJob.type}
+                  </span>
+                  <span className="text-xs font-mono px-3 py-1 rounded-full bg-white/5 text-slate-300 border border-white/10">
+                    {selectedJob.openings} Openings Available
+                  </span>
+                </div>
+
+                <h1 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight font-[family-name:var(--font-display)] mb-4">
+                  {selectedJob.title}
+                </h1>
+
+                <div className="flex flex-wrap items-center gap-5 text-xs sm:text-sm font-medium text-slate-300 pt-2 border-t border-white/5">
+                  <div className="flex items-center gap-1.5 text-slate-400">
+                    <MapPin size={16} className="text-[#38BDF8]" />
+                    <span>{selectedJob.location}</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 font-mono text-[#FFA000]">
+                    <IndianRupee size={16} />
+                    <span className="font-bold text-white">{selectedJob.salary}</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-slate-400 font-mono text-xs">
+                    <Calendar size={14} className="text-slate-500" />
+                    <span>Posted {selectedJob.postedDate}</span>
+                  </div>
+                </div>
               </div>
 
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-[1.15] font-[family-name:var(--font-display)] mb-4">
-                Elevate Your Career <br />
-                <span className="bg-gradient-to-r from-[#FF4500] via-[#FF7A00] to-[#FFA000] bg-clip-text text-transparent">
-                  With Us
-                </span>
-              </h2>
+              {/* 01. About The Role */}
+              <div className="p-6 sm:p-8 rounded-3xl bg-[#111116] border border-white/10 shadow-lg">
+                <h3 className="text-sm font-mono uppercase tracking-wider text-[#00B4D8] font-bold mb-3 flex items-center gap-2">
+                  <Briefcase size={16} />
+                  <span>About The Role &amp; Mission</span>
+                </h3>
+                <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
+                  {selectedJob.summary}
+                </p>
+              </div>
 
-              <p className="text-sm sm:text-base text-slate-300 max-w-xl leading-relaxed">
-                Every great engineer starts with the right people. Find your place here as a full-time technical instructor, campus trainer, or flexible weekend mentor.
-              </p>
+              {/* 02. Key Responsibilities */}
+              <div className="p-6 sm:p-8 rounded-3xl bg-[#111116] border border-white/10 shadow-lg">
+                <h3 className="text-sm font-mono uppercase tracking-wider text-[#FFA000] font-bold mb-4 flex items-center gap-2">
+                  <Layers size={16} />
+                  <span>Key Responsibilities</span>
+                </h3>
+                <ul className="space-y-3">
+                  {selectedJob.responsibilities.map((resp, i) => (
+                    <li key={i} className="flex items-start gap-3 text-xs sm:text-sm text-slate-300 leading-relaxed">
+                      <div className="w-5 h-5 rounded-full bg-orange-500/10 border border-orange-500/20 text-[#FFA000] flex items-center justify-center shrink-0 mt-0.5 font-mono text-[10px]">
+                        ✓
+                      </div>
+                      <span>{resp}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-              {/* Quick stats pills */}
-              <div className="flex flex-wrap items-center gap-3 mt-6 pt-6 border-t border-white/10 text-xs font-medium text-slate-300">
-                <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span className="font-bold text-white">{JOB_LISTINGS.length}+ Active Openings</span>
-                </div>
-                <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10">
-                  <Globe size={13} className="text-[#38BDF8]" />
-                  <span>Remote & Campus Hybrid</span>
-                </div>
-                <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10">
-                  <IndianRupee size={13} className="text-[#FFA000]" />
-                  <span>Transparent Compensation</span>
+              {/* 03. Candidate Requirements */}
+              <div className="p-6 sm:p-8 rounded-3xl bg-[#111116] border border-white/10 shadow-lg">
+                <h3 className="text-sm font-mono uppercase tracking-wider text-emerald-400 font-bold mb-4 flex items-center gap-2">
+                  <Award size={16} />
+                  <span>Candidate Requirements &amp; Background</span>
+                </h3>
+                <ul className="space-y-3">
+                  {selectedJob.requirements.map((req, i) => (
+                    <li key={i} className="flex items-start gap-3 text-xs sm:text-sm text-slate-300 leading-relaxed">
+                      <div className="w-5 h-5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5 font-mono text-[10px]">
+                        ★
+                      </div>
+                      <span>{req}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* 04. Required Tech Stack & Skills */}
+              <div className="p-6 sm:p-8 rounded-3xl bg-[#111116] border border-white/10 shadow-lg">
+                <h3 className="text-sm font-mono uppercase tracking-wider text-slate-400 font-bold mb-4">
+                  Required Tech Stack &amp; Keywords
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {selectedJob.skills.map((skill, sIdx) => (
+                    <span
+                      key={sIdx}
+                      className="text-xs font-mono px-3 py-1.5 rounded-xl bg-[#09090D] text-slate-200 border border-white/10 hover:border-[#00B4D8]/50 transition-colors"
+                    >
+                      {skill}
+                    </span>
+                  ))}
                 </div>
               </div>
+
+              {/* 05. Why Join Grow360? */}
+              <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-[#161622] to-[#0E0E14] border border-white/15 shadow-xl">
+                <h3 className="text-base font-bold text-white mb-2 font-[family-name:var(--font-display)]">
+                  Why Mentor with Grow360?
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-300 mb-4 leading-relaxed">
+                  Join hundreds of engineers and educators transforming placement outcomes across tier-2/3 colleges in India.
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-300">
+                  <div className="p-3 rounded-xl bg-white/5 border border-white/10">
+                    <strong className="text-white block mb-1">Weekly Honorariums</strong>
+                    <span>Direct bank payouts credited promptly with zero operational friction.</span>
+                  </div>
+                  <div className="p-3 rounded-xl bg-white/5 border border-white/10">
+                    <strong className="text-white block mb-1">100% Flexible Hours</strong>
+                    <span>Choose weekend or evening slots that fit your professional calendar.</span>
+                  </div>
+                </div>
+              </div>
+
             </div>
 
-            {/* Right Visualizer: Stylized Map & Mentor Nodes */}
-            <div className="lg:col-span-5 relative hidden sm:block">
-              <div className="relative rounded-2xl bg-[#14141C]/80 border border-white/10 p-6 overflow-hidden">
-                
-                {/* Stylized world dot matrix grid */}
-                <div className="h-44 w-full relative flex items-center justify-center">
-                  <svg className="w-full h-full opacity-30" viewBox="0 0 400 180" fill="none">
-                    <pattern id="dotGrid" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse">
-                      <circle cx="2" cy="2" r="1.5" fill="#FF4500" fillOpacity="0.6" />
-                    </pattern>
-                    <rect width="400" height="180" fill="url(#dotGrid)" />
-                    {/* Connection arcs */}
-                    <path d="M 60 90 Q 140 20 220 70 T 350 110" stroke="#FF4500" strokeWidth="1.5" strokeDasharray="4 4" fill="none" opacity="0.6" />
-                    <path d="M 100 130 Q 200 150 320 60" stroke="#38BDF8" strokeWidth="1.5" strokeDasharray="3 3" fill="none" opacity="0.5" />
-                  </svg>
+            {/* ── RIGHT COLUMN (5 Cols): DEDICATED STICKY APPLICATION FORM ── */}
+            <div className="lg:col-span-5 lg:sticky lg:top-24">
+              <div className="rounded-3xl bg-[#111116] border border-white/15 p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-48 h-48 bg-[#FF4500]/10 blur-3xl pointer-events-none rounded-full" />
 
-                  {/* Mentor avatar pin 1 */}
-                  <div className="absolute top-4 left-10 flex items-center gap-2 bg-[#1C1C26] border border-orange-500/40 rounded-full px-2 py-1 shadow-lg shadow-orange-500/20">
-                    <img
-                      src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80"
-                      alt="Mentor"
-                      className="w-6 h-6 rounded-full object-cover border border-white/20"
-                    />
-                    <span className="text-[10px] font-mono font-bold text-white">Noida HQ</span>
-                  </div>
-
-                  {/* Mentor avatar pin 2 */}
-                  <div className="absolute bottom-6 left-28 flex items-center gap-2 bg-[#1C1C26] border border-blue-500/40 rounded-full px-2 py-1 shadow-lg shadow-blue-500/20">
-                    <img
-                      src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80"
-                      alt="Mentor"
-                      className="w-6 h-6 rounded-full object-cover border border-white/20"
-                    />
-                    <span className="text-[10px] font-mono font-bold text-white">Phagwara</span>
-                  </div>
-
-                  {/* Mentor avatar pin 3 */}
-                  <div className="absolute top-10 right-8 flex items-center gap-2 bg-[#1C1C26] border border-emerald-500/40 rounded-full px-2 py-1 shadow-lg shadow-emerald-500/20">
-                    <img
-                      src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=100&q=80"
-                      alt="Mentor"
-                      className="w-6 h-6 rounded-full object-cover border border-white/20"
-                    />
-                    <span className="text-[10px] font-mono font-bold text-white">Remote</span>
-                  </div>
-
-                  {/* Center live pulse */}
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center pointer-events-none">
-                    <div className="w-12 h-12 rounded-full bg-[#FF4500]/20 border border-[#FF4500]/40 flex items-center justify-center animate-ping absolute inset-0 m-auto" />
-                    <div className="w-8 h-8 rounded-full bg-[#FF4500] text-white flex items-center justify-center text-xs font-bold shadow-lg shadow-orange-500/50 relative z-10">
-                      TJ
+                {applySuccess ? (
+                  /* Success Notification State */
+                  <div className="text-center py-10 px-2">
+                    <div className="w-16 h-16 rounded-3xl bg-emerald-500/15 border border-emerald-500/40 flex items-center justify-center text-emerald-400 mx-auto mb-6 shadow-xl shadow-emerald-500/20">
+                      <CheckCircle2 size={36} />
                     </div>
+                    <h3 className="text-2xl font-black text-white mb-2 font-[family-name:var(--font-display)]">
+                      Application Submitted!
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-300 max-w-sm mx-auto mb-6 leading-relaxed">
+                      Thank you for applying for <span className="text-white font-semibold">{selectedJob.title}</span>. Our team will review your profile and contact you within 24–48 hours.
+                    </p>
+                    <button
+                      onClick={handleCloseJobDetail}
+                      className="btn-pill-primary py-3 px-8 text-xs font-bold cursor-pointer w-full justify-center"
+                    >
+                      <span>Return to All Openings</span>
+                    </button>
                   </div>
-                </div>
+                ) : (
+                  /* Main Application Form */
+                  <div>
+                    <div className="mb-6">
+                      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#00B4D8]/10 border border-[#00B4D8]/30 text-[#00B4D8] text-xs font-mono font-semibold mb-2">
+                        <Sparkles size={13} />
+                        <span>Direct Application</span>
+                      </div>
+                      <h3 className="text-xl font-bold text-white tracking-tight font-[family-name:var(--font-display)]">
+                        Apply for this Role
+                      </h3>
+                      <p className="text-xs text-slate-400 mt-1">
+                        Submit your details below. Our team responds within 24-48 hours.
+                      </p>
+                    </div>
 
-                <div className="pt-3 border-t border-white/10 flex items-center justify-between text-[11px] font-mono text-slate-400">
-                  <span>Mentors active in 18+ cities</span>
-                  <span className="text-emerald-400 font-bold">● Hiring actively</span>
-                </div>
+                    {submitError && (
+                      <div className="mb-4 p-3.5 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-400 text-xs flex items-center gap-2">
+                        <AlertCircle size={15} className="shrink-0 text-rose-400" />
+                        <span>{submitError}</span>
+                      </div>
+                    )}
+
+                    <form onSubmit={handleFormSubmit} className="space-y-4">
+                      {/* Full Name */}
+                      <div>
+                        <label className="block text-xs font-medium text-slate-300 mb-1.5">
+                          Full Name <span className="text-[#FF4500]">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          value={applicantName}
+                          onChange={(e) => setApplicantName(e.target.value)}
+                          placeholder="e.g. Rahul Sharma"
+                          className="w-full px-4 py-3 rounded-2xl bg-[#09090D] border border-white/10 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:border-[#00B4D8] transition-colors"
+                        />
+                      </div>
+
+                      {/* Email Address */}
+                      <div>
+                        <label className="block text-xs font-medium text-slate-300 mb-1.5">
+                          Email Address <span className="text-[#FF4500]">*</span>
+                        </label>
+                        <input
+                          type="email"
+                          required
+                          value={applicantEmail}
+                          onChange={(e) => setApplicantEmail(e.target.value)}
+                          placeholder="rahul@example.com"
+                          className="w-full px-4 py-3 rounded-2xl bg-[#09090D] border border-white/10 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:border-[#00B4D8] transition-colors"
+                        />
+                      </div>
+
+                      {/* Phone Number */}
+                      <div>
+                        <label className="block text-xs font-medium text-slate-300 mb-1.5">
+                          Phone Number <span className="text-[#FF4500]">*</span>
+                        </label>
+                        <input
+                          type="tel"
+                          required
+                          value={applicantPhone}
+                          onChange={(e) => setApplicantPhone(e.target.value)}
+                          placeholder="e.g. +91 98765 43210"
+                          className="w-full px-4 py-3 rounded-2xl bg-[#09090D] border border-white/10 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:border-[#00B4D8] transition-colors"
+                        />
+                      </div>
+
+                      {/* Resume Upload (File OR Link - Either is accepted) */}
+                      <div>
+                        <div className="flex items-center justify-between mb-1.5">
+                          <label className="block text-xs font-medium text-slate-300">
+                            Resume / CV <span className="text-[#FF4500]">*</span>
+                          </label>
+                          <span className="text-[10px] font-mono text-[#FFA000] bg-[#FFA000]/10 border border-[#FFA000]/20 px-2 py-0.5 rounded-full">
+                            File OR Link
+                          </span>
+                        </div>
+                        
+                        <div className="space-y-2">
+                          {/* File Upload Button */}
+                          <label className={`w-full px-4 py-3 rounded-2xl border ${
+                            resumeFileName 
+                              ? 'bg-emerald-500/10 border-emerald-500/40 text-emerald-300' 
+                              : 'bg-[#09090D] border-dashed border-white/20 hover:border-[#00B4D8]/50 text-slate-300'
+                          } text-xs flex items-center justify-between cursor-pointer transition-all group`}>
+                            <div className="flex items-center gap-2 overflow-hidden">
+                              <Upload size={15} className={`${resumeFileName ? 'text-emerald-400' : 'text-[#00B4D8]'} shrink-0 group-hover:scale-110 transition-transform`} />
+                              <span className="truncate">
+                                {resumeFileName ? resumeFileName : 'Upload PDF / Word Resume'}
+                              </span>
+                            </div>
+                            <span className="text-[10px] font-mono font-bold text-slate-400 bg-white/5 px-2 py-1 rounded-lg shrink-0">
+                              {resumeFileName ? 'Change' : 'Browse'}
+                            </span>
+                            <input
+                              type="file"
+                              accept=".pdf,.doc,.docx"
+                              className="hidden"
+                              onChange={(e) => {
+                                const file = e.target.files?.[0];
+                                if (file) {
+                                  setResumeFileName(file.name);
+                                  setResumeFileObject(file);
+                                }
+                              }}
+                            />
+                          </label>
+
+                          {/* Or Link Input */}
+                          <input
+                            type="url"
+                            placeholder="Or paste Google Drive / Portfolio Link..."
+                            value={resumeLink}
+                            onChange={(e) => setResumeLink(e.target.value)}
+                            className={`w-full px-4 py-3 rounded-2xl bg-[#09090D] border ${
+                              resumeLink.trim()
+                                ? 'border-emerald-500/40 text-emerald-300 focus:border-emerald-500'
+                                : 'border-white/10 text-white placeholder:text-slate-600 focus:border-[#00B4D8]'
+                            } text-xs focus:outline-none transition-all`}
+                          />
+                        </div>
+
+                        {/* Confirmation Badge */}
+                        {(resumeFileName || resumeLink.trim()) && (
+                          <div className="mt-2 flex items-center gap-1.5 text-[11px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-xl">
+                            <CheckCircle2 size={13} className="shrink-0" />
+                            <span className="truncate">
+                              {resumeFileName && resumeLink.trim()
+                                ? `Resume: File (${resumeFileName}) & Link provided`
+                                : resumeFileName
+                                ? `Attached File: ${resumeFileName}`
+                                : `Resume Link: ${resumeLink.trim()}`}
+                            </span>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Submit Button */}
+                      <div className="pt-2">
+                        <button
+                          type="submit"
+                          disabled={isSubmitting || (!resumeFileName && !resumeLink.trim())}
+                          className="w-full btn-pill-primary py-4 text-xs font-bold cursor-pointer justify-center flex items-center gap-2 shadow-lg shadow-orange-500/20 disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                          {isSubmitting ? (
+                            <>
+                              <Loader2 size={15} className="animate-spin" />
+                              <span>Submitting Application to Database...</span>
+                            </>
+                          ) : (
+                            <>
+                              <Send size={14} />
+                              <span>Submit Application for {selectedJob.title}</span>
+                            </>
+                          )}
+                        </button>
+                      </div>
+
+                      <p className="text-[10px] text-slate-500 text-center font-mono pt-1">
+                        Your application is securely submitted to Grow360 Talent Guild.
+                      </p>
+                    </form>
+                  </div>
+                )}
+
               </div>
             </div>
 
           </div>
+
+        </div>
+      </section>
+    );
+  }
+
+  // =========================================================================
+  // VIEW B: JOB LISTINGS GRID WITH SEARCH & FILTERS (When no job is selected)
+  // =========================================================================
+  return (
+    <section id="open-roles" className="py-8 bg-[#07070A] text-slate-100 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* ========================================================
+            01. SEARCH & CATEGORY FILTER ROW
+        ======================================================== */}
+        <div className="mb-10 space-y-4">
+          
+          {/* Main Search Bar & Quick Counters */}
+          <div className="flex flex-col md:flex-row items-stretch md:items-center gap-3">
+            <div className="relative flex-1">
+              <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search by job title, skill (e.g. Next.js, DSA, C++, AWS), or location..."
+                className="w-full pl-11 pr-10 py-3.5 rounded-2xl bg-[#111116] border border-white/10 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-[#00B4D8] transition-all shadow-inner"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs font-mono text-slate-500 hover:text-white"
+                >
+                  Clear
+                </button>
+              )}
+            </div>
+
+            {/* Clear All Filters Button */}
+            {hasActiveFilters && (
+              <button
+                onClick={handleClearFilters}
+                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl bg-white/5 hover:bg-white/10 text-xs font-semibold text-[#FFA000] border border-[#FFA000]/30 transition-all cursor-pointer"
+              >
+                <RotateCcw size={14} />
+                <span>Reset Filters</span>
+              </button>
+            )}
+          </div>
+
+          {/* Quick Domain Filter Pills */}
+          <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+            <span className="text-xs font-mono text-slate-500 uppercase tracking-wider shrink-0 mr-1 hidden sm:inline">
+              Domain:
+            </span>
+            {DOMAINS.map((domain) => {
+              const isActive = selectedDomain === domain;
+              return (
+                <button
+                  key={domain}
+                  onClick={() => setSelectedDomain(domain)}
+                  className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer shrink-0 ${
+                    isActive
+                      ? 'bg-gradient-to-r from-[#00B4D8] to-[#0077B6] text-white shadow-md shadow-cyan-500/20'
+                      : 'bg-[#111116] text-slate-400 hover:text-white border border-white/10'
+                  }`}
+                >
+                  {domain}
+                </button>
+              );
+            })}
+          </div>
+
         </div>
 
         {/* ========================================================
-            02. MAIN TWO-COLUMN SECTION: FILTERS & JOB LISTINGS
+            02. MAIN TWO-COLUMN LAYOUT: SIDEBAR FILTERS + JOB CARDS
         ======================================================== */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* ==========================================
-              LEFT COLUMN: FILTERS SIDEBAR
+              LEFT SIDEBAR: DETAILED CRITERIA FILTERS
           ========================================== */}
           <div className="lg:col-span-4 space-y-6">
-            <div className="sticky top-24 rounded-3xl bg-[#111116] border border-white/10 p-6 shadow-xl backdrop-blur-md">
+            <div className="rounded-3xl bg-[#111116] border border-white/10 p-6 shadow-xl space-y-6">
               
-              {/* Header */}
-              <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-6">
-                <div className="flex items-center gap-2 text-white font-bold text-base font-[family-name:var(--font-display)]">
-                  <SlidersHorizontal size={18} className="text-[#FFA000]" />
-                  <span>Filters</span>
-                  {hasActiveFilters && (
-                    <span className="w-2 h-2 rounded-full bg-[#FF4500]" />
-                  )}
+              <div className="flex items-center justify-between pb-4 border-b border-white/10">
+                <div className="flex items-center gap-2 text-white font-bold text-sm">
+                  <SlidersHorizontal size={16} className="text-[#00B4D8]" />
+                  <span>Filter Opportunities</span>
                 </div>
-
                 {hasActiveFilters && (
                   <button
                     onClick={handleClearFilters}
-                    className="text-xs text-slate-400 hover:text-[#FFA000] flex items-center gap-1 transition-colors cursor-pointer"
+                    className="text-[11px] font-mono text-slate-400 hover:text-[#FFA000] cursor-pointer"
                   >
-                    <RotateCcw size={12} />
-                    <span>Clear</span>
+                    Clear All
                   </button>
                 )}
               </div>
 
-              {/* 1. Search Box */}
-              <div className="mb-6">
-                <div className="relative">
-                  <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
-                  <input
-                    type="text"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Search job title, skills..."
-                    className="w-full pl-10 pr-9 py-2.5 rounded-xl bg-[#09090D] border border-white/10 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-[#FF4500] transition-colors"
-                  />
-                  {searchQuery && (
+              {/* 1. Employment Type Filter */}
+              <div>
+                <label className="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-2.5 font-bold">
+                  Job Type
+                </label>
+                <div className="space-y-1.5">
+                  {EMPLOYMENT_TYPES.map((type) => (
                     <button
-                      onClick={() => setSearchQuery('')}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white"
+                      key={type}
+                      onClick={() => setSelectedType(type)}
+                      className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs transition-all text-left cursor-pointer ${
+                        selectedType === type
+                          ? 'bg-white/10 text-white font-bold border border-white/20'
+                          : 'text-slate-400 hover:bg-white/5 hover:text-slate-200'
+                      }`}
                     >
-                      <X size={14} />
+                      <span>{type}</span>
+                      {selectedType === type && <CheckCircle2 size={13} className="text-[#00B4D8]" />}
                     </button>
-                  )}
+                  ))}
                 </div>
               </div>
 
-              {/* 2. Domain Filter */}
-              <div className="mb-6">
-                <label className="text-[11px] font-mono uppercase tracking-wider text-slate-400 block mb-2.5 font-bold">
-                  Domain
-                </label>
-                <div className="flex flex-wrap gap-1.5">
-                  {DOMAINS.map((domain) => {
-                    const isSelected = selectedDomain === domain;
-                    return (
-                      <button
-                        key={domain}
-                        onClick={() => setSelectedDomain(domain)}
-                        className={`text-xs px-3 py-1.5 rounded-lg border transition-all cursor-pointer ${
-                          isSelected
-                            ? 'bg-[#FF4500]/15 border-[#FF4500] text-[#FFA000] font-bold shadow-sm shadow-orange-500/20'
-                            : 'bg-[#09090D] border-white/10 text-slate-300 hover:border-white/20 hover:text-white'
-                        }`}
-                      >
-                        {domain}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* 3. Employment Type Filter */}
-              <div className="mb-6">
-                <label className="text-[11px] font-mono uppercase tracking-wider text-slate-400 block mb-2.5 font-bold">
-                  Employment Type
-                </label>
-                <div className="flex flex-wrap gap-1.5">
-                  {EMPLOYMENT_TYPES.map((type) => {
-                    const isSelected = selectedType === type;
-                    return (
-                      <button
-                        key={type}
-                        onClick={() => setSelectedType(type)}
-                        className={`text-xs px-3 py-1.5 rounded-lg border transition-all cursor-pointer ${
-                          isSelected
-                            ? 'bg-[#38BDF8]/15 border-[#38BDF8] text-[#38BDF8] font-bold shadow-sm shadow-blue-500/20'
-                            : 'bg-[#09090D] border-white/10 text-slate-300 hover:border-white/20 hover:text-white'
-                        }`}
-                      >
-                        {type}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* 4. Date Posted */}
-              <div className="mb-6">
-                <label className="text-[11px] font-mono uppercase tracking-wider text-slate-400 block mb-2.5 font-bold">
+              {/* 2. Date Posted Filter */}
+              <div>
+                <label className="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-2.5 font-bold">
                   Date Posted
                 </label>
-                <div className="flex flex-wrap gap-1.5">
-                  {DATE_POSTED_OPTIONS.map((opt) => {
-                    const isSelected = selectedDatePosted === opt.label;
-                    return (
-                      <button
-                        key={opt.label}
-                        onClick={() => setSelectedDatePosted(opt.label)}
-                        className={`text-xs px-2.5 py-1.5 rounded-lg border transition-all cursor-pointer ${
-                          isSelected
-                            ? 'bg-emerald-500/15 border-emerald-500 text-emerald-400 font-bold'
-                            : 'bg-[#09090D] border-white/10 text-slate-300 hover:border-white/20 hover:text-white'
-                        }`}
-                      >
-                        {opt.label}
-                      </button>
-                    );
-                  })}
+                <div className="grid grid-cols-2 gap-1.5">
+                  {DATE_POSTED_OPTIONS.map((opt) => (
+                    <button
+                      key={opt.label}
+                      onClick={() => setSelectedDatePosted(opt.label)}
+                      className={`px-3 py-2 rounded-xl text-xs font-mono transition-all text-center cursor-pointer ${
+                        selectedDatePosted === opt.label
+                          ? 'bg-[#00B4D8]/20 text-[#00B4D8] font-bold border border-[#00B4D8]/40'
+                          : 'bg-[#09090D] text-slate-400 hover:text-white border border-white/5'
+                      }`}
+                    >
+                      {opt.label}
+                    </button>
+                  ))}
                 </div>
               </div>
 
-              {/* 5. Location */}
-              <div className="mb-6">
-                <label className="text-[11px] font-mono uppercase tracking-wider text-slate-400 block mb-2.5 font-bold">
-                  Location
-                </label>
-                <div className="flex flex-wrap gap-1.5">
-                  {LOCATIONS.map((loc) => {
-                    const isSelected = selectedLocation === loc;
-                    return (
-                      <button
-                        key={loc}
-                        onClick={() => setSelectedLocation(loc)}
-                        className={`text-xs px-2.5 py-1.5 rounded-lg border transition-all cursor-pointer flex items-center gap-1 ${
-                          isSelected
-                            ? 'bg-[#FFA000]/15 border-[#FFA000] text-[#FFA000] font-bold'
-                            : 'bg-[#09090D] border-white/10 text-slate-300 hover:border-white/20 hover:text-white'
-                        }`}
-                      >
-                        <MapPin size={11} className={isSelected ? 'text-[#FFA000]' : 'text-slate-400'} />
-                        <span>{loc}</span>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* 6. Popular Skills Filter */}
+              {/* 3. Location Hub Filter */}
               <div>
-                <label className="text-[11px] font-mono uppercase tracking-wider text-slate-400 block mb-2.5 font-bold">
-                  Skills & Tech Stack
+                <label className="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-2.5 font-bold">
+                  Location / Hub
                 </label>
-                <div className="flex flex-wrap gap-1.5 max-h-36 overflow-y-auto pr-1">
+                <div className="space-y-1.5">
+                  {LOCATIONS.map((loc) => (
+                    <button
+                      key={loc}
+                      onClick={() => setSelectedLocation(loc)}
+                      className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs transition-all text-left cursor-pointer ${
+                        selectedLocation === loc
+                          ? 'bg-white/10 text-white font-bold border border-white/20'
+                          : 'text-slate-400 hover:bg-white/5 hover:text-slate-200'
+                      }`}
+                    >
+                      <span>{loc === 'All' ? 'All Locations' : loc}</span>
+                      {selectedLocation === loc && <CheckCircle2 size={13} className="text-[#00B4D8]" />}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* 4. Popular Skills Filter Tags */}
+              <div>
+                <label className="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-2.5 font-bold">
+                  Filter by Skill
+                </label>
+                <div className="flex flex-wrap gap-1.5">
                   {allSkills.map((skill) => {
                     const isSelected = selectedSkill === skill;
                     return (
@@ -870,7 +1121,7 @@ export function MentorJobPortal() {
                         onClick={() => setSelectedSkill(isSelected ? 'All' : skill)}
                         className={`text-[11px] px-2.5 py-1 rounded-md border font-mono transition-all cursor-pointer ${
                           isSelected
-                            ? 'bg-[#FF4500] border-[#FF4500] text-white font-bold'
+                            ? 'bg-[#00B4D8] border-[#00B4D8] text-white font-bold'
                             : 'bg-[#09090D] border-white/10 text-slate-400 hover:text-slate-200 hover:border-white/20'
                         }`}
                       >
@@ -894,9 +1145,9 @@ export function MentorJobPortal() {
               <div className="flex items-center gap-1.5">
                 <span>Showing <span className="font-bold text-white">{filteredJobs.length}</span> positions</span>
                 {isLoadingJobs && (
-                  <span className="inline-block w-3 h-3 border-2 border-orange-500/30 border-t-[#FF4500] rounded-full animate-spin" />
+                  <span className="inline-block w-3 h-3 border-2 border-cyan-500/30 border-t-[#00B4D8] rounded-full animate-spin" />
                 )}
-                {hasActiveFilters && <span className="text-[#FFA000] ml-1">(Filtered)</span>}
+                {hasActiveFilters && <span className="text-[#00B4D8] ml-1">(Filtered)</span>}
               </div>
               <div className="text-[11px] font-mono text-slate-400">
                 Sorted by: <span className="text-slate-200">Recommended</span>
@@ -934,59 +1185,79 @@ export function MentorJobPortal() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.2 }}
-                  className="rounded-3xl bg-[#111116] border border-white/10 hover:border-[#FF4500]/40 transition-all p-6 sm:p-7 shadow-lg group relative overflow-hidden"
+                  className="rounded-3xl bg-[#111116] border border-white/10 hover:border-[#00B4D8]/50 transition-all p-6 sm:p-7 shadow-lg group relative overflow-hidden"
                 >
                   {/* Subtle hover accent gradient */}
-                  <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-bl from-[#FF4500]/5 via-transparent to-transparent pointer-events-none group-hover:from-[#FF4500]/10 transition-colors" />
+                  <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-bl from-[#00B4D8]/5 via-transparent to-transparent pointer-events-none group-hover:from-[#00B4D8]/10 transition-colors" />
 
                   <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-4">
                     <div>
                       {/* Job Title & Badges */}
                       <div className="flex flex-wrap items-center gap-2 mb-2">
-                        <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-[#FFA000] transition-colors font-[family-name:var(--font-display)]">
+                        <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-[#00B4D8] transition-colors font-[family-name:var(--font-display)]">
                           {job.title}
                         </h3>
                         
                         <span className={`text-[10px] font-mono px-2.5 py-0.5 rounded-full font-bold border ${
-                          job.type === 'Full-time'
+                          job.domain === 'Tech' 
+                            ? 'bg-blue-500/10 text-blue-400 border-blue-500/30' 
+                            : job.domain === 'Non-Tech'
+                            ? 'bg-purple-500/10 text-purple-400 border-purple-500/30'
+                            : job.domain === 'Academics'
                             ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30'
-                            : job.type === 'Contract'
-                            ? 'bg-blue-500/10 text-blue-400 border-blue-500/30'
-                            : 'bg-purple-500/10 text-purple-400 border-purple-500/30'
+                            : 'bg-amber-500/10 text-amber-400 border-amber-500/30'
                         }`}>
+                          {job.domain}
+                        </span>
+
+                        <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-white/5 text-slate-300 border border-white/10 font-bold">
                           {job.type}
                         </span>
                       </div>
 
-                      {/* Meta info row */}
-                      <div className="flex flex-wrap items-center gap-y-2 gap-x-4 text-xs text-slate-300 font-medium">
-                        <div className="flex items-center gap-1.5 text-slate-400">
-                          <Briefcase size={14} className="text-[#FF4500]" />
-                          <span>{job.domain}</span>
-                        </div>
-
+                      {/* Location & Compensation */}
+                      <div className="flex flex-wrap items-center gap-4 text-xs font-medium text-slate-300">
                         <div className="flex items-center gap-1.5 text-slate-400">
                           <MapPin size={14} className="text-[#38BDF8]" />
                           <span>{job.location}</span>
                         </div>
 
-                        <div className="flex items-center gap-1.5 text-slate-300 font-mono">
-                          <IndianRupee size={14} className="text-[#FFA000]" />
+                        <div className="flex items-center gap-1 font-mono text-[#FFA000]">
+                          <IndianRupee size={14} />
                           <span className="font-bold text-white">{job.salary}</span>
+                        </div>
+
+                        <div className="text-[11px] text-slate-400 font-mono">
+                          {job.openings} {job.openings === 1 ? 'opening' : 'openings'}
                         </div>
                       </div>
                     </div>
 
-                    {/* Desktop View & Apply Button */}
-                    <div className="hidden sm:block shrink-0">
+                    {/* Action Button: View & Apply (Desktop) */}
+                    <div className="shrink-0 hidden sm:block">
                       <button
                         onClick={() => handleOpenJobApply(job)}
-                        className="btn-pill-primary text-xs py-2.5 px-5 font-bold cursor-pointer flex items-center gap-1.5 shadow-md shadow-orange-500/10"
+                        className="btn-pill-primary text-xs py-2.5 px-5 font-bold cursor-pointer shadow-md shadow-cyan-500/15 flex items-center gap-2 group/btn"
                       >
-                        <span>View Job & Apply</span>
-                        <ExternalLink size={13} />
+                        <span>View &amp; Apply</span>
+                        <ArrowRight size={14} className="group-hover/btn:translate-x-0.5 transition-transform" />
                       </button>
                     </div>
+                  </div>
+
+                  {/* Summary Snippet */}
+                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4">
+                    {job.summary}
+                  </p>
+
+                  {/* Responsibilities list snippet */}
+                  <div className="mb-4 space-y-1.5">
+                    {job.responsibilities.slice(0, 2).map((resp, rIdx) => (
+                      <div key={rIdx} className="text-xs text-slate-400 flex items-start gap-2">
+                        <span className="text-[#00B4D8] font-bold">›</span>
+                        <span className="leading-normal">{resp}</span>
+                      </div>
+                    ))}
                   </div>
 
                   {/* Skills tags list */}
@@ -1009,8 +1280,8 @@ export function MentorJobPortal() {
                         onClick={() => handleOpenJobApply(job)}
                         className="btn-pill-primary text-xs py-2 px-4 font-bold cursor-pointer flex items-center gap-1.5"
                       >
-                        <span>View & Apply</span>
-                        <ExternalLink size={12} />
+                        <span>View &amp; Apply</span>
+                        <ArrowRight size={12} />
                       </button>
                     </div>
                   </div>
@@ -1023,7 +1294,7 @@ export function MentorJobPortal() {
         </div>
 
         {/* ========================================================
-            03. CONNECT WITH US SECTION (Layout ref: Bottom Banner)
+            03. CONNECT WITH US SECTION (Bottom Banner)
         ======================================================== */}
         <div className="mt-16 rounded-3xl bg-gradient-to-br from-[#111116] via-[#0E0E14] to-[#0A0A0D] border border-white/10 p-8 sm:p-10 shadow-2xl relative overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
@@ -1048,7 +1319,7 @@ export function MentorJobPortal() {
               {/* Office & Website Details */}
               <div className="space-y-3 pt-2">
                 <div className="flex items-start gap-3 p-3 rounded-2xl bg-[#09090D] border border-white/10">
-                  <div className="w-8 h-8 rounded-xl bg-white/5 flex items-center justify-center text-[#FF4500] shrink-0">
+                  <div className="w-8 h-8 rounded-xl bg-white/5 flex items-center justify-center text-[#00B4D8] shrink-0">
                     <Building2 size={16} />
                   </div>
                   <div>
@@ -1062,7 +1333,7 @@ export function MentorJobPortal() {
                     <Globe size={16} />
                   </div>
                   <div>
-                    <div className="text-xs font-bold text-white">Website & Mentor Portal</div>
+                    <div className="text-xs font-bold text-white">Website &amp; Mentor Portal</div>
                     <a
                       href="https://grow360.in"
                       target="_blank"
@@ -1088,21 +1359,21 @@ export function MentorJobPortal() {
 
             {/* Right Interactive Campus Map / Hub Network Visualizer */}
             <div className="lg:col-span-6">
-              <div className="rounded-2xl bg-[#09090D] border border-white/10 p-6 relative overflow-hidden">
+              <div className="p-6 rounded-2xl bg-[#09090D] border border-white/10 relative overflow-hidden">
                 <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-4">
                   <div className="flex items-center gap-2">
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
-                    <span className="text-xs font-mono font-bold text-white">Campus Centers & Partner Nodes</span>
+                    <MapPin size={16} className="text-[#00B4D8]" />
+                    <span className="text-xs font-bold text-white">Active Training Hubs in India</span>
                   </div>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 text-slate-400 border border-white/10">
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
                     50+ Campuses
                   </span>
                 </div>
 
-                {/* Node Grid */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                {/* Hub Pills Grid */}
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
                   {[
-                    { city: 'Noida Hub', state: 'Uttar Pradesh', status: 'Active Training', color: '#FF4500' },
+                    { city: 'Noida Hub', state: 'Uttar Pradesh', status: 'Active Training', color: '#00B4D8' },
                     { city: 'Phagwara', state: 'Punjab Hub', status: 'Batch #14 Live', color: '#38BDF8' },
                     { city: 'Vadodara', state: 'Gujarat Hub', status: 'Analytics Lab', color: '#FFA000' },
                     { city: 'Bareilly', state: 'UP East Hub', status: 'Campus Program', color: '#22C55E' },
@@ -1131,283 +1402,6 @@ export function MentorJobPortal() {
         </div>
 
       </div>
-
-      {/* ========================================================
-          04. VIEW JOB DETAILS & APPLICATION MODAL
-      ======================================================== */}
-      <AnimatePresence>
-        {isApplyModalOpen && selectedJob && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={handleCloseModal}
-              className="fixed inset-0 bg-black/85 backdrop-blur-md"
-            />
-
-            {/* Modal Body */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-2xl rounded-3xl bg-[#111116] border border-white/15 p-6 sm:p-8 shadow-2xl shadow-black z-10 text-slate-100 max-h-[90vh] overflow-y-auto"
-            >
-              {/* Glow Accent */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-[#FF4500]/10 blur-[100px] pointer-events-none rounded-full" />
-
-              {/* Close Button */}
-              <button
-                onClick={handleCloseModal}
-                className="absolute top-6 right-6 p-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
-              >
-                <X size={20} />
-              </button>
-
-              {applySuccess ? (
-                /* Success State */
-                <div className="text-center py-10 px-4">
-                  <div className="w-16 h-16 rounded-3xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mx-auto mb-6 shadow-lg shadow-emerald-500/20">
-                    <CheckCircle2 size={36} />
-                  </div>
-                  <h3 className="text-2xl font-extrabold text-white mb-2 font-[family-name:var(--font-display)]">
-                    Application Submitted!
-                  </h3>
-                  <p className="text-sm text-slate-300 max-w-md mx-auto mb-6 leading-relaxed">
-                    Thank you for applying for <span className="text-white font-semibold">{selectedJob.title}</span>. Our engineering & talent team will review your profile and contact you within 24–48 hours.
-                  </p>
-                  <button
-                    onClick={handleCloseModal}
-                    className="btn-pill-primary py-3 px-8 text-xs font-bold cursor-pointer"
-                  >
-                    <span>Done</span>
-                  </button>
-                </div>
-              ) : (
-                <div>
-                  {/* Job Header */}
-                  <div className="mb-6 pb-6 border-b border-white/10">
-                    <div className="flex flex-wrap items-center gap-2 mb-2">
-                      <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded bg-[#FF4500]/15 text-[#FFA000] border border-[#FF4500]/30">
-                        {selectedJob.domain}
-                      </span>
-                      <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
-                        {selectedJob.type}
-                      </span>
-                    </div>
-
-                    <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight font-[family-name:var(--font-display)] mb-3">
-                      {selectedJob.title}
-                    </h3>
-
-                    <div className="flex flex-wrap items-center gap-4 text-xs font-medium text-slate-300">
-                      <div className="flex items-center gap-1 text-slate-400">
-                        <MapPin size={14} className="text-[#38BDF8]" />
-                        <span>{selectedJob.location}</span>
-                      </div>
-                      <div className="flex items-center gap-1 font-mono text-[#FFA000]">
-                        <IndianRupee size={14} />
-                        <span className="font-bold text-white">{selectedJob.salary}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Summary & Responsibilities */}
-                  <div className="space-y-4 mb-6 text-xs sm:text-sm text-slate-300">
-                    <div>
-                      <h4 className="text-xs font-mono uppercase tracking-wider text-slate-400 font-bold mb-1.5">
-                        About The Role
-                      </h4>
-                      <p className="leading-relaxed">{selectedJob.summary}</p>
-                    </div>
-
-                    <div>
-                      <h4 className="text-xs font-mono uppercase tracking-wider text-slate-400 font-bold mb-1.5">
-                        Key Responsibilities
-                      </h4>
-                      <ul className="space-y-1.5 list-disc list-inside text-slate-300">
-                        {selectedJob.responsibilities.map((r, i) => (
-                          <li key={i} className="leading-relaxed">{r}</li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div>
-                      <h4 className="text-xs font-mono uppercase tracking-wider text-slate-400 font-bold mb-1.5">
-                        Requirements & Skills
-                      </h4>
-                      <ul className="space-y-1.5 list-disc list-inside text-slate-300">
-                        {selectedJob.requirements.map((req, i) => (
-                          <li key={i} className="leading-relaxed">{req}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-
-                  {/* Quick Application Form (Name, Email, Phone, Resume) */}
-                  <div className="p-5 rounded-2xl bg-[#09090D] border border-white/10 mb-6">
-                    <h4 className="text-sm font-bold text-white mb-4 flex items-center gap-2">
-                      <Send size={15} className="text-[#FF4500]" />
-                      <span>Apply for this position</span>
-                    </h4>
-
-                    {submitError && (
-                      <div className="mb-4 p-3.5 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-400 text-xs flex items-center gap-2">
-                        <AlertCircle size={15} className="shrink-0 text-rose-400" />
-                        <span>{submitError}</span>
-                      </div>
-                    )}
-
-                    <form onSubmit={handleFormSubmit} className="space-y-4">
-                      {/* Row 1: Full Name & Email */}
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <div>
-                          <label className="block text-[11px] font-mono text-slate-400 mb-1">
-                            Full Name <span className="text-[#FF4500]">*</span>
-                          </label>
-                          <input
-                            type="text"
-                            required
-                            value={applicantName}
-                            onChange={(e) => setApplicantName(e.target.value)}
-                            placeholder="e.g. Rahul Sharma"
-                            className="w-full px-3.5 py-2.5 rounded-xl bg-[#111116] border border-white/10 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:border-[#FF4500]"
-                          />
-                        </div>
-
-                        <div>
-                          <label className="block text-[11px] font-mono text-slate-400 mb-1">
-                            Work / Personal Email <span className="text-[#FF4500]">*</span>
-                          </label>
-                          <input
-                            type="email"
-                            required
-                            value={applicantEmail}
-                            onChange={(e) => setApplicantEmail(e.target.value)}
-                            placeholder="rahul@example.com"
-                            className="w-full px-3.5 py-2.5 rounded-xl bg-[#111116] border border-white/10 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:border-[#FF4500]"
-                          />
-                        </div>
-                      </div>
-
-                      {/* Row 2: Phone Number */}
-                      <div>
-                        <label className="block text-[11px] font-mono text-slate-400 mb-1">
-                          Phone Number <span className="text-[#FF4500]">*</span>
-                        </label>
-                        <input
-                          type="tel"
-                          required
-                          value={applicantPhone}
-                          onChange={(e) => setApplicantPhone(e.target.value)}
-                          placeholder="e.g. +91 98765 43210"
-                          className="w-full px-3.5 py-2.5 rounded-xl bg-[#111116] border border-white/10 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:border-[#FF4500]"
-                        />
-                      </div>
-
-                      {/* Row 3: Resume (Upload File OR Paste Link - Either one is required) */}
-                      <div>
-                        <div className="flex items-center justify-between mb-1.5">
-                          <label className="block text-[11px] font-mono text-slate-300">
-                            Resume / CV <span className="text-[#FF4500]">*</span>
-                          </label>
-                          <span className="text-[10px] font-mono text-[#FFA000] bg-[#FFA000]/10 border border-[#FFA000]/20 px-2 py-0.5 rounded-full">
-                            Upload File OR Paste Link (Any one)
-                          </span>
-                        </div>
-                        
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                          {/* Option 1: File Upload */}
-                          <div>
-                            <label className={`w-full px-3.5 py-2.5 rounded-xl border ${
-                              resumeFileName 
-                                ? 'bg-emerald-500/10 border-emerald-500/40 text-emerald-300' 
-                                : 'bg-[#111116] border-dashed border-white/20 hover:border-[#FF4500]/50 text-slate-300'
-                            } text-xs flex items-center justify-between cursor-pointer transition-all group h-[42px]`}>
-                              <div className="flex items-center gap-2 overflow-hidden">
-                                <Upload size={14} className={`${resumeFileName ? 'text-emerald-400' : 'text-[#FFA000]'} shrink-0 group-hover:scale-110 transition-transform`} />
-                                <span className="truncate">
-                                  {resumeFileName ? resumeFileName : 'Upload PDF / DOC file'}
-                                </span>
-                              </div>
-                              <span className="text-[10px] font-mono font-bold text-slate-400 bg-white/5 px-2 py-0.5 rounded shrink-0">
-                                {resumeFileName ? 'Change' : 'Browse'}
-                              </span>
-                              <input
-                                type="file"
-                                accept=".pdf,.doc,.docx"
-                                className="hidden"
-                                onChange={(e) => {
-                                  const file = e.target.files?.[0];
-                                  if (file) {
-                                    setResumeFileName(file.name);
-                                    setResumeFileObject(file);
-                                  }
-                                }}
-                              />
-                            </label>
-                          </div>
-
-                          {/* Option 2: Link */}
-                          <div>
-                            <input
-                              type="url"
-                              placeholder="Or paste Drive / Portfolio link..."
-                              value={resumeLink}
-                              onChange={(e) => setResumeLink(e.target.value)}
-                              className={`w-full px-3.5 py-2.5 rounded-xl bg-[#111116] border ${
-                                resumeLink.trim()
-                                  ? 'border-emerald-500/40 text-emerald-300 focus:border-emerald-500'
-                                  : 'border-white/10 text-white placeholder:text-slate-600 focus:border-[#FF4500]'
-                              } text-xs focus:outline-none transition-all h-[42px]`}
-                            />
-                          </div>
-                        </div>
-
-                        {/* Confirmation Badge */}
-                        {(resumeFileName || resumeLink.trim()) && (
-                          <div className="mt-2 flex items-center gap-1.5 text-[11px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-xl">
-                            <CheckCircle2 size={13} className="shrink-0" />
-                            <span className="truncate">
-                              {resumeFileName && resumeLink.trim()
-                                ? `Resume: File (${resumeFileName}) & Link provided`
-                                : resumeFileName
-                                ? `Attached File: ${resumeFileName}`
-                                : `Resume Link: ${resumeLink.trim()}`}
-                            </span>
-                          </div>
-                        )}
-                      </div>
-
-                      <div className="pt-2">
-                        <button
-                          type="submit"
-                          disabled={isSubmitting || (!resumeFileName && !resumeLink.trim())}
-                          className="w-full btn-pill-primary py-3.5 text-xs font-bold cursor-pointer justify-center flex items-center gap-2 shadow-lg shadow-orange-500/20 disabled:opacity-50 disabled:cursor-not-allowed"
-                        >
-                          {isSubmitting ? (
-                            <>
-                              <Loader2 size={15} className="animate-spin" />
-                              <span>Submitting Application to Database...</span>
-                            </>
-                          ) : (
-                            <>
-                              <span>Submit Application for {selectedJob.title}</span>
-                              <ArrowRight size={14} />
-                            </>
-                          )}
-                        </button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              )}
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
     </section>
   );
 }
