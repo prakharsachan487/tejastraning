@@ -233,7 +233,7 @@ export function ProgramsSection() {
 
         {/* Interactive Category Navigation Tabs */}
         <div className="flex justify-center mb-10">
-          <div className="inline-flex p-1.5 bg-[#121218] border border-black/8 rounded-2xl max-w-full overflow-x-auto no-scrollbar gap-1.5">
+          <div className="inline-flex p-1.5 bg-slate-50 border border-black/8 rounded-2xl max-w-full overflow-x-auto no-scrollbar gap-1.5">
             {categories.map((cat) => {
               const Icon = cat.icon;
               const isActive = activeId === cat.id;
@@ -327,7 +327,7 @@ export function ProgramsSection() {
                     {track.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-[#181822] text-slate-700 border border-black/8 group-hover:border-white/20 transition-colors"
+                        className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 border border-black/8 group-hover:border-white/20 transition-colors"
                       >
                         {tag}
                       </span>

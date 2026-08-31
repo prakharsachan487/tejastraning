@@ -41,7 +41,7 @@ export function Preloader({ onComplete }: { onComplete?: () => void }) {
             y: '-100%',
             transition: { duration: 0.7, ease: [0.76, 0, 0.24, 1] },
           }}
-          className="fixed inset-0 z-[999] bg-[#0A0A0D] flex flex-col items-center justify-between p-8 sm:p-12 select-none"
+          className="fixed inset-0 z-[999] bg-[#F8F9FB] flex flex-col items-center justify-between p-8 sm:p-12 select-none"
         >
           {/* Top Label */}
           <div className="w-full flex items-center justify-between text-[11px] font-mono text-slate-500 uppercase tracking-widest">
@@ -94,7 +94,7 @@ export function Preloader({ onComplete }: { onComplete?: () => void }) {
             </div>
 
             {/* Progress Track */}
-            <div className="w-full h-1 bg-[#181822] rounded-full overflow-hidden">
+            <div className="w-full h-1 bg-slate-100 rounded-full overflow-hidden">
               <motion.div
                 className="h-full bg-gradient-to-r from-[#2563EB] to-[#3B82F6]"
                 style={{ width: `${progress}%` }}

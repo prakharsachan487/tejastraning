@@ -50,7 +50,7 @@ export function TrainingSolutionsSection() {
                     Placement-Focused Intensive
                   </div>
                 </div>
-                <div className="w-11 h-11 rounded-2xl bg-[#0F1E36] border border-[#38BDF8]/20 flex items-center justify-center text-[#38BDF8] shrink-0">
+                <div className="w-11 h-11 rounded-2xl bg-blue-50 border border-[#38BDF8]/20 flex items-center justify-center text-[#38BDF8] shrink-0">
                   <Rocket size={20} />
                 </div>
               </div>
@@ -87,13 +87,13 @@ export function TrainingSolutionsSection() {
                 Mapped to recruiters like
               </div>
               <div className="flex items-center gap-3 text-xs font-semibold text-slate-700">
-                <span className="px-2.5 py-1 rounded bg-[#161622] border border-black/5 text-[#005696] font-bold">
+                <span className="px-2.5 py-1 rounded bg-slate-50 border border-black/5 text-[#005696] font-bold">
                   TCS
                 </span>
-                <span className="px-2.5 py-1 rounded bg-[#161622] border border-black/5 text-[#007CC3] font-bold">
+                <span className="px-2.5 py-1 rounded bg-slate-50 border border-black/5 text-[#007CC3] font-bold">
                   Infosys
                 </span>
-                <span className="px-2.5 py-1 rounded bg-[#161622] border border-black/5 text-[#92278F] font-bold">
+                <span className="px-2.5 py-1 rounded bg-slate-50 border border-black/5 text-[#92278F] font-bold">
                   Wipro
                 </span>
                 <span className="text-xs text-slate-600 font-medium">

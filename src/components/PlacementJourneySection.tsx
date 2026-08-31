@@ -234,7 +234,7 @@ export function PlacementJourneySection() {
               </div>
 
               {/* Night Grind Coding Workstation Card */}
-              <div className="rounded-2xl bg-[#0D131F] border border-slate-800 p-5 sm:p-6 shadow-2xl">
+              <div className="rounded-2xl bg-slate-50 border border-slate-800 p-5 sm:p-6 shadow-2xl">
                 <div className="flex items-center justify-between pb-3 border-b border-slate-800 mb-4 text-xs">
                   <span className="px-2.5 py-1 rounded bg-[#1E3A8A]/50 text-[#60A5FA] font-bold uppercase text-[10px] tracking-wider">
                     NIGHT GRIND
@@ -242,7 +242,7 @@ export function PlacementJourneySection() {
                   <span className="text-slate-600 font-mono text-xs">2:14 AM</span>
                 </div>
 
-                <div className="p-4 rounded-xl bg-[#080B11] border border-slate-800 mb-5">
+                <div className="p-4 rounded-xl bg-white border border-slate-800 mb-5">
                   <div className="flex items-center justify-between pb-3 mb-3 border-b border-slate-800/80">
                     <div className="flex items-center gap-2">
                       <div className="w-2.5 h-2.5 rounded-full bg-rose-500" />
@@ -359,7 +359,7 @@ export function PlacementJourneySection() {
               </div>
 
               {/* Assessment Contest Card */}
-              <div className="rounded-2xl bg-[#0D131F] border border-slate-800 p-5 sm:p-6 shadow-2xl">
+              <div className="rounded-2xl bg-slate-50 border border-slate-800 p-5 sm:p-6 shadow-2xl">
                 <div className="flex items-center justify-between pb-3 border-b border-slate-800 mb-4 text-xs">
                   <div className="flex items-center gap-2">
                     <Terminal size={14} className="text-[#38BDF8]" />
@@ -371,17 +371,17 @@ export function PlacementJourneySection() {
                 </div>
 
                 <div className="grid sm:grid-cols-3 gap-3 text-xs mb-4">
-                  <div className="p-3.5 rounded-xl bg-[#080B11] border border-slate-800">
+                  <div className="p-3.5 rounded-xl bg-white border border-slate-800">
                     <div className="text-slate-600 text-[10px] font-bold">TOTAL SUBMISSIONS</div>
                     <div className="text-lg font-bold text-slate-900 mt-1">1,480+</div>
                     <div className="text-[10px] text-emerald-400 mt-1">✓ Automated Test Suites</div>
                   </div>
-                  <div className="p-3.5 rounded-xl bg-[#080B11] border border-slate-800">
+                  <div className="p-3.5 rounded-xl bg-white border border-slate-800">
                     <div className="text-slate-600 text-[10px] font-bold">AVERAGE RUNTIME</div>
                     <div className="text-lg font-bold text-cyan-400 mt-1">14 ms</div>
                     <div className="text-[10px] text-slate-600 mt-1">O(N log N) Optimal</div>
                   </div>
-                  <div className="p-3.5 rounded-xl bg-[#080B11] border border-slate-800">
+                  <div className="p-3.5 rounded-xl bg-white border border-slate-800">
                     <div className="text-slate-600 text-[10px] font-bold">BENCHMARK SCORE</div>
                     <div className="text-lg font-bold text-[#3B82F6] mt-1">94.8 / 100</div>
                     <div className="text-[10px] text-emerald-400 mt-1">Top Tier Tier-1 Readiness</div>
@@ -447,7 +447,7 @@ export function PlacementJourneySection() {
               </div>
 
               {/* Cloud Architecture & GitHub Deploy Card */}
-              <div className="rounded-2xl bg-[#0D131F] border border-slate-800 p-5 sm:p-6 shadow-2xl">
+              <div className="rounded-2xl bg-slate-50 border border-slate-800 p-5 sm:p-6 shadow-2xl">
                 <div className="flex items-center justify-between pb-3 border-b border-slate-800 mb-4 text-xs">
                   <div className="flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-emerald-400" />
@@ -535,7 +535,7 @@ export function PlacementJourneySection() {
               </div>
 
               {/* Mock Interview Simulation Card */}
-              <div className="rounded-2xl bg-[#0D131F] border border-slate-800 p-5 sm:p-6 shadow-2xl">
+              <div className="rounded-2xl bg-slate-50 border border-slate-800 p-5 sm:p-6 shadow-2xl">
                 <div className="flex items-center justify-between pb-3 border-b border-slate-800 mb-4 text-xs">
                   <span className="px-2.5 py-1 rounded bg-[#1E3A8A]/50 text-[#60A5FA] font-bold uppercase text-[10px] tracking-wider">
                     MOCK INTERVIEW
@@ -645,7 +645,7 @@ export function PlacementJourneySection() {
               </div>
 
               {/* AI Diagnostics & Scorecard */}
-              <div className="rounded-2xl bg-[#0D131F] border border-slate-800 p-5 sm:p-6 shadow-2xl space-y-3">
+              <div className="rounded-2xl bg-slate-50 border border-slate-800 p-5 sm:p-6 shadow-2xl space-y-3">
                 <div className="flex items-center justify-between pb-3 border-b border-slate-800 text-xs">
                   <div className="flex items-center gap-2">
                     <Cpu size={14} className="text-[#EC4899]" />
@@ -671,7 +671,7 @@ export function PlacementJourneySection() {
                   </div>
                 </div>
 
-                <div className="p-3.5 rounded-xl bg-[#080B11] border border-slate-800 text-xs">
+                <div className="p-3.5 rounded-xl bg-white border border-slate-800 text-xs">
                   <div className="text-[11px] font-bold text-slate-900 mb-1">Mentor Growth Recommendation:</div>
                   <p className="text-[11px] text-slate-700 leading-relaxed">
                     "Solid understanding of asynchronous concurrency. Emphasize impact metrics and latency reduction in capstone project walkthroughs."
@@ -732,7 +732,7 @@ export function PlacementJourneySection() {
               </div>
 
               {/* Campus Drive Pipeline Card */}
-              <div className="rounded-2xl bg-[#0D131F] border border-slate-800 p-5 sm:p-6 shadow-2xl">
+              <div className="rounded-2xl bg-slate-50 border border-slate-800 p-5 sm:p-6 shadow-2xl">
                 <div className="flex items-center justify-between pb-3 border-b border-slate-800 mb-4 text-xs">
                   <div className="flex items-center gap-2">
                     <Building2 size={14} className="text-[#10B981]" />
@@ -744,19 +744,19 @@ export function PlacementJourneySection() {
                 </div>
 
                 <div className="grid sm:grid-cols-3 gap-3 text-xs mb-4">
-                  <div className="p-3 rounded-xl bg-[#080B11] border border-slate-800">
+                  <div className="p-3 rounded-xl bg-white border border-slate-800">
                     <div className="text-slate-600 text-[10px] uppercase font-bold">Applied</div>
                     <div className="text-xl font-bold text-slate-900 mt-1">420</div>
                     <div className="text-[10px] text-slate-500 mt-0.5">Online Assessment</div>
                   </div>
 
-                  <div className="p-3 rounded-xl bg-[#080B11] border border-slate-800">
+                  <div className="p-3 rounded-xl bg-white border border-slate-800">
                     <div className="text-slate-600 text-[10px] uppercase font-bold">Shortlisted</div>
                     <div className="text-xl font-bold text-[#3B82F6] mt-1">96</div>
                     <div className="text-[10px] text-slate-500 mt-0.5">Tech Interview Panels</div>
                   </div>
 
-                  <div className="p-3 rounded-xl bg-[#080B11] border border-slate-800">
+                  <div className="p-3 rounded-xl bg-white border border-slate-800">
                     <div className="text-slate-600 text-[10px] uppercase font-bold">Offers Rolled</div>
                     <div className="text-xl font-bold text-emerald-400 mt-1">38</div>
                     <div className="text-[10px] text-slate-500 mt-0.5">Avg: ₹8.4 LPA</div>

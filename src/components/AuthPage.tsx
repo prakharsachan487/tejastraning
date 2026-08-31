@@ -304,7 +304,7 @@ export function AuthPage() {
       {/* ========================================================
           RIGHT HALF: FULL SCREEN VISUAL & INTERACTIVE SHOWCASE
       ======================================================== */}
-      <div className="hidden lg:flex lg:w-1/2 min-h-screen relative overflow-hidden bg-[#0A0A0D]">
+      <div className="hidden lg:flex lg:w-1/2 min-h-screen relative overflow-hidden bg-[#F8F9FB]">
         
         {/* Full Screen Background Image */}
         <img
@@ -331,7 +331,7 @@ export function AuthPage() {
             <span className="w-2.5 h-2.5 rounded-full bg-black shrink-0" />
           </div>
 
-          <div className="px-4 py-2 rounded-xl bg-black/80 backdrop-blur-md text-white text-xs font-mono shadow-md w-fit flex items-center gap-2 border border-white/15">
+          <div className="px-4 py-2 rounded-xl bg-slate-900/30 backdrop-blur-md text-white text-xs font-mono shadow-md w-fit flex items-center gap-2 border border-white/15">
             <span>09:30am-10:00am</span>
             <span className="w-2 h-2 rounded-full bg-amber-400" />
           </div>
@@ -408,7 +408,7 @@ export function AuthPage() {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.5 }}
-          className="absolute bottom-10 left-10 z-20 flex items-center gap-3 px-5 py-3 rounded-2xl bg-black/80 backdrop-blur-md border border-white/15 text-white shadow-2xl"
+          className="absolute bottom-10 left-10 z-20 flex items-center gap-3 px-5 py-3 rounded-2xl bg-slate-900/30 backdrop-blur-md border border-white/15 text-white shadow-2xl"
         >
           <div className="w-8 h-8 rounded-xl bg-amber-400 flex items-center justify-center text-black font-bold text-sm">
             ★

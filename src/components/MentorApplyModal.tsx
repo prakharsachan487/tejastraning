@@ -56,7 +56,7 @@ export function MentorApplyModal({ isOpen, onClose }: MentorApplyModalProps) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="relative w-full max-w-xl rounded-3xl bg-[#111116] border border-white/15 p-6 sm:p-8 shadow-2xl shadow-black z-10 text-slate-100 overflow-hidden"
+            className="relative w-full max-w-xl rounded-3xl bg-white border border-white/15 p-6 sm:p-8 shadow-2xl shadow-black z-10 text-slate-100 overflow-hidden"
           >
             {/* Ambient Background Glow */}
             <div className="absolute top-0 right-0 w-72 h-72 bg-[#2563EB]/10 blur-[100px] pointer-events-none rounded-full" />

@@ -70,7 +70,7 @@ function App() {
   return (
     <EnquiryProvider>
       <AuthProvider>
-        <div className="relative min-h-screen bg-[#0A0A0D] text-slate-100 font-sans selection:bg-[#2563EB] selection:text-white flex flex-col">
+        <div className="relative min-h-screen bg-[#F8F9FB] text-slate-100 font-sans selection:bg-[#2563EB] selection:text-white flex flex-col">
           {/* Universal Header across every single page */}
           <Navbar />
 

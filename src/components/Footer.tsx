@@ -17,13 +17,10 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-[#161920] text-slate-400 pt-20 pb-12 relative overflow-hidden border-t border-black/10 selection:bg-[#2563EB] selection:text-white">
-      {/* Background Subtle Gradient & Shadow */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
-
+    <footer className="bg-[#F1F4F9] text-slate-600 pt-20 pb-12 relative overflow-hidden border-t border-slate-200/80 selection:bg-[#2563EB] selection:text-white">
       {/* Giant "GROW 360" Background Watermark Typography - Perfectly Centered */}
       <div className="absolute inset-x-0 bottom-8 sm:bottom-12 w-full flex items-center justify-center select-none pointer-events-none z-0 overflow-hidden">
-        <span className="text-6xl sm:text-8xl md:text-[11rem] lg:text-[14rem] font-extrabold text-white/[0.025] tracking-tight whitespace-nowrap text-center leading-none">
+        <span className="text-6xl sm:text-8xl md:text-[11rem] lg:text-[14rem] font-extrabold text-slate-900/[0.035] tracking-tight whitespace-nowrap text-center leading-none">
           GROW 360°
         </span>
       </div>
@@ -47,17 +44,17 @@ export function Footer() {
                   className="h-10 w-auto object-contain rounded-lg group-hover:scale-105 transition-transform"
                 />
                 <div className="flex flex-col leading-tight">
-                  <span className="text-2xl font-extrabold text-white tracking-tight font-[family-name:var(--font-display)] flex items-center">
+                  <span className="text-2xl font-extrabold text-[#0F172A] tracking-tight font-[family-name:var(--font-display)] flex items-center">
                     GROW<span className="text-[#2563EB]">360°</span>
                   </span>
-                  <span className="text-[11px] font-mono text-slate-400 tracking-wider">
+                  <span className="text-[11px] font-mono text-slate-500 tracking-wider">
                     Decoding the corporate world
                   </span>
                 </div>
               </div>
 
               {/* Tagline */}
-              <p className="text-xs sm:text-sm text-slate-400 max-w-sm leading-relaxed mb-8">
+              <p className="text-xs sm:text-sm text-slate-600 max-w-sm leading-relaxed mb-8">
                 The comprehensive corporate training, AI-powered interview diagnostics, and campus placement infrastructure.
               </p>
 
@@ -82,13 +79,13 @@ export function Footer() {
                     <svg className="w-5 h-4" viewBox="0 0 24 24">
                       <path fill="#FF9900" d="M13.9 14.4c-2.3 1.7-5.7 2.6-8.6 2.6-4.1 0-7.8-1.6-10.6-4.2-.2-.2 0-.5.3-.4 2.8 1.6 6.3 2.6 9.9 2.6 2.6 0 5.4-.6 8-1.8.4-.2.8.2.4.6z" />
                       <path fill="#FF9900" d="M14.9 13.2c-.3-.4-1.9-.2-2.6 0-.2 0-.3-.2-.1-.3 1.1-.9 3-1 3.3-.6.4.4.1 2.3-.9 3.3-.2.1-.3.1-.4 0-.1-.2.2-1.8.7-2.4z" />
-                      <text x="7" y="11" fill="#FFFFFF" fontSize="12" fontWeight="bold" fontFamily="sans-serif">a</text>
+                      <text x="7" y="11" fill="#0F172A" fontSize="12" fontWeight="bold" fontFamily="sans-serif">a</text>
                     </svg>
                   </div>
 
                   {/* Uber */}
                   <div className="flex items-center opacity-90 hover:opacity-100 transition-opacity">
-                    <span className="text-white font-bold text-xs tracking-tight">
+                    <span className="text-slate-900 font-bold text-xs tracking-tight">
                       Uber
                     </span>
                   </div>
@@ -107,14 +104,14 @@ export function Footer() {
 
           {/* Column 2: Platform (3 cols) */}
           <div className="lg:col-span-3">
-            <h4 className="text-sm font-bold text-white tracking-tight mb-5">
+            <h4 className="text-sm font-bold text-slate-900 tracking-tight mb-5 font-[family-name:var(--font-display)]">
               Platform
             </h4>
             <ul className="space-y-3.5 text-xs sm:text-sm">
               <li>
                 <button
                   onClick={() => nav('#training')}
-                  className="text-slate-400 hover:text-white transition-colors cursor-pointer text-left"
+                  className="text-slate-600 hover:text-[#2563EB] transition-colors cursor-pointer text-left font-medium"
                 >
                   Training
                 </button>
@@ -122,7 +119,7 @@ export function Footer() {
               <li>
                 <button
                   onClick={() => nav('#recruiters')}
-                  className="text-slate-400 hover:text-white transition-colors cursor-pointer text-left"
+                  className="text-slate-600 hover:text-[#2563EB] transition-colors cursor-pointer text-left font-medium"
                 >
                   Placements
                 </button>
@@ -130,7 +127,7 @@ export function Footer() {
               <li>
                 <button
                   onClick={() => nav('#programs')}
-                  className="text-slate-400 hover:text-white transition-colors cursor-pointer text-left"
+                  className="text-slate-600 hover:text-[#2563EB] transition-colors cursor-pointer text-left font-medium"
                 >
                   Curriculum
                 </button>
@@ -138,7 +135,7 @@ export function Footer() {
               <li>
                 <button
                   onClick={() => nav('#about')}
-                  className="text-slate-400 hover:text-white transition-colors cursor-pointer text-left"
+                  className="text-slate-600 hover:text-[#2563EB] transition-colors cursor-pointer text-left font-medium"
                 >
                   Mentors
                 </button>
@@ -149,7 +146,7 @@ export function Footer() {
                     window.location.hash = '#mentor';
                     window.scrollTo({ top: 0, behavior: 'instant' });
                   }}
-                  className="text-slate-400 hover:text-white transition-colors cursor-pointer text-left"
+                  className="text-slate-600 hover:text-[#2563EB] transition-colors cursor-pointer text-left font-medium"
                 >
                   Become a Mentor
                 </button>
@@ -157,7 +154,7 @@ export function Footer() {
               <li>
                 <button
                   onClick={() => nav('#career-path')}
-                  className="text-slate-400 hover:text-white transition-colors cursor-pointer text-left"
+                  className="text-slate-600 hover:text-[#2563EB] transition-colors cursor-pointer text-left font-medium"
                 >
                   Placement Journey
                 </button>
@@ -167,14 +164,14 @@ export function Footer() {
 
           {/* Column 3: Contact (2 cols) */}
           <div className="lg:col-span-2">
-            <h4 className="text-sm font-bold text-white tracking-tight mb-5">
+            <h4 className="text-sm font-bold text-slate-900 tracking-tight mb-5 font-[family-name:var(--font-display)]">
               Contact
             </h4>
-            <div className="space-y-3 text-xs sm:text-sm text-slate-400">
+            <div className="space-y-3 text-xs sm:text-sm text-slate-600">
               <div>
                 <a
                   href="tel:+919041429928"
-                  className="hover:text-white transition-colors block font-mono"
+                  className="hover:text-[#2563EB] transition-colors block font-mono font-medium"
                 >
                   +91 9041429928
                 </a>
@@ -182,7 +179,7 @@ export function Footer() {
               <div>
                 <a
                   href="mailto:partnerships@grow360.in"
-                  className="hover:text-white transition-colors block break-all font-mono"
+                  className="hover:text-[#2563EB] transition-colors block break-all font-mono font-medium"
                 >
                   partnerships@grow360.in
                 </a>
@@ -192,7 +189,7 @@ export function Footer() {
 
           {/* Column 4: Legal (2 cols) */}
           <div className="lg:col-span-2">
-            <h4 className="text-sm font-bold text-white tracking-tight mb-5">
+            <h4 className="text-sm font-bold text-slate-900 tracking-tight mb-5 font-[family-name:var(--font-display)]">
               Legal
             </h4>
             <ul className="space-y-3.5 text-xs sm:text-sm">
@@ -202,7 +199,7 @@ export function Footer() {
                     window.location.hash = '#privacy';
                     window.scrollTo({ top: 0, behavior: 'instant' });
                   }}
-                  className="text-slate-400 hover:text-white transition-colors cursor-pointer text-left"
+                  className="text-slate-600 hover:text-[#2563EB] transition-colors cursor-pointer text-left font-medium"
                 >
                   Privacy Policy
                 </button>
@@ -213,7 +210,7 @@ export function Footer() {
                     window.location.hash = '#terms';
                     window.scrollTo({ top: 0, behavior: 'instant' });
                   }}
-                  className="text-slate-400 hover:text-white transition-colors cursor-pointer text-left"
+                  className="text-slate-600 hover:text-[#2563EB] transition-colors cursor-pointer text-left font-medium"
                 >
                   Terms of Service
                 </button>
@@ -224,7 +221,7 @@ export function Footer() {
                     window.location.hash = '#cookies';
                     window.scrollTo({ top: 0, behavior: 'instant' });
                   }}
-                  className="text-slate-400 hover:text-white transition-colors cursor-pointer text-left"
+                  className="text-slate-600 hover:text-[#2563EB] transition-colors cursor-pointer text-left font-medium"
                 >
                   Cookie Policy
                 </button>
@@ -235,19 +232,19 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar: Copyright & Socials */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+        <div className="pt-8 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <div>
             <p>© {new Date().getFullYear()} Grow360 — Decoding the corporate world. All rights reserved.</p>
           </div>
 
-          {/* Social Icons in Dark Rounded Squares */}
+          {/* Social Icons in Clean Rounded Squares */}
           <div className="flex items-center gap-2.5">
             <a
               href="https://linkedin.com"
               target="_blank"
               rel="noreferrer"
               aria-label="LinkedIn"
-              className="w-8 h-8 rounded-lg bg-[#14141A] hover:bg-white hover:text-black border border-white/10 text-slate-300 flex items-center justify-center transition-all duration-200"
+              className="w-8 h-8 rounded-lg bg-white hover:bg-[#2563EB] hover:text-white border border-slate-200 text-slate-700 flex items-center justify-center transition-all duration-200 shadow-xs"
             >
               <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
                 <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.64a1.65 1.65 0 0 0-1.66 1.66 1.66 1.66 0 0 0 1.66 1.66 1.66 1.66 0 0 0 1.66-1.66c0-.92-.74-1.66-1.66-1.66Z" />
@@ -258,7 +255,7 @@ export function Footer() {
               target="_blank"
               rel="noreferrer"
               aria-label="Instagram"
-              className="w-8 h-8 rounded-lg bg-[#14141A] hover:bg-white hover:text-black border border-white/10 text-slate-300 flex items-center justify-center transition-all duration-200"
+              className="w-8 h-8 rounded-lg bg-white hover:bg-[#2563EB] hover:text-white border border-slate-200 text-slate-700 flex items-center justify-center transition-all duration-200 shadow-xs"
             >
               <svg className="w-3.5 h-3.5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
                 <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />

@@ -243,12 +243,12 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
   };
 
   return (
-    <div className={`min-h-screen ${isDarkMode ? 'bg-[#0F0F14] text-slate-100' : 'bg-[#F8F9FA] text-slate-800'} font-sans transition-colors duration-200`}>
+    <div className={`min-h-screen ${isDarkMode ? 'bg-[#F8F9FB] text-slate-100' : 'bg-[#F8F9FA] text-slate-800'} font-sans transition-colors duration-200`}>
       
       {/* ========================================================
           01. TOP NAVBAR
       ======================================================== */}
-      <header className={`sticky top-0 z-30 h-16 border-b ${isDarkMode ? 'bg-[#15151D]/90 border-white/10' : 'bg-white border-slate-200'} backdrop-blur-md px-4 sm:px-6 flex items-center justify-between`}>
+      <header className={`sticky top-0 z-30 h-16 border-b ${isDarkMode ? 'bg-white/90 border-white/10' : 'bg-white border-slate-200'} backdrop-blur-md px-4 sm:px-6 flex items-center justify-between`}>
         {/* Left: Brand & Home Link */}
         <div className="flex items-center gap-4 sm:gap-6">
           <div className="flex items-center gap-2.5 cursor-pointer" onClick={handleLogout} title="Click to logout and go to home">
@@ -314,7 +314,7 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
         {/* ==========================================
             LEFT MAIN SIDEBAR
         ========================================== */}
-        <aside className={`w-64 shrink-0 border-r ${isDarkMode ? 'bg-[#12121A] border-white/10' : 'bg-white border-slate-200'} min-h-[calc(100vh-4rem)] p-4 flex flex-col justify-between hidden md:flex`}>
+        <aside className={`w-64 shrink-0 border-r ${isDarkMode ? 'bg-white border-white/10' : 'bg-white border-slate-200'} min-h-[calc(100vh-4rem)] p-4 flex flex-col justify-between hidden md:flex`}>
           <div className="space-y-6">
             
             {/* Dashboard Link */}
@@ -464,7 +464,7 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
           <div className="lg:col-span-4 space-y-5">
             
             {/* 1. Main Profile Card */}
-            <div className={`rounded-3xl border ${isDarkMode ? 'bg-[#15151D] border-white/10' : 'bg-white border-slate-200'} p-6 shadow-sm`}>
+            <div className={`rounded-3xl border ${isDarkMode ? 'bg-white border-white/10' : 'bg-white border-slate-200'} p-6 shadow-sm`}>
               <div className="flex items-start gap-4 mb-4">
                 <div className="relative">
                   <img
@@ -541,7 +541,7 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
             </div>
 
             {/* 2. Profile Completion Card */}
-            <div className={`rounded-3xl border ${isDarkMode ? 'bg-[#15151D] border-white/10' : 'bg-white border-slate-200'} p-6 shadow-sm`}>
+            <div className={`rounded-3xl border ${isDarkMode ? 'bg-white border-white/10' : 'bg-white border-slate-200'} p-6 shadow-sm`}>
               <div className="flex items-center justify-between mb-2">
                 <span className={`text-xs font-bold ${isDarkMode ? 'text-white' : 'text-slate-800'}`}>
                   Profile completion
@@ -563,7 +563,7 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
             </div>
 
             {/* 3. Resume PDF Card */}
-            <div className={`rounded-3xl border ${isDarkMode ? 'bg-[#15151D] border-white/10' : 'bg-white border-slate-200'} p-6 shadow-sm`}>
+            <div className={`rounded-3xl border ${isDarkMode ? 'bg-white border-white/10' : 'bg-white border-slate-200'} p-6 shadow-sm`}>
               <div className="flex items-center justify-between mb-1">
                 <h4 className={`text-xs font-bold ${isDarkMode ? 'text-white' : 'text-slate-800'}`}>
                   Resume PDF
@@ -579,7 +579,7 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
                 Upload a PDF resume (max 4MB). Use the resume builder for a generated version.
               </p>
 
-              <div className={`p-2.5 rounded-xl border ${isDarkMode ? 'bg-black/30 border-white/10 text-slate-300' : 'bg-slate-50 border-slate-200 text-slate-600'} text-[11px] font-mono truncate mb-3 flex items-center gap-2`}>
+              <div className={`p-2.5 rounded-xl border ${isDarkMode ? 'bg-slate-100 border-white/10 text-slate-300' : 'bg-slate-50 border-slate-200 text-slate-600'} text-[11px] font-mono truncate mb-3 flex items-center gap-2`}>
                 <FileText size={13} className="text-blue-500 shrink-0" />
                 <span className="truncate">{resumeUrl || 'No resume uploaded yet'}</span>
               </div>
@@ -604,7 +604,7 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
           {/* ==========================================
               RIGHT EDIT PROFILE PANEL (Form & Tabs)
           ========================================== */}
-          <div className={`lg:col-span-8 rounded-3xl border ${isDarkMode ? 'bg-[#15151D] border-white/10' : 'bg-white border-slate-200'} p-6 sm:p-8 shadow-sm`}>
+          <div className={`lg:col-span-8 rounded-3xl border ${isDarkMode ? 'bg-white border-white/10' : 'bg-white border-slate-200'} p-6 sm:p-8 shadow-sm`}>
             
             {/* Panel Header */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-5 border-b border-slate-100 dark:border-white/10 mb-6">
@@ -720,7 +720,7 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
                         setFirstName(e.target.value);
                         handleFieldChange();
                       }}
-                      className={`w-full px-3.5 py-2.5 rounded-xl border text-xs ${isDarkMode ? 'bg-[#0E0E14] border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'} focus:outline-none focus:border-blue-500 shadow-xs`}
+                      className={`w-full px-3.5 py-2.5 rounded-xl border text-xs ${isDarkMode ? 'bg-white border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'} focus:outline-none focus:border-blue-500 shadow-xs`}
                     />
                     <span className="text-[10px] text-slate-400 mt-1 block">
                       Locked after account setup to keep Resume Builder identity secure.
@@ -741,7 +741,7 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
                         setLastName(e.target.value);
                         handleFieldChange();
                       }}
-                      className={`w-full px-3.5 py-2.5 rounded-xl border text-xs ${isDarkMode ? 'bg-[#0E0E14] border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'} focus:outline-none focus:border-blue-500 shadow-xs`}
+                      className={`w-full px-3.5 py-2.5 rounded-xl border text-xs ${isDarkMode ? 'bg-white border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'} focus:outline-none focus:border-blue-500 shadow-xs`}
                     />
                     <span className="text-[10px] text-slate-400 mt-1 block">
                       Locked after account setup to keep Resume Builder identity secure.
@@ -759,7 +759,7 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
                         setCurrentState(e.target.value);
                         handleFieldChange();
                       }}
-                      className={`w-full px-3.5 py-2.5 rounded-xl border text-xs ${isDarkMode ? 'bg-[#0E0E14] border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'} focus:outline-none focus:border-blue-500 shadow-xs`}
+                      className={`w-full px-3.5 py-2.5 rounded-xl border text-xs ${isDarkMode ? 'bg-white border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'} focus:outline-none focus:border-blue-500 shadow-xs`}
                     >
                       <option value="">Select State</option>
                       <option value="Uttar Pradesh">Uttar Pradesh</option>
@@ -788,7 +788,7 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
                         setCurrentCity(e.target.value);
                         handleFieldChange();
                       }}
-                      className={`w-full px-3.5 py-2.5 rounded-xl border text-xs ${isDarkMode ? 'bg-[#0E0E14] border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'} focus:outline-none focus:border-blue-500 shadow-xs`}
+                      className={`w-full px-3.5 py-2.5 rounded-xl border text-xs ${isDarkMode ? 'bg-white border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'} focus:outline-none focus:border-blue-500 shadow-xs`}
                     />
                   </div>
                 </div>
@@ -808,7 +808,7 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
                         setPhone(e.target.value);
                         handleFieldChange();
                       }}
-                      className={`w-full px-3.5 py-2.5 rounded-xl border text-xs ${isDarkMode ? 'bg-[#0E0E14] border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'} focus:outline-none focus:border-blue-500 shadow-xs`}
+                      className={`w-full px-3.5 py-2.5 rounded-xl border text-xs ${isDarkMode ? 'bg-white border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'} focus:outline-none focus:border-blue-500 shadow-xs`}
                     />
                     <span className="text-[10px] text-slate-400 mt-1 block">Locked after account setup</span>
                   </div>
@@ -826,7 +826,7 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
                         setEmail(e.target.value);
                         handleFieldChange();
                       }}
-                      className={`w-full px-3.5 py-2.5 rounded-xl border text-xs ${isDarkMode ? 'bg-[#0E0E14] border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'} focus:outline-none focus:border-blue-500 shadow-xs`}
+                      className={`w-full px-3.5 py-2.5 rounded-xl border text-xs ${isDarkMode ? 'bg-white border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'} focus:outline-none focus:border-blue-500 shadow-xs`}
                     />
                   </div>
 
@@ -843,7 +843,7 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
                         setWhatsapp(e.target.value);
                         handleFieldChange();
                       }}
-                      className={`w-full px-3.5 py-2.5 rounded-xl border text-xs ${isDarkMode ? 'bg-[#0E0E14] border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'} focus:outline-none focus:border-blue-500 shadow-xs`}
+                      className={`w-full px-3.5 py-2.5 rounded-xl border text-xs ${isDarkMode ? 'bg-white border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'} focus:outline-none focus:border-blue-500 shadow-xs`}
                     />
                   </div>
                 </div>
@@ -860,7 +860,7 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
                         setGender(e.target.value);
                         handleFieldChange();
                       }}
-                      className={`w-full px-3.5 py-2.5 rounded-xl border text-xs ${isDarkMode ? 'bg-[#0E0E14] border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'} focus:outline-none focus:border-blue-500 shadow-xs`}
+                      className={`w-full px-3.5 py-2.5 rounded-xl border text-xs ${isDarkMode ? 'bg-white border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'} focus:outline-none focus:border-blue-500 shadow-xs`}
                     >
                       <option value="">Select Gender</option>
                       <option value="Male">Male</option>
@@ -880,7 +880,7 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
                         setDob(e.target.value);
                         handleFieldChange();
                       }}
-                      className={`w-full px-3.5 py-2.5 rounded-xl border text-xs ${isDarkMode ? 'bg-[#0E0E14] border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'} focus:outline-none focus:border-blue-500 shadow-xs`}
+                      className={`w-full px-3.5 py-2.5 rounded-xl border text-xs ${isDarkMode ? 'bg-white border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'} focus:outline-none focus:border-blue-500 shadow-xs`}
                     />
                   </div>
 
@@ -888,7 +888,7 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
                     <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
                       Languages Spoken <span className="text-red-500">*</span>
                     </label>
-                    <div className={`p-1.5 rounded-xl border flex flex-wrap gap-1.5 items-center min-h-[42px] ${isDarkMode ? 'bg-[#0E0E14] border-white/10' : 'bg-white border-slate-200'}`}>
+                    <div className={`p-1.5 rounded-xl border flex flex-wrap gap-1.5 items-center min-h-[42px] ${isDarkMode ? 'bg-white border-white/10' : 'bg-white border-slate-200'}`}>
                       {languages.map((lang) => (
                         <span
                           key={lang}
@@ -935,7 +935,7 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
                       setPreferredLanguage(e.target.value);
                       handleFieldChange();
                     }}
-                    className={`w-full max-w-sm px-3.5 py-2.5 rounded-xl border text-xs ${isDarkMode ? 'bg-[#0E0E14] border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'} focus:outline-none focus:border-blue-500 shadow-xs`}
+                    className={`w-full max-w-sm px-3.5 py-2.5 rounded-xl border text-xs ${isDarkMode ? 'bg-white border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'} focus:outline-none focus:border-blue-500 shadow-xs`}
                   >
                     <option value="">Select Preferred Language</option>
                     <option value="Python">Python</option>
@@ -965,7 +965,7 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
                           setFatherName(e.target.value);
                           handleFieldChange();
                         }}
-                        className={`w-full px-3.5 py-2.5 rounded-xl border text-xs ${isDarkMode ? 'bg-[#0E0E14] border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'} focus:outline-none focus:border-blue-500 shadow-xs`}
+                        className={`w-full px-3.5 py-2.5 rounded-xl border text-xs ${isDarkMode ? 'bg-white border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'} focus:outline-none focus:border-blue-500 shadow-xs`}
                       />
                     </div>
 
@@ -981,7 +981,7 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
                           setParentContact(e.target.value);
                           handleFieldChange();
                         }}
-                        className={`w-full px-3.5 py-2.5 rounded-xl border text-xs ${isDarkMode ? 'bg-[#0E0E14] border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'} focus:outline-none focus:border-blue-500 shadow-xs`}
+                        className={`w-full px-3.5 py-2.5 rounded-xl border text-xs ${isDarkMode ? 'bg-white border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'} focus:outline-none focus:border-blue-500 shadow-xs`}
                       />
                     </div>
                   </div>
@@ -995,7 +995,7 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
                     </label>
                     <span className="text-[11px] text-slate-400">You can select upto 5</span>
                   </div>
-                  <div className={`p-2 rounded-xl border flex flex-wrap gap-2 items-center ${isDarkMode ? 'bg-[#0E0E14] border-white/10' : 'bg-white border-slate-200'}`}>
+                  <div className={`p-2 rounded-xl border flex flex-wrap gap-2 items-center ${isDarkMode ? 'bg-white border-white/10' : 'bg-white border-slate-200'}`}>
                     {skills.map((skill) => (
                       <span
                         key={skill}
@@ -1054,7 +1054,7 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
                         handleFieldChange();
                       }}
                       placeholder="e.g. prakhar_leetcode"
-                      className={`w-full max-w-sm px-3.5 py-2.5 rounded-xl border text-xs ${isDarkMode ? 'bg-[#0E0E14] border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'} focus:outline-none focus:border-blue-500 shadow-xs`}
+                      className={`w-full max-w-sm px-3.5 py-2.5 rounded-xl border text-xs ${isDarkMode ? 'bg-white border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'} focus:outline-none focus:border-blue-500 shadow-xs`}
                     />
                     <span className="text-[10px] text-slate-400 mt-1 block">
                       Social links (LinkedIn, website, X, resume) are managed in the Social tab.
@@ -1105,7 +1105,7 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
                         setCollege(e.target.value);
                         handleFieldChange();
                       }}
-                      className={`w-full px-3.5 py-2.5 rounded-xl border text-xs ${isDarkMode ? 'bg-[#0E0E14] border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'}`}
+                      className={`w-full px-3.5 py-2.5 rounded-xl border text-xs ${isDarkMode ? 'bg-white border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'}`}
                     />
                   </div>
                   <div>
@@ -1118,7 +1118,7 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
                         setDegree(e.target.value);
                         handleFieldChange();
                       }}
-                      className={`w-full px-3.5 py-2.5 rounded-xl border text-xs ${isDarkMode ? 'bg-[#0E0E14] border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'}`}
+                      className={`w-full px-3.5 py-2.5 rounded-xl border text-xs ${isDarkMode ? 'bg-white border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'}`}
                     />
                   </div>
                   <div>
@@ -1131,7 +1131,7 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
                         setCgpa(e.target.value);
                         handleFieldChange();
                       }}
-                      className={`w-full px-3.5 py-2.5 rounded-xl border text-xs ${isDarkMode ? 'bg-[#0E0E14] border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'}`}
+                      className={`w-full px-3.5 py-2.5 rounded-xl border text-xs ${isDarkMode ? 'bg-white border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'}`}
                     />
                   </div>
                   <div>
@@ -1144,7 +1144,7 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
                         setGradYear(e.target.value);
                         handleFieldChange();
                       }}
-                      className={`w-full px-3.5 py-2.5 rounded-xl border text-xs ${isDarkMode ? 'bg-[#0E0E14] border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'}`}
+                      className={`w-full px-3.5 py-2.5 rounded-xl border text-xs ${isDarkMode ? 'bg-white border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'}`}
                     />
                   </div>
                 </div>
@@ -1161,7 +1161,7 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
             {/* TAB CONTENT: 3. WORK EXPERIENCE */}
             {activeTab === 'experience' && (
               <div className="space-y-4">
-                <div className={`p-4 rounded-2xl border ${isDarkMode ? 'bg-black/20 border-white/10' : 'bg-slate-50 border-slate-200'}`}>
+                <div className={`p-4 rounded-2xl border ${isDarkMode ? 'bg-slate-50 border-white/10' : 'bg-slate-50 border-slate-200'}`}>
                   <div className="flex items-center justify-between mb-1">
                     <h4 className="text-sm font-bold">Engineering Intern / Fresher Project</h4>
                     <span className="text-[11px] font-mono text-blue-500">Summer 2025</span>
@@ -1181,7 +1181,7 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
             {/* TAB CONTENT: 4. PROJECTS */}
             {activeTab === 'projects' && (
               <div className="space-y-4">
-                <div className={`p-4 rounded-2xl border ${isDarkMode ? 'bg-black/20 border-white/10' : 'bg-slate-50 border-slate-200'}`}>
+                <div className={`p-4 rounded-2xl border ${isDarkMode ? 'bg-slate-50 border-white/10' : 'bg-slate-50 border-slate-200'}`}>
                   <div className="flex items-center justify-between mb-1">
                     <h4 className="text-sm font-bold">AI Placement Readiness Portal</h4>
                     <span className="text-[11px] font-mono text-emerald-500">Live Project</span>
@@ -1217,7 +1217,7 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
                       setLinkedinUrl(e.target.value);
                       handleFieldChange();
                     }}
-                    className={`w-full px-3.5 py-2.5 rounded-xl border text-xs ${isDarkMode ? 'bg-[#0E0E14] border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'}`}
+                    className={`w-full px-3.5 py-2.5 rounded-xl border text-xs ${isDarkMode ? 'bg-white border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'}`}
                   />
                 </div>
                 <div>
@@ -1230,7 +1230,7 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
                       setGithubUrl(e.target.value);
                       handleFieldChange();
                     }}
-                    className={`w-full px-3.5 py-2.5 rounded-xl border text-xs ${isDarkMode ? 'bg-[#0E0E14] border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'}`}
+                    className={`w-full px-3.5 py-2.5 rounded-xl border text-xs ${isDarkMode ? 'bg-white border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'}`}
                   />
                 </div>
                 <div>
@@ -1243,7 +1243,7 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
                       setPortfolioUrl(e.target.value);
                       handleFieldChange();
                     }}
-                    className={`w-full px-3.5 py-2.5 rounded-xl border text-xs ${isDarkMode ? 'bg-[#0E0E14] border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'}`}
+                    className={`w-full px-3.5 py-2.5 rounded-xl border text-xs ${isDarkMode ? 'bg-white border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'}`}
                   />
                 </div>
                 <button
@@ -1272,13 +1272,13 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setShowShareModal(false)}
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm"
+              className="fixed inset-0 bg-slate-900/25 backdrop-blur-sm"
             />
             <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className={`relative z-10 w-full max-w-md p-6 rounded-3xl border shadow-2xl ${isDarkMode ? 'bg-[#15151D] border-white/15 text-white' : 'bg-white border-slate-200 text-slate-900'}`}
+              className={`relative z-10 w-full max-w-md p-6 rounded-3xl border shadow-2xl ${isDarkMode ? 'bg-white border-white/15 text-white' : 'bg-white border-slate-200 text-slate-900'}`}
             >
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-base font-bold">Share Public Profile</h3>
@@ -1291,7 +1291,7 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
                 Anyone with this link can view your verified placement scorecard, resume, and coding profiles.
               </p>
 
-              <div className={`p-3 rounded-2xl border flex items-center justify-between gap-2 mb-4 ${isDarkMode ? 'bg-black/30 border-white/10' : 'bg-slate-50 border-slate-200'}`}>
+              <div className={`p-3 rounded-2xl border flex items-center justify-between gap-2 mb-4 ${isDarkMode ? 'bg-slate-100 border-white/10' : 'bg-slate-50 border-slate-200'}`}>
                 <span className="text-xs font-mono text-blue-500 truncate">
                   https://grow360.in/profile/{firstName.toLowerCase()}-{lastName.toLowerCase()}
                 </span>

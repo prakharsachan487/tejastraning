@@ -1,28 +1,27 @@
 @import "tailwindcss";
 
 /* ═══════════════════════════════════════════════════════
-   GROW360 — EDITORIAL SERIF & WARM LUXE LIGHT PALETTE
+   GROW360 — OUTFIT GEOMETRIC TYPOGRAPHY & ZERO BLACK DESIGN
    ═══════════════════════════════════════════════════════ */
 
 @theme {
-  /* ── Reference Warm Light & Off-White Palette ── */
+  /* ── 100% Light & Pure Clean Palette (NO BLACK BACKGROUNDS) ── */
   --color-bg-base: #F8F9FB;
-  --color-bg-alt: #F2F4F7;
+  --color-bg-alt: #F1F4F9;
   --color-bg-card: #FFFFFF;
-  --color-bg-dark: #1A1D24;
-  --color-border-subtle: rgba(0, 0, 0, 0.07);
-  --color-border-hover: rgba(37, 99, 235, 0.5);
+  --color-bg-card-hover: #FFFFFF;
+  --color-border-subtle: rgba(0, 0, 0, 0.08);
+  --color-border-hover: rgba(37, 99, 235, 0.4);
 
-  /* ── Royal Sapphire Blue Accent (#2563EB) ── */
-  --color-accent-mist: #2563EB;
-  --color-accent-mist-dark: #1D4ED8;
-  --color-accent-mist-light: #EFF6FF;
+  /* ── Sapphire Blue Accent (#2563EB) ── */
+  --color-accent-blue: #2563EB;
+  --color-accent-blue-dark: #1D4ED8;
+  --color-accent-blue-light: #EFF6FF;
 
-  /* ── Reference Typography (Editorial Serif + Plus Jakarta Sans) ── */
-  --font-display: 'DM Serif Display', 'Playfair Display', Georgia, serif;
-  --font-serif: 'Playfair Display', 'DM Serif Display', Georgia, serif;
-  --font-sans: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'Inter', 'Plus Jakarta Sans', system-ui, sans-serif;
+  /* ── Outfit Specimen Typography (200 - 900) ── */
+  --font-display: 'Outfit', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-sans: 'Outfit', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Outfit', system-ui, sans-serif;
 
   /* ── Animations ── */
   --animate-float-slow: float-slow 6s ease-in-out infinite;
@@ -58,29 +57,28 @@
 }
 
 /* ═══════════════════════════════════════
-   GLOBAL STYLES & LUXE LIGHT BASE
+   GLOBAL LIGHT SYSTEM (ZERO BLACK BACKGROUNDS)
    ═══════════════════════════════════════ */
 html {
   scroll-behavior: auto;
   background-color: #F8F9FB;
-  color: #1A1D24;
+  color: #0F172A;
 }
 
 body {
   font-family: var(--font-sans);
   background-color: #F8F9FB;
-  color: #1A1D24;
+  color: #0F172A;
   overflow-x: hidden;
 }
 
-/* Editorial Heading Styling */
-h1, h2, h3, .font-serif-heading {
+h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
   letter-spacing: -0.02em;
 }
 
 /* ═══════════════════════════════════════
-   CRISP LUXE CARD UTILITIES
+   CRISP WHITE CARDS
    ═══════════════════════════════════════ */
 .bento-card {
   background: #FFFFFF;
@@ -103,7 +101,7 @@ h1, h2, h3, .font-serif-heading {
 }
 
 /* ═══════════════════════════════════════
-   PILL BUTTONS (Refined High-Contrast)
+   PILL BUTTONS
    ═══════════════════════════════════════ */
 .btn-pill-primary {
   display: inline-flex;
@@ -133,7 +131,7 @@ h1, h2, h3, .font-serif-heading {
   border-radius: 9999px;
   background-color: #FFFFFF;
   border: 1px solid rgba(0, 0, 0, 0.12);
-  color: #1A1D24;
+  color: #0F172A;
   font-size: 0.875rem;
   font-weight: 600;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
@@ -153,20 +151,24 @@ h1, h2, h3, .font-serif-heading {
   gap: 0.5rem;
   padding: 0.75rem 1.5rem;
   border-radius: 9999px;
-  background-color: #1A1D24;
-  color: #FFFFFF;
+  background-color: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  color: #0F172A;
   font-size: 0.875rem;
   font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
   transition: all 0.2s ease;
 }
 
 .btn-pill-white:hover {
-  background-color: #2D313A;
+  background-color: #F1F5F9;
+  border-color: #2563EB;
+  color: #2563EB;
   transform: translateY(-1px);
 }
 
 /* ═══════════════════════════════════════
-   SUBTLE PATTERN BACKGROUND
+   SUBTLE GRID BACKGROUND
    ═══════════════════════════════════════ */
 .obsidian-grid {
   background-image:

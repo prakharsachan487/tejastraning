@@ -65,7 +65,7 @@ export function AuthModal() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={closeAuth}
-            className="fixed inset-0 bg-black/80 backdrop-blur-md transition-opacity"
+            className="fixed inset-0 bg-slate-900/30 backdrop-blur-md transition-opacity"
           />
 
           {/* Modal Container */}
