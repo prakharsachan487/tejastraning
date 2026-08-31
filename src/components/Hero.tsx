@@ -269,7 +269,7 @@ export function Hero() {
                     </h3>
                   </div>
                   <p className="text-xs text-slate-500 mt-0.5">
-                    Speak with our placement &amp; academic consulting directors.
+                    Speak with our placement &amp; academic consulting team.
                   </p>
                 </div>
                 <span className="hidden sm:inline-flex px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-[10px] font-mono font-bold text-emerald-700">

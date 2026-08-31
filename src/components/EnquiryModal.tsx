@@ -142,7 +142,7 @@ export function EnquiryModal() {
                   </h3>
                 </div>
                 <p className="text-xs sm:text-sm text-slate-500 mt-1">
-                  Speak with our placement &amp; academic consulting directors.
+                  Speak with our placement &amp; academic consulting team.
                 </p>
               </div>
 
