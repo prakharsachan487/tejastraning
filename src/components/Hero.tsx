@@ -7,6 +7,7 @@ import { useEnquiry } from '../context/EnquiryContext';
 interface ShatterWordProps {
   word: string;
   startIndex: number;
+  gradientStartIndex?: number;
   totalGradientLength?: number;
   isGradient?: boolean;
 }
@@ -14,7 +15,8 @@ interface ShatterWordProps {
 function ShatterWord({
   word,
   startIndex,
-  totalGradientLength = 16,
+  gradientStartIndex = 0,
+  totalGradientLength = 27,
   isGradient = false,
 }: ShatterWordProps) {
   return (
@@ -28,7 +30,7 @@ function ShatterWord({
 
         let charColor = '#12151B';
         if (isGradient) {
-          const ratio = (startIndex + charIdx - 20) / Math.max(totalGradientLength - 1, 1);
+          const ratio = Math.max(0, Math.min(1, (globalIdx - gradientStartIndex) / Math.max(totalGradientLength - 1, 1)));
           const r = Math.round(37 + (96 - 37) * ratio);
           const g = Math.round(99 + (165 - 99) * ratio);
           const b = Math.round(235 + (250 - 235) * ratio);
@@ -163,16 +165,16 @@ export function Hero() {
             </motion.div>
 
             {/* 02. Slow Shatter Re-assembly Headline */}
-            <h1 className="text-3xl sm:text-4xl lg:text-[3.25rem] xl:text-[3.65rem] font-bold tracking-tight leading-[1.15] text-[#12151B] font-[family-name:var(--font-display)]">
+            <h1 className="text-3xl sm:text-4xl lg:text-[3.15rem] xl:text-[3.5rem] font-bold tracking-tight leading-[1.15] text-[#12151B] font-[family-name:var(--font-display)]">
               <span className="block whitespace-nowrap overflow-visible">
-                <ShatterWord word="The" startIndex={0} />
-                <ShatterWord word="Infrastructure" startIndex={3} />
-                <ShatterWord word="for" startIndex={17} />
+                <ShatterWord word="Turn" startIndex={0} />
+                <ShatterWord word="Students" startIndex={5} />
+                <ShatterWord word="Into" startIndex={14} />
               </span>
 
               <span className="block whitespace-nowrap overflow-visible mt-1">
-                <ShatterWord word="Campus" startIndex={20} isGradient totalGradientLength={16} />
-                <ShatterWord word="Placements" startIndex={26} isGradient totalGradientLength={16} />
+                <ShatterWord word="Industry-Ready" startIndex={19} isGradient gradientStartIndex={19} totalGradientLength={27} />
+                <ShatterWord word="Professionals" startIndex={34} isGradient gradientStartIndex={19} totalGradientLength={27} />
               </span>
             </h1>
 
