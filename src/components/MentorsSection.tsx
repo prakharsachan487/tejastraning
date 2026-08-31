@@ -268,7 +268,7 @@ export function MentorsSection() {
             <button
               onClick={() => {
                 window.location.hash = '#mentor';
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                window.scrollTo({ top: 0, behavior: 'instant' });
               }}
               className="text-[#FF6A00] font-bold hover:text-white transition-colors cursor-pointer flex items-center gap-1 ml-1"
             >

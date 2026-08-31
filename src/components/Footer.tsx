@@ -1,12 +1,12 @@
 export function Footer() {
   const nav = (href: string) => {
     if (!href || href === '#') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: 'instant' });
       return;
     }
     const elem = document.querySelector(href);
     if (elem) {
-      elem.scrollIntoView({ behavior: 'smooth' });
+      elem.scrollIntoView({ behavior: 'instant' });
     }
   };
 
@@ -33,7 +33,7 @@ export function Footer() {
               {/* TEJAS Brand Logo */}
               <div 
                 className="flex items-center gap-2.5 mb-6 cursor-pointer select-none group"
-                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}
               >
                 <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#FF4500] via-[#FF6A00] to-[#FFA000] flex items-center justify-center text-white font-mono font-bold text-xs shadow-md shadow-orange-500/20 group-hover:scale-105 transition-transform">
                   TJ
@@ -134,7 +134,7 @@ export function Footer() {
                 <button
                   onClick={() => {
                     window.location.hash = '#mentor';
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    window.scrollTo({ top: 0, behavior: 'instant' });
                   }}
                   className="text-slate-400 hover:text-white transition-colors cursor-pointer text-left"
                 >

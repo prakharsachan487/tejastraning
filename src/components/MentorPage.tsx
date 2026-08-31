@@ -200,7 +200,7 @@ export function MentorPage({ onBackToHome }: MentorPageProps) {
   const scrollToSection = (id: string) => {
     const elem = document.getElementById(id);
     if (elem) {
-      elem.scrollIntoView({ behavior: 'smooth' });
+      elem.scrollIntoView({ behavior: 'instant' });
     }
   };
 

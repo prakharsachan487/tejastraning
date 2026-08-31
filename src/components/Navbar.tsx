@@ -55,7 +55,7 @@ export function Navbar() {
     setIsMobileOpen(false);
     const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: 'instant' });
     }
   }, []);
 
@@ -80,7 +80,7 @@ export function Navbar() {
               className="flex items-center gap-3 group focus:outline-none"
               onClick={(e) => {
                 e.preventDefault();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                window.scrollTo({ top: 0, behavior: 'instant' });
               }}
             >
               <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#FF4500] via-[#FF6A00] to-[#FFA000] flex items-center justify-center text-white font-extrabold text-sm group-hover:scale-105 transition-transform duration-200">

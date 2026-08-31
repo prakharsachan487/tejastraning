@@ -62,7 +62,7 @@
    GLOBAL DARK STYLES
    ═══════════════════════════════════════ */
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
   color-scheme: dark;
   background-color: #0A0A0D;
 }
