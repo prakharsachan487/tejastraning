@@ -1,106 +1,88 @@
 import { motion } from 'framer-motion';
-import { Sparkles, Star, CheckCircle2 } from 'lucide-react';
+import { Sparkles, MapPin, Users, Calendar } from 'lucide-react';
 
-interface GalleryCard {
-  name: string;
-  company: string;
-  companyColor: string;
-  role: string;
-  domain: string;
-  rating: string;
-  sessions: string;
+interface MomentCard {
+  title: string;
+  category: string;
+  categoryColor: string;
+  description: string;
+  stats: string;
+  location: string;
   image: string;
-  badge: string;
 }
 
-const galleryMentorsRow1: GalleryCard[] = [
+const mentoringMoments: MomentCard[] = [
   {
-    name: 'Nidhi Singh',
-    company: 'Accenture',
-    companyColor: '#A100FF',
-    role: 'Lead Analyst – FP&A',
-    domain: 'Finance & Analytics',
-    rating: '4.98',
-    sessions: '85+ Mock Rounds',
-    image: '/mentors/nidhi_singh.jpg',
-    badge: 'FP&A & Power BI',
+    title: '1:1 Technical Mentoring & Code Reviews',
+    category: '1:1 Pair Programming',
+    categoryColor: '#2563EB',
+    description: 'Deep-dive code walkthroughs, algorithmic debugging, and personalized system design feedback from senior engineers.',
+    stats: '150+ Hours Completed',
+    location: 'Live Virtual Lab',
+    image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80',
   },
   {
-    name: 'Vishal Motlani',
-    company: 'J&J MedTech',
-    companyColor: '#D51900',
-    role: "SIBM P'27 · Ex-Deloitte",
-    domain: 'Strategy & Advisory',
-    rating: '4.95',
-    sessions: '60+ Mock Rounds',
-    image: '/mentors/vishal_motlani.jpg',
-    badge: 'J&J Imagivator 2025',
+    title: '48-Hour Campus Innovation Sprints',
+    category: 'Hackathons',
+    categoryColor: '#10B981',
+    description: 'Student engineering teams collaborating in real-time to build and deploy production-grade AI microservices.',
+    stats: '30+ Teams Competing',
+    location: 'Campus Tech Hub',
+    image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80',
   },
   {
-    name: 'Nandwana Abhishek',
-    company: 'Meta',
-    companyColor: '#0668E1',
-    role: 'Software Engineer',
-    domain: 'Systems & Scalability',
-    rating: '4.99',
-    sessions: '95+ Mock Rounds',
-    image: '/mentors/nandwana_abhishek.jpg',
-    badge: 'London, UK Panel',
+    title: 'Whiteboard System Architecture Workshops',
+    category: 'System Design',
+    categoryColor: '#8B5CF6',
+    description: 'Deconstructing distributed caching, rate limiters, database sharding, and high-concurrency cloud topologies.',
+    stats: 'Hands-on Interactive',
+    location: 'Design Studio',
+    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80',
   },
   {
-    name: 'Ashish Sachan',
-    company: 'Product Leadership',
-    companyColor: '#2563EB',
-    role: 'Product & Program Lead',
-    domain: 'AI & Web Platforms',
-    rating: '4.96',
-    sessions: '110+ Mock Rounds',
-    image: '/mentors/ashish_sachan.jpg',
-    badge: '10+ Yrs Tech Lead',
+    title: 'Simulated Hiring Rounds & Mock Panels',
+    category: 'Mock Drives',
+    categoryColor: '#D97706',
+    description: 'Live interviewer panels simulating Tier-1 corporate assessments, behavioral questions, and live coding challenges.',
+    stats: '100% Industry Rubrics',
+    location: 'Placement Cell',
+    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80',
   },
   {
-    name: 'Mohit Khandelwal',
-    company: 'ZS',
-    companyColor: '#005A9C',
-    role: 'Analytics Consultant',
-    domain: 'Commercial Analytics',
-    rating: '4.97',
-    sessions: '75+ Mock Rounds',
-    image: '/mentors/mohit_khandelwal.png',
-    badge: 'Pharma & BI Lead',
+    title: 'Industry Masterclasses & Keynotes',
+    category: 'Masterclasses',
+    categoryColor: '#2563EB',
+    description: 'Global engineering leaders addressing college cohorts on emerging AI landscapes and career progression.',
+    stats: '500+ Students Attending',
+    location: 'Campus Auditorium',
+    image: 'https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=800&q=80',
   },
   {
-    name: 'Sakshi Havelia',
-    company: 'Koridge Capital',
-    companyColor: '#D97706',
-    role: 'Founder Advisory',
-    domain: 'Equity & Fundraising',
-    rating: '4.98',
-    sessions: '90+ Mock Rounds',
-    image: '/mentors/sakshi_havelia.png',
-    badge: 'M&A & Pre-IPO',
+    title: 'Demo Day & Capstone Project Showcases',
+    category: 'Demo Day',
+    categoryColor: '#EC4899',
+    description: 'Final-year batches presenting functional full-stack products directly to corporate hiring directors.',
+    stats: '12 Corporate Recruiters',
+    location: 'Main Exhibition Hall',
+    image: 'https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=800&q=80',
   },
   {
-    name: 'Gagandeep Singh',
-    company: 'VALUETE',
-    companyColor: '#10B981',
-    role: 'Founder & Full-Stack Lead',
-    domain: 'Scalable Engineering',
-    rating: '4.94',
-    sessions: '70+ Mock Rounds',
-    image: '/mentors/gagandeep_singh.jpg',
-    badge: 'Cloud & Next.js',
+    title: 'Hands-on Cloud & DevOps Deployments',
+    category: 'Cloud Labs',
+    categoryColor: '#06B6D4',
+    description: 'Setting up production CI/CD pipelines, Docker containers, and Kubernetes orchestration under expert guidance.',
+    stats: 'Live AWS Deployments',
+    location: 'Cloud Sandbox',
+    image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80',
   },
   {
-    name: 'Siddhartha Kumar',
-    company: 'Brainstack',
-    companyColor: '#8B5CF6',
-    role: 'Senior Full-Stack Engineer',
-    domain: 'Agentic AI & RAG',
-    rating: '4.96',
-    sessions: '80+ Mock Rounds',
-    image: '/mentors/siddhartha_kumar.jpg',
-    badge: 'AI & Full Stack',
+    title: 'Small-Group Career Strategy Circles',
+    category: 'Cohort Sync',
+    categoryColor: '#6366F1',
+    description: 'Targeted resume audits, portfolio reviews, and personal branding sessions tailored for competitive placements.',
+    stats: '1:8 Mentor Ratio',
+    location: 'Seminar Room',
+    image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80',
   },
 ];
 
@@ -120,7 +102,7 @@ export function RollingGallerySection() {
         >
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2563EB]/10 border border-[#2563EB]/25 text-[#2563EB] text-xs font-semibold tracking-wide mb-3">
             <Sparkles size={14} className="text-[#2563EB]" />
-            <span>Campus Mentorship In Action</span>
+            <span>Moments in Action</span>
           </div>
           <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-[#12151B] font-[family-name:var(--font-display)] leading-tight">
             Mentoring Moments.{' '}
@@ -129,67 +111,61 @@ export function RollingGallerySection() {
         </motion.div>
       </div>
 
-      {/* ── CONTINUOUS INFINITE ROLLING GALLERY ROW ── */}
+      {/* ── CONTINUOUS INFINITE ROLLING ACTIVITY GALLERY ── */}
       <div className="relative w-full overflow-hidden mask-fade-horizontal py-2">
-        <div className="flex items-stretch gap-5 w-max animate-marquee hover:[animation-play-state:paused]">
-          {[...galleryMentorsRow1, ...galleryMentorsRow1, ...galleryMentorsRow1].map((item, index) => (
+        <div className="flex items-stretch gap-6 w-max animate-marquee hover:[animation-play-state:paused]">
+          {[...mentoringMoments, ...mentoringMoments, ...mentoringMoments].map((moment, index) => (
             <div
-              key={`gallery-${item.name}-${index}`}
-              className="w-[290px] sm:w-[310px] shrink-0 rounded-3xl bg-white border border-black/8 p-4 shadow-[0_4px_20px_-2px_rgba(0,0,0,0.05)] hover:border-[#2563EB]/40 hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between select-none group"
+              key={`moment-${moment.title}-${index}`}
+              className="w-[340px] sm:w-[380px] shrink-0 rounded-3xl bg-white border border-black/8 overflow-hidden shadow-[0_4px_20px_-2px_rgba(0,0,0,0.06)] hover:border-[#2563EB]/40 hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between select-none group"
             >
-              {/* Top Row: Photo + Badges */}
-              <div className="relative w-full h-44 rounded-2xl overflow-hidden bg-slate-100 mb-3.5">
+              {/* Photo Showcase with Badges */}
+              <div className="relative w-full h-52 sm:h-56 overflow-hidden bg-slate-100">
                 <img
-                  src={item.image}
-                  alt={item.name}
-                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                  src={moment.image}
+                  alt={moment.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
                   draggable={false}
                 />
                 
-                {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10" />
+                {/* Gradient Vignette */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
 
-                {/* Company Tag (Top-Left) */}
-                <div className="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-md border border-black/10 text-[10px] font-bold text-slate-900 shadow-sm flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full" style={{ backgroundColor: item.companyColor }} />
-                  <span>{item.company}</span>
+                {/* Top-Left Category Tag */}
+                <div className="absolute top-3.5 left-3.5 px-3 py-1 rounded-full bg-white/95 backdrop-blur-md border border-black/10 text-[11px] font-bold text-slate-900 shadow-sm flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full" style={{ backgroundColor: moment.categoryColor }} />
+                  <span>{moment.category}</span>
                 </div>
 
-                {/* Rating Badge (Top-Right) */}
-                <div className="absolute top-2.5 right-2.5 px-2 py-0.5 rounded-full bg-black/75 backdrop-blur-md text-[10px] font-bold text-amber-300 shadow-sm flex items-center gap-1">
-                  <Star size={10} className="fill-amber-300 text-amber-300" />
-                  <span>{item.rating}</span>
+                {/* Top-Right Location Tag */}
+                <div className="absolute top-3.5 right-3.5 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-[10px] font-medium text-white shadow-sm flex items-center gap-1">
+                  <MapPin size={10} className="text-white" />
+                  <span>{moment.location}</span>
                 </div>
 
-                {/* Floating Speciality Pill (Bottom-Left) */}
-                <div className="absolute bottom-2.5 left-2.5 px-2.5 py-1 rounded-lg bg-black/70 backdrop-blur-md border border-white/10 text-[10px] font-semibold text-white">
-                  {item.badge}
+                {/* Bottom Stats Overlay inside Image */}
+                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white text-[11px] font-medium">
+                  <span className="flex items-center gap-1 bg-black/50 backdrop-blur-md px-2.5 py-1 rounded-lg border border-white/10">
+                    <Users size={11} className="text-[#38BDF8]" />
+                    <span>{moment.stats}</span>
+                  </span>
+                  <span className="flex items-center gap-1 bg-black/50 backdrop-blur-md px-2 py-1 rounded-lg border border-white/10 text-[10px] font-mono text-slate-300">
+                    <Calendar size={10} />
+                    <span>Active Cohort</span>
+                  </span>
                 </div>
               </div>
 
-              {/* Bottom Details */}
-              <div className="text-left">
-                <div className="flex items-center justify-between">
-                  <h4 className="text-base font-bold text-slate-900 tracking-tight group-hover:text-[#2563EB] transition-colors">
-                    {item.name}
-                  </h4>
-                  <span className="text-[10px] font-mono font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
-                    Verified
-                  </span>
-                </div>
+              {/* Card Details */}
+              <div className="p-5 text-left">
+                <h4 className="text-base font-bold text-slate-900 tracking-tight leading-snug group-hover:text-[#2563EB] transition-colors mb-2">
+                  {moment.title}
+                </h4>
 
-                <p className="text-xs font-semibold text-slate-700 mt-1">
-                  {item.role}
+                <p className="text-xs text-slate-600 leading-relaxed font-normal line-clamp-2">
+                  {moment.description}
                 </p>
-
-                <div className="flex items-center justify-between mt-3 pt-3 border-t border-black/5 text-[11px] text-slate-500 font-medium">
-                  <span className="flex items-center gap-1">
-                    <CheckCircle2 size={13} className="text-[#2563EB]" />
-                    <span>{item.domain}</span>
-                  </span>
-                  <span className="font-mono text-slate-600 font-semibold">{item.sessions}</span>
-                </div>
               </div>
             </div>
           ))}
