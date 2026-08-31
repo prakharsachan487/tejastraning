@@ -28,7 +28,7 @@ const mentors = [
     ),
     role: 'Product & Program Management · 10+ Yrs Exp',
     quote: '10+ years of experience across web technologies, AI systems, project execution, and cross-functional leadership for high-impact tech products.',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80',
+    image: '/mentors/ashish_sachan.jpg',
     tilt: '0.6deg',
   },
   {

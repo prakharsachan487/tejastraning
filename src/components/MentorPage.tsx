@@ -138,7 +138,7 @@ const fellowMentors = [
     role: 'Product & Program Management · 10+ Yrs Exp',
     rating: '4.96',
     sessions: '110+ Sessions',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80',
+    image: '/mentors/ashish_sachan.jpg',
     color: '#2563EB',
   },
   {
