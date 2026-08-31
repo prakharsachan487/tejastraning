@@ -183,7 +183,7 @@ const fellowMentors = [
     role: 'Founder & Full-Stack Developer · Scalable Tech',
     rating: '4.94',
     sessions: '70+ Sessions',
-    image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80',
+    image: '/mentors/gagandeep_singh.jpg',
     color: '#10B981',
   },
   {

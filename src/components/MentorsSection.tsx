@@ -99,7 +99,7 @@ const mentors = [
     ),
     role: 'Founder & Full-Stack Developer · VALUETE',
     quote: 'Founder and Full-Stack Developer turning ideas into scalable technology architectures, robust cloud backends, and high-velocity builds.',
-    image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80',
+    image: '/mentors/gagandeep_singh.jpg',
     tilt: '-1.0deg',
   },
   {
