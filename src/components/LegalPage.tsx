@@ -12,7 +12,6 @@ import {
   CheckCircle2,
   AlertCircle
 } from 'lucide-react';
-import { Footer } from './Footer';
 
 export type LegalTab = 'privacy' | 'terms' | 'cookies';
 
@@ -135,9 +134,6 @@ export function LegalPage({ initialTab = 'privacy', onBackToHome: _ }: LegalPage
 
         </div>
       </main>
-
-      {/* Footer */}
-      <Footer />
     </div>
   );
 }

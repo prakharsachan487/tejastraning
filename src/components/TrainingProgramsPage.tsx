@@ -4,7 +4,6 @@ import { Sparkles, GraduationCap, Code2, Award, Users, CheckCircle2, ArrowRight 
 import { TrainingSolutionsSection } from './TrainingSolutionsSection';
 import { ProgramsSection } from './ProgramsSection';
 import { PlacementJourneySection } from './PlacementJourneySection';
-import { Footer } from './Footer';
 import { useEnquiry } from '../context/EnquiryContext';
 
 interface TrainingProgramsPageProps {
@@ -139,9 +138,6 @@ export function TrainingProgramsPage({ onBackToHome: _ }: TrainingProgramsPagePr
           </div>
         </div>
       </section>
-
-      {/* ── 07. Footer ── */}
-      <Footer />
 
     </div>
   );

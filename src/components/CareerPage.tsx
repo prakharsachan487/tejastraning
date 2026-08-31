@@ -1,31 +1,21 @@
-import { useEffect } from 'react';
-import { Sparkles } from 'lucide-react';
 import { MentorJobPortal } from './MentorJobPortal';
-import { Footer } from './Footer';
 
 interface CareerPageProps {
   onBackToHome?: () => void;
 }
 
-export function CareerPage({ onBackToHome: _ }: CareerPageProps) {
-  useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-  }, []);
-
+export function CareerPage({ onBackToHome: _onBackToHome }: CareerPageProps) {
   return (
-    <div className="min-h-screen bg-[#F8F9FB] text-slate-100 font-sans selection:bg-[#2563EB] selection:text-slate-900">
-      {/* Main Container */}
-      <main className="pt-24 pb-12">
-        {/* Banner Hero */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-4 text-center">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2563EB]/10 border border-[#2563EB]/30 text-[#2563EB] text-xs font-semibold tracking-wide mb-4">
-            <Sparkles size={14} className="text-[#2563EB]" />
-            <span>Grow360 Open Opportunities</span>
+    <div className="min-h-screen bg-[#F8F9FB] text-slate-900 font-sans selection:bg-[#2563EB] selection:text-white flex flex-col justify-between">
+      {/* Main Content Area */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20 w-full flex-1">
+        {/* Editorial Page Headline */}
+        <div className="text-center max-w-3xl mx-auto mb-14">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2563EB]/10 border border-[#2563EB]/25 text-[#2563EB] text-xs font-semibold tracking-wide mb-4">
+            <span>Career Opportunities</span>
           </div>
-
-          <h1 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight font-[family-name:var(--font-display)] mb-4">
+          
+          <h1 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight font-[family-name:var(--font-display)] mb-4">
             Explore Open <span className="bg-gradient-to-r from-[#2563EB] to-[#3B82F6] bg-clip-text text-transparent">Mentor &amp; Instructor</span> Roles
           </h1>
 
@@ -37,9 +27,6 @@ export function CareerPage({ onBackToHome: _ }: CareerPageProps) {
         {/* The Dedicated Job Portal Component */}
         <MentorJobPortal />
       </main>
-
-      {/* Footer */}
-      <Footer />
     </div>
   );
 }

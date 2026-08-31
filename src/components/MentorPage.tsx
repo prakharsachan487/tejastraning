@@ -14,7 +14,6 @@ import {
   Star,
   FileCode
 } from 'lucide-react';
-import { Footer } from './Footer';
 
 interface MentorPageProps {
   onBackToHome?: () => void;
@@ -707,9 +706,6 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
         </section>
 
       </main>
-
-      {/* Footer */}
-      <Footer />
 
     </div>
   );

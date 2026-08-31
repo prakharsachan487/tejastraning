@@ -119,8 +119,8 @@ function App() {
             )}
           </div>
 
-          {/* Footer on landing page, legal, and other views if not already in subcomponent */}
-          {currentPage !== 'training-programs' && currentPage !== 'career' && currentPage !== 'dashboard' && currentPage !== 'login' && currentPage !== 'signup' && (
+          {/* Global Universal Footer across Home, Mentor, Career, Training & Legal */}
+          {currentPage !== 'dashboard' && currentPage !== 'login' && currentPage !== 'signup' && (
             <Footer />
           )}
 
