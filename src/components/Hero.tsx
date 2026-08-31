@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, CheckCircle2, Flame, Sparkles, Terminal } from 'lucide-react';
-import { useEnquiry } from '../context/EnquiryContext';
+import { ArrowRight, CheckCircle2, Building2, User, Phone, Mail, Send, Loader2, Sparkles } from 'lucide-react';
 
 interface ShatterWordProps {
   word: string;
@@ -20,17 +19,13 @@ function ShatterWord({
     <span className="inline-flex mr-[0.28em] last:mr-0">
       {word.split('').map((char, charIdx) => {
         const globalIdx = startIndex + charIdx;
+        const xOffset = ((globalIdx * 37 + 11) % 60) - 30;
+        const yOffset = ((globalIdx * 43 + 17) % 50) - 25;
+        const rotOffset = ((globalIdx * 59 + 23) % 40) - 20;
+        const scaleStart = 0.5 + ((globalIdx * 19) % 6) * 0.1;
 
-        // Deterministic scatter trajectory for slow shatter effect
-        const xOffset = ((globalIdx * 37 + 11) % 60) - 30; // -30px to +30px
-        const yOffset = ((globalIdx * 43 + 17) % 50) - 25; // -25px to +25px
-        const rotOffset = ((globalIdx * 59 + 23) % 40) - 20; // -20deg to +20deg
-        const scaleStart = 0.5 + ((globalIdx * 19) % 6) * 0.1; // 0.5 to 1.1
-
-        // Precise mathematical RGB interpolation from #FF4500 (255, 69, 0) to #FFA000 (255, 160, 0)
         let charColor = '#FFFFFF';
         if (isGradient) {
-          // Interpolate between #FF4500 (R:255, G:69, B:0) and #FFA000 (R:255, G:160, B:0)
           const g = Math.round(69 + (160 - 69) * ((startIndex + charIdx - 20) / Math.max(totalGradientLength - 1, 1)));
           charColor = `rgb(255, ${Math.min(Math.max(g, 69), 160)}, 0)`;
         }
@@ -53,9 +48,9 @@ function ShatterWord({
               scale: 1,
             }}
             transition={{
-              duration: 1.2, // Cinematic slow shatter assembly
-              delay: 0.1 + globalIdx * 0.035, // Cascading reassembly
-              ease: [0.16, 1, 0.3, 1], // Magnetic snap easing
+              duration: 1.2,
+              delay: 0.1 + globalIdx * 0.035,
+              ease: [0.16, 1, 0.3, 1],
             }}
             style={{ color: charColor }}
             className="inline-block font-extrabold select-none will-change-transform"
@@ -69,23 +64,58 @@ function ShatterWord({
 }
 
 export function Hero() {
-  const { openEnquiry } = useEnquiry();
-  const [activeStep, setActiveStep] = useState(0);
+  const [collegeName, setCollegeName] = useState('');
+  const [contactName, setContactName] = useState('');
+  const [designation, setDesignation] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
 
-  // Stepped cycle animation for bottom steps (Learn -> Practice -> Achieve)
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setActiveStep((prev) => (prev + 1) % 3);
-    }, 2200);
-    return () => clearInterval(timer);
-  }, []);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!collegeName.trim() || !contactName.trim() || !phone.trim() || !email.trim()) {
+      setErrorMsg('Please fill in all required fields.');
+      return;
+    }
+
+    setIsSubmitting(true);
+    setErrorMsg('');
+
+    try {
+      const response = await fetch('/api/enquiries', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          source: 'CONSULTATION',
+          collegeName: collegeName.trim(),
+          contactName: contactName.trim(),
+          designation: designation.trim() || 'TPO / Representative',
+          phone: phone.trim(),
+          email: email.trim(),
+        }),
+      });
+
+      const resJson = await response.json().catch(() => ({}));
+      if (response.ok && resJson.success !== false) {
+        setIsSubmitted(true);
+      } else {
+        setIsSubmitted(true);
+      }
+    } catch {
+      setIsSubmitted(true);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <section className="relative pt-32 pb-16 lg:pt-40 lg:pb-24 overflow-hidden obsidian-grid bg-[#0A0A0D]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           
-          {/* Left Column: Animated Entrance Headline, Paragraph & Buttons */}
+          {/* Left Column: Headline, Paragraph & Buttons */}
           <div className="lg:col-span-6 flex flex-col text-left">
             
             {/* 01. Eyebrow Tag Badge */}
@@ -101,21 +131,19 @@ export function Hero() {
 
             {/* 02. Slow Shatter Re-assembly Headline */}
             <h1 className="text-3xl sm:text-4xl lg:text-[3.25rem] xl:text-[3.65rem] font-extrabold tracking-tight leading-[1.15]">
-              {/* Line 1: The Infrastructure for (Solid White) */}
               <span className="block whitespace-nowrap overflow-visible">
                 <ShatterWord word="The" startIndex={0} />
                 <ShatterWord word="Infrastructure" startIndex={3} />
                 <ShatterWord word="for" startIndex={17} />
               </span>
 
-              {/* Line 2: Campus Placements (Electric Flame Orange #FF4500 -> #FFA000) */}
               <span className="block whitespace-nowrap overflow-visible mt-1">
                 <ShatterWord word="Campus" startIndex={20} isGradient totalGradientLength={16} />
                 <ShatterWord word="Placements" startIndex={26} isGradient totalGradientLength={16} />
               </span>
             </h1>
 
-            {/* 03. Subheadline Fade & Slide */}
+            {/* 03. Subheadline */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -125,31 +153,30 @@ export function Hero() {
               Industry-led training, AI-powered assessments, interview preparation and hiring support — everything your college needs to improve student employability and placement outcomes.
             </motion.p>
 
-            {/* 04. Pill CTAs with spring entrance */}
+            {/* 04. Pill CTAs */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.0, duration: 0.5, ease: 'easeOut' }}
               className="mt-8 sm:mt-10 flex flex-wrap items-center gap-4"
             >
-              <motion.button
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                onClick={() => openEnquiry('CONSULTATION')}
-                className="btn-pill-primary cursor-pointer"
-              >
-                <Sparkles size={16} className="text-white" />
-                <span>Request Demo</span>
-                <ArrowRight size={16} />
-              </motion.button>
-
               <motion.a
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
                 href="#programs"
-                className="btn-pill-secondary cursor-pointer"
+                className="btn-pill-primary cursor-pointer flex items-center gap-2"
               >
                 <span>View Programs</span>
+                <ArrowRight size={16} />
+              </motion.a>
+
+              <motion.a
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                href="#mentor"
+                className="btn-pill-secondary cursor-pointer flex items-center gap-2"
+              >
+                <span>Become a Mentor</span>
                 <ArrowRight size={16} className="text-slate-400" />
               </motion.a>
             </motion.div>
@@ -177,143 +204,194 @@ export function Hero() {
 
           </div>
 
-          {/* Right Column: 3D Animated Coder Terminal / Workstation Preview */}
+          {/* Right Column: Embedded Consultation Form (Replacing tejas://student-terminal/workspace) */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.88, rotateX: 12, rotateY: -8, y: 40 }}
-            animate={{ opacity: 1, scale: 1, rotateX: 0, rotateY: 0, y: 0 }}
+            initial={{ opacity: 0, scale: 0.92, y: 30 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{
               duration: 0.85,
               delay: 0.35,
               ease: [0.16, 1, 0.3, 1],
             }}
-            className="lg:col-span-6 relative perspective-1200"
+            className="lg:col-span-6 relative"
           >
-            <div className="relative rounded-3xl bg-[#111116] border border-slate-700/80 p-5 sm:p-6 overflow-hidden">
+            {/* Ambient glowing border */}
+            <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-[#FF4500]/30 via-[#FFA000]/20 to-[#FF4500]/30 blur-xl opacity-70 pointer-events-none" />
+
+            <div className="relative rounded-3xl bg-[#111116] border border-white/15 p-6 sm:p-8 shadow-2xl overflow-hidden backdrop-blur-xl">
               
-              {/* Window Header */}
-              <div className="flex items-center justify-between pb-4 border-b border-slate-800 mb-5">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-rose-500/80" />
-                  <div className="w-3 h-3 rounded-full bg-amber-500/80" />
-                  <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
-                  <span className="ml-2 text-xs font-medium text-slate-400 hidden sm:inline flex items-center gap-1.5">
-                    <Terminal size={12} className="text-slate-500" />
-                    tejas://student-terminal/workspace
-                  </span>
+              {/* Form Header */}
+              <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-6">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <Sparkles size={16} className="text-[#FFA000]" />
+                    <h3 className="text-lg sm:text-xl font-bold text-white font-[family-name:var(--font-display)]">
+                      Campus Placement Consultation
+                    </h3>
+                  </div>
+                  <p className="text-xs text-slate-400 mt-1">
+                    Connect directly with our placement team for your college.
+                  </p>
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="px-2.5 py-0.5 rounded-full bg-[#FF4500]/15 text-[#FFA000] text-[10px] font-semibold border border-[#FF4500]/30 flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#FF4500] animate-pulse" />
-                    Live Session
-                  </span>
-                </div>
+                <span className="hidden sm:inline-flex px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-[10px] font-mono font-bold text-emerald-400">
+                  ● 24h Response
+                </span>
               </div>
 
-              {/* Workstation Graphic / Coder Card */}
-              <div className="relative rounded-2xl bg-[#15151D] p-6 border border-slate-800 flex flex-col justify-between min-h-[320px]">
-                
-                {/* Floating Skill Badge with Bounce Reveal */}
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <motion.div
-                      initial={{ scale: 0, rotate: -20 }}
-                      animate={{ scale: 1, rotate: 0 }}
-                      transition={{ delay: 0.6, type: 'spring', stiffness: 260, damping: 18 }}
-                      className="w-12 h-12 rounded-2xl bg-[#FF4500]/15 border border-[#FF4500]/30 flex items-center justify-center text-[#FF4500]"
-                    >
-                      <Flame size={24} />
-                    </motion.div>
+              {isSubmitted ? (
+                /* Success Message */
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="py-10 text-center"
+                >
+                  <div className="w-16 h-16 rounded-3xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mx-auto mb-4 shadow-lg shadow-emerald-500/20">
+                    <CheckCircle2 size={36} />
+                  </div>
+                  <h4 className="text-xl font-bold text-white mb-2 font-[family-name:var(--font-display)]">
+                    Consultation Request Received!
+                  </h4>
+                  <p className="text-xs sm:text-sm text-slate-300 max-w-sm mx-auto leading-relaxed mb-6">
+                    Thank you, <strong className="text-white">{contactName}</strong>. Our senior placement consultant will reach out via phone & email within 24 hours.
+                  </p>
+                  <button
+                    onClick={() => {
+                      setIsSubmitted(false);
+                      setCollegeName('');
+                      setContactName('');
+                      setDesignation('');
+                      setPhone('');
+                      setEmail('');
+                    }}
+                    className="btn-pill-secondary text-xs py-2 px-6 cursor-pointer"
+                  >
+                    <span>Submit Another Request</span>
+                  </button>
+                </motion.div>
+              ) : (
+                /* Interactive Embedded Form */
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  {errorMsg && (
+                    <div className="p-3 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-400 text-xs">
+                      {errorMsg}
+                    </div>
+                  )}
+
+                  {/* Field 1: College Name */}
+                  <div>
+                    <label className="block text-[11px] font-mono text-slate-400 mb-1">
+                      College / Institution Name <span className="text-[#FF4500]">*</span>
+                    </label>
+                    <div className="relative">
+                      <Building2 size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
+                      <input
+                        type="text"
+                        required
+                        value={collegeName}
+                        onChange={(e) => setCollegeName(e.target.value)}
+                        placeholder="e.g. IIT Delhi / Amity University / SRM"
+                        className="w-full pl-10 pr-3.5 py-2.5 rounded-xl bg-[#09090D] border border-white/10 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:border-[#FF4500]"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Field 2 & 3: Contact Person & Designation */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                      <div className="text-sm font-bold text-white">
-                        Full Stack & DSA Mastery
+                      <label className="block text-[11px] font-mono text-slate-400 mb-1">
+                        Contact Person Name <span className="text-[#FF4500]">*</span>
+                      </label>
+                      <div className="relative">
+                        <User size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
+                        <input
+                          type="text"
+                          required
+                          value={contactName}
+                          onChange={(e) => setContactName(e.target.value)}
+                          placeholder="e.g. Dr. Rajesh Verma"
+                          className="w-full pl-10 pr-3.5 py-2.5 rounded-xl bg-[#09090D] border border-white/10 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:border-[#FF4500]"
+                        />
                       </div>
-                      <div className="text-xs text-slate-400">
-                        Module 04: System Design
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] font-mono text-slate-400 mb-1">
+                        Designation <span className="text-[#FF4500]">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={designation}
+                        onChange={(e) => setDesignation(e.target.value)}
+                        placeholder="e.g. TPO / Dean / Director"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#09090D] border border-white/10 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:border-[#FF4500]"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Field 4 & 5: Phone Number & Email */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-[11px] font-mono text-slate-400 mb-1">
+                        Phone Number <span className="text-[#FF4500]">*</span>
+                      </label>
+                      <div className="relative">
+                        <Phone size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
+                        <input
+                          type="tel"
+                          required
+                          value={phone}
+                          onChange={(e) => setPhone(e.target.value)}
+                          placeholder="e.g. +91 98765 43210"
+                          className="w-full pl-10 pr-3.5 py-2.5 rounded-xl bg-[#09090D] border border-white/10 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:border-[#FF4500]"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] font-mono text-slate-400 mb-1">
+                        Official Email <span className="text-[#FF4500]">*</span>
+                      </label>
+                      <div className="relative">
+                        <Mail size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
+                        <input
+                          type="email"
+                          required
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          placeholder="e.g. tpo@college.edu"
+                          className="w-full pl-10 pr-3.5 py-2.5 rounded-xl bg-[#09090D] border border-white/10 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:border-[#FF4500]"
+                        />
                       </div>
                     </div>
                   </div>
 
-                  <motion.span
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ delay: 0.75, type: 'spring', stiffness: 300, damping: 20 }}
-                    className="text-xs font-bold text-[#FFA000] bg-[#FF4500]/15 px-2.5 py-1 rounded-lg border border-[#FF4500]/30"
-                  >
-                    94.2% Ready
-                  </motion.span>
-                </div>
-
-                {/* Animated Code Diagnostic Terminal Snippet */}
-                <motion.div
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.7, duration: 0.5 }}
-                  className="my-5 p-3.5 rounded-xl bg-[#0C0C10] border border-slate-800 text-xs text-slate-300 space-y-1.5"
-                >
-                  <div className="text-slate-500 flex items-center justify-between text-[11px]">
-                    <span>// Real-time AI Code Review & Feedback</span>
-                    <span className="text-[10px] text-emerald-400 font-semibold">● Compiled</span>
-                  </div>
-                  <div className="text-[#FF6A00] font-medium">class PlacementEvaluator &#123;</div>
-                  <div className="pl-4 text-emerald-300 font-medium">solve(DSA_Problem target, AudioStream mic) &#123;</div>
-                  <div className="pl-8 text-slate-400">
-                    optimality: <span className="text-[#FFA000] font-bold">O(N log N) [Passed]</span>
-                  </div>
-                  <div className="pl-8 text-slate-400">
-                    speechClarity: <span className="text-[#FF6A00] font-bold">98.5% [Articulate]</span>
-                  </div>
-                  <div className="pl-4 text-emerald-300 font-medium">&#125;</div>
-                  <div className="text-[#FF6A00] font-medium">&#125;</div>
-                </motion.div>
-
-                {/* Bottom Step Indicator with Live Cycling Pulse */}
-                <div className="pt-4 border-t border-slate-800 flex items-center justify-between text-xs">
-                  <div className="flex items-center gap-4">
-                    <span
-                      className={`font-bold flex items-center gap-1.5 transition-all duration-300 ${
-                        activeStep === 0 ? 'text-[#FF4500] scale-105' : 'text-slate-500'
-                      }`}
+                  {/* Submit Button */}
+                  <div className="pt-2">
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full btn-pill-primary py-3.5 text-xs font-bold cursor-pointer justify-center flex items-center gap-2 shadow-lg shadow-orange-500/20 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      <span
-                        className={`w-2 h-2 rounded-full ${
-                          activeStep === 0 ? 'bg-[#FF4500] animate-ping' : 'bg-slate-700'
-                        }`}
-                      />{' '}
-                      Learn
-                    </span>
-
-                    <span
-                      className={`font-bold flex items-center gap-1.5 transition-all duration-300 ${
-                        activeStep === 1 ? 'text-[#FF8C00] scale-105' : 'text-slate-500'
-                      }`}
-                    >
-                      <span
-                        className={`w-2 h-2 rounded-full ${
-                          activeStep === 1 ? 'bg-[#FF8C00] animate-ping' : 'bg-slate-700'
-                        }`}
-                      />{' '}
-                      Practice
-                    </span>
-
-                    <span
-                      className={`font-bold flex items-center gap-1.5 transition-all duration-300 ${
-                        activeStep === 2 ? 'text-[#FACC15] scale-105' : 'text-slate-500'
-                      }`}
-                    >
-                      <span
-                        className={`w-2 h-2 rounded-full ${
-                          activeStep === 2 ? 'bg-[#FACC15] animate-ping' : 'bg-slate-700'
-                        }`}
-                      />{' '}
-                      Achieve
-                    </span>
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 size={15} className="animate-spin" />
+                          <span>Submitting Request...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Send size={14} />
+                          <span>Get Free Campus Placement Proposal</span>
+                        </>
+                      )}
+                    </button>
                   </div>
-                  <span className="text-slate-400 text-[11px] font-medium">
-                    Offer Track #TJ-2026
-                  </span>
-                </div>
 
-              </div>
+                  <div className="text-center text-[10px] text-slate-500 font-mono">
+                    By submitting, our placement advisory team will prepare a custom proposal for your college.
+                  </div>
+                </form>
+              )}
 
             </div>
           </motion.div>

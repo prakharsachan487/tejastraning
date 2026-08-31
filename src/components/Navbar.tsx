@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ArrowRight, Sparkles, ChevronRight, LogIn, LogOut } from 'lucide-react';
-import { useEnquiry } from '../context/EnquiryContext';
+import { Menu, X, ChevronRight, LogIn, LogOut } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 interface NavItem {
@@ -20,7 +19,6 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
-  const { openEnquiry } = useEnquiry();
   const { openAuth, user, logout } = useAuth();
 
   useEffect(() => {
@@ -150,21 +148,12 @@ export function Navbar() {
               ) : (
                 <button
                   onClick={() => openAuth('login')}
-                  className="text-xs font-bold text-slate-300 hover:text-[#FFA000] px-3.5 py-2 transition-colors cursor-pointer flex items-center gap-1.5"
+                  className="btn-pill-primary px-5 py-2.5 text-xs font-bold cursor-pointer flex items-center gap-1.5 shadow-md shadow-orange-500/20"
                 >
-                  <LogIn size={14} className="text-[#FF6A00]" />
+                  <LogIn size={14} className="text-white" />
                   <span>Login</span>
                 </button>
               )}
-
-              <button
-                onClick={() => openEnquiry('CONSULTATION')}
-                className="btn-pill-primary cursor-pointer active:scale-95 text-xs py-2.5 px-5"
-              >
-                <Sparkles size={14} className="text-white" />
-                <span>Request Demo</span>
-                <ArrowRight size={14} />
-              </button>
             </div>
 
             {/* Mobile Menu Button */}
@@ -267,21 +256,10 @@ export function Navbar() {
                     }}
                     className="btn-pill-secondary w-full justify-center text-xs py-3 flex items-center gap-2"
                   >
-                    <LogIn size={14} className="text-[#FF6A00]" />
+                    <LogIn size={14} className="text-white" />
                     <span>Login / Sign Up</span>
                   </button>
                 )}
-                <button
-                  onClick={() => {
-                    setIsMobileOpen(false);
-                    openEnquiry('CONSULTATION');
-                  }}
-                  className="btn-pill-primary w-full justify-center text-xs py-3"
-                >
-                  <Sparkles size={14} className="text-white" />
-                  <span>Request Demo</span>
-                  <ArrowRight size={14} />
-                </button>
               </div>
             </motion.div>
           </>
