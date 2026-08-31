@@ -374,7 +374,7 @@ export function PlatformSection() {
             </div>
 
             {/* Inner Certificate Mockup Widget */}
-            <div className="rounded-xl bg-gradient-to-br from-[#161622] to-[#0D0D12] border border-[#3B82F6]/30 p-3.5 text-xs shadow-md">
+            <div className="rounded-xl bg-gradient-to-br from-white to-slate-50 border border-blue-200 p-3.5 text-xs shadow-md">
               <div className="flex items-center justify-between pb-2 mb-2 border-b border-black/10">
                 <div className="flex items-center gap-1.5">
                   <div className="w-5 h-5 rounded-full bg-[#3B82F6]/20 flex items-center justify-center text-[#3B82F6]">

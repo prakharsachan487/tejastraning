@@ -375,7 +375,7 @@ export function ProgramsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mt-12 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-[#181824] via-[#14141C] to-[#121218] border border-black/8 flex flex-col md:flex-row items-center justify-between gap-6"
+          className="mt-12 p-6 sm:p-8 rounded-3xl bg-white shadow-sm border border-black/8 border border-black/8 flex flex-col md:flex-row items-center justify-between gap-6"
         >
           <div className="flex items-center gap-4 text-left">
             <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#2563EB] to-[#3B82F6] flex items-center justify-center text-slate-900 shrink-0 shadow-lg shadow-[#2563EB]/">

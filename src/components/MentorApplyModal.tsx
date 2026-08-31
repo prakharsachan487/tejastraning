@@ -56,7 +56,7 @@ export function MentorApplyModal({ isOpen, onClose }: MentorApplyModalProps) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="relative w-full max-w-xl rounded-3xl bg-white border border-white/15 p-6 sm:p-8 shadow-2xl shadow-black z-10 text-slate-100 overflow-hidden"
+            className="relative w-full max-w-xl rounded-3xl bg-white border border-slate-200 p-6 sm:p-8 shadow-2xl shadow-black z-10 text-slate-100 overflow-hidden"
           >
             {/* Ambient Background Glow */}
             <div className="absolute top-0 right-0 w-72 h-72 bg-[#2563EB]/10 blur-[100px] pointer-events-none rounded-full" />
@@ -64,7 +64,7 @@ export function MentorApplyModal({ isOpen, onClose }: MentorApplyModalProps) {
             {/* Close Button */}
             <button
               onClick={handleReset}
-              className="absolute top-6 right-6 p-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+              className="absolute top-6 right-6 p-2 rounded-xl text-slate-400 hover:text-slate-900 hover:bg-white/10 transition-colors cursor-pointer"
             >
               <X size={20} />
             </button>
@@ -74,11 +74,11 @@ export function MentorApplyModal({ isOpen, onClose }: MentorApplyModalProps) {
                 <div className="w-16 h-16 rounded-3xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mx-auto mb-6 shadow-lg shadow-emerald-500/20">
                   <CheckCircle2 size={36} />
                 </div>
-                <h3 className="text-2xl font-extrabold text-white mb-2 font-[family-name:var(--font-display)]">
+                <h3 className="text-2xl font-extrabold text-slate-900 mb-2 font-[family-name:var(--font-display)]">
                   Application Received!
                 </h3>
                 <p className="text-sm text-slate-300 max-w-md mx-auto mb-8 leading-relaxed">
-                  Thank you for applying to the Grow360 Mentor Guild, <span className="text-white font-semibold">{fullName || 'Engineer'}</span>. Our developer relations team will review your LinkedIn and reach out within 24 hours.
+                  Thank you for applying to the Grow360 Mentor Guild, <span className="text-slate-900 font-semibold">{fullName || 'Engineer'}</span>. Our developer relations team will review your LinkedIn and reach out within 24 hours.
                 </p>
                 <button
                   onClick={handleReset}
@@ -91,11 +91,11 @@ export function MentorApplyModal({ isOpen, onClose }: MentorApplyModalProps) {
               <div>
                 {/* Modal Header */}
                 <div className="mb-6">
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#00B4D8]/10 border border-[#00B4D8]/30 text-[#00B4D8] text-xs font-mono font-semibold mb-3">
-                    <Sparkles size={13} className="text-[#00B4D8]" />
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-[#2563EB] text-xs font-mono font-semibold mb-3">
+                    <Sparkles size={13} className="text-[#2563EB]" />
                     <span>Grow360 Mentor Network</span>
                   </div>
-                  <h3 className="text-2xl font-extrabold text-white tracking-tight font-[family-name:var(--font-display)]">
+                  <h3 className="text-2xl font-extrabold text-slate-900 tracking-tight font-[family-name:var(--font-display)]">
                     Apply as an Industry Mentor
                   </h3>
                   <p className="text-xs sm:text-sm text-slate-400 mt-1.5">
@@ -118,7 +118,7 @@ export function MentorApplyModal({ isOpen, onClose }: MentorApplyModalProps) {
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
                         placeholder="e.g. Rahul Sharma"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#0A0A0E] border border-white/15 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-[#2563EB] transition-colors"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-white border-slate-200 text-slate-900 border border-slate-200 text-xs text-slate-900 placeholder:text-slate-500 focus:outline-none focus:border-[#2563EB] transition-colors"
                       />
                     </div>
 
@@ -134,7 +134,7 @@ export function MentorApplyModal({ isOpen, onClose }: MentorApplyModalProps) {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="rahul@company.com"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#0A0A0E] border border-white/15 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-[#2563EB] transition-colors"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-white border-slate-200 text-slate-900 border border-slate-200 text-xs text-slate-900 placeholder:text-slate-500 focus:outline-none focus:border-[#2563EB] transition-colors"
                       />
                     </div>
                   </div>
@@ -152,7 +152,7 @@ export function MentorApplyModal({ isOpen, onClose }: MentorApplyModalProps) {
                         value={company}
                         onChange={(e) => setCompany(e.target.value)}
                         placeholder="e.g. Google, Microsoft, Startup"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#0A0A0E] border border-white/15 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-[#2563EB] transition-colors"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-white border-slate-200 text-slate-900 border border-slate-200 text-xs text-slate-900 placeholder:text-slate-500 focus:outline-none focus:border-[#2563EB] transition-colors"
                       />
                     </div>
 
@@ -168,7 +168,7 @@ export function MentorApplyModal({ isOpen, onClose }: MentorApplyModalProps) {
                         value={role}
                         onChange={(e) => setRole(e.target.value)}
                         placeholder="e.g. SDE II, Senior Engineer"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#0A0A0E] border border-white/15 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-[#2563EB] transition-colors"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-white border-slate-200 text-slate-900 border border-slate-200 text-xs text-slate-900 placeholder:text-slate-500 focus:outline-none focus:border-[#2563EB] transition-colors"
                       />
                     </div>
                   </div>
@@ -187,7 +187,7 @@ export function MentorApplyModal({ isOpen, onClose }: MentorApplyModalProps) {
                       value={linkedin}
                       onChange={(e) => setLinkedin(e.target.value)}
                       placeholder="https://linkedin.com/in/yourprofile"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#0A0A0E] border border-white/15 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-[#2563EB] transition-colors"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-white border-slate-200 text-slate-900 border border-slate-200 text-xs text-slate-900 placeholder:text-slate-500 focus:outline-none focus:border-[#2563EB] transition-colors"
                     />
                   </div>
 
@@ -200,7 +200,7 @@ export function MentorApplyModal({ isOpen, onClose }: MentorApplyModalProps) {
                       <select
                         value={domain}
                         onChange={(e) => setDomain(e.target.value)}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#0A0A0E] border border-white/15 text-xs text-white focus:outline-none focus:border-[#2563EB] transition-colors cursor-pointer"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-white border-slate-200 text-slate-900 border border-slate-200 text-xs text-slate-900 focus:outline-none focus:border-[#2563EB] transition-colors cursor-pointer"
                       >
                         <option value="DSA & Algorithms">DSA & Algorithms</option>
                         <option value="System Design & Backend">System Design & Backend</option>
@@ -220,7 +220,7 @@ export function MentorApplyModal({ isOpen, onClose }: MentorApplyModalProps) {
                       <select
                         value={availability}
                         onChange={(e) => setAvailability(e.target.value)}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#0A0A0E] border border-white/15 text-xs text-white focus:outline-none focus:border-[#2563EB] transition-colors cursor-pointer"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-white border-slate-200 text-slate-900 border border-slate-200 text-xs text-slate-900 focus:outline-none focus:border-[#2563EB] transition-colors cursor-pointer"
                       >
                         <option value="1-2 hrs / weekend">1-2 hrs / weekend</option>
                         <option value="2-4 hrs / weekend">2-4 hrs / weekend</option>

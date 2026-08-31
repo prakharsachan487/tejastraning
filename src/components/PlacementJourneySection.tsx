@@ -234,23 +234,23 @@ export function PlacementJourneySection() {
               </div>
 
               {/* Night Grind Coding Workstation Card */}
-              <div className="rounded-2xl bg-slate-50 border border-slate-800 p-5 sm:p-6 shadow-2xl">
-                <div className="flex items-center justify-between pb-3 border-b border-slate-800 mb-4 text-xs">
-                  <span className="px-2.5 py-1 rounded bg-[#1E3A8A]/50 text-[#60A5FA] font-bold uppercase text-[10px] tracking-wider">
+              <div className="rounded-2xl bg-slate-50 border border-slate-200 p-5 sm:p-6 shadow-2xl">
+                <div className="flex items-center justify-between pb-3 border-b border-slate-200 mb-4 text-xs">
+                  <span className="px-2.5 py-1 rounded bg-blue-100 text-[#60A5FA] font-bold uppercase text-[10px] tracking-wider">
                     NIGHT GRIND
                   </span>
                   <span className="text-slate-600 font-mono text-xs">2:14 AM</span>
                 </div>
 
-                <div className="p-4 rounded-xl bg-white border border-slate-800 mb-5">
-                  <div className="flex items-center justify-between pb-3 mb-3 border-b border-slate-800/80">
+                <div className="p-4 rounded-xl bg-white border border-slate-200 mb-5">
+                  <div className="flex items-center justify-between pb-3 mb-3 border-b border-slate-200/80">
                     <div className="flex items-center gap-2">
                       <div className="w-2.5 h-2.5 rounded-full bg-rose-500" />
                       <div className="w-2.5 h-2.5 rounded-full bg-[#2563EB]" />
                       <div className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
                       <span className="ml-2 text-xs font-mono text-slate-600">two-sum.cpp</span>
                     </div>
-                    <span className="px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-400 text-[10px] font-bold border border-emerald-500/30">
+                    <span className="px-2 py-0.5 rounded bg-emerald-100 text-emerald-400 text-[10px] font-bold border border-emerald-200">
                       Accepted
                     </span>
                   </div>
@@ -259,14 +259,14 @@ export function PlacementJourneySection() {
                     <div className="sm:col-span-8 font-mono text-xs text-slate-700 space-y-1">
                       <div className="text-slate-500">// LC 1 · Easy</div>
                       <div className="text-[#38BDF8]">class Solution &#123;</div>
-                      <div className="pl-4 text-emerald-300">vector&lt;int&gt; twoSum(...) &#123;</div>
+                      <div className="pl-4 text-emerald-700">vector&lt;int&gt; twoSum(...) &#123;</div>
                       <div className="pl-8 text-slate-700">unordered_map&lt;int, int&gt; m;</div>
                       <div className="pl-8 text-slate-700">return &#123;i, m[t]&#125;;</div>
-                      <div className="pl-4 text-emerald-300">&#125;</div>
+                      <div className="pl-4 text-emerald-700">&#125;</div>
                       <div className="text-[#38BDF8]">&#125;</div>
                     </div>
 
-                    <div className="sm:col-span-4 border-l border-slate-800 pl-4 space-y-2 text-xs">
+                    <div className="sm:col-span-4 border-l border-slate-200 pl-4 space-y-2 text-xs">
                       <div className="font-bold text-slate-900">Two Sum</div>
                       <div className="text-[11px] text-slate-600">Find indices that add up to target.</div>
                       <div className="space-y-1 text-[11px] pt-1">
@@ -278,9 +278,9 @@ export function PlacementJourneySection() {
                   </div>
                 </div>
 
-                <div className="flex flex-wrap items-center justify-between gap-4 pt-3 border-t border-slate-800">
+                <div className="flex flex-wrap items-center justify-between gap-4 pt-3 border-t border-slate-200">
                   <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-full bg-[#1E293B] border border-slate-700 flex items-center justify-center text-slate-700 text-xs font-bold">
+                    <div className="w-9 h-9 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-700 text-xs font-bold">
                       🧑‍💻
                     </div>
                     <div>
@@ -290,16 +290,16 @@ export function PlacementJourneySection() {
                   </div>
 
                   <div className="flex items-center gap-2">
-                    <span className="px-2 py-1 rounded bg-[#162032] text-amber-300 text-[10px] font-semibold border border-[#2563EB]/20">
+                    <span className="px-2 py-1 rounded bg-slate-100 text-amber-300 text-[10px] font-semibold border border-[#2563EB]/20">
                       Arrays
                     </span>
-                    <span className="px-2 py-1 rounded bg-[#162032] text-cyan-300 text-[10px] font-semibold border border-cyan-400/20">
+                    <span className="px-2 py-1 rounded bg-slate-100 text-cyan-700 text-[10px] font-semibold border border-cyan-400/20">
                       Trees
                     </span>
-                    <span className="px-2 py-1 rounded bg-[#162032] text-emerald-300 text-[10px] font-semibold border border-emerald-400/20">
+                    <span className="px-2 py-1 rounded bg-slate-100 text-emerald-700 text-[10px] font-semibold border border-emerald-400/20">
                       DP
                     </span>
-                    <div className="ml-2 px-2.5 py-1 rounded-lg bg-[#1E293B] text-[#3B82F6] text-xs font-bold border border-slate-700">
+                    <div className="ml-2 px-2.5 py-1 rounded-lg bg-slate-100 text-[#3B82F6] text-xs font-bold border border-slate-200">
                       312 <span className="text-[9px] text-slate-600 uppercase font-normal">Problems</span>
                     </div>
                   </div>
@@ -359,11 +359,11 @@ export function PlacementJourneySection() {
               </div>
 
               {/* Assessment Contest Card */}
-              <div className="rounded-2xl bg-slate-50 border border-slate-800 p-5 sm:p-6 shadow-2xl">
-                <div className="flex items-center justify-between pb-3 border-b border-slate-800 mb-4 text-xs">
+              <div className="rounded-2xl bg-slate-50 border border-slate-200 p-5 sm:p-6 shadow-2xl">
+                <div className="flex items-center justify-between pb-3 border-b border-slate-200 mb-4 text-xs">
                   <div className="flex items-center gap-2">
                     <Terminal size={14} className="text-[#38BDF8]" />
-                    <span className="px-2.5 py-1 rounded bg-[#1E3A8A]/50 text-[#60A5FA] font-bold uppercase text-[10px] tracking-wider">
+                    <span className="px-2.5 py-1 rounded bg-blue-100 text-[#60A5FA] font-bold uppercase text-[10px] tracking-wider">
                       CAMPUS CODING SPRINT
                     </span>
                   </div>
@@ -371,24 +371,24 @@ export function PlacementJourneySection() {
                 </div>
 
                 <div className="grid sm:grid-cols-3 gap-3 text-xs mb-4">
-                  <div className="p-3.5 rounded-xl bg-white border border-slate-800">
+                  <div className="p-3.5 rounded-xl bg-white border border-slate-200">
                     <div className="text-slate-600 text-[10px] font-bold">TOTAL SUBMISSIONS</div>
                     <div className="text-lg font-bold text-slate-900 mt-1">1,480+</div>
                     <div className="text-[10px] text-emerald-400 mt-1">✓ Automated Test Suites</div>
                   </div>
-                  <div className="p-3.5 rounded-xl bg-white border border-slate-800">
+                  <div className="p-3.5 rounded-xl bg-white border border-slate-200">
                     <div className="text-slate-600 text-[10px] font-bold">AVERAGE RUNTIME</div>
                     <div className="text-lg font-bold text-cyan-400 mt-1">14 ms</div>
                     <div className="text-[10px] text-slate-600 mt-1">O(N log N) Optimal</div>
                   </div>
-                  <div className="p-3.5 rounded-xl bg-white border border-slate-800">
+                  <div className="p-3.5 rounded-xl bg-white border border-slate-200">
                     <div className="text-slate-600 text-[10px] font-bold">BENCHMARK SCORE</div>
                     <div className="text-lg font-bold text-[#3B82F6] mt-1">94.8 / 100</div>
                     <div className="text-[10px] text-emerald-400 mt-1">Top Tier Tier-1 Readiness</div>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between text-xs text-slate-600 pt-2 border-t border-slate-800">
+                <div className="flex items-center justify-between text-xs text-slate-600 pt-2 border-t border-slate-200">
                   <span className="text-slate-700">Weekly campus-wide leaderboards &amp; proctored contests</span>
                   <span className="text-emerald-400 font-bold">100% Proctored</span>
                 </div>
@@ -447,36 +447,36 @@ export function PlacementJourneySection() {
               </div>
 
               {/* Cloud Architecture & GitHub Deploy Card */}
-              <div className="rounded-2xl bg-slate-50 border border-slate-800 p-5 sm:p-6 shadow-2xl">
-                <div className="flex items-center justify-between pb-3 border-b border-slate-800 mb-4 text-xs">
+              <div className="rounded-2xl bg-slate-50 border border-slate-200 p-5 sm:p-6 shadow-2xl">
+                <div className="flex items-center justify-between pb-3 border-b border-slate-200 mb-4 text-xs">
                   <div className="flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-emerald-400" />
                     <span className="font-mono text-slate-700 font-bold">github.com/grow360-cohort/microservices-platform</span>
                   </div>
-                  <span className="px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-400 text-[10px] font-bold border border-emerald-500/30">
+                  <span className="px-2 py-0.5 rounded bg-emerald-100 text-emerald-400 text-[10px] font-bold border border-emerald-200">
                     Deployed to AWS
                   </span>
                 </div>
 
                 <div className="grid sm:grid-cols-3 gap-3 text-xs mb-4">
-                  <div className="p-3.5 rounded-xl bg-[#090D15] border border-slate-800">
+                  <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
                     <div className="text-slate-600 text-[10px] font-bold">API GATEWAY</div>
                     <div className="text-sm font-bold text-slate-900 mt-1">Next.js App Router</div>
                     <div className="text-[10px] text-emerald-400 mt-1">✓ 100% Type-Safe</div>
                   </div>
-                  <div className="p-3.5 rounded-xl bg-[#090D15] border border-slate-800">
+                  <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
                     <div className="text-slate-600 text-[10px] font-bold">CORE BACKEND</div>
                     <div className="text-sm font-bold text-slate-900 mt-1">Spring Boot 3 + Redis</div>
                     <div className="text-[10px] text-cyan-400 mt-1">✓ Kafka Event Streams</div>
                   </div>
-                  <div className="p-3.5 rounded-xl bg-[#090D15] border border-slate-800">
+                  <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
                     <div className="text-slate-600 text-[10px] font-bold">DATABASE LAYER</div>
                     <div className="text-sm font-bold text-slate-900 mt-1">PostgreSQL Shards</div>
                     <div className="text-[10px] text-[#3B82F6] mt-1">✓ ACID Guaranteed</div>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between text-xs text-slate-600 pt-2 border-t border-slate-800">
+                <div className="flex items-center justify-between text-xs text-slate-600 pt-2 border-t border-slate-200">
                   <span className="text-slate-700">Reviewed by Staff Engineers at Google &amp; Adobe</span>
                   <span className="text-emerald-400 font-bold">Production Approved</span>
                 </div>
@@ -535,9 +535,9 @@ export function PlacementJourneySection() {
               </div>
 
               {/* Mock Interview Simulation Card */}
-              <div className="rounded-2xl bg-slate-50 border border-slate-800 p-5 sm:p-6 shadow-2xl">
-                <div className="flex items-center justify-between pb-3 border-b border-slate-800 mb-4 text-xs">
-                  <span className="px-2.5 py-1 rounded bg-[#1E3A8A]/50 text-[#60A5FA] font-bold uppercase text-[10px] tracking-wider">
+              <div className="rounded-2xl bg-slate-50 border border-slate-200 p-5 sm:p-6 shadow-2xl">
+                <div className="flex items-center justify-between pb-3 border-b border-slate-200 mb-4 text-xs">
+                  <span className="px-2.5 py-1 rounded bg-blue-100 text-[#60A5FA] font-bold uppercase text-[10px] tracking-wider">
                     MOCK INTERVIEW
                   </span>
                   <div className="flex items-center gap-1.5 text-rose-400 font-mono text-xs">
@@ -547,37 +547,37 @@ export function PlacementJourneySection() {
                 </div>
 
                 <div className="grid sm:grid-cols-2 gap-4 mb-5">
-                  <div className="p-4 rounded-xl bg-[#090D15] border border-slate-800 flex flex-col justify-between min-h-[140px]">
+                  <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 flex flex-col justify-between min-h-[140px]">
                     <div className="flex items-center gap-2 mb-3">
                       <div className="w-8 h-8 rounded-full bg-slate-300 flex items-center justify-center text-slate-800 text-xs font-bold">
                         👤
                       </div>
                       <span className="text-xs font-bold text-slate-600">Interviewer (Staff Engineer)</span>
                     </div>
-                    <div className="text-xs text-slate-700 bg-[#111827] p-2.5 rounded-lg border border-slate-800 leading-relaxed italic">
+                    <div className="text-xs text-slate-700 bg-white p-2.5 rounded-lg border border-slate-200 leading-relaxed italic">
                       "Walk me through your approach to binary search on answer space."
                     </div>
                   </div>
 
-                  <div className="p-4 rounded-xl bg-[#090D15] border border-slate-800 flex flex-col justify-between min-h-[140px]">
+                  <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 flex flex-col justify-between min-h-[140px]">
                     <div className="flex items-center gap-2 mb-3">
                       <div className="w-8 h-8 rounded-full bg-[#2563EB] flex items-center justify-center text-slate-900 text-xs font-bold">
                         🎓
                       </div>
                       <span className="text-xs font-bold text-slate-600">You (Student)</span>
                     </div>
-                    <div className="text-xs text-slate-700 bg-[#111827] p-2.5 rounded-lg border border-slate-800 leading-relaxed italic">
+                    <div className="text-xs text-slate-700 bg-white p-2.5 rounded-lg border border-slate-200 leading-relaxed italic">
                       "I'd set lo/hi on the answer space, then check feasibility with mid in O(N)..."
                     </div>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-3 gap-2 mb-3 text-center text-xs">
-                  <div className="p-2.5 rounded-xl bg-[#0B251E] border border-emerald-500/20 text-emerald-400">
+                  <div className="p-2.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-400">
                     <div className="text-[10px] font-mono text-slate-600 uppercase">Clarity</div>
                     <div className="text-sm font-bold">9/10</div>
                   </div>
-                  <div className="p-2.5 rounded-xl bg-[#0F2033] border border-cyan-500/20 text-cyan-400">
+                  <div className="p-2.5 rounded-xl bg-cyan-50 border border-cyan-500/20 text-cyan-400">
                     <div className="text-[10px] font-mono text-slate-600 uppercase">DSA Depth</div>
                     <div className="text-sm font-bold">8.5/10</div>
                   </div>
@@ -587,7 +587,7 @@ export function PlacementJourneySection() {
                   </div>
                 </div>
 
-                <div className="text-[11px] text-slate-600 text-center font-medium pt-2 border-t border-slate-800">
+                <div className="text-[11px] text-slate-600 text-center font-medium pt-2 border-t border-slate-200">
                   Mentor note: Strong fundamentals. Practice high-scale distributed caching next.
                 </div>
               </div>
@@ -645,33 +645,33 @@ export function PlacementJourneySection() {
               </div>
 
               {/* AI Diagnostics & Scorecard */}
-              <div className="rounded-2xl bg-slate-50 border border-slate-800 p-5 sm:p-6 shadow-2xl space-y-3">
-                <div className="flex items-center justify-between pb-3 border-b border-slate-800 text-xs">
+              <div className="rounded-2xl bg-slate-50 border border-slate-200 p-5 sm:p-6 shadow-2xl space-y-3">
+                <div className="flex items-center justify-between pb-3 border-b border-slate-200 text-xs">
                   <div className="flex items-center gap-2">
                     <Cpu size={14} className="text-[#EC4899]" />
                     <span className="font-bold text-slate-900 uppercase text-[10px] tracking-wider">
                       AI &amp; MENTOR DIAGNOSTICS DASHBOARD
                     </span>
                   </div>
-                  <span className="px-2 py-0.5 rounded bg-pink-950/60 text-pink-400 text-[10px] font-bold border border-pink-500/30">
+                  <span className="px-2 py-0.5 rounded bg-pink-100 text-pink-400 text-[10px] font-bold border border-pink-500/30">
                     Analysis Complete
                   </span>
                 </div>
 
                 <div className="grid grid-cols-2 gap-3 text-xs">
-                  <div className="p-3.5 rounded-xl bg-[#090D15] border border-slate-800">
+                  <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
                     <div className="text-[10px] text-slate-600 uppercase font-bold">Speech Clarity Index</div>
                     <div className="text-xl font-extrabold text-emerald-400 mt-1">94%</div>
                     <div className="text-[10px] text-slate-600 mt-0.5">Pace: 135 WPM (Optimal)</div>
                   </div>
-                  <div className="p-3.5 rounded-xl bg-[#090D15] border border-slate-800">
+                  <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
                     <div className="text-[10px] text-slate-600 uppercase font-bold">Resume ATS Score</div>
                     <div className="text-xl font-extrabold text-cyan-400 mt-1">96 / 100</div>
                     <div className="text-[10px] text-slate-600 mt-0.5">Keywords: 100% Matched</div>
                   </div>
                 </div>
 
-                <div className="p-3.5 rounded-xl bg-white border border-slate-800 text-xs">
+                <div className="p-3.5 rounded-xl bg-white border border-slate-200 text-xs">
                   <div className="text-[11px] font-bold text-slate-900 mb-1">Mentor Growth Recommendation:</div>
                   <p className="text-[11px] text-slate-700 leading-relaxed">
                     "Solid understanding of asynchronous concurrency. Emphasize impact metrics and latency reduction in capstone project walkthroughs."
@@ -732,11 +732,11 @@ export function PlacementJourneySection() {
               </div>
 
               {/* Campus Drive Pipeline Card */}
-              <div className="rounded-2xl bg-slate-50 border border-slate-800 p-5 sm:p-6 shadow-2xl">
-                <div className="flex items-center justify-between pb-3 border-b border-slate-800 mb-4 text-xs">
+              <div className="rounded-2xl bg-slate-50 border border-slate-200 p-5 sm:p-6 shadow-2xl">
+                <div className="flex items-center justify-between pb-3 border-b border-slate-200 mb-4 text-xs">
                   <div className="flex items-center gap-2">
                     <Building2 size={14} className="text-[#10B981]" />
-                    <span className="px-2.5 py-1 rounded bg-emerald-950/60 text-emerald-400 font-bold uppercase text-[10px] tracking-wider border border-emerald-500/30">
+                    <span className="px-2.5 py-1 rounded bg-emerald-100 text-emerald-400 font-bold uppercase text-[10px] tracking-wider border border-emerald-200">
                       CAMPUS HIRING DRIVE
                     </span>
                   </div>
@@ -744,26 +744,26 @@ export function PlacementJourneySection() {
                 </div>
 
                 <div className="grid sm:grid-cols-3 gap-3 text-xs mb-4">
-                  <div className="p-3 rounded-xl bg-white border border-slate-800">
+                  <div className="p-3 rounded-xl bg-white border border-slate-200">
                     <div className="text-slate-600 text-[10px] uppercase font-bold">Applied</div>
                     <div className="text-xl font-bold text-slate-900 mt-1">420</div>
                     <div className="text-[10px] text-slate-500 mt-0.5">Online Assessment</div>
                   </div>
 
-                  <div className="p-3 rounded-xl bg-white border border-slate-800">
+                  <div className="p-3 rounded-xl bg-white border border-slate-200">
                     <div className="text-slate-600 text-[10px] uppercase font-bold">Shortlisted</div>
                     <div className="text-xl font-bold text-[#3B82F6] mt-1">96</div>
                     <div className="text-[10px] text-slate-500 mt-0.5">Tech Interview Panels</div>
                   </div>
 
-                  <div className="p-3 rounded-xl bg-white border border-slate-800">
+                  <div className="p-3 rounded-xl bg-white border border-slate-200">
                     <div className="text-slate-600 text-[10px] uppercase font-bold">Offers Rolled</div>
                     <div className="text-xl font-bold text-emerald-400 mt-1">38</div>
                     <div className="text-[10px] text-slate-500 mt-0.5">Avg: ₹8.4 LPA</div>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between text-xs text-slate-600 pt-2 border-t border-slate-800">
+                <div className="flex items-center justify-between text-xs text-slate-600 pt-2 border-t border-slate-200">
                   <span className="text-slate-700 font-semibold">Tier-1 Drives Executed This Season</span>
                   <span className="text-[#3B82F6] font-bold">100% Verified</span>
                 </div>
@@ -821,20 +821,20 @@ export function PlacementJourneySection() {
               </div>
 
               {/* Offer Letter Verification Card */}
-              <div className="rounded-2xl bg-gradient-to-br from-[#0D1F17] to-[#0A130F] border border-emerald-500/30 p-5 sm:p-6 shadow-2xl space-y-4">
-                <div className="flex items-center justify-between pb-3 border-b border-emerald-500/20 text-xs">
+              <div className="rounded-2xl bg-white border border-emerald-200 p-5 sm:p-6 shadow-2xl space-y-4">
+                <div className="flex items-center justify-between pb-3 border-b border-emerald-200 text-xs">
                   <div className="flex items-center gap-2">
                     <Award size={16} className="text-emerald-400" />
-                    <span className="font-bold text-emerald-300 uppercase text-[11px] tracking-wider">
+                    <span className="font-bold text-emerald-700 uppercase text-[11px] tracking-wider">
                       SIGNED OFFER LETTER CONFIRMATION
                     </span>
                   </div>
-                  <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[10px] font-bold border border-emerald-400/30">
+                  <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-700 text-[10px] font-bold border border-emerald-400/30">
                     100% Verified
                   </span>
                 </div>
 
-                <div className="p-4 rounded-xl bg-[#06120D] border border-emerald-500/30 space-y-2 text-xs">
+                <div className="p-4 rounded-xl bg-emerald-50/60 border border-emerald-200 space-y-2 text-xs">
                   <div className="flex items-center justify-between">
                     <span className="text-slate-600">Position:</span>
                     <span className="font-bold text-slate-900">Full-Stack Software Development Engineer</span>
@@ -845,11 +845,11 @@ export function PlacementJourneySection() {
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-slate-600">Joining Status:</span>
-                    <span className="text-cyan-300 font-semibold">Offer Accepted &amp; Verified</span>
+                    <span className="text-cyan-700 font-semibold">Offer Accepted &amp; Verified</span>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between text-xs text-slate-700 pt-2 border-t border-emerald-500/20">
+                <div className="flex items-center justify-between text-xs text-slate-700 pt-2 border-t border-emerald-200">
                   <span className="flex items-center gap-1.5 text-emerald-400 font-semibold">
                     <FileCheck size={14} />
                     Signed &amp; Transition Support Active

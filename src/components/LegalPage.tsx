@@ -125,7 +125,7 @@ export function LegalPage({ initialTab = 'privacy', onBackToHome: _ }: LegalPage
           </div>
 
           {/* Document Content View */}
-          <div className="bg-[#0C0C10] rounded-3xl border border-black/8 p-6 sm:p-10 shadow-xl">
+          <div className="bg-white border-slate-200 text-slate-800 rounded-3xl border border-black/8 p-6 sm:p-10 shadow-xl">
             <AnimatePresence mode="wait">
               {activeTab === 'privacy' && <PrivacyContent key="privacy" />}
               {activeTab === 'terms' && <TermsContent key="terms" />}

@@ -347,7 +347,7 @@ function FormField({
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         required={required}
-        className="w-full px-4 py-2.5 rounded-xl border border-slate-700/80 text-sm text-slate-100 placeholder:text-slate-500 focus:border-[#2563EB] focus:outline-none transition-all bg-[#0C0C10]"
+        className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder:text-slate-500 focus:border-[#2563EB] focus:outline-none transition-all bg-white"
       />
     </div>
   );

@@ -26,7 +26,7 @@ export function CareerPage({ onBackToHome: _ }: CareerPageProps) {
           </div>
 
           <h1 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight font-[family-name:var(--font-display)] mb-4">
-            Explore Open <span className="bg-gradient-to-r from-[#00B4D8] via-[#0077B6] to-[#90E0EF] bg-clip-text text-transparent">Mentor &amp; Instructor</span> Roles
+            Explore Open <span className="bg-gradient-to-r from-[#2563EB] to-[#3B82F6] bg-clip-text text-transparent">Mentor &amp; Instructor</span> Roles
           </h1>
 
           <p className="text-xs sm:text-sm text-slate-600 max-w-2xl mx-auto leading-relaxed">

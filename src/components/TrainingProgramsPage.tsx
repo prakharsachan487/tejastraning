@@ -23,7 +23,7 @@ export function TrainingProgramsPage({ onBackToHome: _ }: TrainingProgramsPagePr
   return (
     <div className="min-h-screen bg-[#F8F9FB] text-slate-100 font-sans selection:bg-[#2563EB] selection:text-slate-900">
       {/* ── 02. Hero Banner ── */}
-      <section className="pt-32 pb-16 lg:pt-36 lg:pb-20 relative overflow-hidden border-b border-black/5 bg-gradient-to-b from-[#0F0F16] via-[#0A0A0D] to-[#0A0A0D]">
+      <section className="pt-32 pb-16 lg:pt-36 lg:pb-20 relative overflow-hidden border-b border-black/5 bg-[#F8F9FB]">
         {/* Glow Spheres */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-[#2563EB]/10 blur-[130px] pointer-events-none rounded-full" />
 
@@ -106,7 +106,7 @@ export function TrainingProgramsPage({ onBackToHome: _ }: TrainingProgramsPagePr
       </div>
 
       {/* ── 06. Institutional Consultation CTA Banner ── */}
-      <section className="py-20 bg-gradient-to-b from-[#0A0A0D] to-[#111116] border-t border-black/8 relative overflow-hidden">
+      <section className="py-20 bg-[#F1F4F9] border-t border-black/8 relative overflow-hidden">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2563EB]/10 border border-[#2563EB]/30 text-[#3B82F6] text-xs font-mono font-bold mb-4">
             <CheckCircle2 size={13} />

@@ -561,7 +561,7 @@ export function MentorJobPortal() {
               
               {/* Job Header Hero Box */}
               <div className="p-6 sm:p-8 rounded-3xl bg-white shadow-sm border border-black/8 shadow-xl relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-[#00B4D8]/10 via-transparent to-transparent pointer-events-none blur-2xl" />
+                <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-blue-500/10 via-transparent to-transparent pointer-events-none blur-2xl" />
 
                 {/* Domain & Type Badges */}
                 <div className="flex flex-wrap items-center gap-2 mb-4">
@@ -661,7 +661,7 @@ export function MentorJobPortal() {
               </div>
 
               {/* 05. Why Join Grow360? */}
-              <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-[#161622] to-[#0E0E14] border border-black/10 shadow-xl">
+              <div className="p-6 sm:p-8 rounded-3xl bg-white border border-black/10 shadow-xl">
                 <h3 className="text-base font-bold text-slate-900 mb-2 font-[family-name:var(--font-display)]">
                   Why Mentor with Grow360?
                 </h3>
@@ -941,7 +941,7 @@ export function MentorJobPortal() {
                   onClick={() => setSelectedDomain(domain)}
                   className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer shrink-0 ${
                     isActive
-                      ? 'bg-gradient-to-r from-[#00B4D8] to-[#0077B6] text-slate-900 shadow-md shadow-cyan-500/20'
+                      ? 'bg-gradient-to-r from-[#2563EB] to-[#1D4ED8] text-white shadow-md shadow-blue-500/20'
                       : 'bg-white shadow-sm text-slate-600 hover:text-slate-900 border border-black/8'
                   }`}
                 >
@@ -1011,7 +1011,7 @@ export function MentorJobPortal() {
                   className="rounded-3xl bg-white shadow-sm border border-black/8 hover:border-[#2563EB]/50 transition-all duration-300 p-6 sm:p-7 shadow-lg hover:shadow-2xl hover:shadow-cyan-500/10 group flex flex-col justify-between relative overflow-hidden"
                 >
                   {/* Top Ambient Glow */}
-                  <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-bl from-[#00B4D8]/10 via-transparent to-transparent pointer-events-none group-hover:from-[#00B4D8]/20 transition-colors" />
+                  <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-bl from-blue-500/10 via-transparent to-transparent pointer-events-none group-hover:from-blue-500/20 transition-colors" />
 
                   <div>
                     {/* Top Badges & Posted Time */}
@@ -1104,7 +1104,7 @@ export function MentorJobPortal() {
         {/* ========================================================
             03. CONNECT WITH US SECTION (Bottom Banner)
         ======================================================== */}
-        <div className="mt-16 rounded-3xl bg-gradient-to-br from-[#111116] via-[#0E0E14] to-[#0A0A0D] border border-black/8 p-8 sm:p-10 shadow-2xl relative overflow-hidden">
+        <div className="mt-16 rounded-3xl bg-white shadow-xl border border-black/8 p-8 sm:p-10 shadow-2xl relative overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
             {/* Left Info */}

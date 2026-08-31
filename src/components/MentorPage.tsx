@@ -315,10 +315,10 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
                     </div>
 
                     {/* Honorarium & Scheduling Guarantee */}
-                    <div className="p-4 rounded-2xl bg-gradient-to-br from-[#181822] to-[#111116] border border-black/8 flex items-center justify-between">
+                    <div className="p-4 rounded-2xl bg-slate-50 border border-black/8 flex items-center justify-between">
                       <div className="flex items-center gap-2.5">
                         <Clock size={16} className="text-[#3B82F6]" />
-                        <div className="text-xs font-medium text-slate-200">
+                        <div className="text-xs font-medium text-slate-700">
                           Your Calendar, Your Terms
                         </div>
                       </div>
@@ -597,7 +597,7 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
         ======================================================== */}
         <section className="py-16 bg-[#F8F9FB] border-t border-black/5 relative">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-[#1A1A26] via-[#14141C] to-[#101014] border border-black/10 shadow-2xl relative overflow-hidden">
+            <div className="p-8 sm:p-12 rounded-3xl bg-white shadow-lg border border-black/8 border border-black/10 shadow-2xl relative overflow-hidden">
               
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                 
@@ -605,7 +605,7 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
                 <div className="lg:col-span-7">
                   <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-[family-name:var(--font-display)]">
                     Ready to mentor with{' '}
-                    <span className="bg-gradient-to-r from-[#00B4D8] via-[#0077B6] to-[#90E0EF] bg-clip-text text-transparent">
+                    <span className="bg-gradient-to-r from-[#2563EB] to-[#3B82F6] bg-clip-text text-transparent">
                       Grow360?
                     </span>
                   </h2>
@@ -622,7 +622,7 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
                 </div>
 
                 {/* Right Checklist */}
-                <div className="lg:col-span-5 space-y-3 text-xs sm:text-sm text-slate-200">
+                <div className="lg:col-span-5 space-y-3 text-xs sm:text-sm text-slate-700">
                   <div className="flex items-center gap-3">
                     <CheckCircle2 size={16} className="text-[#22C55E] shrink-0" />
                     <span>100% remote & flexible scheduling</span>
