@@ -230,13 +230,6 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
     document.body.scrollTop = 0;
   }, []);
 
-  const scrollToSection = (id: string) => {
-    const elem = document.getElementById(id);
-    if (elem) {
-      elem.scrollIntoView({ behavior: 'instant' });
-    }
-  };
-
   return (
     <div className="min-h-screen bg-[#F8F9FB] text-slate-100 font-sans selection:bg-[#2563EB] selection:text-slate-900">
 
@@ -286,10 +279,10 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
                   </button>
 
                   <button
-                    onClick={() => scrollToSection('how-it-works')}
+                    onClick={() => { window.location.hash = '#careers'; }}
                     className="btn-pill-secondary py-3.5 px-6 text-xs sm:text-sm cursor-pointer"
                   >
-                    <span>See How It Works</span>
+                    <span>View All Openings</span>
                   </button>
                 </div>
 
