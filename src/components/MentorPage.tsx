@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
 import { 
   Sparkles, 
   ArrowRight, 
@@ -205,17 +204,6 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
               {/* Left Column: Headline, Description & CTAs (7 cols) */}
               <div className="lg:col-span-7">
                 
-                {/* Eyebrow Badge */}
-                <motion.div
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4 }}
-                  className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-[#2563EB] text-xs font-semibold tracking-wide mb-6"
-                >
-                  <Sparkles size={14} className="text-[#2563EB]" />
-                  <span>Join Grow360 Senior Engineering Guild</span>
-                </motion.div>
-
                 {/* Main Headline */}
                 <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 font-[family-name:var(--font-display)] leading-[1.1] mb-6">
                   Shape the Next Generation of Engineers.{' '}
