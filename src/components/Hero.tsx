@@ -123,10 +123,10 @@ export function Hero() {
               initial={{ opacity: 0, y: -15, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 0.5, ease: 'easeOut' }}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF4500]/10 border border-[#FF4500]/25 text-[#FFA000] text-xs font-semibold tracking-wide mb-6 w-max"
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#00B4D8]/10 border border-[#00B4D8]/30 text-[#00B4D8] text-xs font-semibold tracking-wide mb-6 w-max"
             >
-              <span className="w-2 h-2 rounded-full bg-[#FF4500] animate-ping" />
-              <span>The Placement Infrastructure for Colleges</span>
+              <span className="w-2 h-2 rounded-full bg-[#00B4D8] animate-ping" />
+              <span>Grow360 — Decoding the corporate world</span>
             </motion.div>
 
             {/* 02. Slow Shatter Re-assembly Headline */}

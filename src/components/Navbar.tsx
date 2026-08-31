@@ -74,7 +74,7 @@ export function Navbar() {
               isScrolled ? 'h-16' : 'h-20'
             }`}
           >
-            {/* Brand Logo - TEJAS */}
+            {/* Brand Logo - Grow360 */}
             <a
               href="#"
               className="flex items-center gap-3 group focus:outline-none"
@@ -83,15 +83,17 @@ export function Navbar() {
                 window.scrollTo({ top: 0, behavior: 'instant' });
               }}
             >
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#FF4500] via-[#FF6A00] to-[#FFA000] flex items-center justify-center text-white font-extrabold text-sm group-hover:scale-105 transition-transform duration-200">
-                TJ
-              </div>
+              <img
+                src="/grow360-logo.png"
+                alt="Grow360 Logo"
+                className="h-10 w-auto object-contain rounded-lg group-hover:scale-105 transition-transform"
+              />
               <div className="flex flex-col leading-tight">
-                <span className="text-xl font-extrabold tracking-tight text-white font-[family-name:var(--font-display)]">
-                  TEJAS
+                <span className="text-xl font-extrabold tracking-tight text-white font-[family-name:var(--font-display)] flex items-center">
+                  GROW<span className="text-[#00B4D8]">360°</span>
                 </span>
-                <span className="text-[10px] font-medium text-slate-400 tracking-tight hidden sm:block">
-                  The Placement Infrastructure for Colleges
+                <span className="text-[10px] font-mono text-slate-400 tracking-wider hidden sm:block">
+                  Decoding the corporate world
                 </span>
               </div>
             </a>
@@ -191,11 +193,13 @@ export function Navbar() {
               <div>
                 <div className="flex items-center justify-between pb-6 border-b border-white/10">
                   <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#FF4500] to-[#FFA000] flex items-center justify-center text-white font-bold text-xs">
-                      TJ
-                    </div>
-                    <span className="font-extrabold text-lg text-white font-[family-name:var(--font-display)]">
-                      TEJAS
+                    <img
+                      src="/grow360-logo.png"
+                      alt="Grow360 Logo"
+                      className="h-8 w-auto object-contain rounded-lg"
+                    />
+                    <span className="font-extrabold text-lg text-white font-[family-name:var(--font-display)] flex items-center">
+                      GROW<span className="text-[#00B4D8]">360°</span>
                     </span>
                   </div>
                   <button

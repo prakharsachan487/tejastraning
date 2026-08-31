@@ -79,8 +79,12 @@ export function AuthPage() {
           </button>
 
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-black/15 bg-white/80 shadow-xs">
-            <div className="w-2 h-2 rounded-full bg-[#FF4500]" />
-            <span className="text-xs font-extrabold text-[#1E1E24] tracking-tight">TEJAS</span>
+            <img
+              src="/grow360-logo.png"
+              alt="Grow360 Logo"
+              className="h-4 w-auto object-contain rounded"
+            />
+            <span className="text-xs font-extrabold text-[#1E1E24] tracking-tight">GROW<span className="text-[#00B4D8]">360°</span></span>
           </div>
         </div>
 
@@ -94,8 +98,8 @@ export function AuthPage() {
             </h1>
             <p className="text-xs sm:text-sm text-slate-600 mt-2 font-normal">
               {isSignUp
-                ? 'Sign up and get 30-day free access to placement roadmap'
-                : 'Log in to access your mock sessions and student placement portal'}
+                ? 'Grow360 — Decoding the corporate world. Sign up to get started.'
+                : 'Log in to access your placement roadmap, diagnostics & mentor sessions.'}
             </p>
           </div>
 
@@ -270,7 +274,7 @@ export function AuthPage() {
 
         {/* Bottom Footer Row */}
         <div className="flex flex-wrap items-center justify-between text-xs text-slate-500 pt-6 border-t border-black/10">
-          <span>© {new Date().getFullYear()} TEJAS. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} Grow360 — Decoding the corporate world. All rights reserved.</span>
           <div className="flex items-center gap-4">
             <a
               href="#terms"

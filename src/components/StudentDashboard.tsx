@@ -252,11 +252,13 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
         {/* Left: Brand & Home Link */}
         <div className="flex items-center gap-4 sm:gap-6">
           <div className="flex items-center gap-2.5 cursor-pointer" onClick={handleLogout} title="Click to logout and go to home">
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#FF4500] via-[#FF6A00] to-[#FFA000] flex items-center justify-center text-white font-extrabold text-xs shadow-sm">
-              TJ
-            </div>
+            <img
+              src="/grow360-logo.png"
+              alt="Grow360 Logo"
+              className="h-8 w-auto object-contain rounded-lg"
+            />
             <span className={`text-lg font-black tracking-tight ${isDarkMode ? 'text-white' : 'text-slate-900'} font-[family-name:var(--font-display)]`}>
-              TrainX <span className="text-[10px] font-mono font-medium text-[#FF4500] bg-orange-500/10 px-1.5 py-0.5 rounded ml-1">Portal</span>
+              GROW<span className="text-[#00B4D8]">360°</span> <span className="text-[10px] font-mono font-medium text-[#00B4D8] bg-[#00B4D8]/10 px-1.5 py-0.5 rounded ml-1">Portal</span>
             </span>
           </div>
 

@@ -15,10 +15,10 @@ export function Footer() {
       {/* Background Subtle Gradient & Shadow */}
       <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent pointer-events-none" />
 
-      {/* Giant "TEJAS" Background Watermark Typography - Perfectly Centered */}
+      {/* Giant "GROW 360" Background Watermark Typography - Perfectly Centered */}
       <div className="absolute inset-x-0 bottom-8 sm:bottom-12 w-full flex items-center justify-center select-none pointer-events-none z-0 overflow-hidden">
         <span className="text-6xl sm:text-8xl md:text-[11rem] lg:text-[14rem] font-extrabold text-white/[0.035] tracking-tight whitespace-nowrap text-center leading-none">
-          TEJAS
+          GROW 360°
         </span>
       </div>
 
@@ -30,22 +30,29 @@ export function Footer() {
           {/* Column 1: Brand & Backed By (5 cols) */}
           <div className="lg:col-span-5 flex flex-col justify-between">
             <div>
-              {/* TEJAS Brand Logo */}
+              {/* Grow360 Brand Logo */}
               <div 
-                className="flex items-center gap-2.5 mb-6 cursor-pointer select-none group"
+                className="flex items-center gap-3 mb-4 cursor-pointer select-none group"
                 onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}
               >
-                <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#FF4500] via-[#FF6A00] to-[#FFA000] flex items-center justify-center text-white font-mono font-bold text-xs shadow-md shadow-orange-500/20 group-hover:scale-105 transition-transform">
-                  TJ
+                <img
+                  src="/grow360-logo.png"
+                  alt="Grow360 Logo"
+                  className="h-10 w-auto object-contain rounded-lg group-hover:scale-105 transition-transform"
+                />
+                <div className="flex flex-col leading-tight">
+                  <span className="text-2xl font-extrabold text-white tracking-tight font-[family-name:var(--font-display)] flex items-center">
+                    GROW<span className="text-[#00B4D8]">360°</span>
+                  </span>
+                  <span className="text-[11px] font-mono text-slate-400 tracking-wider">
+                    Decoding the corporate world
+                  </span>
                 </div>
-                <span className="text-2xl font-extrabold text-white tracking-tight font-[family-name:var(--font-display)]">
-                  TEJAS
-                </span>
               </div>
 
               {/* Tagline */}
               <p className="text-xs sm:text-sm text-slate-400 max-w-sm leading-relaxed mb-8">
-                The end-to-end Training & Placement infrastructure for Indian colleges.
+                The comprehensive corporate training, AI-powered interview diagnostics, and campus placement infrastructure.
               </p>
 
               {/* Backed By Developers From */}
@@ -224,7 +231,7 @@ export function Footer() {
         {/* Bottom Bar: Copyright & Socials */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <div>
-            <p>© {new Date().getFullYear()} TEJAS. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} Grow360 — Decoding the corporate world. All rights reserved.</p>
           </div>
 
           {/* Social Icons in Dark Rounded Squares */}

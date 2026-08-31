@@ -226,11 +226,13 @@ export function MentorPage({ onBackToHome }: MentorPageProps) {
             <div className="h-4 w-px bg-white/10 hidden sm:block" />
 
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#FF4500] to-[#FFA000] flex items-center justify-center text-white font-extrabold text-xs">
-                TJ
-              </div>
+              <img
+                src="/grow360-logo.png"
+                alt="Grow360 Logo"
+                className="h-8 w-auto object-contain rounded-lg"
+              />
               <span className="text-lg font-extrabold text-white font-[family-name:var(--font-display)]">
-                TEJAS <span className="text-xs font-mono font-normal text-[#FFA000] ml-1">Mentors</span>
+                GROW<span className="text-[#00B4D8]">360°</span> <span className="text-xs font-mono font-normal text-[#FFA000] ml-1">Mentors</span>
               </span>
             </div>
           </div>
