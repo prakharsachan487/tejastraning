@@ -148,31 +148,31 @@ export function Hero() {
   return (
     <section className="relative pt-32 pb-16 lg:pt-36 lg:pb-24 overflow-hidden obsidian-grid bg-[#F8F9FB]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-start">
           
-          {/* Left Column: Headline, Subheadline & Quick Links */}
-          <div className="lg:col-span-6 flex flex-col text-left pt-2">
+          {/* Left Column: Headline, Subheadline & Quick Links (7 cols for ample text width) */}
+          <div className="lg:col-span-7 flex flex-col text-left pt-1">
             
             {/* 01. Eyebrow Tag Badge */}
             <motion.div
               initial={{ opacity: 0, y: -15, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 0.5, ease: 'easeOut' }}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2563EB]/10 border border-[#2563EB]/30 text-[#2563EB] text-xs font-semibold tracking-wide mb-6 w-max"
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2563EB]/10 border border-[#2563EB]/30 text-[#2563EB] text-xs font-semibold tracking-wide mb-5 w-max"
             >
               <span className="w-2 h-2 rounded-full bg-[#2563EB] animate-ping" />
               <span>Grow360 — Decoding the corporate world</span>
             </motion.div>
 
             {/* 02. Slow Shatter Re-assembly Headline */}
-            <h1 className="text-3xl sm:text-4xl lg:text-[3.15rem] xl:text-[3.5rem] font-bold tracking-tight leading-[1.15] text-[#12151B] font-[family-name:var(--font-display)]">
+            <h1 className="text-3xl sm:text-4xl lg:text-[2.75rem] xl:text-[3.2rem] font-bold tracking-tight leading-[1.18] text-[#12151B] font-[family-name:var(--font-display)]">
               <span className="block whitespace-nowrap overflow-visible">
                 <ShatterWord word="Turn" startIndex={0} />
                 <ShatterWord word="Students" startIndex={5} />
-                <ShatterWord word="Into" startIndex={14} />
+                <ShatterWord word="into" startIndex={14} />
               </span>
 
-              <span className="block whitespace-nowrap overflow-visible mt-1">
+              <span className="block overflow-visible mt-1">
                 <ShatterWord word="Industry-Ready" startIndex={19} isGradient gradientStartIndex={19} totalGradientLength={27} />
                 <ShatterWord word="Professionals" startIndex={34} isGradient gradientStartIndex={19} totalGradientLength={27} />
               </span>
@@ -183,7 +183,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.85, duration: 0.6, ease: 'easeOut' }}
-              className="mt-6 text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-xl"
+              className="mt-5 text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-xl"
             >
               Industry-led training, AI-powered assessments, interview preparation and hiring support — everything your college needs to improve student employability and placement outcomes.
             </motion.p>
@@ -193,7 +193,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.0, duration: 0.5, ease: 'easeOut' }}
-              className="mt-8 sm:mt-10 flex flex-wrap items-center gap-4"
+              className="mt-8 flex flex-wrap items-center gap-4"
             >
               <motion.button
                 whileHover={{ scale: 1.03 }}
@@ -225,7 +225,7 @@ export function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.15, duration: 0.6 }}
-              className="mt-10 pt-6 border-t border-black/5 flex flex-wrap items-center gap-5 text-xs text-slate-500 font-medium"
+              className="mt-9 pt-5 border-t border-black/5 flex flex-wrap items-center gap-5 text-xs text-slate-500 font-medium"
             >
               <div className="flex items-center gap-1.5">
                 <CheckCircle2 size={14} className="text-[#2563EB]" />
@@ -243,7 +243,7 @@ export function Hero() {
 
           </div>
 
-          {/* Right Column: Reference Form Box */}
+          {/* Right Column: Reference Form Box (5 cols) */}
           <motion.div
             initial={{ opacity: 0, scale: 0.94, y: 25 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -252,7 +252,7 @@ export function Hero() {
               delay: 0.25,
               ease: [0.16, 1, 0.3, 1],
             }}
-            className="lg:col-span-6 relative"
+            className="lg:col-span-5 relative w-full"
           >
             {/* Ambient subtle glow background */}
             <div className="absolute -inset-1 rounded-3xl bg-[#2563EB]/15 blur-xl opacity-70 pointer-events-none" />
