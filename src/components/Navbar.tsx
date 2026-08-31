@@ -9,10 +9,10 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
+  { label: 'About Us', href: '#about' },
   { label: 'Training', href: '#training' },
   { label: 'Programs', href: '#programs' },
   { label: 'Career Path', href: '#career-path' },
-  { label: 'About Us', href: '#about' },
 ];
 
 export function Navbar() {
