@@ -13,6 +13,15 @@ interface MomentCard {
 
 const mentoringMoments: MomentCard[] = [
   {
+    title: 'On-Campus Placement & Resume Strategy Workshop',
+    category: 'Campus Workshop',
+    categoryColor: '#2563EB',
+    description: 'Live interactive masterclass on crafting recruiter-ready resumes, core technical competencies, and placement interview strategies.',
+    stats: 'Batch Placement Drive',
+    location: 'Campus Classroom Sync',
+    image: '/moments/campus_moment_1.jpg',
+  },
+  {
     title: '1:1 Technical Mentoring & Code Reviews',
     category: '1:1 Pair Programming',
     categoryColor: '#2563EB',
