@@ -42,7 +42,7 @@ const mentors = [
     ),
     role: 'Software Engineer · Meta (London, UK)',
     quote: 'Software Engineer at Meta working on scalable software systems and production-grade engineering solutions based in London.',
-    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80',
+    image: '/mentors/nandwana_abhishek.jpg',
     tilt: '-1.2deg',
   },
   {

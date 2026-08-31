@@ -147,7 +147,7 @@ const fellowMentors = [
     role: 'Software Engineer · Meta (London, UK)',
     rating: '4.99',
     sessions: '95+ Sessions',
-    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80',
+    image: '/mentors/nandwana_abhishek.jpg',
     color: '#0668E1',
   },
   {
