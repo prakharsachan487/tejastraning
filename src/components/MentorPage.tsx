@@ -222,9 +222,9 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
                   
                   {/* Main Headline */}
                   <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 font-[family-name:var(--font-display)] leading-[1.1] mb-6">
-                    Shape the Next Generation of Engineers.{' '}
+                    Join Us in Shaping the Future,{' '}
                     <span className="bg-gradient-to-r from-[#2563EB] via-[#3B82F6] to-[#60A5FA] bg-clip-text text-transparent">
-                      On Your Own Schedule.
+                      Empowering the Next Generation
                     </span>
                   </h1>
 
