@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useEnquiry } from '../context/EnquiryContext';
-import { MapPin, Phone, Mail, Send, CheckCircle2, BookOpen } from 'lucide-react';
+import { MapPin, Phone, Mail, Send, CheckCircle2, BookOpen, Users, GraduationCap, UserCheck } from 'lucide-react';
 
 export function Footer() {
   const { openEnquiry } = useEnquiry();
@@ -158,44 +158,20 @@ export function Footer() {
             <ul className="space-y-3.5 text-xs sm:text-sm">
               <li>
                 <button
-                  onClick={() => nav('#training')}
-                  className="text-slate-600 hover:text-[#2563EB] transition-colors cursor-pointer text-left font-medium"
-                >
-                  Training
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => nav('#recruiters')}
-                  className="text-slate-600 hover:text-[#2563EB] transition-colors cursor-pointer text-left font-medium"
-                >
-                  Placements
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => nav('#blog')}
-                  className="text-slate-600 hover:text-[#2563EB] transition-colors cursor-pointer text-left font-medium flex items-center gap-1.5"
-                >
-                  <BookOpen size={13} className="text-[#2563EB]" />
-                  <span>Blog &amp; Articles</span>
-                  <span className="text-[9px] font-bold text-[#2563EB] bg-[#2563EB]/10 px-1.5 py-0.5 rounded-full">New</span>
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => nav('#programs')}
-                  className="text-slate-600 hover:text-[#2563EB] transition-colors cursor-pointer text-left font-medium"
-                >
-                  Curriculum
-                </button>
-              </li>
-              <li>
-                <button
                   onClick={() => nav('#about')}
-                  className="text-slate-600 hover:text-[#2563EB] transition-colors cursor-pointer text-left font-medium"
+                  className="text-slate-600 hover:text-[#2563EB] transition-colors cursor-pointer text-left font-medium flex items-center gap-2 group"
                 >
-                  Mentors
+                  <Users size={15} className="text-[#2563EB] group-hover:scale-110 transition-transform" />
+                  <span>About Us</span>
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => nav('#training-programs')}
+                  className="text-slate-600 hover:text-[#2563EB] transition-colors cursor-pointer text-left font-medium flex items-center gap-2 group"
+                >
+                  <GraduationCap size={15} className="text-[#2563EB] group-hover:scale-110 transition-transform" />
+                  <span>Training &amp; Programs</span>
                 </button>
               </li>
               <li>
@@ -204,17 +180,19 @@ export function Footer() {
                     window.location.hash = '#mentor';
                     window.scrollTo({ top: 0, behavior: 'instant' });
                   }}
-                  className="text-slate-600 hover:text-[#2563EB] transition-colors cursor-pointer text-left font-medium"
+                  className="text-slate-600 hover:text-[#2563EB] transition-colors cursor-pointer text-left font-medium flex items-center gap-2 group"
                 >
-                  Become a Mentor
+                  <UserCheck size={15} className="text-[#2563EB] group-hover:scale-110 transition-transform" />
+                  <span>Become a Mentor</span>
                 </button>
               </li>
               <li>
                 <button
-                  onClick={() => nav('#career-path')}
-                  className="text-slate-600 hover:text-[#2563EB] transition-colors cursor-pointer text-left font-medium"
+                  onClick={() => nav('#blog')}
+                  className="text-slate-600 hover:text-[#2563EB] transition-colors cursor-pointer text-left font-medium flex items-center gap-2 group"
                 >
-                  Placement Journey
+                  <BookOpen size={15} className="text-[#2563EB] group-hover:scale-110 transition-transform" />
+                  <span>Blog &amp; Articles</span>
                 </button>
               </li>
             </ul>
