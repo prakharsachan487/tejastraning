@@ -13,7 +13,6 @@ import {
   Mail,
   Send,
   ArrowRight,
-  SlidersHorizontal,
   Upload,
   AlertCircle,
   Loader2,
@@ -285,15 +284,6 @@ const JOB_LISTINGS: JobOpening[] = [
 ];
 
 const DOMAINS = ['All', 'Tech', 'Non-Tech', 'Academics', 'Sales'] as const;
-const EMPLOYMENT_TYPES = ['All', 'Full-time', 'Contract', 'Part-time', 'Remote Mentorship'] as const;
-const DATE_POSTED_OPTIONS = [
-  { label: 'Any time', days: 365 },
-  { label: '24 hrs', days: 1 },
-  { label: '3 days', days: 3 },
-  { label: '7 days', days: 7 },
-  { label: '30 days', days: 30 }
-];
-const LOCATIONS = ['All', 'Remote', 'Bareilly', 'Phagwara', 'Vadodara', 'Noida', 'Bangalore'] as const;
 
 function mapSupabaseJob(row: any): JobOpening {
   const dateStr = row.posted_date || row.created_at;
@@ -348,13 +338,9 @@ export function MentorJobPortal() {
   const [jobs, setJobs] = useState<JobOpening[]>(JOB_LISTINGS);
   const [isLoadingJobs, setIsLoadingJobs] = useState<boolean>(true);
 
-  // Filter States
+  // Filter States (Search & Domain)
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedDomain, setSelectedDomain] = useState<string>('All');
-  const [selectedType, setSelectedType] = useState<string>('All');
-  const [selectedDatePosted, setSelectedDatePosted] = useState<string>('Any time');
-  const [selectedLocation, setSelectedLocation] = useState<string>('All');
-  const [selectedSkill, setSelectedSkill] = useState<string>('All');
 
   // Selected Job for Full Page View
   const [selectedJob, setSelectedJob] = useState<JobOpening | null>(null);
@@ -407,16 +393,7 @@ export function MentorJobPortal() {
     };
   }, []);
 
-  // Extract all unique skills
-  const allSkills = useMemo(() => {
-    const skillsSet = new Set<string>();
-    jobs.forEach(job => {
-      job.skills.forEach(s => skillsSet.add(s));
-    });
-    return Array.from(skillsSet).slice(0, 14);
-  }, [jobs]);
-
-  // Filter logic
+  // Filter logic (Search + Domain)
   const filteredJobs = useMemo(() => {
     return jobs.filter(job => {
       // Search match
@@ -436,52 +413,15 @@ export function MentorJobPortal() {
         return false;
       }
 
-      // Employment type match
-      if (selectedType !== 'All' && job.type !== selectedType) {
-        return false;
-      }
-
-      // Date posted match
-      if (selectedDatePosted !== 'Any time') {
-        const option = DATE_POSTED_OPTIONS.find(o => o.label === selectedDatePosted);
-        if (option && job.postedDaysAgo > option.days) {
-          return false;
-        }
-      }
-
-      // Location match
-      if (selectedLocation !== 'All') {
-        if (selectedLocation === 'Remote') {
-          if (!job.location.toLowerCase().includes('remote')) return false;
-        } else {
-          if (!job.location.toLowerCase().includes(selectedLocation.toLowerCase())) return false;
-        }
-      }
-
-      // Skill match
-      if (selectedSkill !== 'All' && !job.skills.includes(selectedSkill)) {
-        return false;
-      }
-
       return true;
     });
-  }, [jobs, searchQuery, selectedDomain, selectedType, selectedDatePosted, selectedLocation, selectedSkill]);
+  }, [jobs, searchQuery, selectedDomain]);
 
-  const hasActiveFilters =
-    searchQuery !== '' ||
-    selectedDomain !== 'All' ||
-    selectedType !== 'All' ||
-    selectedDatePosted !== 'Any time' ||
-    selectedLocation !== 'All' ||
-    selectedSkill !== 'All';
+  const hasActiveFilters = searchQuery !== '' || selectedDomain !== 'All';
 
   const handleClearFilters = () => {
     setSearchQuery('');
     setSelectedDomain('All');
-    setSelectedType('All');
-    setSelectedDatePosted('Any time');
-    setSelectedLocation('All');
-    setSelectedSkill('All');
   };
 
   const handleOpenJobApply = (job: JobOpening) => {
@@ -1014,145 +954,23 @@ export function MentorJobPortal() {
         </div>
 
         {/* ========================================================
-            02. MAIN TWO-COLUMN LAYOUT: SIDEBAR FILTERS + JOB CARDS
+            02. JOB CARDS LIST (Full Width Clean Layout)
         ======================================================== */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div className="space-y-4">
           
-          {/* ==========================================
-              LEFT SIDEBAR: DETAILED CRITERIA FILTERS
-          ========================================== */}
-          <div className="lg:col-span-4 space-y-6">
-            <div className="rounded-3xl bg-[#111116] border border-white/10 p-6 shadow-xl space-y-6">
-              
-              <div className="flex items-center justify-between pb-4 border-b border-white/10">
-                <div className="flex items-center gap-2 text-white font-bold text-sm">
-                  <SlidersHorizontal size={16} className="text-[#00B4D8]" />
-                  <span>Filter Opportunities</span>
-                </div>
-                {hasActiveFilters && (
-                  <button
-                    onClick={handleClearFilters}
-                    className="text-[11px] font-mono text-slate-400 hover:text-[#FFA000] cursor-pointer"
-                  >
-                    Clear All
-                  </button>
-                )}
-              </div>
-
-              {/* 1. Employment Type Filter */}
-              <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-2.5 font-bold">
-                  Job Type
-                </label>
-                <div className="space-y-1.5">
-                  {EMPLOYMENT_TYPES.map((type) => (
-                    <button
-                      key={type}
-                      onClick={() => setSelectedType(type)}
-                      className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs transition-all text-left cursor-pointer ${
-                        selectedType === type
-                          ? 'bg-white/10 text-white font-bold border border-white/20'
-                          : 'text-slate-400 hover:bg-white/5 hover:text-slate-200'
-                      }`}
-                    >
-                      <span>{type}</span>
-                      {selectedType === type && <CheckCircle2 size={13} className="text-[#00B4D8]" />}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* 2. Date Posted Filter */}
-              <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-2.5 font-bold">
-                  Date Posted
-                </label>
-                <div className="grid grid-cols-2 gap-1.5">
-                  {DATE_POSTED_OPTIONS.map((opt) => (
-                    <button
-                      key={opt.label}
-                      onClick={() => setSelectedDatePosted(opt.label)}
-                      className={`px-3 py-2 rounded-xl text-xs font-mono transition-all text-center cursor-pointer ${
-                        selectedDatePosted === opt.label
-                          ? 'bg-[#00B4D8]/20 text-[#00B4D8] font-bold border border-[#00B4D8]/40'
-                          : 'bg-[#09090D] text-slate-400 hover:text-white border border-white/5'
-                      }`}
-                    >
-                      {opt.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* 3. Location Hub Filter */}
-              <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-2.5 font-bold">
-                  Location / Hub
-                </label>
-                <div className="space-y-1.5">
-                  {LOCATIONS.map((loc) => (
-                    <button
-                      key={loc}
-                      onClick={() => setSelectedLocation(loc)}
-                      className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs transition-all text-left cursor-pointer ${
-                        selectedLocation === loc
-                          ? 'bg-white/10 text-white font-bold border border-white/20'
-                          : 'text-slate-400 hover:bg-white/5 hover:text-slate-200'
-                      }`}
-                    >
-                      <span>{loc === 'All' ? 'All Locations' : loc}</span>
-                      {selectedLocation === loc && <CheckCircle2 size={13} className="text-[#00B4D8]" />}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* 4. Popular Skills Filter Tags */}
-              <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-2.5 font-bold">
-                  Filter by Skill
-                </label>
-                <div className="flex flex-wrap gap-1.5">
-                  {allSkills.map((skill) => {
-                    const isSelected = selectedSkill === skill;
-                    return (
-                      <button
-                        key={skill}
-                        onClick={() => setSelectedSkill(isSelected ? 'All' : skill)}
-                        className={`text-[11px] px-2.5 py-1 rounded-md border font-mono transition-all cursor-pointer ${
-                          isSelected
-                            ? 'bg-[#00B4D8] border-[#00B4D8] text-white font-bold'
-                            : 'bg-[#09090D] border-white/10 text-slate-400 hover:text-slate-200 hover:border-white/20'
-                        }`}
-                      >
-                        {skill}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
+          {/* Header info bar */}
+          <div className="flex items-center justify-between px-2 py-1 text-xs text-slate-400">
+            <div className="flex items-center gap-1.5">
+              <span>Showing <span className="font-bold text-white">{filteredJobs.length}</span> open positions</span>
+              {isLoadingJobs && (
+                <span className="inline-block w-3 h-3 border-2 border-cyan-500/30 border-t-[#00B4D8] rounded-full animate-spin" />
+              )}
+              {hasActiveFilters && <span className="text-[#00B4D8] ml-1">(Filtered)</span>}
+            </div>
+            <div className="text-[11px] font-mono text-slate-400">
+              Sorted by: <span className="text-slate-200">Recommended</span>
             </div>
           </div>
-
-          {/* ==========================================
-              RIGHT COLUMN: JOB CARDS LIST
-          ========================================== */}
-          <div className="lg:col-span-8 space-y-4">
-            
-            {/* Header info bar */}
-            <div className="flex items-center justify-between px-2 py-1 text-xs text-slate-400">
-              <div className="flex items-center gap-1.5">
-                <span>Showing <span className="font-bold text-white">{filteredJobs.length}</span> positions</span>
-                {isLoadingJobs && (
-                  <span className="inline-block w-3 h-3 border-2 border-cyan-500/30 border-t-[#00B4D8] rounded-full animate-spin" />
-                )}
-                {hasActiveFilters && <span className="text-[#00B4D8] ml-1">(Filtered)</span>}
-              </div>
-              <div className="text-[11px] font-mono text-slate-400">
-                Sorted by: <span className="text-slate-200">Recommended</span>
-              </div>
-            </div>
 
             {/* Empty State */}
             {filteredJobs.length === 0 && (
@@ -1290,8 +1108,6 @@ export function MentorJobPortal() {
             })}
 
           </div>
-
-        </div>
 
         {/* ========================================================
             03. CONNECT WITH US SECTION (Bottom Banner)
