@@ -123,7 +123,7 @@ export function Navbar() {
               />
               <div className="flex flex-col leading-tight">
                 <span className="text-xl font-extrabold tracking-tight text-[#1A1D24] font-[family-name:var(--font-display)] flex items-center">
-                  GROW<span className="text-[#7A9D96]">360°</span>
+                  GROW<span className="text-[#2563EB]">360°</span>
                 </span>
                 <span className="text-[10px] font-mono text-slate-500 tracking-wider hidden sm:block">
                   Decoding the corporate world
@@ -141,7 +141,7 @@ export function Navbar() {
                     onClick={() => handleNavClick(item.href)}
                     className={`px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-all cursor-pointer ${
                       isActive
-                        ? 'bg-white text-[#7A9D96] font-bold shadow-sm border border-black/5'
+                        ? 'bg-white text-[#2563EB] font-bold shadow-sm border border-black/5'
                         : 'text-slate-600 hover:text-black hover:bg-white/60'
                     }`}
                   >
@@ -155,9 +155,9 @@ export function Navbar() {
             <div className="hidden lg:flex items-center gap-3">
               <button
                 onClick={() => openEnquiry('CONTACT')}
-                className="btn-pill-secondary px-4 py-2 text-xs font-semibold cursor-pointer flex items-center gap-1.5 hover:text-[#7A9D96]"
+                className="btn-pill-secondary px-4 py-2 text-xs font-semibold cursor-pointer flex items-center gap-1.5 hover:text-[#2563EB]"
               >
-                <Mail size={13} className="text-[#7A9D96]" />
+                <Mail size={13} className="text-[#2563EB]" />
                 <span>Contact Us</span>
               </button>
 
@@ -173,11 +173,11 @@ export function Navbar() {
                     <img
                       src={user.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80'}
                       alt={user.name}
-                      className="w-7 h-7 rounded-full object-cover border border-[#7A9D96]/40 group-hover:scale-105 transition-transform"
+                      className="w-7 h-7 rounded-full object-cover border border-[#2563EB]/40 group-hover:scale-105 transition-transform"
                     />
                     <div className="flex flex-col text-left">
-                      <span className="text-xs font-bold text-slate-800 leading-none group-hover:text-[#7A9D96] transition-colors">{user.name}</span>
-                      <span className="text-[10px] text-[#7A9D96] font-mono leading-none mt-0.5">{user.role}</span>
+                      <span className="text-xs font-bold text-slate-800 leading-none group-hover:text-[#2563EB] transition-colors">{user.name}</span>
+                      <span className="text-[10px] text-[#2563EB] font-mono leading-none mt-0.5">{user.role}</span>
                     </div>
                   </div>
                   <button
@@ -240,7 +240,7 @@ export function Navbar() {
                       className="h-8 w-auto object-contain rounded-lg"
                     />
                     <span className="font-extrabold text-lg text-slate-900 font-[family-name:var(--font-display)] flex items-center">
-                      GROW<span className="text-[#7A9D96]">360°</span>
+                      GROW<span className="text-[#2563EB]">360°</span>
                     </span>
                   </div>
                   <button
@@ -256,7 +256,7 @@ export function Navbar() {
                     <button
                       key={item.href}
                       onClick={() => handleNavClick(item.href)}
-                      className="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:text-[#7A9D96] hover:bg-slate-50 transition-colors text-left"
+                      className="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:text-[#2563EB] hover:bg-slate-50 transition-colors text-left"
                     >
                       <span>{item.label}</span>
                       <ChevronRight size={16} className="text-slate-400" />
@@ -273,7 +273,7 @@ export function Navbar() {
                   }}
                   className="btn-pill-secondary w-full justify-center text-xs py-2.5 flex items-center gap-2"
                 >
-                  <Mail size={14} className="text-[#7A9D96]" />
+                  <Mail size={14} className="text-[#2563EB]" />
                   <span>Contact Us</span>
                 </button>
 
@@ -289,11 +289,11 @@ export function Navbar() {
                       <img
                         src={user.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80'}
                         alt={user.name}
-                        className="w-8 h-8 rounded-full object-cover border border-[#7A9D96]/40"
+                        className="w-8 h-8 rounded-full object-cover border border-[#2563EB]/40"
                       />
                       <div className="text-left">
                         <div className="text-xs font-bold text-slate-900">{user.name}</div>
-                        <div className="text-[10px] text-[#7A9D96] font-mono">{user.role} · Tap to open Dashboard</div>
+                        <div className="text-[10px] text-[#2563EB] font-mono">{user.role} · Tap to open Dashboard</div>
                       </div>
                     </div>
                     <button

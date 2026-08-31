@@ -28,9 +28,9 @@ function ShatterWord({
         let charColor = '#12151B';
         if (isGradient) {
           const ratio = (startIndex + charIdx - 20) / Math.max(totalGradientLength - 1, 1);
-          const r = Math.round(122 + (168 - 122) * ratio);
-          const g = Math.round(157 + (204 - 157) * ratio);
-          const b = Math.round(150 + (197 - 150) * ratio);
+          const r = Math.round(37 + (96 - 37) * ratio);
+          const g = Math.round(99 + (165 - 99) * ratio);
+          const b = Math.round(235 + (250 - 235) * ratio);
           charColor = `rgb(${r}, ${g}, ${b})`;
         }
 
@@ -154,9 +154,9 @@ export function Hero() {
               initial={{ opacity: 0, y: -15, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 0.5, ease: 'easeOut' }}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#7A9D96]/10 border border-[#7A9D96]/30 text-[#7A9D96] text-xs font-semibold tracking-wide mb-6 w-max"
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2563EB]/10 border border-[#2563EB]/30 text-[#2563EB] text-xs font-semibold tracking-wide mb-6 w-max"
             >
-              <span className="w-2 h-2 rounded-full bg-[#7A9D96] animate-ping" />
+              <span className="w-2 h-2 rounded-full bg-[#2563EB] animate-ping" />
               <span>Grow360 — Decoding the corporate world</span>
             </motion.div>
 
@@ -210,15 +210,15 @@ export function Hero() {
               className="mt-10 pt-6 border-t border-black/5 flex flex-wrap items-center gap-5 text-xs text-slate-500 font-medium"
             >
               <div className="flex items-center gap-1.5">
-                <CheckCircle2 size={14} className="text-[#7A9D96]" />
+                <CheckCircle2 size={14} className="text-[#2563EB]" />
                 <span>AI Mock Diagnostics</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <CheckCircle2 size={14} className="text-[#7A9D96]" />
+                <CheckCircle2 size={14} className="text-[#2563EB]" />
                 <span>Industry Mentorship</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <CheckCircle2 size={14} className="text-[#7A9D96]" />
+                <CheckCircle2 size={14} className="text-[#2563EB]" />
                 <span>Campus Hiring Drives</span>
               </div>
             </motion.div>
@@ -237,7 +237,7 @@ export function Hero() {
             className="lg:col-span-6 relative"
           >
             {/* Ambient subtle glow background */}
-            <div className="absolute -inset-1 rounded-3xl bg-[#7A9D96]/15 blur-xl opacity-70 pointer-events-none" />
+            <div className="absolute -inset-1 rounded-3xl bg-[#2563EB]/15 blur-xl opacity-70 pointer-events-none" />
 
             <div className="relative rounded-3xl bg-white border border-black/8 p-6 sm:p-7 shadow-[0_10px_35px_-5px_rgba(0,0,0,0.08)] overflow-hidden">
               
@@ -245,7 +245,7 @@ export function Hero() {
               <div className="flex items-center justify-between pb-4 border-b border-black/8 mb-5">
                 <div>
                   <div className="flex items-center gap-2">
-                    <Sparkles size={16} className="text-[#7A9D96]" />
+                    <Sparkles size={16} className="text-[#2563EB]" />
                     <h3 className="text-lg font-bold text-slate-900 font-[family-name:var(--font-display)]">
                       Connect with Grow360
                     </h3>
@@ -291,7 +291,7 @@ export function Hero() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                     <div>
                       <label className="block text-xs font-medium text-slate-700 mb-1">
-                        Full Name <span className="text-[#7A9D96] font-bold">*</span>
+                        Full Name <span className="text-[#2563EB] font-bold">*</span>
                       </label>
                       <input
                         type="text"
@@ -299,13 +299,13 @@ export function Hero() {
                         autoComplete="off"
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50/80 border border-black/10 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-[#7A9D96] transition-colors"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50/80 border border-black/10 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-[#2563EB] transition-colors"
                       />
                     </div>
 
                     <div>
                       <label className="block text-xs font-medium text-slate-700 mb-1">
-                        Email <span className="text-[#7A9D96] font-bold">*</span>
+                        Email <span className="text-[#2563EB] font-bold">*</span>
                       </label>
                       <input
                         type="email"
@@ -313,7 +313,7 @@ export function Hero() {
                         autoComplete="off"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50/80 border border-black/10 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-[#7A9D96] transition-colors"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50/80 border border-black/10 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-[#2563EB] transition-colors"
                       />
                     </div>
                   </div>
@@ -322,7 +322,7 @@ export function Hero() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                     <div>
                       <label className="block text-xs font-medium text-slate-700 mb-1">
-                        Phone Number <span className="text-[#7A9D96] font-bold">*</span>
+                        Phone Number <span className="text-[#2563EB] font-bold">*</span>
                       </label>
                       <input
                         type="tel"
@@ -330,7 +330,7 @@ export function Hero() {
                         autoComplete="off"
                         value={phoneNumber}
                         onChange={(e) => setPhoneNumber(e.target.value)}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50/80 border border-black/10 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-[#7A9D96] transition-colors"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50/80 border border-black/10 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-[#2563EB] transition-colors"
                       />
                     </div>
 
@@ -343,7 +343,7 @@ export function Hero() {
                         autoComplete="off"
                         value={collegeName}
                         onChange={(e) => setCollegeName(e.target.value)}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50/80 border border-black/10 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-[#7A9D96] transition-colors"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50/80 border border-black/10 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-[#2563EB] transition-colors"
                       />
                     </div>
                   </div>
@@ -358,7 +358,7 @@ export function Hero() {
                       autoComplete="off"
                       value={profession}
                       onChange={(e) => setProfession(e.target.value)}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50/80 border border-black/10 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-[#7A9D96] transition-colors"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50/80 border border-black/10 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-[#2563EB] transition-colors"
                     />
                   </div>
 
@@ -371,7 +371,7 @@ export function Hero() {
                       rows={3}
                       value={requestDetails}
                       onChange={(e) => setRequestDetails(e.target.value)}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50/80 border border-black/10 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-[#7A9D96] transition-colors resize-none"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50/80 border border-black/10 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-[#2563EB] transition-colors resize-none"
                     />
                   </div>
 

@@ -76,7 +76,7 @@ export function ProblemSection() {
   return (
     <section id="colleges" className="py-24 lg:py-32 bg-[#F8F9FB] relative border-b border-black/5 overflow-hidden">
       {/* Background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[400px] bg-[#7A9D96]/5 blur-[160px] pointer-events-none rounded-full" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[400px] bg-[#2563EB]/5 blur-[160px] pointer-events-none rounded-full" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
@@ -88,13 +88,13 @@ export function ProblemSection() {
           transition={{ duration: 0.5 }}
           className="text-center max-w-3xl mx-auto mb-16 sm:mb-20"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#7A9D96]/10 border border-[#7A9D96]/25 text-[#7A9D96] text-xs font-semibold tracking-wide mb-4">
-            <Sparkles size={14} className="text-[#7A9D96]" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2563EB]/10 border border-[#2563EB]/25 text-[#2563EB] text-xs font-semibold tracking-wide mb-4">
+            <Sparkles size={14} className="text-[#2563EB]" />
             <span>Institutional Diagnostic</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#12151B] leading-tight font-[family-name:var(--font-display)]">
             Your Students Learn. But Are They{' '}
-            <span className="text-[#7A9D96]">
+            <span className="text-[#2563EB]">
               Placement Ready?
             </span>
           </h2>
@@ -125,7 +125,7 @@ export function ProblemSection() {
                       {item.tag}
                     </span>
 
-                    <div className="w-8 h-8 rounded-full bg-white shadow-sm border border-slate-200/80 flex items-center justify-center text-slate-700 group-hover:bg-[#7A9D96] group-hover:text-white group-hover:border-[#7A9D96] transition-colors">
+                    <div className="w-8 h-8 rounded-full bg-white shadow-sm border border-slate-200/80 flex items-center justify-center text-slate-700 group-hover:bg-[#2563EB] group-hover:text-white group-hover:border-[#2563EB] transition-colors">
                       <ArrowUpRight size={16} />
                     </div>
                   </div>

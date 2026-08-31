@@ -160,8 +160,8 @@ export function PlacementJourneySection() {
           transition={{ duration: 0.5 }}
           className="max-w-3xl mb-24 text-left"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#7A9D96]/10 border border-[#7A9D96]/25 text-[#9CBDB7] text-xs font-semibold tracking-wide mb-4">
-            <Sparkles size={14} className="text-[#7A9D96]" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2563EB]/10 border border-[#2563EB]/25 text-[#3B82F6] text-xs font-semibold tracking-wide mb-4">
+            <Sparkles size={14} className="text-[#2563EB]" />
             <span>The 7-Stage Roadmap</span>
           </div>
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.1]">
@@ -188,12 +188,12 @@ export function PlacementJourneySection() {
             <div className="lg:col-span-4 flex items-center gap-6 lg:sticky lg:top-36">
               <div className="flex flex-col items-center">
                 <div className={`w-4 h-4 rounded-full border-2 transition-all duration-300 ${
-                  activeStage >= 0 ? 'border-[#7A9D96] bg-[#7A9D96] ring-4 ring-[#7A9D96]/20' : 'border-slate-600 bg-[#F8F9FB]'
+                  activeStage >= 0 ? 'border-[#2563EB] bg-[#2563EB] ring-4 ring-[#2563EB]/20' : 'border-slate-600 bg-[#F8F9FB]'
                 }`} />
                 <div className="w-0.5 h-56 bg-slate-800 my-2 hidden lg:block" />
               </div>
               <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-[#7A9D96] block mb-1">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#2563EB] block mb-1">
                   Stage 01
                 </span>
                 <h3 className={`text-3xl sm:text-4xl lg:text-5xl font-extrabold transition-colors duration-300 ${
@@ -214,7 +214,7 @@ export function PlacementJourneySection() {
                 <ul className="space-y-3 text-sm text-slate-700 mb-6">
                   {stages[0].bullets.map((b) => (
                     <li key={b} className="flex items-start gap-2.5">
-                      <span className="text-[#7A9D96] font-bold text-base">•</span>
+                      <span className="text-[#2563EB] font-bold text-base">•</span>
                       <span>{b}</span>
                     </li>
                   ))}
@@ -246,7 +246,7 @@ export function PlacementJourneySection() {
                   <div className="flex items-center justify-between pb-3 mb-3 border-b border-slate-800/80">
                     <div className="flex items-center gap-2">
                       <div className="w-2.5 h-2.5 rounded-full bg-rose-500" />
-                      <div className="w-2.5 h-2.5 rounded-full bg-[#7A9D96]" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-[#2563EB]" />
                       <div className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
                       <span className="ml-2 text-xs font-mono text-slate-600">two-sum.cpp</span>
                     </div>
@@ -290,7 +290,7 @@ export function PlacementJourneySection() {
                   </div>
 
                   <div className="flex items-center gap-2">
-                    <span className="px-2 py-1 rounded bg-[#162032] text-amber-300 text-[10px] font-semibold border border-[#7A9D96]/20">
+                    <span className="px-2 py-1 rounded bg-[#162032] text-amber-300 text-[10px] font-semibold border border-[#2563EB]/20">
                       Arrays
                     </span>
                     <span className="px-2 py-1 rounded bg-[#162032] text-cyan-300 text-[10px] font-semibold border border-cyan-400/20">
@@ -299,7 +299,7 @@ export function PlacementJourneySection() {
                     <span className="px-2 py-1 rounded bg-[#162032] text-emerald-300 text-[10px] font-semibold border border-emerald-400/20">
                       DP
                     </span>
-                    <div className="ml-2 px-2.5 py-1 rounded-lg bg-[#1E293B] text-[#9CBDB7] text-xs font-bold border border-slate-700">
+                    <div className="ml-2 px-2.5 py-1 rounded-lg bg-[#1E293B] text-[#3B82F6] text-xs font-bold border border-slate-700">
                       312 <span className="text-[9px] text-slate-600 uppercase font-normal">Problems</span>
                     </div>
                   </div>
@@ -315,12 +315,12 @@ export function PlacementJourneySection() {
             <div className="lg:col-span-4 flex items-center gap-6 lg:sticky lg:top-36">
               <div className="flex flex-col items-center">
                 <div className={`w-4 h-4 rounded-full border-2 transition-all duration-300 ${
-                  activeStage >= 1 ? 'border-[#7A9D96] bg-[#7A9D96] ring-4 ring-[#7A9D96]/20' : 'border-slate-600 bg-[#F8F9FB]'
+                  activeStage >= 1 ? 'border-[#2563EB] bg-[#2563EB] ring-4 ring-[#2563EB]/20' : 'border-slate-600 bg-[#F8F9FB]'
                 }`} />
                 <div className="w-0.5 h-56 bg-slate-800 my-2 hidden lg:block" />
               </div>
               <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-[#7A9D96] block mb-1">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#2563EB] block mb-1">
                   Stage 02
                 </span>
                 <h3 className={`text-3xl sm:text-4xl lg:text-5xl font-extrabold transition-colors duration-300 ${
@@ -340,7 +340,7 @@ export function PlacementJourneySection() {
                 <ul className="space-y-3 text-sm text-slate-700 mb-6">
                   {stages[1].bullets.map((b) => (
                     <li key={b} className="flex items-start gap-2.5">
-                      <span className="text-[#7A9D96] font-bold text-base">•</span>
+                      <span className="text-[#2563EB] font-bold text-base">•</span>
                       <span>{b}</span>
                     </li>
                   ))}
@@ -383,7 +383,7 @@ export function PlacementJourneySection() {
                   </div>
                   <div className="p-3.5 rounded-xl bg-[#080B11] border border-slate-800">
                     <div className="text-slate-600 text-[10px] font-bold">BENCHMARK SCORE</div>
-                    <div className="text-lg font-bold text-[#9CBDB7] mt-1">94.8 / 100</div>
+                    <div className="text-lg font-bold text-[#3B82F6] mt-1">94.8 / 100</div>
                     <div className="text-[10px] text-emerald-400 mt-1">Top Tier Tier-1 Readiness</div>
                   </div>
                 </div>
@@ -403,12 +403,12 @@ export function PlacementJourneySection() {
             <div className="lg:col-span-4 flex items-center gap-6 lg:sticky lg:top-36">
               <div className="flex flex-col items-center">
                 <div className={`w-4 h-4 rounded-full border-2 transition-all duration-300 ${
-                  activeStage >= 2 ? 'border-[#7A9D96] bg-[#7A9D96] ring-4 ring-[#7A9D96]/20' : 'border-slate-600 bg-[#F8F9FB]'
+                  activeStage >= 2 ? 'border-[#2563EB] bg-[#2563EB] ring-4 ring-[#2563EB]/20' : 'border-slate-600 bg-[#F8F9FB]'
                 }`} />
                 <div className="w-0.5 h-56 bg-slate-800 my-2 hidden lg:block" />
               </div>
               <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-[#7A9D96] block mb-1">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#2563EB] block mb-1">
                   Stage 03
                 </span>
                 <h3 className={`text-3xl sm:text-4xl lg:text-5xl font-extrabold transition-colors duration-300 ${
@@ -428,7 +428,7 @@ export function PlacementJourneySection() {
                 <ul className="space-y-3 text-sm text-slate-700 mb-6">
                   {stages[2].bullets.map((b) => (
                     <li key={b} className="flex items-start gap-2.5">
-                      <span className="text-[#7A9D96] font-bold text-base">•</span>
+                      <span className="text-[#2563EB] font-bold text-base">•</span>
                       <span>{b}</span>
                     </li>
                   ))}
@@ -472,7 +472,7 @@ export function PlacementJourneySection() {
                   <div className="p-3.5 rounded-xl bg-[#090D15] border border-slate-800">
                     <div className="text-slate-600 text-[10px] font-bold">DATABASE LAYER</div>
                     <div className="text-sm font-bold text-slate-900 mt-1">PostgreSQL Shards</div>
-                    <div className="text-[10px] text-[#9CBDB7] mt-1">✓ ACID Guaranteed</div>
+                    <div className="text-[10px] text-[#3B82F6] mt-1">✓ ACID Guaranteed</div>
                   </div>
                 </div>
 
@@ -491,12 +491,12 @@ export function PlacementJourneySection() {
             <div className="lg:col-span-4 flex items-center gap-6 lg:sticky lg:top-36">
               <div className="flex flex-col items-center">
                 <div className={`w-4 h-4 rounded-full border-2 transition-all duration-300 ${
-                  activeStage >= 3 ? 'border-[#7A9D96] bg-[#7A9D96] ring-4 ring-[#7A9D96]/20' : 'border-slate-600 bg-[#F8F9FB]'
+                  activeStage >= 3 ? 'border-[#2563EB] bg-[#2563EB] ring-4 ring-[#2563EB]/20' : 'border-slate-600 bg-[#F8F9FB]'
                 }`} />
                 <div className="w-0.5 h-56 bg-slate-800 my-2 hidden lg:block" />
               </div>
               <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-[#7A9D96] block mb-1">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#2563EB] block mb-1">
                   Stage 04
                 </span>
                 <h3 className={`text-3xl sm:text-4xl lg:text-5xl font-extrabold transition-colors duration-300 ${
@@ -516,7 +516,7 @@ export function PlacementJourneySection() {
                 <ul className="space-y-3 text-sm text-slate-700 mb-6">
                   {stages[3].bullets.map((b) => (
                     <li key={b} className="flex items-start gap-2.5">
-                      <span className="text-[#7A9D96] font-bold text-base">•</span>
+                      <span className="text-[#2563EB] font-bold text-base">•</span>
                       <span>{b}</span>
                     </li>
                   ))}
@@ -581,7 +581,7 @@ export function PlacementJourneySection() {
                     <div className="text-[10px] font-mono text-slate-600 uppercase">DSA Depth</div>
                     <div className="text-sm font-bold">8.5/10</div>
                   </div>
-                  <div className="p-2.5 rounded-xl bg-[#2E200F] border border-[#7A9D96]/20 text-[#9CBDB7]">
+                  <div className="p-2.5 rounded-xl bg-[#2E200F] border border-[#2563EB]/20 text-[#3B82F6]">
                     <div className="text-[10px] font-mono text-slate-600 uppercase">STAR Format</div>
                     <div className="text-sm font-bold">Excellent</div>
                   </div>
@@ -601,12 +601,12 @@ export function PlacementJourneySection() {
             <div className="lg:col-span-4 flex items-center gap-6 lg:sticky lg:top-36">
               <div className="flex flex-col items-center">
                 <div className={`w-4 h-4 rounded-full border-2 transition-all duration-300 ${
-                  activeStage >= 4 ? 'border-[#7A9D96] bg-[#7A9D96] ring-4 ring-[#7A9D96]/20' : 'border-slate-600 bg-[#F8F9FB]'
+                  activeStage >= 4 ? 'border-[#2563EB] bg-[#2563EB] ring-4 ring-[#2563EB]/20' : 'border-slate-600 bg-[#F8F9FB]'
                 }`} />
                 <div className="w-0.5 h-56 bg-slate-800 my-2 hidden lg:block" />
               </div>
               <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-[#7A9D96] block mb-1">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#2563EB] block mb-1">
                   Stage 05
                 </span>
                 <h3 className={`text-3xl sm:text-4xl lg:text-5xl font-extrabold transition-colors duration-300 ${
@@ -626,7 +626,7 @@ export function PlacementJourneySection() {
                 <ul className="space-y-3 text-sm text-slate-700 mb-6">
                   {stages[4].bullets.map((b) => (
                     <li key={b} className="flex items-start gap-2.5">
-                      <span className="text-[#7A9D96] font-bold text-base">•</span>
+                      <span className="text-[#2563EB] font-bold text-base">•</span>
                       <span>{b}</span>
                     </li>
                   ))}
@@ -688,12 +688,12 @@ export function PlacementJourneySection() {
             <div className="lg:col-span-4 flex items-center gap-6 lg:sticky lg:top-36">
               <div className="flex flex-col items-center">
                 <div className={`w-4 h-4 rounded-full border-2 transition-all duration-300 ${
-                  activeStage >= 5 ? 'border-[#7A9D96] bg-[#7A9D96] ring-4 ring-[#7A9D96]/20' : 'border-slate-600 bg-[#F8F9FB]'
+                  activeStage >= 5 ? 'border-[#2563EB] bg-[#2563EB] ring-4 ring-[#2563EB]/20' : 'border-slate-600 bg-[#F8F9FB]'
                 }`} />
                 <div className="w-0.5 h-56 bg-slate-800 my-2 hidden lg:block" />
               </div>
               <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-[#7A9D96] block mb-1">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#2563EB] block mb-1">
                   Stage 06
                 </span>
                 <h3 className={`text-3xl sm:text-4xl lg:text-5xl font-extrabold transition-colors duration-300 ${
@@ -713,7 +713,7 @@ export function PlacementJourneySection() {
                 <ul className="space-y-3 text-sm text-slate-700 mb-6">
                   {stages[5].bullets.map((b) => (
                     <li key={b} className="flex items-start gap-2.5">
-                      <span className="text-[#7A9D96] font-bold text-base">•</span>
+                      <span className="text-[#2563EB] font-bold text-base">•</span>
                       <span>{b}</span>
                     </li>
                   ))}
@@ -752,7 +752,7 @@ export function PlacementJourneySection() {
 
                   <div className="p-3 rounded-xl bg-[#080B11] border border-slate-800">
                     <div className="text-slate-600 text-[10px] uppercase font-bold">Shortlisted</div>
-                    <div className="text-xl font-bold text-[#9CBDB7] mt-1">96</div>
+                    <div className="text-xl font-bold text-[#3B82F6] mt-1">96</div>
                     <div className="text-[10px] text-slate-500 mt-0.5">Tech Interview Panels</div>
                   </div>
 
@@ -765,7 +765,7 @@ export function PlacementJourneySection() {
 
                 <div className="flex items-center justify-between text-xs text-slate-600 pt-2 border-t border-slate-800">
                   <span className="text-slate-700 font-semibold">Tier-1 Drives Executed This Season</span>
-                  <span className="text-[#9CBDB7] font-bold">100% Verified</span>
+                  <span className="text-[#3B82F6] font-bold">100% Verified</span>
                 </div>
               </div>
             </div>
@@ -866,7 +866,7 @@ export function PlacementJourneySection() {
         <div className="mt-24 text-center">
           <button
             onClick={() => openEnquiry('CONSULTATION')}
-            className="btn-pill-primary cursor-pointer active:scale-95 text-xs py-3.5 px-8 inline-flex items-center gap-2 shadow-xl shadow-[#7A9D96]/20"
+            className="btn-pill-primary cursor-pointer active:scale-95 text-xs py-3.5 px-8 inline-flex items-center gap-2 shadow-xl shadow-[#2563EB]/20"
           >
             <span>Deploy This Infrastructure on Campus</span>
             <ArrowRight size={16} />

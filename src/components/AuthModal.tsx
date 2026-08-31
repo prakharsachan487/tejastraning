@@ -175,7 +175,7 @@ export function AuthModal() {
                           Password
                         </label>
                         {!isSignUp && (
-                          <a href="#forgot" className="text-[11px] text-[#7A9D96] hover:underline font-medium">
+                          <a href="#forgot" className="text-[11px] text-[#2563EB] hover:underline font-medium">
                             Forgot?
                           </a>
                         )}
@@ -204,7 +204,7 @@ export function AuthModal() {
                       <button
                         type="submit"
                         disabled={isLoading}
-                        className="w-full py-3.5 px-6 rounded-full bg-gradient-to-r from-[#B8D5CF] via-[#A5C4BE] to-[#9CBDB7] hover:from-[#CBE3DE] hover:to-[#7A9D96] text-[#1E1E24] font-bold text-xs sm:text-sm shadow-md shadow-[#7A9D96]/ active:scale-[0.99] transition-all duration-200 cursor-pointer flex items-center justify-center gap-2"
+                        className="w-full py-3.5 px-6 rounded-full bg-gradient-to-r from-[#B8D5CF] via-[#A5C4BE] to-[#3B82F6] hover:from-[#CBE3DE] hover:to-[#2563EB] text-[#1E1E24] font-bold text-xs sm:text-sm shadow-md shadow-[#2563EB]/ active:scale-[0.99] transition-all duration-200 cursor-pointer flex items-center justify-center gap-2"
                       >
                         {isLoading ? (
                           <span className="inline-block w-4 h-4 border-2 border-black/20 border-t-black rounded-full animate-spin" />

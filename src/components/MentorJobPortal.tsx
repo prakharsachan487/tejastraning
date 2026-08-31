@@ -549,7 +549,7 @@ export function MentorJobPortal() {
               <span className="text-slate-600">/</span>
               <span className="text-slate-600">{selectedJob.domain}</span>
               <span className="text-slate-600">/</span>
-              <span className="text-[#7A9D96] font-bold truncate max-w-[200px] sm:max-w-none">{selectedJob.title}</span>
+              <span className="text-[#2563EB] font-bold truncate max-w-[200px] sm:max-w-none">{selectedJob.title}</span>
             </div>
           </div>
 
@@ -565,7 +565,7 @@ export function MentorJobPortal() {
 
                 {/* Domain & Type Badges */}
                 <div className="flex flex-wrap items-center gap-2 mb-4">
-                  <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-[#7A9D96]/15 text-[#9CBDB7] border border-[#7A9D96]/30">
+                  <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-[#2563EB]/15 text-[#3B82F6] border border-[#2563EB]/30">
                     {selectedJob.domain}
                   </span>
                   <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
@@ -585,7 +585,7 @@ export function MentorJobPortal() {
                     <MapPin size={16} className="text-[#38BDF8]" />
                     <span>{selectedJob.location}</span>
                   </div>
-                  <div className="flex items-center gap-1.5 font-mono text-[#9CBDB7]">
+                  <div className="flex items-center gap-1.5 font-mono text-[#3B82F6]">
                     <IndianRupee size={16} />
                     <span className="font-bold text-slate-900">{selectedJob.salary}</span>
                   </div>
@@ -598,7 +598,7 @@ export function MentorJobPortal() {
 
               {/* 01. About The Role */}
               <div className="p-6 sm:p-8 rounded-3xl bg-white shadow-sm border border-black/8 shadow-lg">
-                <h3 className="text-sm font-mono uppercase tracking-wider text-[#7A9D96] font-bold mb-3 flex items-center gap-2">
+                <h3 className="text-sm font-mono uppercase tracking-wider text-[#2563EB] font-bold mb-3 flex items-center gap-2">
                   <Briefcase size={16} />
                   <span>About The Role &amp; Mission</span>
                 </h3>
@@ -609,14 +609,14 @@ export function MentorJobPortal() {
 
               {/* 02. Key Responsibilities */}
               <div className="p-6 sm:p-8 rounded-3xl bg-white shadow-sm border border-black/8 shadow-lg">
-                <h3 className="text-sm font-mono uppercase tracking-wider text-[#9CBDB7] font-bold mb-4 flex items-center gap-2">
+                <h3 className="text-sm font-mono uppercase tracking-wider text-[#3B82F6] font-bold mb-4 flex items-center gap-2">
                   <Layers size={16} />
                   <span>Key Responsibilities</span>
                 </h3>
                 <ul className="space-y-3">
                   {selectedJob.responsibilities.map((resp, i) => (
                     <li key={i} className="flex items-start gap-3 text-xs sm:text-sm text-slate-700 leading-relaxed">
-                      <div className="w-5 h-5 rounded-full bg-[#7A9D96]/10 border border-[#7A9D96]/20 text-[#9CBDB7] flex items-center justify-center shrink-0 mt-0.5 font-mono text-[10px]">
+                      <div className="w-5 h-5 rounded-full bg-[#2563EB]/10 border border-[#2563EB]/20 text-[#3B82F6] flex items-center justify-center shrink-0 mt-0.5 font-mono text-[10px]">
                         ✓
                       </div>
                       <span>{resp}</span>
@@ -652,7 +652,7 @@ export function MentorJobPortal() {
                   {selectedJob.skills.map((skill, sIdx) => (
                     <span
                       key={sIdx}
-                      className="text-xs font-mono px-3 py-1.5 rounded-xl bg-slate-50 text-slate-200 border border-black/8 hover:border-[#7A9D96]/50 transition-colors"
+                      className="text-xs font-mono px-3 py-1.5 rounded-xl bg-slate-50 text-slate-200 border border-black/8 hover:border-[#2563EB]/50 transition-colors"
                     >
                       {skill}
                     </span>
@@ -685,7 +685,7 @@ export function MentorJobPortal() {
             {/* ── RIGHT COLUMN (5 Cols): DEDICATED STICKY APPLICATION FORM ── */}
             <div className="lg:col-span-5 lg:sticky lg:top-24">
               <div className="rounded-3xl bg-white shadow-sm border border-black/10 p-6 sm:p-8 shadow-2xl relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-48 h-48 bg-[#7A9D96]/10 blur-3xl pointer-events-none rounded-full" />
+                <div className="absolute top-0 right-0 w-48 h-48 bg-[#2563EB]/10 blur-3xl pointer-events-none rounded-full" />
 
                 {applySuccess ? (
                   /* Success Notification State */
@@ -710,7 +710,7 @@ export function MentorJobPortal() {
                   /* Main Application Form */
                   <div>
                     <div className="mb-6">
-                      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#7A9D96]/10 border border-[#7A9D96]/30 text-[#7A9D96] text-xs font-mono font-semibold mb-2">
+                      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#2563EB]/10 border border-[#2563EB]/30 text-[#2563EB] text-xs font-mono font-semibold mb-2">
                         <Sparkles size={13} />
                         <span>Direct Application</span>
                       </div>
@@ -733,7 +733,7 @@ export function MentorJobPortal() {
                       {/* Full Name */}
                       <div>
                         <label className="block text-xs font-medium text-slate-700 mb-1.5">
-                          Full Name <span className="text-[#7A9D96]">*</span>
+                          Full Name <span className="text-[#2563EB]">*</span>
                         </label>
                         <input
                           type="text"
@@ -741,14 +741,14 @@ export function MentorJobPortal() {
                           value={applicantName}
                           onChange={(e) => setApplicantName(e.target.value)}
                           placeholder="e.g. Rahul Sharma"
-                          className="w-full px-4 py-3 rounded-2xl bg-slate-50 border border-black/8 text-xs text-slate-900 placeholder:text-slate-600 focus:outline-none focus:border-[#7A9D96] transition-colors"
+                          className="w-full px-4 py-3 rounded-2xl bg-slate-50 border border-black/8 text-xs text-slate-900 placeholder:text-slate-600 focus:outline-none focus:border-[#2563EB] transition-colors"
                         />
                       </div>
 
                       {/* Email Address */}
                       <div>
                         <label className="block text-xs font-medium text-slate-700 mb-1.5">
-                          Email Address <span className="text-[#7A9D96]">*</span>
+                          Email Address <span className="text-[#2563EB]">*</span>
                         </label>
                         <input
                           type="email"
@@ -756,14 +756,14 @@ export function MentorJobPortal() {
                           value={applicantEmail}
                           onChange={(e) => setApplicantEmail(e.target.value)}
                           placeholder="rahul@example.com"
-                          className="w-full px-4 py-3 rounded-2xl bg-slate-50 border border-black/8 text-xs text-slate-900 placeholder:text-slate-600 focus:outline-none focus:border-[#7A9D96] transition-colors"
+                          className="w-full px-4 py-3 rounded-2xl bg-slate-50 border border-black/8 text-xs text-slate-900 placeholder:text-slate-600 focus:outline-none focus:border-[#2563EB] transition-colors"
                         />
                       </div>
 
                       {/* Phone Number */}
                       <div>
                         <label className="block text-xs font-medium text-slate-700 mb-1.5">
-                          Phone Number <span className="text-[#7A9D96]">*</span>
+                          Phone Number <span className="text-[#2563EB]">*</span>
                         </label>
                         <input
                           type="tel"
@@ -771,7 +771,7 @@ export function MentorJobPortal() {
                           value={applicantPhone}
                           onChange={(e) => setApplicantPhone(e.target.value)}
                           placeholder="e.g. +91 98765 43210"
-                          className="w-full px-4 py-3 rounded-2xl bg-slate-50 border border-black/8 text-xs text-slate-900 placeholder:text-slate-600 focus:outline-none focus:border-[#7A9D96] transition-colors"
+                          className="w-full px-4 py-3 rounded-2xl bg-slate-50 border border-black/8 text-xs text-slate-900 placeholder:text-slate-600 focus:outline-none focus:border-[#2563EB] transition-colors"
                         />
                       </div>
 
@@ -779,9 +779,9 @@ export function MentorJobPortal() {
                       <div>
                         <div className="flex items-center justify-between mb-1.5">
                           <label className="block text-xs font-medium text-slate-700">
-                            Resume / CV <span className="text-[#7A9D96]">*</span>
+                            Resume / CV <span className="text-[#2563EB]">*</span>
                           </label>
-                          <span className="text-[10px] font-mono text-[#9CBDB7] bg-[#9CBDB7]/10 border border-[#9CBDB7]/20 px-2 py-0.5 rounded-full">
+                          <span className="text-[10px] font-mono text-[#3B82F6] bg-[#3B82F6]/10 border border-[#3B82F6]/20 px-2 py-0.5 rounded-full">
                             File OR Link
                           </span>
                         </div>
@@ -791,10 +791,10 @@ export function MentorJobPortal() {
                           <label className={`w-full px-4 py-3 rounded-2xl border ${
                             resumeFileName 
                               ? 'bg-emerald-500/10 border-emerald-500/40 text-emerald-300' 
-                              : 'bg-slate-50 border-dashed border-white/20 hover:border-[#7A9D96]/50 text-slate-700'
+                              : 'bg-slate-50 border-dashed border-white/20 hover:border-[#2563EB]/50 text-slate-700'
                           } text-xs flex items-center justify-between cursor-pointer transition-all group`}>
                             <div className="flex items-center gap-2 overflow-hidden">
-                              <Upload size={15} className={`${resumeFileName ? 'text-emerald-400' : 'text-[#7A9D96]'} shrink-0 group-hover:scale-110 transition-transform`} />
+                              <Upload size={15} className={`${resumeFileName ? 'text-emerald-400' : 'text-[#2563EB]'} shrink-0 group-hover:scale-110 transition-transform`} />
                               <span className="truncate">
                                 {resumeFileName ? resumeFileName : 'Upload PDF / Word Resume'}
                               </span>
@@ -825,7 +825,7 @@ export function MentorJobPortal() {
                             className={`w-full px-4 py-3 rounded-2xl bg-slate-50 border ${
                               resumeLink.trim()
                                 ? 'border-emerald-500/40 text-emerald-300 focus:border-emerald-500'
-                                : 'border-black/8 text-slate-900 placeholder:text-slate-600 focus:border-[#7A9D96]'
+                                : 'border-black/8 text-slate-900 placeholder:text-slate-600 focus:border-[#2563EB]'
                             } text-xs focus:outline-none transition-all`}
                           />
                         </div>
@@ -850,7 +850,7 @@ export function MentorJobPortal() {
                         <button
                           type="submit"
                           disabled={isSubmitting || (!resumeFileName && !resumeLink.trim())}
-                          className="w-full btn-pill-primary py-4 text-xs font-bold cursor-pointer justify-center flex items-center gap-2 shadow-lg shadow-[#7A9D96]/ disabled:opacity-50 disabled:cursor-not-allowed"
+                          className="w-full btn-pill-primary py-4 text-xs font-bold cursor-pointer justify-center flex items-center gap-2 shadow-lg shadow-[#2563EB]/ disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           {isSubmitting ? (
                             <>
@@ -904,7 +904,7 @@ export function MentorJobPortal() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search by job title, skill (e.g. Next.js, DSA, C++, AWS), or location..."
-                className="w-full pl-11 pr-10 py-3.5 rounded-2xl bg-white shadow-sm border border-black/8 text-sm text-slate-900 placeholder:text-slate-500 focus:outline-none focus:border-[#7A9D96] transition-all shadow-inner"
+                className="w-full pl-11 pr-10 py-3.5 rounded-2xl bg-white shadow-sm border border-black/8 text-sm text-slate-900 placeholder:text-slate-500 focus:outline-none focus:border-[#2563EB] transition-all shadow-inner"
               />
               {searchQuery && (
                 <button
@@ -920,7 +920,7 @@ export function MentorJobPortal() {
             {hasActiveFilters && (
               <button
                 onClick={handleClearFilters}
-                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl bg-white/5 hover:bg-white/10 text-xs font-semibold text-[#9CBDB7] border border-[#9CBDB7]/30 transition-all cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl bg-white/5 hover:bg-white/10 text-xs font-semibold text-[#3B82F6] border border-[#3B82F6]/30 transition-all cursor-pointer"
               >
                 <RotateCcw size={14} />
                 <span>Reset Filters</span>
@@ -966,7 +966,7 @@ export function MentorJobPortal() {
                 <span className="inline-block w-3 h-3 border-2 border-cyan-500/30 border-t-[#00B4D8] rounded-full animate-spin" />
               )}
               {hasActiveFilters && (
-                <span className="text-xs px-2 py-0.5 rounded-full bg-[#7A9D96]/15 text-[#7A9D96] font-mono font-bold">
+                <span className="text-xs px-2 py-0.5 rounded-full bg-[#2563EB]/15 text-[#2563EB] font-mono font-bold">
                   Filtered
                 </span>
               )}
@@ -1008,7 +1008,7 @@ export function MentorJobPortal() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.2 }}
-                  className="rounded-3xl bg-white shadow-sm border border-black/8 hover:border-[#7A9D96]/50 transition-all duration-300 p-6 sm:p-7 shadow-lg hover:shadow-2xl hover:shadow-cyan-500/10 group flex flex-col justify-between relative overflow-hidden"
+                  className="rounded-3xl bg-white shadow-sm border border-black/8 hover:border-[#2563EB]/50 transition-all duration-300 p-6 sm:p-7 shadow-lg hover:shadow-2xl hover:shadow-cyan-500/10 group flex flex-col justify-between relative overflow-hidden"
                 >
                   {/* Top Ambient Glow */}
                   <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-bl from-[#00B4D8]/10 via-transparent to-transparent pointer-events-none group-hover:from-[#00B4D8]/20 transition-colors" />
@@ -1024,7 +1024,7 @@ export function MentorJobPortal() {
                             ? 'bg-purple-500/10 text-purple-400 border-purple-500/30'
                             : job.domain === 'Academics'
                             ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30'
-                            : 'bg-[#7A9D96]/10 text-[#9CBDB7] border-[#7A9D96]/30'
+                            : 'bg-[#2563EB]/10 text-[#3B82F6] border-[#2563EB]/30'
                         }`}>
                           {job.domain}
                         </span>
@@ -1040,7 +1040,7 @@ export function MentorJobPortal() {
                     </div>
 
                     {/* Job Title */}
-                    <h3 className="text-lg sm:text-xl font-bold text-slate-900 group-hover:text-[#7A9D96] transition-colors font-[family-name:var(--font-display)] leading-snug mb-2 line-clamp-1">
+                    <h3 className="text-lg sm:text-xl font-bold text-slate-900 group-hover:text-[#2563EB] transition-colors font-[family-name:var(--font-display)] leading-snug mb-2 line-clamp-1">
                       {job.title}
                     </h3>
 
@@ -1051,7 +1051,7 @@ export function MentorJobPortal() {
                         <span className="truncate max-w-[160px]">{job.location}</span>
                       </div>
 
-                      <div className="flex items-center gap-1 font-mono text-[#9CBDB7]">
+                      <div className="flex items-center gap-1 font-mono text-[#3B82F6]">
                         <IndianRupee size={13} className="shrink-0" />
                         <span className="font-bold text-slate-900">{job.salary}</span>
                       </div>
@@ -1116,7 +1116,7 @@ export function MentorJobPortal() {
                   className="h-9 w-auto object-contain rounded-lg"
                 />
                 <h3 className="text-2xl sm:text-3xl font-black text-slate-900 font-[family-name:var(--font-display)]">
-                  Connect With <span className="italic font-serif text-[#7A9D96]">Us</span>
+                  Connect With <span className="italic font-serif text-[#2563EB]">Us</span>
                 </h3>
               </div>
 
@@ -1127,7 +1127,7 @@ export function MentorJobPortal() {
               {/* Office & Website Details */}
               <div className="space-y-3 pt-2">
                 <div className="flex items-start gap-3 p-3 rounded-2xl bg-slate-50 border border-black/8">
-                  <div className="w-8 h-8 rounded-xl bg-white/5 flex items-center justify-center text-[#7A9D96] shrink-0">
+                  <div className="w-8 h-8 rounded-xl bg-white/5 flex items-center justify-center text-[#2563EB] shrink-0">
                     <Building2 size={16} />
                   </div>
                   <div>
@@ -1170,7 +1170,7 @@ export function MentorJobPortal() {
               <div className="p-6 rounded-2xl bg-slate-50 border border-black/8 relative overflow-hidden">
                 <div className="flex items-center justify-between pb-4 border-b border-black/8 mb-4">
                   <div className="flex items-center gap-2">
-                    <MapPin size={16} className="text-[#7A9D96]" />
+                    <MapPin size={16} className="text-[#2563EB]" />
                     <span className="text-xs font-bold text-slate-900">Active Training Hubs in India</span>
                   </div>
                   <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
@@ -1183,7 +1183,7 @@ export function MentorJobPortal() {
                   {[
                     { city: 'Noida Hub', state: 'Uttar Pradesh', status: 'Active Training', color: '#00B4D8' },
                     { city: 'Phagwara', state: 'Punjab Hub', status: 'Batch #14 Live', color: '#38BDF8' },
-                    { city: 'Vadodara', state: 'Gujarat Hub', status: 'Analytics Lab', color: '#9CBDB7' },
+                    { city: 'Vadodara', state: 'Gujarat Hub', status: 'Analytics Lab', color: '#3B82F6' },
                     { city: 'Bareilly', state: 'UP East Hub', status: 'Campus Program', color: '#22C55E' },
                     { city: 'Kolhapur', state: 'Maharashtra Hub', status: 'Aptitude & DSA', color: '#8B5CF6' },
                     { city: 'Remote Cohort', state: 'Pan-India', status: '1-on-1 Mocks', color: '#EC4899' },

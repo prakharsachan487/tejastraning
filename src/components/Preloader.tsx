@@ -90,13 +90,13 @@ export function Preloader({ onComplete }: { onComplete?: () => void }) {
           <div className="w-full max-w-sm flex flex-col gap-2">
             <div className="flex justify-between items-center text-xs font-mono">
               <span className="text-slate-500">Loading modules</span>
-              <span className="text-[#7A9D96] font-bold">{progress}%</span>
+              <span className="text-[#2563EB] font-bold">{progress}%</span>
             </div>
 
             {/* Progress Track */}
             <div className="w-full h-1 bg-[#181822] rounded-full overflow-hidden">
               <motion.div
-                className="h-full bg-gradient-to-r from-[#7A9D96] to-[#9CBDB7]"
+                className="h-full bg-gradient-to-r from-[#2563EB] to-[#3B82F6]"
                 style={{ width: `${progress}%` }}
                 transition={{ ease: 'easeOut' }}
               />

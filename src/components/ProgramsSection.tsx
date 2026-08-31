@@ -186,7 +186,7 @@ export function ProgramsSection() {
   return (
     <section id="programs" className="py-20 lg:py-28 bg-[#F8F9FB] relative obsidian-grid overflow-hidden">
       {/* Background Subtle Gradient Glows */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-gradient-to-br from-[#7A9D96]/10 via-[#9CBDB7]/5 to-transparent blur-[120px] pointer-events-none rounded-full" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-gradient-to-br from-[#2563EB]/10 via-[#3B82F6]/5 to-transparent blur-[120px] pointer-events-none rounded-full" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
@@ -198,14 +198,14 @@ export function ProgramsSection() {
           transition={{ duration: 0.5 }}
           className="text-center max-w-3xl mx-auto mb-12"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#7A9D96]/10 border border-[#7A9D96]/25 text-[#9CBDB7] text-xs font-semibold tracking-wide mb-4 shadow-sm shadow-[#7A9D96]/">
-            <Sparkles size={14} className="text-[#7A9D96]" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2563EB]/10 border border-[#2563EB]/25 text-[#3B82F6] text-xs font-semibold tracking-wide mb-4 shadow-sm shadow-[#2563EB]/">
+            <Sparkles size={14} className="text-[#2563EB]" />
             <span>Comprehensive Curriculum</span>
           </div>
           
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight font-[family-name:var(--font-display)]">
             Industry-Ready Programs.{' '}
-            <span className="bg-gradient-to-r from-[#7A9D96] via-[#9CBDB7] to-[#9CBDB7] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#2563EB] via-[#3B82F6] to-[#3B82F6] bg-clip-text text-transparent">
               Built for Your Campus.
             </span>
           </h2>
@@ -217,7 +217,7 @@ export function ProgramsSection() {
           {/* Quick Value Badges */}
           <div className="mt-6 flex flex-wrap items-center justify-center gap-4 text-xs font-medium text-slate-700">
             <div className="flex items-center gap-1.5 bg-white shadow-sm px-3 py-1.5 rounded-full border border-black/8">
-              <Award size={14} className="text-[#9CBDB7]" />
+              <Award size={14} className="text-[#3B82F6]" />
               <span>University Credit Aligned</span>
             </div>
             <div className="flex items-center gap-1.5 bg-white shadow-sm px-3 py-1.5 rounded-full border border-black/8">
@@ -248,7 +248,7 @@ export function ProgramsSection() {
                   {isActive && (
                     <motion.div
                       layoutId="activeProgramTab"
-                      className="absolute inset-0 bg-gradient-to-r from-[#7A9D96] to-[#9CBDB7] rounded-xl shadow-lg shadow-[#7A9D96]/ -z-10"
+                      className="absolute inset-0 bg-gradient-to-r from-[#2563EB] to-[#3B82F6] rounded-xl shadow-lg shadow-[#2563EB]/ -z-10"
                       transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                     />
                   )}
@@ -269,7 +269,7 @@ export function ProgramsSection() {
           className="mb-8 flex flex-col sm:flex-row items-center justify-between gap-4 p-4 sm:p-5 rounded-2xl bg-white shadow-sm border border-black/8"
         >
           <div className="flex items-center gap-3.5 text-left">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#7A9D96]/20 to-[#9CBDB7]/10 border border-[#7A9D96]/30 flex items-center justify-center text-[#9CBDB7] shrink-0">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#2563EB]/20 to-[#3B82F6]/10 border border-[#2563EB]/30 flex items-center justify-center text-[#3B82F6] shrink-0">
               <currentCategory.icon size={20} />
             </div>
             <div>
@@ -287,8 +287,8 @@ export function ProgramsSection() {
             </div>
           </div>
 
-          <div className="shrink-0 px-3.5 py-1.5 rounded-xl bg-white/5 border border-black/8 text-xs font-mono text-[#9CBDB7] flex items-center gap-2">
-            <Sparkles size={13} className="text-[#7A9D96]" />
+          <div className="shrink-0 px-3.5 py-1.5 rounded-xl bg-white/5 border border-black/8 text-xs font-mono text-[#3B82F6] flex items-center gap-2">
+            <Sparkles size={13} className="text-[#2563EB]" />
             <span>{currentCategory.stat}</span>
           </div>
         </motion.div>
@@ -303,12 +303,12 @@ export function ProgramsSection() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -15, scale: 0.98 }}
                 transition={{ duration: 0.35, delay: i * 0.08 }}
-                className="group relative rounded-2xl bg-white shadow-sm border border-black/8 p-6 flex flex-col justify-between hover:border-[#7A9D96]/50 transition-all duration-300 hover:shadow-xl hover:shadow-teal-950/20"
+                className="group relative rounded-2xl bg-white shadow-sm border border-black/8 p-6 flex flex-col justify-between hover:border-[#2563EB]/50 transition-all duration-300 hover:shadow-xl hover:shadow-teal-950/20"
               >
                 <div>
                   {/* Top Bar with Duration & Level */}
                   <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-[#9CBDB7] bg-[#7A9D96]/10 px-2.5 py-1 rounded-md border border-[#7A9D96]/25">
+                    <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-[#3B82F6] bg-[#2563EB]/10 px-2.5 py-1 rounded-md border border-[#2563EB]/25">
                       <Clock size={12} />
                       <span>{track.duration}</span>
                     </div>
@@ -318,7 +318,7 @@ export function ProgramsSection() {
                   </div>
 
                   {/* Track Title */}
-                  <h3 className="text-lg font-bold text-slate-900 group-hover:text-[#9CBDB7] transition-colors leading-snug mb-3 font-[family-name:var(--font-display)]">
+                  <h3 className="text-lg font-bold text-slate-900 group-hover:text-[#3B82F6] transition-colors leading-snug mb-3 font-[family-name:var(--font-display)]">
                     {track.title}
                   </h3>
 
@@ -358,7 +358,7 @@ export function ProgramsSection() {
 
                   <button
                     onClick={() => openEnquiry('PROPOSAL')}
-                    className="w-full py-2.5 px-4 rounded-xl bg-white/5 hover:bg-[#7A9D96] text-slate-200 hover:text-slate-900 text-xs font-bold transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer group/btn"
+                    className="w-full py-2.5 px-4 rounded-xl bg-white/5 hover:bg-[#2563EB] text-slate-200 hover:text-slate-900 text-xs font-bold transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer group/btn"
                   >
                     <span>Request Syllabus</span>
                     <ArrowRight size={13} className="transition-transform group-hover/btn:translate-x-1" />
@@ -378,7 +378,7 @@ export function ProgramsSection() {
           className="mt-12 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-[#181824] via-[#14141C] to-[#121218] border border-black/8 flex flex-col md:flex-row items-center justify-between gap-6"
         >
           <div className="flex items-center gap-4 text-left">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#7A9D96] to-[#9CBDB7] flex items-center justify-center text-slate-900 shrink-0 shadow-lg shadow-[#7A9D96]/">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#2563EB] to-[#3B82F6] flex items-center justify-center text-slate-900 shrink-0 shadow-lg shadow-[#2563EB]/">
               <FileCode size={24} />
             </div>
             <div>

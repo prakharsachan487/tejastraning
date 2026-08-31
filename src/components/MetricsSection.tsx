@@ -63,12 +63,12 @@ export function MetricsSection() {
           transition={{ duration: 0.5 }}
           className="text-center max-w-3xl mx-auto mb-14"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#7A9D96]/10 border border-[#7A9D96]/25 text-[#7A9D96] text-xs font-semibold tracking-wide mb-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2563EB]/10 border border-[#2563EB]/25 text-[#2563EB] text-xs font-semibold tracking-wide mb-4">
             <span>Verified Track Record</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#12151B] font-[family-name:var(--font-display)]">
             Numbers That{' '}
-            <span className="text-[#7A9D96]">
+            <span className="text-[#2563EB]">
               Move the Needle
             </span>
           </h2>
@@ -83,7 +83,7 @@ export function MetricsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="bento-card p-5 sm:p-6 text-center hover:border-[#7A9D96]/40 transition-colors bg-white shadow-sm"
+              className="bento-card p-5 sm:p-6 text-center hover:border-[#2563EB]/40 transition-colors bg-white shadow-sm"
             >
               <div className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-mono text-[#12151B] mb-1">
                 <AnimatedCounter

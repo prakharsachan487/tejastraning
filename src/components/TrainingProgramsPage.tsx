@@ -21,11 +21,11 @@ export function TrainingProgramsPage({ onBackToHome: _ }: TrainingProgramsPagePr
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#F8F9FB] text-slate-100 font-sans selection:bg-[#7A9D96] selection:text-slate-900">
+    <div className="min-h-screen bg-[#F8F9FB] text-slate-100 font-sans selection:bg-[#2563EB] selection:text-slate-900">
       {/* ── 02. Hero Banner ── */}
       <section className="pt-32 pb-16 lg:pt-36 lg:pb-20 relative overflow-hidden border-b border-black/5 bg-gradient-to-b from-[#0F0F16] via-[#0A0A0D] to-[#0A0A0D]">
         {/* Glow Spheres */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-[#7A9D96]/10 blur-[130px] pointer-events-none rounded-full" />
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-[#2563EB]/10 blur-[130px] pointer-events-none rounded-full" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative text-center">
           
@@ -33,7 +33,7 @@ export function TrainingProgramsPage({ onBackToHome: _ }: TrainingProgramsPagePr
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#7A9D96]/10 border border-[#7A9D96]/30 text-[#9CBDB7] text-xs font-mono font-bold mb-6"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#2563EB]/10 border border-[#2563EB]/30 text-[#3B82F6] text-xs font-mono font-bold mb-6"
           >
             <GraduationCap size={14} />
             <span>CAMPUS TRAINING &amp; INDUSTRY CURRICULUM</span>
@@ -47,7 +47,7 @@ export function TrainingProgramsPage({ onBackToHome: _ }: TrainingProgramsPagePr
             className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight font-[family-name:var(--font-display)] max-w-4xl mx-auto leading-tight sm:leading-tight"
           >
             Industry-Mapped Training.{' '}
-            <span className="bg-gradient-to-r from-[#7A9D96] via-[#9CBDB7] to-[#9CBDB7] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#2563EB] via-[#3B82F6] to-[#3B82F6] bg-clip-text text-transparent">
               Built for Campus Success.
             </span>
           </motion.h1>
@@ -71,8 +71,8 @@ export function TrainingProgramsPage({ onBackToHome: _ }: TrainingProgramsPagePr
             {[
               { label: 'Partner Campuses', val: '50+', icon: Users, color: '#38BDF8' },
               { label: 'Placement Rate', val: '92%', icon: Award, color: '#22C55E' },
-              { label: 'Patterns & Drills', val: '700+', icon: Code2, color: '#9CBDB7' },
-              { label: 'Highest Package', val: '₹44 LPA', icon: Sparkles, color: '#7A9D96' },
+              { label: 'Patterns & Drills', val: '700+', icon: Code2, color: '#3B82F6' },
+              { label: 'Highest Package', val: '₹44 LPA', icon: Sparkles, color: '#2563EB' },
             ].map((metric, i) => {
               const Icon = metric.icon;
               return (
@@ -108,7 +108,7 @@ export function TrainingProgramsPage({ onBackToHome: _ }: TrainingProgramsPagePr
       {/* ── 06. Institutional Consultation CTA Banner ── */}
       <section className="py-20 bg-gradient-to-b from-[#0A0A0D] to-[#111116] border-t border-black/8 relative overflow-hidden">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#7A9D96]/10 border border-[#7A9D96]/30 text-[#9CBDB7] text-xs font-mono font-bold mb-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2563EB]/10 border border-[#2563EB]/30 text-[#3B82F6] text-xs font-mono font-bold mb-4">
             <CheckCircle2 size={13} />
             <span>INSTITUTIONAL PARTNERSHIPS</span>
           </div>
@@ -124,7 +124,7 @@ export function TrainingProgramsPage({ onBackToHome: _ }: TrainingProgramsPagePr
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <button
               onClick={() => openEnquiry('PARTNERSHIP')}
-              className="btn-pill-primary text-xs py-3.5 px-8 font-bold cursor-pointer shadow-lg shadow-[#7A9D96]/ flex items-center gap-2"
+              className="btn-pill-primary text-xs py-3.5 px-8 font-bold cursor-pointer shadow-lg shadow-[#2563EB]/ flex items-center gap-2"
             >
               <span>Schedule Campus Consultation</span>
               <ArrowRight size={14} />

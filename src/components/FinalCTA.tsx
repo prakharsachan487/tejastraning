@@ -15,14 +15,14 @@ export function FinalCTA() {
           transition={{ duration: 0.5 }}
           className="max-w-3xl mx-auto text-center"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#7A9D96]/10 border border-[#7A9D96]/25 text-[#7A9D96] text-xs font-semibold tracking-wide mb-6">
-            <Sparkles size={14} className="text-[#7A9D96]" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2563EB]/10 border border-[#2563EB]/25 text-[#2563EB] text-xs font-semibold tracking-wide mb-6">
+            <Sparkles size={14} className="text-[#2563EB]" />
             <span>Institutional Transformation</span>
           </div>
 
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#12151B] tracking-tight leading-[1.1] font-[family-name:var(--font-display)]">
             Ready to Build{' '}
-            <span className="text-[#7A9D96]">
+            <span className="text-[#2563EB]">
               Placement-Ready
             </span>{' '}
             Campuses?
@@ -55,7 +55,7 @@ export function FinalCTA() {
           <div className="mt-12 flex flex-wrap items-center justify-center gap-y-2 gap-x-8 text-xs text-slate-500">
             {['Zero disruption to academic timetable', 'Dedicated TPO Success Director', 'Customized college cohort pricing'].map((t) => (
               <div key={t} className="flex items-center gap-2">
-                <CheckCircle2 size={14} className="text-[#7A9D96]" />
+                <CheckCircle2 size={14} className="text-[#2563EB]" />
                 <span>{t}</span>
               </div>
             ))}

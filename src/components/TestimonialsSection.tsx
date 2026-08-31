@@ -80,13 +80,13 @@ export function TestimonialsSection() {
           transition={{ duration: 0.5 }}
           className="text-center max-w-3xl mx-auto mb-14"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#7A9D96]/10 border border-[#7A9D96]/25 text-[#7A9D96] text-xs font-semibold tracking-wide mb-4">
-            <Sparkles size={14} className="text-[#7A9D96]" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2563EB]/10 border border-[#2563EB]/25 text-[#2563EB] text-xs font-semibold tracking-wide mb-4">
+            <Sparkles size={14} className="text-[#2563EB]" />
             <span>Institutional Testimonials</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#12151B] leading-tight font-[family-name:var(--font-display)]">
             What Our{' '}
-            <span className="text-[#7A9D96]">
+            <span className="text-[#2563EB]">
               Partners Say
             </span>
           </h2>
@@ -107,7 +107,7 @@ export function TestimonialsSection() {
                   onClick={() => setActiveCategory(index)}
                   className={`flex items-center gap-2 px-4 sm:px-5 py-2 rounded-full text-xs font-semibold tracking-wide transition-all cursor-pointer ${
                     isActive
-                      ? 'bg-white text-[#7A9D96] font-bold shadow-sm border border-black/5'
+                      ? 'bg-white text-[#2563EB] font-bold shadow-sm border border-black/5'
                       : 'text-slate-600 hover:text-black'
                   }`}
                 >
@@ -127,10 +127,10 @@ export function TestimonialsSection() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.35, delay: i * 0.1 }}
-              className="bento-card p-8 sm:p-9 flex flex-col justify-between relative group hover:border-[#7A9D96]/40 bg-white shadow-[0_4px_25px_-2px_rgba(0,0,0,0.04)] border border-black/8"
+              className="bento-card p-8 sm:p-9 flex flex-col justify-between relative group hover:border-[#2563EB]/40 bg-white shadow-[0_4px_25px_-2px_rgba(0,0,0,0.04)] border border-black/8"
             >
               <div>
-                <Quote className="text-[#7A9D96]/20 w-12 h-12 mb-4" />
+                <Quote className="text-[#2563EB]/20 w-12 h-12 mb-4" />
                 <p className="text-sm sm:text-base text-slate-700 leading-relaxed italic mb-8 font-serif">
                   "{q.quote}"
                 </p>
@@ -144,12 +144,12 @@ export function TestimonialsSection() {
                   <div className="text-xs text-slate-500 font-mono">
                     {q.designation}
                   </div>
-                  <div className="text-[11px] font-mono text-[#7A9D96] mt-0.5 font-semibold">
+                  <div className="text-[11px] font-mono text-[#2563EB] mt-0.5 font-semibold">
                     {q.institution}
                   </div>
                 </div>
 
-                <span className="px-2.5 py-1 rounded-lg bg-[#7A9D96]/10 text-[#7A9D96] border border-[#7A9D96]/20 text-[10px] font-mono font-bold">
+                <span className="px-2.5 py-1 rounded-lg bg-[#2563EB]/10 text-[#2563EB] border border-[#2563EB]/20 text-[10px] font-mono font-bold">
                   {q.stats}
                 </span>
               </div>

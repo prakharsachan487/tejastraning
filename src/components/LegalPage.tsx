@@ -42,18 +42,18 @@ export function LegalPage({ initialTab = 'privacy', onBackToHome: _ }: LegalPage
   };
 
   return (
-    <div className="min-h-screen bg-[#F8F9FB] text-slate-100 font-sans selection:bg-[#7A9D96] selection:text-slate-900">
+    <div className="min-h-screen bg-[#F8F9FB] text-slate-100 font-sans selection:bg-[#2563EB] selection:text-slate-900">
       {/* Main Container */}
       <main className="pt-28 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           
           {/* Header Title Card */}
           <div className="mb-10 p-6 sm:p-8 rounded-3xl bg-white shadow-sm border border-black/8 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-[#7A9D96]/10 to-transparent blur-3xl pointer-events-none" />
+            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-[#2563EB]/10 to-transparent blur-3xl pointer-events-none" />
 
             <div className="relative z-10">
               <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-black/8 text-xs font-mono text-[#7A9D96]">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-black/8 text-xs font-mono text-[#2563EB]">
                   <Sparkles size={12} />
                   <span>Grow360 Trust &amp; Compliance</span>
                 </div>
@@ -64,7 +64,7 @@ export function LegalPage({ initialTab = 'privacy', onBackToHome: _ }: LegalPage
                     onClick={() => handleTabChange('privacy')}
                     className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all cursor-pointer flex items-center gap-1.5 ${
                       activeTab === 'privacy'
-                        ? 'bg-gradient-to-r from-[#7A9D96] to-[#6B8E87] text-slate-900 font-bold shadow-md'
+                        ? 'bg-gradient-to-r from-[#2563EB] to-[#6B8E87] text-slate-900 font-bold shadow-md'
                         : 'text-slate-600 hover:text-slate-900'
                     }`}
                   >
@@ -76,7 +76,7 @@ export function LegalPage({ initialTab = 'privacy', onBackToHome: _ }: LegalPage
                     onClick={() => handleTabChange('terms')}
                     className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all cursor-pointer flex items-center gap-1.5 ${
                       activeTab === 'terms'
-                        ? 'bg-gradient-to-r from-[#7A9D96] to-[#6B8E87] text-slate-900 font-bold shadow-md'
+                        ? 'bg-gradient-to-r from-[#2563EB] to-[#6B8E87] text-slate-900 font-bold shadow-md'
                         : 'text-slate-600 hover:text-slate-900'
                     }`}
                   >
@@ -88,7 +88,7 @@ export function LegalPage({ initialTab = 'privacy', onBackToHome: _ }: LegalPage
                     onClick={() => handleTabChange('cookies')}
                     className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all cursor-pointer flex items-center gap-1.5 ${
                       activeTab === 'cookies'
-                        ? 'bg-gradient-to-r from-[#7A9D96] to-[#6B8E87] text-slate-900 font-bold shadow-md'
+                        ? 'bg-gradient-to-r from-[#2563EB] to-[#6B8E87] text-slate-900 font-bold shadow-md'
                         : 'text-slate-600 hover:text-slate-900'
                     }`}
                   >
@@ -156,7 +156,7 @@ function PrivacyContent() {
     >
       <section>
         <div className="flex items-center gap-2.5 text-slate-900 font-bold text-base sm:text-lg mb-3">
-          <Eye size={18} className="text-[#7A9D96]" />
+          <Eye size={18} className="text-[#2563EB]" />
           <h3>1. Introduction & Overview</h3>
         </div>
         <p className="mb-3">
@@ -196,7 +196,7 @@ function PrivacyContent() {
 
       <section className="border-t border-black/8 pt-8">
         <div className="flex items-center gap-2.5 text-slate-900 font-bold text-base sm:text-lg mb-3">
-          <Lock size={18} className="text-[#9CBDB7]" />
+          <Lock size={18} className="text-[#3B82F6]" />
           <h3>3. How We Use Information</h3>
         </div>
         <ul className="space-y-2 list-disc list-inside text-slate-700">
@@ -224,7 +224,7 @@ function PrivacyContent() {
 
       <section className="border-t border-black/8 pt-8">
         <div className="flex items-center gap-2.5 text-slate-900 font-bold text-base sm:text-lg mb-3">
-          <ShieldCheck size={18} className="text-[#7A9D96]" />
+          <ShieldCheck size={18} className="text-[#2563EB]" />
           <h3>5. Data Security & Storage</h3>
         </div>
         <p>
@@ -271,7 +271,7 @@ function TermsContent() {
     >
       <section>
         <div className="flex items-center gap-2.5 text-slate-900 font-bold text-base sm:text-lg mb-3">
-          <Scale size={18} className="text-[#7A9D96]" />
+          <Scale size={18} className="text-[#2563EB]" />
           <h3>1. Acceptance of Terms</h3>
         </div>
         <p>
@@ -295,7 +295,7 @@ function TermsContent() {
 
       <section className="border-t border-black/8 pt-8">
         <div className="flex items-center gap-2.5 text-slate-900 font-bold text-base sm:text-lg mb-3">
-          <AlertCircle size={18} className="text-[#9CBDB7]" />
+          <AlertCircle size={18} className="text-[#3B82F6]" />
           <h3>3. User Conduct & Acceptable Use</h3>
         </div>
         <p className="mb-3">When using Grow360, you agree not to:</p>
@@ -329,7 +329,7 @@ function TermsContent() {
 
       <section className="border-t border-black/8 pt-8">
         <div className="flex items-center gap-2.5 text-slate-900 font-bold text-base sm:text-lg mb-3">
-          <Scale size={18} className="text-[#7A9D96]" />
+          <Scale size={18} className="text-[#2563EB]" />
           <h3>6. Governing Law & Dispute Resolution</h3>
         </div>
         <p>
@@ -354,7 +354,7 @@ function CookiesContent() {
     >
       <section>
         <div className="flex items-center gap-2.5 text-slate-900 font-bold text-base sm:text-lg mb-3">
-          <Cookie size={18} className="text-[#9CBDB7]" />
+          <Cookie size={18} className="text-[#3B82F6]" />
           <h3>1. What Are Cookies?</h3>
         </div>
         <p>

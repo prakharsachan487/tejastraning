@@ -15,13 +15,13 @@ export function CareerPage({ onBackToHome: _ }: CareerPageProps) {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#F8F9FB] text-slate-100 font-sans selection:bg-[#7A9D96] selection:text-slate-900">
+    <div className="min-h-screen bg-[#F8F9FB] text-slate-100 font-sans selection:bg-[#2563EB] selection:text-slate-900">
       {/* Main Container */}
       <main className="pt-24 pb-12">
         {/* Banner Hero */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-4 text-center">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#7A9D96]/10 border border-[#7A9D96]/30 text-[#7A9D96] text-xs font-semibold tracking-wide mb-4">
-            <Sparkles size={14} className="text-[#7A9D96]" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2563EB]/10 border border-[#2563EB]/30 text-[#2563EB] text-xs font-semibold tracking-wide mb-4">
+            <Sparkles size={14} className="text-[#2563EB]" />
             <span>Grow360 Open Opportunities</span>
           </div>
 

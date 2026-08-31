@@ -11,12 +11,12 @@
   --color-bg-card: #FFFFFF;
   --color-bg-dark: #1A1D24;
   --color-border-subtle: rgba(0, 0, 0, 0.07);
-  --color-border-hover: rgba(122, 157, 150, 0.5);
+  --color-border-hover: rgba(37, 99, 235, 0.5);
 
-  /* ── Mist Accent (#7A9D96) ── */
-  --color-accent-mist: #7A9D96;
-  --color-accent-mist-dark: #688A83;
-  --color-accent-mist-light: #EAF2F0;
+  /* ── Royal Sapphire Blue Accent (#2563EB) ── */
+  --color-accent-mist: #2563EB;
+  --color-accent-mist-dark: #1D4ED8;
+  --color-accent-mist-light: #EFF6FF;
 
   /* ── Reference Typography (Editorial Serif + Plus Jakarta Sans) ── */
   --font-display: 'DM Serif Display', 'Playfair Display', Georgia, serif;
@@ -91,15 +91,15 @@ h1, h2, h3, .font-serif-heading {
 }
 
 .bento-card:hover {
-  border-color: rgba(122, 157, 150, 0.5);
-  box-shadow: 0 10px 30px -4px rgba(122, 157, 150, 0.12);
+  border-color: rgba(37, 99, 235, 0.4);
+  box-shadow: 0 10px 30px -4px rgba(37, 99, 235, 0.12);
   transform: translateY(-2px);
 }
 
 .bento-card-highlight {
   background: #FFFFFF;
-  border: 1px solid rgba(122, 157, 150, 0.4);
-  box-shadow: 0 8px 25px -3px rgba(122, 157, 150, 0.1);
+  border: 1px solid rgba(37, 99, 235, 0.3);
+  box-shadow: 0 8px 25px -3px rgba(37, 99, 235, 0.08);
 }
 
 /* ═══════════════════════════════════════
@@ -111,17 +111,17 @@ h1, h2, h3, .font-serif-heading {
   gap: 0.5rem;
   padding: 0.75rem 1.5rem;
   border-radius: 9999px;
-  background: #7A9D96;
+  background: #2563EB;
   color: #FFFFFF;
   font-size: 0.875rem;
   font-weight: 700;
-  box-shadow: 0 4px 14px rgba(122, 157, 150, 0.3);
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.28);
   transition: all 0.2s ease;
 }
 
 .btn-pill-primary:hover {
-  background: #688A83;
-  box-shadow: 0 6px 20px rgba(122, 157, 150, 0.4);
+  background: #1D4ED8;
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.38);
   transform: translateY(-1px);
 }
 
@@ -142,8 +142,8 @@ h1, h2, h3, .font-serif-heading {
 
 .btn-pill-secondary:hover {
   background-color: #F8F9FA;
-  border-color: rgba(122, 157, 150, 0.5);
-  color: #7A9D96;
+  border-color: rgba(37, 99, 235, 0.4);
+  color: #2563EB;
   transform: translateY(-1px);
 }
 

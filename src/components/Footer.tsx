@@ -17,7 +17,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-[#161920] text-slate-400 pt-20 pb-12 relative overflow-hidden border-t border-black/10 selection:bg-[#7A9D96] selection:text-white">
+    <footer className="bg-[#161920] text-slate-400 pt-20 pb-12 relative overflow-hidden border-t border-black/10 selection:bg-[#2563EB] selection:text-white">
       {/* Background Subtle Gradient & Shadow */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
 
@@ -48,7 +48,7 @@ export function Footer() {
                 />
                 <div className="flex flex-col leading-tight">
                   <span className="text-2xl font-extrabold text-white tracking-tight font-[family-name:var(--font-display)] flex items-center">
-                    GROW<span className="text-[#7A9D96]">360°</span>
+                    GROW<span className="text-[#2563EB]">360°</span>
                   </span>
                   <span className="text-[11px] font-mono text-slate-400 tracking-wider">
                     Decoding the corporate world
