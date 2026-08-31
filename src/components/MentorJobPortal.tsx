@@ -424,12 +424,33 @@ export function MentorJobPortal() {
     setSelectedDomain('All');
   };
 
+  useEffect(() => {
+    const checkHashJob = () => {
+      const hash = window.location.hash;
+      if (hash.includes('jobId=')) {
+        const match = hash.match(/jobId=([^&]+)/);
+        if (match && match[1]) {
+          const targetId = decodeURIComponent(match[1]);
+          const found = jobs.find(j => String(j.id) === targetId || String(j.id).toLowerCase() === targetId.toLowerCase());
+          if (found) {
+            setSelectedJob(found);
+            setApplySuccess(false);
+            setSubmitError('');
+            window.scrollTo({ top: 0, behavior: 'instant' });
+            document.documentElement.scrollTop = 0;
+          }
+        }
+      }
+    };
+
+    checkHashJob();
+    window.addEventListener('hashchange', checkHashJob);
+    return () => window.removeEventListener('hashchange', checkHashJob);
+  }, [jobs]);
+
   const handleOpenJobApply = (job: JobOpening) => {
-    setSelectedJob(job);
-    setApplySuccess(false);
-    setSubmitError('');
-    window.scrollTo({ top: 0, behavior: 'instant' });
-    document.documentElement.scrollTop = 0;
+    const targetUrl = `${window.location.origin}${window.location.pathname}#career?jobId=${encodeURIComponent(job.id)}`;
+    window.open(targetUrl, '_blank', 'noopener,noreferrer');
   };
 
   const handleCloseJobDetail = () => {
@@ -1086,13 +1107,19 @@ export function MentorJobPortal() {
                       {job.openings} {job.openings === 1 ? 'opening' : 'openings'}
                     </span>
 
-                    <button
-                      onClick={() => handleOpenJobApply(job)}
+                    <a
+                      href={`#career?jobId=${encodeURIComponent(job.id)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleOpenJobApply(job);
+                      }}
                       className="btn-pill-primary text-xs py-2 px-4 font-bold cursor-pointer shadow-md shadow-cyan-500/15 flex items-center gap-1.5 group/btn"
                     >
                       <span>View &amp; Apply</span>
                       <ArrowRight size={13} className="group-hover/btn:translate-x-0.5 transition-transform" />
-                    </button>
+                    </a>
                   </div>
                 </motion.div>
               );

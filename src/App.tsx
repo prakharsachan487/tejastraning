@@ -28,9 +28,9 @@ function App() {
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash;
-      if (hash === '#mentor' || hash === '#become-a-mentor' || hash === '#career' || hash === '#careers' || hash === '#jobs') {
+      if (hash.startsWith('#mentor') || hash.startsWith('#become-a-mentor') || hash.startsWith('#career') || hash.startsWith('#careers') || hash.startsWith('#jobs')) {
         setCurrentPage('mentor');
-      } else if (hash === '#training-programs' || hash === '#training' || hash === '#programs' || hash === '#courses') {
+      } else if (hash.startsWith('#training-programs') || hash.startsWith('#training') || hash.startsWith('#programs') || hash.startsWith('#courses')) {
         setCurrentPage('training-programs');
       } else if (hash === '#blog' || hash === '#blogs' || hash === '#articles') {
         setCurrentPage('blog');
