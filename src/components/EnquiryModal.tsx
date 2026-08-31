@@ -188,7 +188,7 @@ export function EnquiryModal() {
               {submitState === 'success' ? (
                 <SuccessState onClose={closeEnquiry} />
               ) : (
-                <form onSubmit={handleSubmit} noValidate>
+                <form onSubmit={handleSubmit} noValidate autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck={false}>
                   {/* Error display */}
                   {(clientErrors.length > 0 || serverError) && (
                     <div className="mb-6 p-4 rounded-2xl border border-rose-500/30 bg-rose-950/40 text-sm">
@@ -347,6 +347,10 @@ function FormField({
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         required={required}
+        autoComplete="new-password"
+        autoCorrect="off"
+        autoCapitalize="off"
+        spellCheck={false}
         className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder:text-slate-500 focus:border-[#2563EB] focus:outline-none transition-all bg-white"
       />
     </div>

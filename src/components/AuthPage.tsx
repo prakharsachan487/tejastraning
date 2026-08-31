@@ -122,7 +122,7 @@ export function AuthPage() {
             </motion.div>
           ) : (
             /* Main Form */
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck={false} className="space-y-4">
               
               {/* Full Name Field (Sign Up Only) */}
               {isSignUp && (
@@ -133,6 +133,10 @@ export function AuthPage() {
                   <input
                     type="text"
                     required
+                    autoComplete="new-password"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    spellCheck={false}
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Amélie Laurent"
@@ -149,6 +153,10 @@ export function AuthPage() {
                 <input
                   type="email"
                   required
+                  autoComplete="new-password"
+                  autoCorrect="off"
+                  autoCapitalize="off"
+                  spellCheck={false}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="amelielaurent7622@gmail.com"

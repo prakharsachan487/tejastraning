@@ -292,7 +292,7 @@ export function Hero() {
                 </div>
               ) : (
                 /* Main 2-Column Clean Form */
-                <form onSubmit={handleSubmit} autoComplete="off" className="space-y-3.5">
+                <form onSubmit={handleSubmit} autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck={false} className="space-y-3.5">
                   {errorMsg && (
                     <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-600 text-xs">
                       {errorMsg}
@@ -308,7 +308,10 @@ export function Hero() {
                       <input
                         type="text"
                         required
-                        autoComplete="off"
+                        autoComplete="new-password"
+                        autoCorrect="off"
+                        autoCapitalize="off"
+                        spellCheck={false}
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
                         className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50/80 border border-black/10 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-[#2563EB] transition-colors"
@@ -322,7 +325,10 @@ export function Hero() {
                       <input
                         type="email"
                         required
-                        autoComplete="off"
+                        autoComplete="new-password"
+                        autoCorrect="off"
+                        autoCapitalize="off"
+                        spellCheck={false}
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50/80 border border-black/10 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-[#2563EB] transition-colors"
@@ -339,7 +345,10 @@ export function Hero() {
                       <input
                         type="tel"
                         required
-                        autoComplete="off"
+                        autoComplete="new-password"
+                        autoCorrect="off"
+                        autoCapitalize="off"
+                        spellCheck={false}
                         value={phoneNumber}
                         onChange={(e) => setPhoneNumber(e.target.value)}
                         className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50/80 border border-black/10 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-[#2563EB] transition-colors"
@@ -352,7 +361,10 @@ export function Hero() {
                       </label>
                       <input
                         type="text"
-                        autoComplete="off"
+                        autoComplete="new-password"
+                        autoCorrect="off"
+                        autoCapitalize="off"
+                        spellCheck={false}
                         value={collegeName}
                         onChange={(e) => setCollegeName(e.target.value)}
                         className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50/80 border border-black/10 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-[#2563EB] transition-colors"
@@ -367,7 +379,10 @@ export function Hero() {
                     </label>
                     <input
                       type="text"
-                      autoComplete="off"
+                      autoComplete="new-password"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
                       value={profession}
                       onChange={(e) => setProfession(e.target.value)}
                       className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50/80 border border-black/10 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-[#2563EB] transition-colors"
@@ -381,6 +396,10 @@ export function Hero() {
                     </label>
                     <textarea
                       rows={3}
+                      autoComplete="off"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
                       value={requestDetails}
                       onChange={(e) => setRequestDetails(e.target.value)}
                       className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50/80 border border-black/10 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-[#2563EB] transition-colors resize-none"

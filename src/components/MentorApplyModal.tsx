@@ -104,7 +104,7 @@ export function MentorApplyModal({ isOpen, onClose }: MentorApplyModalProps) {
                 </div>
 
                 {/* Form */}
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck={false} className="space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {/* Full Name */}
                     <div>
@@ -115,10 +115,14 @@ export function MentorApplyModal({ isOpen, onClose }: MentorApplyModalProps) {
                       <input
                         type="text"
                         required
+                        autoComplete="new-password"
+                        autoCorrect="off"
+                        autoCapitalize="off"
+                        spellCheck={false}
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
                         placeholder="e.g. Rahul Sharma"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-white border-slate-200 text-slate-900 border border-slate-200 text-xs text-slate-900 placeholder:text-slate-500 focus:outline-none focus:border-[#2563EB] transition-colors"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-xs text-slate-900 placeholder:text-slate-500 focus:outline-none focus:border-[#2563EB] transition-colors"
                       />
                     </div>
 
@@ -131,10 +135,14 @@ export function MentorApplyModal({ isOpen, onClose }: MentorApplyModalProps) {
                       <input
                         type="email"
                         required
+                        autoComplete="new-password"
+                        autoCorrect="off"
+                        autoCapitalize="off"
+                        spellCheck={false}
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="rahul@company.com"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-white border-slate-200 text-slate-900 border border-slate-200 text-xs text-slate-900 placeholder:text-slate-500 focus:outline-none focus:border-[#2563EB] transition-colors"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-xs text-slate-900 placeholder:text-slate-500 focus:outline-none focus:border-[#2563EB] transition-colors"
                       />
                     </div>
                   </div>
@@ -149,10 +157,14 @@ export function MentorApplyModal({ isOpen, onClose }: MentorApplyModalProps) {
                       <input
                         type="text"
                         required
+                        autoComplete="new-password"
+                        autoCorrect="off"
+                        autoCapitalize="off"
+                        spellCheck={false}
                         value={company}
                         onChange={(e) => setCompany(e.target.value)}
                         placeholder="e.g. Google, Microsoft, Startup"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-white border-slate-200 text-slate-900 border border-slate-200 text-xs text-slate-900 placeholder:text-slate-500 focus:outline-none focus:border-[#2563EB] transition-colors"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-xs text-slate-900 placeholder:text-slate-500 focus:outline-none focus:border-[#2563EB] transition-colors"
                       />
                     </div>
 
@@ -165,10 +177,14 @@ export function MentorApplyModal({ isOpen, onClose }: MentorApplyModalProps) {
                       <input
                         type="text"
                         required
+                        autoComplete="new-password"
+                        autoCorrect="off"
+                        autoCapitalize="off"
+                        spellCheck={false}
                         value={role}
                         onChange={(e) => setRole(e.target.value)}
                         placeholder="e.g. SDE II, Senior Engineer"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-white border-slate-200 text-slate-900 border border-slate-200 text-xs text-slate-900 placeholder:text-slate-500 focus:outline-none focus:border-[#2563EB] transition-colors"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-xs text-slate-900 placeholder:text-slate-500 focus:outline-none focus:border-[#2563EB] transition-colors"
                       />
                     </div>
                   </div>
@@ -184,10 +200,14 @@ export function MentorApplyModal({ isOpen, onClose }: MentorApplyModalProps) {
                     <input
                       type="url"
                       required
+                      autoComplete="new-password"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
                       value={linkedin}
                       onChange={(e) => setLinkedin(e.target.value)}
                       placeholder="https://linkedin.com/in/yourprofile"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-white border-slate-200 text-slate-900 border border-slate-200 text-xs text-slate-900 placeholder:text-slate-500 focus:outline-none focus:border-[#2563EB] transition-colors"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-xs text-slate-900 placeholder:text-slate-500 focus:outline-none focus:border-[#2563EB] transition-colors"
                     />
                   </div>
 
