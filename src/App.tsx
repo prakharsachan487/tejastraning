@@ -4,10 +4,7 @@ import { Hero } from './components/Hero';
 import { TrustStrip } from './components/TrustStrip';
 import { ProblemSection } from './components/ProblemSection';
 import { PlatformSection } from './components/PlatformSection';
-import { TrainingSolutionsSection } from './components/TrainingSolutionsSection';
 import { MentorsSection } from './components/MentorsSection';
-import { PlacementJourneySection } from './components/PlacementJourneySection';
-import { ProgramsSection } from './components/ProgramsSection';
 import { MetricsSection } from './components/MetricsSection';
 import { TestimonialsSection } from './components/TestimonialsSection';
 import { PartnersSection } from './components/PartnersSection';
@@ -104,32 +101,23 @@ function App() {
                 {/* 05. Platform Suite (6 Bento Cards with Live UI Visualizers) */}
                 <PlatformSection />
 
-                {/* 06. Flagship Training Solutions (Impact & MARQUEE) */}
-                <TrainingSolutionsSection />
-
-                {/* 07. Meet Our Industry Leaders & Mentors */}
+                {/* 06. Meet Our Industry Leaders & Mentors */}
                 <MentorsSection />
 
-                {/* 08. The 7-Stage Placement Journey Roadmap */}
-                <PlacementJourneySection />
-
-                {/* 09. Industry-Ready Programs Interactive Catalog */}
-                <ProgramsSection />
-
-                {/* 10. Institutional Performance & Animated Metrics */}
+                {/* 07. Institutional Performance & Animated Metrics */}
                 <MetricsSection />
 
-                {/* 11. Testimonials (Editorial Quotation Treatment) */}
+                {/* 08. Testimonials (Editorial Quotation Treatment) */}
                 <TestimonialsSection />
 
-                {/* 12. 35+ Campus Hiring Partners 2-Row Logo Marquee */}
+                {/* 09. 35+ Campus Hiring Partners 2-Row Logo Marquee */}
                 <PartnersSection />
 
-                {/* 13. Cinematic Final CTA */}
+                {/* 10. Cinematic Final CTA */}
                 <FinalCTA />
               </main>
 
-              {/* 14. Spacious Dark Minimal Footer */}
+              {/* 11. Spacious Dark Minimal Footer */}
               <Footer />
             </>
           )}
