@@ -278,7 +278,7 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
 
                   {/* Form Title & Subtitle */}
                   <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight font-[family-name:var(--font-display)] mb-1">
-                    Apply for this Role
+                    Share Your Profile With Us
                   </h2>
                   <p className="text-xs text-slate-500 mb-5 leading-relaxed">
                     Submit your details below. Our team responds within 24–48 hours.
