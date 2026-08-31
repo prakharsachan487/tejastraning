@@ -14,7 +14,7 @@ const mentors = [
     ),
     role: 'Lead Analyst – FP&A · Accenture',
     quote: 'Power BI dashboards, financial modelling, budgeting & forecasting, SOX controls, and corporate FP&A with a focus on data-driven insights.',
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80',
+    image: '/mentors/nidhi_singh.jpg',
     tilt: '-0.8deg',
   },
   {

@@ -129,7 +129,7 @@ const fellowMentors = [
     role: 'Lead Analyst – FP&A · Finance & Modelling',
     rating: '4.98',
     sessions: '85+ Sessions',
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80',
+    image: '/mentors/nidhi_singh.jpg',
     color: '#A100FF',
   },
   {
