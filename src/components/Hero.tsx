@@ -336,11 +336,10 @@ export function Hero() {
 
                     <div>
                       <label className="block text-xs font-medium text-slate-300 mb-1">
-                        College <span className="text-[#FF4500] font-bold">*</span>
+                        College
                       </label>
                       <input
                         type="text"
-                        required
                         value={collegeName}
                         onChange={(e) => setCollegeName(e.target.value)}
                         placeholder="e.g. SRM University / IIT Delhi"
@@ -349,14 +348,13 @@ export function Hero() {
                     </div>
                   </div>
 
-                  {/* Row 3: Profession (Direct Fill Input) */}
+                  {/* Row 3: Profession (Optional Direct Fill Input) */}
                   <div>
                     <label className="block text-xs font-medium text-slate-300 mb-1">
-                      Profession <span className="text-[#FF4500] font-bold">*</span>
+                      Profession
                     </label>
                     <input
                       type="text"
-                      required
                       value={profession}
                       onChange={(e) => setProfession(e.target.value)}
                       placeholder="e.g. TPO, Dean, Faculty, Student, Recruiter..."
