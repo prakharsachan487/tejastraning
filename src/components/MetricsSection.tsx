@@ -67,9 +67,9 @@ export function MetricsSection() {
             <span>Verified Track Record</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#12151B] font-[family-name:var(--font-display)]">
-            Numbers That{' '}
+            Better Skills.{' '}
             <span className="text-[#2563EB]">
-              Move the Needle
+              Better Placements. Better Futures.
             </span>
           </h2>
         </motion.div>
