@@ -664,43 +664,6 @@ export function MentorJobPortal() {
                 </ul>
               </div>
 
-              {/* 04. Required Tech Stack & Skills */}
-              <div className="p-6 sm:p-8 rounded-3xl bg-white shadow-sm border border-black/8 shadow-lg">
-                <h3 className="text-sm font-mono uppercase tracking-wider text-slate-600 font-bold mb-4">
-                  Required Tech Stack &amp; Keywords
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {selectedJob.skills.map((skill, sIdx) => (
-                    <span
-                      key={sIdx}
-                      className="text-xs font-mono px-3 py-1.5 rounded-xl bg-slate-50 text-slate-200 border border-black/8 hover:border-[#2563EB]/50 transition-colors"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* 05. Why Join Grow360? */}
-              <div className="p-6 sm:p-8 rounded-3xl bg-white border border-black/10 shadow-xl">
-                <h3 className="text-base font-bold text-slate-900 mb-2 font-[family-name:var(--font-display)]">
-                  Why Mentor with Grow360?
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-700 mb-4 leading-relaxed">
-                  Join hundreds of engineers and educators transforming placement outcomes across tier-2/3 colleges in India.
-                </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-700">
-                  <div className="p-3 rounded-xl bg-white/5 border border-black/8">
-                    <strong className="text-slate-900 block mb-1">Weekly Honorariums</strong>
-                    <span>Direct bank payouts credited promptly with zero operational friction.</span>
-                  </div>
-                  <div className="p-3 rounded-xl bg-white/5 border border-black/8">
-                    <strong className="text-slate-900 block mb-1">100% Flexible Hours</strong>
-                    <span>Choose weekend or evening slots that fit your professional calendar.</span>
-                  </div>
-                </div>
-              </div>
-
             </div>
 
             {/* ── RIGHT COLUMN (5 Cols): DEDICATED STICKY APPLICATION FORM ── */}
