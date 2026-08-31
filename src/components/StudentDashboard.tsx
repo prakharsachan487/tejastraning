@@ -231,7 +231,7 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
 
   const handleCopyProfileLink = () => {
     const handle = (firstName || 'student').toLowerCase() + (lastName ? `-${lastName.toLowerCase()}` : '');
-    navigator.clipboard.writeText(`https://tejas-tech.in/profile/${handle}`);
+    navigator.clipboard.writeText(`https://grow360.in/profile/${handle}`);
     setCopiedLink(true);
     setTimeout(() => setCopiedLink(false), 2000);
   };
@@ -1293,7 +1293,7 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
 
               <div className={`p-3 rounded-2xl border flex items-center justify-between gap-2 mb-4 ${isDarkMode ? 'bg-black/30 border-white/10' : 'bg-slate-50 border-slate-200'}`}>
                 <span className="text-xs font-mono text-blue-500 truncate">
-                  https://tejas-tech.in/profile/{firstName.toLowerCase()}-{lastName.toLowerCase()}
+                  https://grow360.in/profile/{firstName.toLowerCase()}-{lastName.toLowerCase()}
                 </span>
                 <button
                   onClick={handleCopyProfileLink}

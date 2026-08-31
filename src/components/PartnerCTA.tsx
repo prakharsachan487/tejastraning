@@ -73,7 +73,7 @@ export function PartnerCTA() {
                   onClick={() => openEnquiry('PARTNERSHIP')}
                   className="inline-flex items-center gap-2 px-7 py-3.5 bg-tejas-red text-white text-sm font-semibold hover:bg-tejas-red-dark hover:shadow-lg hover:shadow-tejas-red/25 transition-all duration-300 cursor-pointer"
                 >
-                  Partner with Tejas
+                  Partner with Grow360
                   <ArrowRight size={16} />
                 </button>
                 <button

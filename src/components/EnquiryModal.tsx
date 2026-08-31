@@ -137,7 +137,7 @@ export function EnquiryModal() {
     [formData, source]
   );
 
-  const title = SOURCE_TITLES[source] || 'Get in Touch with TEJAS';
+  const title = SOURCE_TITLES[source] || 'Get in Touch with Grow360';
 
   return (
     <AnimatePresence>

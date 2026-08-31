@@ -1064,12 +1064,12 @@ export function MentorJobPortal() {
                   <div>
                     <div className="text-xs font-bold text-white">Website & Mentor Portal</div>
                     <a
-                      href="https://tejas-tech.in"
+                      href="https://grow360.in"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-[11px] text-[#38BDF8] hover:underline"
                     >
-                      https://tejas-tech.in
+                      https://grow360.in
                     </a>
                   </div>
                 </div>
@@ -1080,7 +1080,7 @@ export function MentorJobPortal() {
                   </div>
                   <div>
                     <div className="text-xs font-bold text-white">Direct Recruitment Contact</div>
-                    <div className="text-[11px] text-slate-300 font-mono">careers@tejas-tech.in</div>
+                    <div className="text-[11px] text-slate-300 font-mono">careers@grow360.in</div>
                   </div>
                 </div>
               </div>

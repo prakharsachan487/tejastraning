@@ -45,7 +45,7 @@ export function Preloader({ onComplete }: { onComplete?: () => void }) {
         >
           {/* Top Label */}
           <div className="w-full flex items-center justify-between text-[11px] font-mono text-slate-500 uppercase tracking-widest">
-            <span>TEJAS Infrastructure</span>
+            <span>Grow360 Infrastructure</span>
             <span>Initializing v2.6</span>
           </div>
 
@@ -56,11 +56,13 @@ export function Preloader({ onComplete }: { onComplete?: () => void }) {
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5, ease: 'easeOut' }}
-              className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-[#FF4500] via-[#FF6A00] to-[#FFA000] flex items-center justify-center text-white mb-6 shadow-xl"
+              className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl flex items-center justify-center text-white mb-6 shadow-xl"
             >
-              <span className="font-extrabold text-2xl sm:text-3xl font-mono tracking-tight">
-                TJ
-              </span>
+              <img
+                src="/grow360-logo.png"
+                alt="Grow360"
+                className="w-full h-full object-contain rounded-2xl"
+              />
             </motion.div>
 
             {/* Brand Title Reveal */}
@@ -68,9 +70,9 @@ export function Preloader({ onComplete }: { onComplete?: () => void }) {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
-              className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-[family-name:var(--font-display)]"
+              className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-[family-name:var(--font-display)] flex items-center"
             >
-              TEJAS
+              GROW<span className="text-[#00B4D8]">360°</span>
             </motion.h1>
 
             {/* Subtext */}
@@ -78,9 +80,9 @@ export function Preloader({ onComplete }: { onComplete?: () => void }) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.35, duration: 0.5 }}
-              className="mt-2 text-xs sm:text-sm text-slate-400 font-mono"
+              className="text-xs sm:text-sm text-slate-400 mt-2 font-mono tracking-wider"
             >
-              The Placement Infrastructure for Colleges
+              Decoding the corporate world
             </motion.p>
           </div>
 

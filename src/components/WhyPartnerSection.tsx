@@ -77,7 +77,7 @@ export function WhyPartnerSection() {
         <div className="mb-16">
           <div className="flex items-center gap-3 mb-4">
             <span className="font-mono text-[10px] tracking-[0.15em] text-tejas-red uppercase">
-              ● Why Colleges Partner With Tejas
+              ● Why Colleges Partner With Grow360
             </span>
           </div>
           <h2 className="heading-editorial text-3xl sm:text-4xl lg:text-[2.75rem] text-white max-w-2xl">

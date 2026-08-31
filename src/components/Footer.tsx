@@ -175,10 +175,10 @@ export function Footer() {
               </div>
               <div>
                 <a
-                  href="mailto:partnerships@tejasplacement.in"
+                  href="mailto:partnerships@grow360.in"
                   className="hover:text-white transition-colors block break-all font-mono"
                 >
-                  partnerships@tejasplacement.in
+                  partnerships@grow360.in
                 </a>
               </div>
             </div>

@@ -292,9 +292,9 @@ export function MentorPage({ onBackToHome }: MentorPageProps) {
               <div className="lg:col-span-7 text-left">
                 
                 {/* Pill Badge */}
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF4500]/10 border border-[#FF4500]/25 text-[#FFA000] text-xs font-semibold tracking-wide mb-6">
-                  <Sparkles size={14} className="text-[#FF4500]" />
-                  <span>Mentor with TEJAS</span>
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#00B4D8]/10 border border-[#00B4D8]/30 text-[#00B4D8] text-xs font-semibold tracking-wide mb-6">
+                  <Sparkles size={14} className="text-[#00B4D8]" />
+                  <span>Mentor with Grow360</span>
                 </div>
 
                 {/* Main Headline */}

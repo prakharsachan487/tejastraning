@@ -78,7 +78,7 @@ export function MentorApplyModal({ isOpen, onClose }: MentorApplyModalProps) {
                   Application Received!
                 </h3>
                 <p className="text-sm text-slate-300 max-w-md mx-auto mb-8 leading-relaxed">
-                  Thank you for applying to the TEJAS Mentor Guild, <span className="text-white font-semibold">{fullName || 'Engineer'}</span>. Our developer relations team will review your LinkedIn and reach out within 24 hours.
+                  Thank you for applying to the Grow360 Mentor Guild, <span className="text-white font-semibold">{fullName || 'Engineer'}</span>. Our developer relations team will review your LinkedIn and reach out within 24 hours.
                 </p>
                 <button
                   onClick={handleReset}
@@ -91,9 +91,9 @@ export function MentorApplyModal({ isOpen, onClose }: MentorApplyModalProps) {
               <div>
                 {/* Modal Header */}
                 <div className="mb-6">
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FF4500]/10 border border-[#FF4500]/25 text-[#FFA000] text-xs font-mono font-semibold mb-3">
-                    <Sparkles size={13} className="text-[#FF4500]" />
-                    <span>TEJAS Mentor Network</span>
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#00B4D8]/10 border border-[#00B4D8]/30 text-[#00B4D8] text-xs font-mono font-semibold mb-3">
+                    <Sparkles size={13} className="text-[#00B4D8]" />
+                    <span>Grow360 Mentor Network</span>
                   </div>
                   <h3 className="text-2xl font-extrabold text-white tracking-tight font-[family-name:var(--font-display)]">
                     Apply as an Industry Mentor

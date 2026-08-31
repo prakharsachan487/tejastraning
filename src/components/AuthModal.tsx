@@ -95,8 +95,8 @@ export function AuthModal() {
                 <div className="flex items-center justify-between mb-8">
                   {/* Brand Pill Badge */}
                   <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#1E1E24]/20 bg-white/60 shadow-xs">
-                    <div className="w-2 h-2 rounded-full bg-[#FF4500]" />
-                    <span className="text-xs font-bold text-[#1E1E24] tracking-tight">TEJAS</span>
+                    <img src="/grow360-logo.png" alt="Grow360" className="h-4 w-auto object-contain" />
+                    <span className="text-xs font-bold text-[#1E1E24] tracking-tight">GROW<span className="text-[#00B4D8]">360°</span></span>
                   </div>
                 </div>
 
@@ -276,7 +276,7 @@ export function AuthModal() {
                   href="#terms"
                   onClick={(e) => {
                     e.preventDefault();
-                    alert('TEJAS Placement & Mentorship Terms of Service.');
+                    alert('Grow360 Placement & Mentorship Terms of Service.');
                   }}
                   className="hover:underline text-slate-500 hover:text-black cursor-pointer"
                 >
