@@ -277,7 +277,7 @@ export function Hero() {
                 </div>
               ) : (
                 /* Main 2-Column Clean Form */
-                <form onSubmit={handleSubmit} className="space-y-3.5">
+                <form onSubmit={handleSubmit} autoComplete="off" className="space-y-3.5">
                   {errorMsg && (
                     <div className="p-3 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-400 text-xs">
                       {errorMsg}
@@ -293,10 +293,10 @@ export function Hero() {
                       <input
                         type="text"
                         required
+                        autoComplete="off"
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
-                        placeholder="e.g. Rahul Sharma"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#09090D] border border-white/15 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:border-[#00B4D8] transition-colors"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#09090D] border border-white/15 text-xs text-white focus:outline-none focus:border-[#00B4D8] transition-colors"
                       />
                     </div>
 
@@ -307,10 +307,10 @@ export function Hero() {
                       <input
                         type="email"
                         required
+                        autoComplete="off"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        placeholder="rahul@college.edu"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#09090D] border border-white/15 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:border-[#00B4D8] transition-colors"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#09090D] border border-white/15 text-xs text-white focus:outline-none focus:border-[#00B4D8] transition-colors"
                       />
                     </div>
                   </div>
@@ -324,14 +324,11 @@ export function Hero() {
                       <input
                         type="tel"
                         required
+                        autoComplete="off"
                         value={phoneNumber}
                         onChange={(e) => setPhoneNumber(e.target.value)}
-                        placeholder="+91 98765 43210"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#09090D] border border-white/15 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:border-[#00B4D8] transition-colors"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#09090D] border border-white/15 text-xs text-white focus:outline-none focus:border-[#00B4D8] transition-colors"
                       />
-                      <span className="block text-[10px] text-slate-500 font-mono mt-1">
-                        Please include country code.
-                      </span>
                     </div>
 
                     <div>
@@ -340,10 +337,10 @@ export function Hero() {
                       </label>
                       <input
                         type="text"
+                        autoComplete="off"
                         value={collegeName}
                         onChange={(e) => setCollegeName(e.target.value)}
-                        placeholder="e.g. SRM University / IIT Delhi"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#09090D] border border-white/15 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:border-[#00B4D8] transition-colors"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#09090D] border border-white/15 text-xs text-white focus:outline-none focus:border-[#00B4D8] transition-colors"
                       />
                     </div>
                   </div>
@@ -355,10 +352,10 @@ export function Hero() {
                     </label>
                     <input
                       type="text"
+                      autoComplete="off"
                       value={profession}
                       onChange={(e) => setProfession(e.target.value)}
-                      placeholder="e.g. TPO, Dean, Faculty, Student, Recruiter..."
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#09090D] border border-white/15 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:border-[#00B4D8] transition-colors"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#09090D] border border-white/15 text-xs text-white focus:outline-none focus:border-[#00B4D8] transition-colors"
                     />
                   </div>
 
@@ -371,8 +368,7 @@ export function Hero() {
                       rows={3}
                       value={requestDetails}
                       onChange={(e) => setRequestDetails(e.target.value)}
-                      placeholder="Share details about student batch size, preferred training tracks, or institutional timeline..."
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#09090D] border border-white/15 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:border-[#00B4D8] transition-colors resize-none"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#09090D] border border-white/15 text-xs text-white focus:outline-none focus:border-[#00B4D8] transition-colors resize-none"
                     />
                   </div>
 
