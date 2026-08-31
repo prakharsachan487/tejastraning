@@ -163,21 +163,11 @@ export function Hero() {
               <motion.a
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                href="#programs"
-                className="btn-pill-primary cursor-pointer flex items-center gap-2"
+                href="#training-programs"
+                className="btn-pill-primary cursor-pointer flex items-center gap-2 shadow-lg shadow-orange-500/20"
               >
                 <span>View Programs</span>
                 <ArrowRight size={16} />
-              </motion.a>
-
-              <motion.a
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                href="#mentor"
-                className="btn-pill-secondary cursor-pointer flex items-center gap-2"
-              >
-                <span>Become a Mentor</span>
-                <ArrowRight size={16} className="text-slate-400" />
               </motion.a>
             </motion.div>
 
