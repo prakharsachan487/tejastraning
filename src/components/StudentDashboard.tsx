@@ -287,8 +287,8 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
           </button>
 
           {/* Streak / XP Pill */}
-          <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border ${isDarkMode ? 'bg-[#7A9D96]/10 border-[#7A9D96]/30 text-[#9CBDB7]' : 'bg-amber-50 border-amber-200 text-amber-600'} text-xs font-bold font-mono`}>
-            <Flame size={14} className="text-[#7A9D96] fill-amber-500" />
+          <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border ${isDarkMode ? 'bg-[#7A9D96]/10 border-[#7A9D96]/30 text-[#9CBDB7]' : 'bg-[#7A9D96]/10 border-[#7A9D96]/30 text-[#7A9D96]'} text-xs font-bold font-mono`}>
+            <Flame size={14} className="text-[#7A9D96] fill-[#7A9D96]" />
             <span>0</span>
           </div>
 
@@ -523,7 +523,7 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
                     href={portfolioUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`w-8 h-8 rounded-full border ${isDarkMode ? 'bg-white/5 border-white/10 hover:bg-[#7A9D96]/20' : 'bg-slate-50 border-slate-200 hover:bg-amber-50'} flex items-center justify-center text-[#7A9D96] transition-colors`}
+                    className={`w-8 h-8 rounded-full border ${isDarkMode ? 'bg-white/5 border-white/10 hover:bg-[#7A9D96]/20' : 'bg-slate-50 border-slate-200 hover:bg-[#7A9D96]/10'} flex items-center justify-center text-[#7A9D96] transition-colors`}
                   >
                     <Globe size={14} />
                   </a>
@@ -618,7 +618,7 @@ export function StudentDashboard({ onBackToHome }: StudentDashboardProps) {
               </div>
 
               {/* Profile Completeness Pill Dropdown */}
-              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#7A9D96]/10 border border-[#7A9D96]/30 text-amber-600 dark:text-[#9CBDB7] text-xs font-bold font-mono">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#7A9D96]/10 border border-[#7A9D96]/30 text-[#7A9D96] dark:text-[#9CBDB7] text-xs font-bold font-mono">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#7A9D96]" />
                 <span>Profile completeness: {profileCompletion}%</span>
                 <ChevronDown size={13} />

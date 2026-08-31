@@ -303,7 +303,7 @@ export function ProgramsSection() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -15, scale: 0.98 }}
                 transition={{ duration: 0.35, delay: i * 0.08 }}
-                className="group relative rounded-2xl bg-[#111116] border border-white/10 p-6 flex flex-col justify-between hover:border-[#7A9D96]/50 transition-all duration-300 hover:shadow-xl hover:shadow-orange-950/20"
+                className="group relative rounded-2xl bg-[#111116] border border-white/10 p-6 flex flex-col justify-between hover:border-[#7A9D96]/50 transition-all duration-300 hover:shadow-xl hover:shadow-teal-950/20"
               >
                 <div>
                   {/* Top Bar with Duration & Level */}

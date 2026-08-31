@@ -27,8 +27,11 @@ function ShatterWord({
 
         let charColor = '#FFFFFF';
         if (isGradient) {
-          const g = Math.round(69 + (160 - 69) * ((startIndex + charIdx - 20) / Math.max(totalGradientLength - 1, 1)));
-          charColor = `rgb(255, ${Math.min(Math.max(g, 69), 160)}, 0)`;
+          const ratio = (startIndex + charIdx - 20) / Math.max(totalGradientLength - 1, 1);
+          const r = Math.round(122 + (168 - 122) * ratio);
+          const g = Math.round(157 + (204 - 157) * ratio);
+          const b = Math.round(150 + (197 - 150) * ratio);
+          charColor = `rgb(${r}, ${g}, ${b})`;
         }
 
         return (

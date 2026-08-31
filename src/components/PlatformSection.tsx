@@ -206,11 +206,11 @@ export function PlatformSection() {
                     <div className="font-bold text-slate-700 text-[9px]">Cloud AWS</div>
                   </div>
 
-                  <div className="p-2 rounded-lg bg-amber-50 border border-amber-200">
+                  <div className="p-2 rounded-lg bg-[#7A9D96]/10 border border-[#7A9D96]/30">
                     <div className="w-4 h-4 mx-auto mb-1 rounded-full bg-[#7A9D96] text-white flex items-center justify-center text-[8px] font-bold">
                       ★
                     </div>
-                    <div className="font-bold text-amber-900 text-[9px]">Drive Ready</div>
+                    <div className="font-bold text-[#7A9D96] text-[9px]">Drive Ready</div>
                   </div>
                 </div>
               </div>
