@@ -305,12 +305,12 @@ export function MentorJobPortal() {
   const [applySuccess, setApplySuccess] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Application Form State (Name, Email, Phone, Resume)
+  // Application Form State (Name, Email, Phone, Resume File OR Link)
   const [applicantName, setApplicantName] = useState('');
   const [applicantEmail, setApplicantEmail] = useState('');
   const [applicantPhone, setApplicantPhone] = useState('');
-  const [applicantResume, setApplicantResume] = useState('');
   const [resumeFileName, setResumeFileName] = useState('');
+  const [resumeLink, setResumeLink] = useState('');
 
   // Extract all unique skills
   const allSkills = useMemo(() => {
@@ -411,8 +411,8 @@ export function MentorJobPortal() {
     setApplicantName('');
     setApplicantEmail('');
     setApplicantPhone('');
-    setApplicantResume('');
     setResumeFileName('');
+    setResumeLink('');
   };
 
   return (
@@ -1126,55 +1126,75 @@ export function MentorJobPortal() {
                         />
                       </div>
 
-                      {/* Row 3: Upload Resume */}
+                      {/* Row 3: Resume (Upload File OR Paste Link - Either one is required) */}
                       <div>
-                        <label className="block text-[11px] font-mono text-slate-400 mb-1">
-                          Upload Resume / CV (PDF or Drive Link) <span className="text-[#FF4500]">*</span>
-                        </label>
-                        
-                        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
-                          <label className="flex-1 px-3.5 py-2.5 rounded-xl bg-[#111116] border border-dashed border-white/20 hover:border-[#FF4500]/50 text-xs text-slate-300 flex items-center justify-between cursor-pointer transition-colors group">
-                            <div className="flex items-center gap-2 overflow-hidden">
-                              <Upload size={14} className="text-[#FFA000] shrink-0 group-hover:scale-110 transition-transform" />
-                              <span className="truncate">
-                                {resumeFileName || (applicantResume ? applicantResume : 'Choose PDF file or browse...')}
-                              </span>
-                            </div>
-                            <span className="text-[10px] font-mono font-bold text-slate-400 bg-white/5 px-2 py-0.5 rounded shrink-0">
-                              Browse
-                            </span>
-                            <input
-                              type="file"
-                              accept=".pdf,.doc,.docx"
-                              className="hidden"
-                              onChange={(e) => {
-                                const file = e.target.files?.[0];
-                                if (file) {
-                                  setResumeFileName(file.name);
-                                  setApplicantResume(file.name);
-                                }
-                              }}
-                            />
+                        <div className="flex items-center justify-between mb-1.5">
+                          <label className="block text-[11px] font-mono text-slate-300">
+                            Resume / CV <span className="text-[#FF4500]">*</span>
                           </label>
+                          <span className="text-[10px] font-mono text-[#FFA000] bg-[#FFA000]/10 border border-[#FFA000]/20 px-2 py-0.5 rounded-full">
+                            Upload File OR Paste Link (Any one)
+                          </span>
+                        </div>
+                        
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                          {/* Option 1: File Upload */}
+                          <div>
+                            <label className={`w-full px-3.5 py-2.5 rounded-xl border ${
+                              resumeFileName 
+                                ? 'bg-emerald-500/10 border-emerald-500/40 text-emerald-300' 
+                                : 'bg-[#111116] border-dashed border-white/20 hover:border-[#FF4500]/50 text-slate-300'
+                            } text-xs flex items-center justify-between cursor-pointer transition-all group h-[42px]`}>
+                              <div className="flex items-center gap-2 overflow-hidden">
+                                <Upload size={14} className={`${resumeFileName ? 'text-emerald-400' : 'text-[#FFA000]'} shrink-0 group-hover:scale-110 transition-transform`} />
+                                <span className="truncate">
+                                  {resumeFileName ? resumeFileName : 'Upload PDF / DOC file'}
+                                </span>
+                              </div>
+                              <span className="text-[10px] font-mono font-bold text-slate-400 bg-white/5 px-2 py-0.5 rounded shrink-0">
+                                {resumeFileName ? 'Change' : 'Browse'}
+                              </span>
+                              <input
+                                type="file"
+                                accept=".pdf,.doc,.docx"
+                                className="hidden"
+                                onChange={(e) => {
+                                  const file = e.target.files?.[0];
+                                  if (file) {
+                                    setResumeFileName(file.name);
+                                  }
+                                }}
+                              />
+                            </label>
+                          </div>
 
-                          <span className="text-[10px] font-mono text-slate-500 text-center">or</span>
-
-                          <input
-                            type="url"
-                            placeholder="Paste Drive / PDF link..."
-                            value={applicantResume}
-                            onChange={(e) => {
-                              setApplicantResume(e.target.value);
-                              if (e.target.value) setResumeFileName('');
-                            }}
-                            className="flex-1 px-3.5 py-2.5 rounded-xl bg-[#111116] border border-white/10 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:border-[#FF4500]"
-                          />
+                          {/* Option 2: Link */}
+                          <div>
+                            <input
+                              type="url"
+                              placeholder="Or paste Drive / Portfolio link..."
+                              value={resumeLink}
+                              onChange={(e) => setResumeLink(e.target.value)}
+                              className={`w-full px-3.5 py-2.5 rounded-xl bg-[#111116] border ${
+                                resumeLink.trim()
+                                  ? 'border-emerald-500/40 text-emerald-300 focus:border-emerald-500'
+                                  : 'border-white/10 text-white placeholder:text-slate-600 focus:border-[#FF4500]'
+                              } text-xs focus:outline-none transition-all h-[42px]`}
+                            />
+                          </div>
                         </div>
 
-                        {applicantResume && (
-                          <div className="mt-1.5 flex items-center gap-1.5 text-[11px] font-mono text-emerald-400">
-                            <CheckCircle2 size={12} />
-                            <span className="truncate">Resume attached: {resumeFileName || applicantResume}</span>
+                        {/* Confirmation Badge */}
+                        {(resumeFileName || resumeLink.trim()) && (
+                          <div className="mt-2 flex items-center gap-1.5 text-[11px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-xl">
+                            <CheckCircle2 size={13} className="shrink-0" />
+                            <span className="truncate">
+                              {resumeFileName && resumeLink.trim()
+                                ? `Resume: File (${resumeFileName}) & Link provided`
+                                : resumeFileName
+                                ? `Attached File: ${resumeFileName}`
+                                : `Resume Link: ${resumeLink.trim()}`}
+                            </span>
                           </div>
                         )}
                       </div>
@@ -1182,7 +1202,7 @@ export function MentorJobPortal() {
                       <div className="pt-2">
                         <button
                           type="submit"
-                          disabled={isSubmitting || !applicantResume}
+                          disabled={isSubmitting || (!resumeFileName && !resumeLink.trim())}
                           className="w-full btn-pill-primary py-3.5 text-xs font-bold cursor-pointer justify-center flex items-center gap-2 shadow-lg shadow-orange-500/20 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           {isSubmitting ? (
