@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
-import { Sparkles, Star, ArrowUpRight, CheckCircle2 } from 'lucide-react';
-import { useEnquiry } from '../context/EnquiryContext';
+import { Sparkles, Star, CheckCircle2 } from 'lucide-react';
 
 interface GalleryCard {
   name: string;
@@ -106,43 +105,28 @@ const galleryMentorsRow1: GalleryCard[] = [
 ];
 
 export function RollingGallerySection() {
-  const { openEnquiry } = useEnquiry();
-
   return (
     <section className="py-16 lg:py-20 bg-[#F1F4F9] border-b border-black/5 overflow-hidden relative">
       {/* Background Ambient Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[300px] bg-gradient-to-r from-[#2563EB]/5 via-[#3B82F6]/5 to-transparent blur-[140px] pointer-events-none rounded-full" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 relative z-10">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="max-w-3xl text-left"
-          >
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2563EB]/10 border border-[#2563EB]/25 text-[#2563EB] text-xs font-semibold tracking-wide mb-3">
-              <Sparkles size={14} className="text-[#2563EB]" />
-              <span>Continuous 1:1 Mentorship Gallery</span>
-            </div>
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-[#12151B] font-[family-name:var(--font-display)] leading-tight">
-              Real Engineers. Real Feedback.{' '}
-              <span className="text-[#2563EB]">Zero Fluff.</span>
-            </h3>
-            <p className="mt-2 text-sm text-slate-600">
-              Live mock rounds, resume teardowns, and architecture evaluations conducted by top tech practitioners.
-            </p>
-          </motion.div>
-
-          <button
-            onClick={() => openEnquiry('CONSULTATION')}
-            className="btn-pill-primary text-xs sm:text-sm font-bold px-6 py-3 shrink-0 flex items-center gap-2 shadow-sm self-start sm:self-end cursor-pointer"
-          >
-            <span>Book Mock Drive</span>
-            <ArrowUpRight size={16} />
-          </button>
-        </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center max-w-3xl mx-auto"
+        >
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2563EB]/10 border border-[#2563EB]/25 text-[#2563EB] text-xs font-semibold tracking-wide mb-3">
+            <Sparkles size={14} className="text-[#2563EB]" />
+            <span>Campus Mentorship In Action</span>
+          </div>
+          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-[#12151B] font-[family-name:var(--font-display)] leading-tight">
+            Mentoring Moments.{' '}
+            <span className="text-[#2563EB]">Growing Together.</span>
+          </h3>
+        </motion.div>
       </div>
 
       {/* ── CONTINUOUS INFINITE ROLLING GALLERY ROW ── */}
