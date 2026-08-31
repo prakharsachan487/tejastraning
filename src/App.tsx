@@ -20,15 +20,18 @@ import { MentorPage } from './components/MentorPage';
 import { StudentDashboard } from './components/StudentDashboard';
 import { LegalPage } from './components/LegalPage';
 import { AuthPage } from './components/AuthPage';
+import { CareerPage } from './components/CareerPage';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'mentor' | 'login' | 'signup' | 'dashboard' | 'privacy' | 'terms' | 'cookies'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'mentor' | 'career' | 'login' | 'signup' | 'dashboard' | 'privacy' | 'terms' | 'cookies'>('home');
 
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash;
       if (hash === '#mentor' || hash === '#become-a-mentor') {
         setCurrentPage('mentor');
+      } else if (hash === '#career' || hash === '#careers' || hash === '#jobs') {
+        setCurrentPage('career');
       } else if (hash === '#login' || hash === '#signin' || hash === '#auth') {
         setCurrentPage('login');
       } else if (hash === '#signup' || hash === '#register') {
@@ -70,6 +73,8 @@ function App() {
         <div className="relative min-h-screen bg-[#0A0A0D] text-slate-100 font-sans selection:bg-[#FF4500] selection:text-white">
           {currentPage === 'mentor' ? (
             <MentorPage onBackToHome={handleBackToHome} />
+          ) : currentPage === 'career' ? (
+            <CareerPage onBackToHome={handleBackToHome} />
           ) : currentPage === 'login' || currentPage === 'signup' ? (
             <AuthPage />
           ) : currentPage === 'dashboard' ? (

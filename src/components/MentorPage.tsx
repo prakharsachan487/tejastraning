@@ -15,7 +15,6 @@ import {
   Star,
   FileCode
 } from 'lucide-react';
-import { MentorJobPortal } from './MentorJobPortal';
 import { Footer } from './Footer';
 
 interface MentorPageProps {
@@ -239,9 +238,9 @@ export function MentorPage({ onBackToHome }: MentorPageProps) {
 
           {/* Quick Anchor Links */}
           <nav className="hidden lg:flex items-center gap-6 text-xs font-medium text-slate-400">
-            <button onClick={() => scrollToSection('open-roles')} className="hover:text-white text-[#FFA000] font-semibold transition-colors cursor-pointer flex items-center gap-1">
+            <button onClick={() => { window.location.hash = '#careers'; }} className="hover:text-white text-[#00B4D8] font-semibold transition-colors cursor-pointer flex items-center gap-1">
               <Sparkles size={12} />
-              <span>Open Roles</span>
+              <span>Careers &amp; Open Roles</span>
             </button>
             <button onClick={() => scrollToSection('how-it-works')} className="hover:text-white transition-colors cursor-pointer">
               Process
@@ -263,7 +262,7 @@ export function MentorPage({ onBackToHome }: MentorPageProps) {
           {/* Action Buttons */}
           <div className="flex items-center gap-3">
             <button
-              onClick={() => scrollToSection('open-roles')}
+              onClick={() => { window.location.hash = '#careers'; }}
               className="btn-pill-primary text-xs py-2.5 px-5 cursor-pointer shadow-lg shadow-orange-500/20"
             >
               <Sparkles size={14} className="text-white" />
@@ -313,7 +312,7 @@ export function MentorPage({ onBackToHome }: MentorPageProps) {
                 {/* Action Buttons */}
                 <div className="flex flex-wrap items-center gap-4 mb-10">
                   <button
-                    onClick={() => scrollToSection('open-roles')}
+                    onClick={() => { window.location.hash = '#careers'; }}
                     className="btn-pill-primary py-3.5 px-8 text-xs sm:text-sm font-bold cursor-pointer"
                   >
                     <span>Apply as Mentor</span>
@@ -448,14 +447,14 @@ export function MentorPage({ onBackToHome }: MentorPageProps) {
 
             <div className="text-center flex flex-wrap items-center justify-center gap-4">
               <button
-                onClick={() => scrollToSection('open-roles')}
+                onClick={() => { window.location.hash = '#careers'; }}
                 className="btn-pill-primary py-3 px-8 text-xs sm:text-sm cursor-pointer"
               >
                 <span>Browse Open Positions</span>
                 <ArrowRight size={15} />
               </button>
               <button
-                onClick={() => scrollToSection('open-roles')}
+                onClick={() => { window.location.hash = '#careers'; }}
                 className="btn-pill-secondary py-3 px-6 text-xs sm:text-sm cursor-pointer"
               >
                 <span>View All Openings</span>
@@ -464,11 +463,6 @@ export function MentorPage({ onBackToHome }: MentorPageProps) {
 
           </div>
         </section>
-
-        {/* ========================================================
-            03. OPEN POSITIONS & MENTOR OPENINGS (JOB PORTAL)
-        ======================================================== */}
-        <MentorJobPortal />
 
         {/* ========================================================
             04. WHAT YOU ACTUALLY DO (RESPONSIBILITIES)
@@ -688,7 +682,7 @@ export function MentorPage({ onBackToHome }: MentorPageProps) {
                     Apply in 2 minutes. Start taking flexible mock interviews and empower the next generation of engineers.
                   </p>
                   <button
-                    onClick={() => scrollToSection('open-roles')}
+                    onClick={() => { window.location.hash = '#careers'; }}
                     className="btn-pill-primary py-3.5 px-8 text-xs sm:text-sm font-bold cursor-pointer"
                   >
                     <span>Browse All Open Roles</span>
