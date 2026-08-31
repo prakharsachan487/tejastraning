@@ -28,10 +28,8 @@ function App() {
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash;
-      if (hash === '#mentor' || hash === '#become-a-mentor') {
+      if (hash === '#mentor' || hash === '#become-a-mentor' || hash === '#career' || hash === '#careers' || hash === '#jobs') {
         setCurrentPage('mentor');
-      } else if (hash === '#career' || hash === '#careers' || hash === '#jobs') {
-        setCurrentPage('career');
       } else if (hash === '#training-programs' || hash === '#training' || hash === '#programs' || hash === '#courses') {
         setCurrentPage('training-programs');
       } else if (hash === '#blog' || hash === '#blogs' || hash === '#articles') {

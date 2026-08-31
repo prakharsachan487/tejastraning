@@ -3,8 +3,10 @@ import { motion } from 'framer-motion';
 import { 
   Sparkles, 
   ArrowRight, 
-  Clock 
+  Clock,
+  Briefcase 
 } from 'lucide-react';
+import { MentorJobPortal } from './MentorJobPortal';
 
 interface MentorPageProps {
   onBackToHome?: () => void;
@@ -86,12 +88,26 @@ const fellowMentors = [
 ];
 
 export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
-  // Instantly scroll to top when page opens
+  // Instantly scroll to top or target hash when page opens
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
+    if (window.location.hash === '#career-portal' || window.location.hash === '#careers' || window.location.hash === '#jobs') {
+      setTimeout(() => {
+        const elem = document.getElementById('career-portal');
+        if (elem) elem.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    } else {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }
   }, []);
+
+  const scrollToCareers = () => {
+    const elem = document.getElementById('career-portal');
+    if (elem) {
+      elem.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <div className="min-h-screen bg-[#F8F9FB] text-slate-900 font-sans selection:bg-[#2563EB] selection:text-white">
@@ -106,7 +122,7 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
         {/* ========================================================
             01. HERO SECTION (FOCUSED & IMPACTFUL)
         ======================================================== */}
-        <section className="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-12">
+        <section className="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-16">
           <div className="p-8 sm:p-12 lg:p-16 rounded-3xl bg-white shadow-sm border border-black/8 relative overflow-hidden">
             
             {/* Corner Decorative Glow */}
@@ -144,7 +160,7 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
                 {/* Action Buttons */}
                 <div className="flex flex-wrap items-center gap-4 mb-10">
                   <button
-                    onClick={() => { window.location.hash = '#careers'; }}
+                    onClick={scrollToCareers}
                     className="btn-pill-primary py-3.5 px-8 text-xs sm:text-sm font-bold cursor-pointer flex items-center gap-2"
                   >
                     <span>Apply as Mentor</span>
@@ -152,7 +168,7 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
                   </button>
 
                   <button
-                    onClick={() => { window.location.hash = '#careers'; }}
+                    onClick={scrollToCareers}
                     className="btn-pill-secondary py-3.5 px-6 text-xs sm:text-sm cursor-pointer"
                   >
                     <span>View All Openings</span>
@@ -235,6 +251,27 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
 
             </div>
           </div>
+        </section>
+
+        {/* ========================================================
+            02. CAREER OPPORTUNITIES (INTEGRATED JOB PORTAL)
+        ======================================================== */}
+        <section id="career-portal" className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+          <div className="text-center max-w-3xl mx-auto mb-10">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2563EB]/10 border border-[#2563EB]/25 text-[#2563EB] text-xs font-semibold tracking-wide mb-3">
+              <Briefcase size={14} className="text-[#2563EB]" />
+              <span>Open Positions &amp; Roles</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-[family-name:var(--font-display)] mb-3">
+              Career <span className="text-[#2563EB]">Opportunities</span>
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600 max-w-2xl mx-auto leading-relaxed">
+              Explore open flexible mock interviewing, DSA instruction, cloud architecture, and corporate training positions. Apply directly with your resume or LinkedIn profile.
+            </p>
+          </div>
+
+          {/* Embedded Job Portal */}
+          <MentorJobPortal />
         </section>
 
       </main>
