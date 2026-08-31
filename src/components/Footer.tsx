@@ -1,4 +1,5 @@
 import { useEnquiry } from '../context/EnquiryContext';
+import { MapPin, Phone, Mail } from 'lucide-react';
 
 export function Footer() {
   const { openEnquiry } = useEnquiry();
@@ -33,8 +34,8 @@ export function Footer() {
         {/* Main Grid: 4 Columns */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 mb-20">
           
-          {/* Column 1: Brand & Backed By (5 cols) */}
-          <div className="lg:col-span-5 flex flex-col justify-between">
+          {/* Column 1: Brand & Backed By (4 cols) */}
+          <div className="lg:col-span-4 flex flex-col justify-between">
             <div>
               {/* Grow360 Brand Logo */}
               <div 
@@ -165,24 +166,32 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Column 3: Contact (2 cols) */}
-          <div className="lg:col-span-2">
-            <h4 className="text-sm font-bold text-slate-900 tracking-tight mb-5 font-[family-name:var(--font-display)]">
-              Contact
+          {/* Column 3: Contact & Office (3 cols) */}
+          <div className="lg:col-span-3">
+            <h4 className="text-sm font-bold text-slate-900 tracking-tight mb-4 font-[family-name:var(--font-display)]">
+              Contact &amp; Office
             </h4>
             <div className="space-y-3 text-xs sm:text-sm text-slate-600">
-              <div>
+              <div className="flex items-start gap-2 text-slate-700">
+                <MapPin size={16} className="text-[#2563EB] shrink-0 mt-0.5" />
+                <span className="leading-relaxed">
+                  A-301 GODREJ PRANA, near dhruv global school, undri, pune, maharashtra, 411060
+                </span>
+              </div>
+              <div className="flex items-center gap-2 pt-0.5">
+                <Phone size={14} className="text-[#2563EB] shrink-0" />
                 <a
-                  href="tel:+919041429928"
-                  className="hover:text-[#2563EB] transition-colors block font-mono font-medium"
+                  href="tel:+917652006897"
+                  className="hover:text-[#2563EB] transition-colors font-mono font-medium"
                 >
-                  +91 9041429928
+                  +91 7652006897
                 </a>
               </div>
-              <div>
+              <div className="flex items-center gap-2">
+                <Mail size={14} className="text-[#2563EB] shrink-0" />
                 <a
                   href="mailto:partnerships@grow360.in"
-                  className="hover:text-[#2563EB] transition-colors block break-all font-mono font-medium"
+                  className="hover:text-[#2563EB] transition-colors break-all font-mono font-medium"
                 >
                   partnerships@grow360.in
                 </a>
