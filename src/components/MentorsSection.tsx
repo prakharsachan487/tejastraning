@@ -56,7 +56,7 @@ const mentors = [
     ),
     role: "SIBM P'27 · Ex-Deloitte USI · Ex-Urban Company",
     quote: 'National Winner of J&J Imagivators 2025 and CISI Level 1 certified with deep experience in business strategy, financial advisory, and risk consulting.',
-    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=600&q=80',
+    image: '/mentors/vishal_motlani.jpg',
     tilt: '0.9deg',
   },
   {
