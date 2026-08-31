@@ -69,7 +69,7 @@ export function TestimonialsSection() {
   const [activeCategory, setActiveCategory] = useState(0);
 
   return (
-    <section className="py-20 lg:py-28 bg-[#0A0A0D] relative obsidian-grid">
+    <section className="py-20 lg:py-28 bg-[#F8F9FB] relative obsidian-grid border-b border-black/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -80,24 +80,24 @@ export function TestimonialsSection() {
           transition={{ duration: 0.5 }}
           className="text-center max-w-3xl mx-auto mb-14"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#7A9D96]/10 border border-[#7A9D96]/25 text-[#9CBDB7] text-xs font-semibold tracking-wide mb-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#7A9D96]/10 border border-[#7A9D96]/25 text-[#7A9D96] text-xs font-semibold tracking-wide mb-4">
             <Sparkles size={14} className="text-[#7A9D96]" />
             <span>Institutional Testimonials</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight font-[family-name:var(--font-display)]">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#12151B] leading-tight font-[family-name:var(--font-display)]">
             What Our{' '}
-            <span className="bg-gradient-to-r from-[#7A9D96] via-[#9CBDB7] to-[#9CBDB7] bg-clip-text text-transparent">
+            <span className="text-[#7A9D96]">
               Partners Say
             </span>
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-slate-400">
+          <p className="mt-4 text-base sm:text-lg text-slate-600">
             Real feedback from college deans, placed students, and corporate recruiters.
           </p>
         </motion.div>
 
         {/* Category Tabs */}
         <div className="flex justify-center mb-12">
-          <div className="flex items-center gap-2 p-1.5 rounded-full bg-[#14141C] border border-white/10 backdrop-blur-md">
+          <div className="flex items-center gap-2 p-1.5 rounded-full bg-slate-100/90 border border-black/5 shadow-inner backdrop-blur-md">
             {testimonials.map((item, index) => {
               const Icon = item.icon;
               const isActive = activeCategory === index;
@@ -107,8 +107,8 @@ export function TestimonialsSection() {
                   onClick={() => setActiveCategory(index)}
                   className={`flex items-center gap-2 px-4 sm:px-5 py-2 rounded-full text-xs font-semibold tracking-wide transition-all cursor-pointer ${
                     isActive
-                      ? 'bg-gradient-to-r from-[#7A9D96] to-[#9CBDB7] text-white font-bold shadow-md shadow-[#7A9D96]/'
-                      : 'text-slate-400 hover:text-white'
+                      ? 'bg-white text-[#7A9D96] font-bold shadow-sm border border-black/5'
+                      : 'text-slate-600 hover:text-black'
                   }`}
                 >
                   <Icon size={14} />
@@ -127,29 +127,29 @@ export function TestimonialsSection() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.35, delay: i * 0.1 }}
-              className="bento-card p-8 sm:p-9 flex flex-col justify-between relative group hover:border-[#7A9D96]/40"
+              className="bento-card p-8 sm:p-9 flex flex-col justify-between relative group hover:border-[#7A9D96]/40 bg-white shadow-[0_4px_25px_-2px_rgba(0,0,0,0.04)] border border-black/8"
             >
               <div>
-                <Quote className="text-[#7A9D96]/25 w-12 h-12 mb-4" />
-                <p className="text-sm sm:text-base text-slate-200 leading-relaxed italic mb-8">
+                <Quote className="text-[#7A9D96]/20 w-12 h-12 mb-4" />
+                <p className="text-sm sm:text-base text-slate-700 leading-relaxed italic mb-8 font-serif">
                   "{q.quote}"
                 </p>
               </div>
 
-              <div className="pt-5 border-t border-white/10 flex items-center justify-between">
+              <div className="pt-5 border-t border-black/5 flex items-center justify-between">
                 <div>
-                  <div className="text-sm font-bold text-white font-[family-name:var(--font-display)]">
+                  <div className="text-sm font-bold text-slate-900 font-[family-name:var(--font-display)]">
                     {q.author}
                   </div>
-                  <div className="text-xs text-slate-400 font-mono">
+                  <div className="text-xs text-slate-500 font-mono">
                     {q.designation}
                   </div>
-                  <div className="text-[11px] font-mono text-[#9CBDB7] mt-0.5">
+                  <div className="text-[11px] font-mono text-[#7A9D96] mt-0.5 font-semibold">
                     {q.institution}
                   </div>
                 </div>
 
-                <span className="px-2.5 py-1 rounded-lg bg-[#7A9D96]/15 text-[#9CBDB7] border border-[#7A9D96]/30 text-[10px] font-mono font-bold">
+                <span className="px-2.5 py-1 rounded-lg bg-[#7A9D96]/10 text-[#7A9D96] border border-[#7A9D96]/20 text-[10px] font-mono font-bold">
                   {q.stats}
                 </span>
               </div>

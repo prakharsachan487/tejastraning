@@ -149,7 +149,7 @@ export function PlacementJourneySection() {
   }, [stageProgress]);
 
   return (
-    <section ref={containerRef} id="career-path" className="py-24 lg:py-32 bg-[#0A0A0D] relative border-b border-white/5">
+    <section ref={containerRef} id="career-path" className="py-24 lg:py-32 bg-[#F8F9FB] relative border-b border-black/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -164,13 +164,13 @@ export function PlacementJourneySection() {
             <Sparkles size={14} className="text-[#7A9D96]" />
             <span>The 7-Stage Roadmap</span>
           </div>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.1]">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.1]">
             Training Means Nothing <br />
             <span className="text-slate-500">
               Without Placement.
             </span>
           </h2>
-          <p className="mt-5 text-base sm:text-lg text-slate-400 leading-relaxed max-w-2xl font-normal">
+          <p className="mt-5 text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl font-normal">
             We stay after training ends. We bring hiring partners to campus and support your placement cell through offers.
           </p>
         </motion.div>
@@ -188,7 +188,7 @@ export function PlacementJourneySection() {
             <div className="lg:col-span-4 flex items-center gap-6 lg:sticky lg:top-36">
               <div className="flex flex-col items-center">
                 <div className={`w-4 h-4 rounded-full border-2 transition-all duration-300 ${
-                  activeStage >= 0 ? 'border-[#7A9D96] bg-[#7A9D96] ring-4 ring-[#7A9D96]/20' : 'border-slate-600 bg-[#0A0A0D]'
+                  activeStage >= 0 ? 'border-[#7A9D96] bg-[#7A9D96] ring-4 ring-[#7A9D96]/20' : 'border-slate-600 bg-[#F8F9FB]'
                 }`} />
                 <div className="w-0.5 h-56 bg-slate-800 my-2 hidden lg:block" />
               </div>
@@ -197,7 +197,7 @@ export function PlacementJourneySection() {
                   Stage 01
                 </span>
                 <h3 className={`text-3xl sm:text-4xl lg:text-5xl font-extrabold transition-colors duration-300 ${
-                  activeStage === 0 ? 'text-white' : 'text-slate-500'
+                  activeStage === 0 ? 'text-slate-900' : 'text-slate-500'
                 }`}>
                   Learn
                 </h3>
@@ -207,11 +207,11 @@ export function PlacementJourneySection() {
             {/* Right Stage Content & Simulator Card */}
             <div className="lg:col-span-8 space-y-8">
               <div>
-                <p className="text-lg sm:text-xl text-white font-medium leading-relaxed mb-5">
+                <p className="text-lg sm:text-xl text-slate-900 font-medium leading-relaxed mb-5">
                   {stages[0].subtitle}
                 </p>
 
-                <ul className="space-y-3 text-sm text-slate-300 mb-6">
+                <ul className="space-y-3 text-sm text-slate-700 mb-6">
                   {stages[0].bullets.map((b) => (
                     <li key={b} className="flex items-start gap-2.5">
                       <span className="text-[#7A9D96] font-bold text-base">•</span>
@@ -223,8 +223,8 @@ export function PlacementJourneySection() {
                 {/* Metric Badges */}
                 <div className="flex items-center gap-4">
                   {stages[0].metrics.map((m) => (
-                    <div key={m.label} className="p-4 rounded-xl bg-[#111116] border border-white/10 min-w-[140px]">
-                      <div className="text-xl font-bold text-white">{m.value}</div>
+                    <div key={m.label} className="p-4 rounded-xl bg-white shadow-sm border border-black/8 min-w-[140px]">
+                      <div className="text-xl font-bold text-slate-900">{m.value}</div>
                       <div className="text-[10px] uppercase font-bold tracking-wider text-slate-500 mt-0.5">
                         {m.label}
                       </div>
@@ -239,7 +239,7 @@ export function PlacementJourneySection() {
                   <span className="px-2.5 py-1 rounded bg-[#1E3A8A]/50 text-[#60A5FA] font-bold uppercase text-[10px] tracking-wider">
                     NIGHT GRIND
                   </span>
-                  <span className="text-slate-400 font-mono text-xs">2:14 AM</span>
+                  <span className="text-slate-600 font-mono text-xs">2:14 AM</span>
                 </div>
 
                 <div className="p-4 rounded-xl bg-[#080B11] border border-slate-800 mb-5">
@@ -248,7 +248,7 @@ export function PlacementJourneySection() {
                       <div className="w-2.5 h-2.5 rounded-full bg-rose-500" />
                       <div className="w-2.5 h-2.5 rounded-full bg-[#7A9D96]" />
                       <div className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
-                      <span className="ml-2 text-xs font-mono text-slate-400">two-sum.cpp</span>
+                      <span className="ml-2 text-xs font-mono text-slate-600">two-sum.cpp</span>
                     </div>
                     <span className="px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-400 text-[10px] font-bold border border-emerald-500/30">
                       Accepted
@@ -256,19 +256,19 @@ export function PlacementJourneySection() {
                   </div>
 
                   <div className="grid sm:grid-cols-12 gap-4">
-                    <div className="sm:col-span-8 font-mono text-xs text-slate-300 space-y-1">
+                    <div className="sm:col-span-8 font-mono text-xs text-slate-700 space-y-1">
                       <div className="text-slate-500">// LC 1 · Easy</div>
                       <div className="text-[#38BDF8]">class Solution &#123;</div>
                       <div className="pl-4 text-emerald-300">vector&lt;int&gt; twoSum(...) &#123;</div>
-                      <div className="pl-8 text-slate-300">unordered_map&lt;int, int&gt; m;</div>
-                      <div className="pl-8 text-slate-300">return &#123;i, m[t]&#125;;</div>
+                      <div className="pl-8 text-slate-700">unordered_map&lt;int, int&gt; m;</div>
+                      <div className="pl-8 text-slate-700">return &#123;i, m[t]&#125;;</div>
                       <div className="pl-4 text-emerald-300">&#125;</div>
                       <div className="text-[#38BDF8]">&#125;</div>
                     </div>
 
                     <div className="sm:col-span-4 border-l border-slate-800 pl-4 space-y-2 text-xs">
-                      <div className="font-bold text-white">Two Sum</div>
-                      <div className="text-[11px] text-slate-400">Find indices that add up to target.</div>
+                      <div className="font-bold text-slate-900">Two Sum</div>
+                      <div className="text-[11px] text-slate-600">Find indices that add up to target.</div>
                       <div className="space-y-1 text-[11px] pt-1">
                         <div className="text-emerald-400 font-semibold">✓ Hash map</div>
                         <div className="text-emerald-400 font-semibold">✓ O(n) time</div>
@@ -280,12 +280,12 @@ export function PlacementJourneySection() {
 
                 <div className="flex flex-wrap items-center justify-between gap-4 pt-3 border-t border-slate-800">
                   <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-full bg-[#1E293B] border border-slate-700 flex items-center justify-center text-slate-300 text-xs font-bold">
+                    <div className="w-9 h-9 rounded-full bg-[#1E293B] border border-slate-700 flex items-center justify-center text-slate-700 text-xs font-bold">
                       🧑‍💻
                     </div>
                     <div>
-                      <div className="text-xs font-bold text-white">Aarav · 3rd year</div>
-                      <div className="text-[10px] text-slate-400">DSA streak: day 47</div>
+                      <div className="text-xs font-bold text-slate-900">Aarav · 3rd year</div>
+                      <div className="text-[10px] text-slate-600">DSA streak: day 47</div>
                     </div>
                   </div>
 
@@ -300,7 +300,7 @@ export function PlacementJourneySection() {
                       DP
                     </span>
                     <div className="ml-2 px-2.5 py-1 rounded-lg bg-[#1E293B] text-[#9CBDB7] text-xs font-bold border border-slate-700">
-                      312 <span className="text-[9px] text-slate-400 uppercase font-normal">Problems</span>
+                      312 <span className="text-[9px] text-slate-600 uppercase font-normal">Problems</span>
                     </div>
                   </div>
                 </div>
@@ -315,7 +315,7 @@ export function PlacementJourneySection() {
             <div className="lg:col-span-4 flex items-center gap-6 lg:sticky lg:top-36">
               <div className="flex flex-col items-center">
                 <div className={`w-4 h-4 rounded-full border-2 transition-all duration-300 ${
-                  activeStage >= 1 ? 'border-[#7A9D96] bg-[#7A9D96] ring-4 ring-[#7A9D96]/20' : 'border-slate-600 bg-[#0A0A0D]'
+                  activeStage >= 1 ? 'border-[#7A9D96] bg-[#7A9D96] ring-4 ring-[#7A9D96]/20' : 'border-slate-600 bg-[#F8F9FB]'
                 }`} />
                 <div className="w-0.5 h-56 bg-slate-800 my-2 hidden lg:block" />
               </div>
@@ -324,7 +324,7 @@ export function PlacementJourneySection() {
                   Stage 02
                 </span>
                 <h3 className={`text-3xl sm:text-4xl lg:text-5xl font-extrabold transition-colors duration-300 ${
-                  activeStage === 1 ? 'text-white' : 'text-slate-500'
+                  activeStage === 1 ? 'text-slate-900' : 'text-slate-500'
                 }`}>
                   Practice
                 </h3>
@@ -333,11 +333,11 @@ export function PlacementJourneySection() {
 
             <div className="lg:col-span-8 space-y-8">
               <div>
-                <p className="text-lg sm:text-xl text-white font-medium leading-relaxed mb-5">
+                <p className="text-lg sm:text-xl text-slate-900 font-medium leading-relaxed mb-5">
                   {stages[1].subtitle}
                 </p>
 
-                <ul className="space-y-3 text-sm text-slate-300 mb-6">
+                <ul className="space-y-3 text-sm text-slate-700 mb-6">
                   {stages[1].bullets.map((b) => (
                     <li key={b} className="flex items-start gap-2.5">
                       <span className="text-[#7A9D96] font-bold text-base">•</span>
@@ -348,8 +348,8 @@ export function PlacementJourneySection() {
 
                 <div className="flex items-center gap-4">
                   {stages[1].metrics.map((m) => (
-                    <div key={m.label} className="p-4 rounded-xl bg-[#111116] border border-white/10 min-w-[140px]">
-                      <div className="text-xl font-bold text-white">{m.value}</div>
+                    <div key={m.label} className="p-4 rounded-xl bg-white shadow-sm border border-black/8 min-w-[140px]">
+                      <div className="text-xl font-bold text-slate-900">{m.value}</div>
                       <div className="text-[10px] uppercase font-bold tracking-wider text-slate-500 mt-0.5">
                         {m.label}
                       </div>
@@ -367,29 +367,29 @@ export function PlacementJourneySection() {
                       CAMPUS CODING SPRINT
                     </span>
                   </div>
-                  <span className="text-slate-400 font-mono text-xs">Live Assessment Round</span>
+                  <span className="text-slate-600 font-mono text-xs">Live Assessment Round</span>
                 </div>
 
                 <div className="grid sm:grid-cols-3 gap-3 text-xs mb-4">
                   <div className="p-3.5 rounded-xl bg-[#080B11] border border-slate-800">
-                    <div className="text-slate-400 text-[10px] font-bold">TOTAL SUBMISSIONS</div>
-                    <div className="text-lg font-bold text-white mt-1">1,480+</div>
+                    <div className="text-slate-600 text-[10px] font-bold">TOTAL SUBMISSIONS</div>
+                    <div className="text-lg font-bold text-slate-900 mt-1">1,480+</div>
                     <div className="text-[10px] text-emerald-400 mt-1">✓ Automated Test Suites</div>
                   </div>
                   <div className="p-3.5 rounded-xl bg-[#080B11] border border-slate-800">
-                    <div className="text-slate-400 text-[10px] font-bold">AVERAGE RUNTIME</div>
+                    <div className="text-slate-600 text-[10px] font-bold">AVERAGE RUNTIME</div>
                     <div className="text-lg font-bold text-cyan-400 mt-1">14 ms</div>
-                    <div className="text-[10px] text-slate-400 mt-1">O(N log N) Optimal</div>
+                    <div className="text-[10px] text-slate-600 mt-1">O(N log N) Optimal</div>
                   </div>
                   <div className="p-3.5 rounded-xl bg-[#080B11] border border-slate-800">
-                    <div className="text-slate-400 text-[10px] font-bold">BENCHMARK SCORE</div>
+                    <div className="text-slate-600 text-[10px] font-bold">BENCHMARK SCORE</div>
                     <div className="text-lg font-bold text-[#9CBDB7] mt-1">94.8 / 100</div>
                     <div className="text-[10px] text-emerald-400 mt-1">Top Tier Tier-1 Readiness</div>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between text-xs text-slate-400 pt-2 border-t border-slate-800">
-                  <span className="text-slate-300">Weekly campus-wide leaderboards &amp; proctored contests</span>
+                <div className="flex items-center justify-between text-xs text-slate-600 pt-2 border-t border-slate-800">
+                  <span className="text-slate-700">Weekly campus-wide leaderboards &amp; proctored contests</span>
                   <span className="text-emerald-400 font-bold">100% Proctored</span>
                 </div>
               </div>
@@ -403,7 +403,7 @@ export function PlacementJourneySection() {
             <div className="lg:col-span-4 flex items-center gap-6 lg:sticky lg:top-36">
               <div className="flex flex-col items-center">
                 <div className={`w-4 h-4 rounded-full border-2 transition-all duration-300 ${
-                  activeStage >= 2 ? 'border-[#7A9D96] bg-[#7A9D96] ring-4 ring-[#7A9D96]/20' : 'border-slate-600 bg-[#0A0A0D]'
+                  activeStage >= 2 ? 'border-[#7A9D96] bg-[#7A9D96] ring-4 ring-[#7A9D96]/20' : 'border-slate-600 bg-[#F8F9FB]'
                 }`} />
                 <div className="w-0.5 h-56 bg-slate-800 my-2 hidden lg:block" />
               </div>
@@ -412,7 +412,7 @@ export function PlacementJourneySection() {
                   Stage 03
                 </span>
                 <h3 className={`text-3xl sm:text-4xl lg:text-5xl font-extrabold transition-colors duration-300 ${
-                  activeStage === 2 ? 'text-white' : 'text-slate-500'
+                  activeStage === 2 ? 'text-slate-900' : 'text-slate-500'
                 }`}>
                   Build
                 </h3>
@@ -421,11 +421,11 @@ export function PlacementJourneySection() {
 
             <div className="lg:col-span-8 space-y-8">
               <div>
-                <p className="text-lg sm:text-xl text-white font-medium leading-relaxed mb-5">
+                <p className="text-lg sm:text-xl text-slate-900 font-medium leading-relaxed mb-5">
                   {stages[2].subtitle}
                 </p>
 
-                <ul className="space-y-3 text-sm text-slate-300 mb-6">
+                <ul className="space-y-3 text-sm text-slate-700 mb-6">
                   {stages[2].bullets.map((b) => (
                     <li key={b} className="flex items-start gap-2.5">
                       <span className="text-[#7A9D96] font-bold text-base">•</span>
@@ -436,8 +436,8 @@ export function PlacementJourneySection() {
 
                 <div className="flex items-center gap-4">
                   {stages[2].metrics.map((m) => (
-                    <div key={m.label} className="p-4 rounded-xl bg-[#111116] border border-white/10 min-w-[140px]">
-                      <div className="text-xl font-bold text-white">{m.value}</div>
+                    <div key={m.label} className="p-4 rounded-xl bg-white shadow-sm border border-black/8 min-w-[140px]">
+                      <div className="text-xl font-bold text-slate-900">{m.value}</div>
                       <div className="text-[10px] uppercase font-bold tracking-wider text-slate-500 mt-0.5">
                         {m.label}
                       </div>
@@ -451,7 +451,7 @@ export function PlacementJourneySection() {
                 <div className="flex items-center justify-between pb-3 border-b border-slate-800 mb-4 text-xs">
                   <div className="flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-emerald-400" />
-                    <span className="font-mono text-slate-300 font-bold">github.com/grow360-cohort/microservices-platform</span>
+                    <span className="font-mono text-slate-700 font-bold">github.com/grow360-cohort/microservices-platform</span>
                   </div>
                   <span className="px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-400 text-[10px] font-bold border border-emerald-500/30">
                     Deployed to AWS
@@ -460,24 +460,24 @@ export function PlacementJourneySection() {
 
                 <div className="grid sm:grid-cols-3 gap-3 text-xs mb-4">
                   <div className="p-3.5 rounded-xl bg-[#090D15] border border-slate-800">
-                    <div className="text-slate-400 text-[10px] font-bold">API GATEWAY</div>
-                    <div className="text-sm font-bold text-white mt-1">Next.js App Router</div>
+                    <div className="text-slate-600 text-[10px] font-bold">API GATEWAY</div>
+                    <div className="text-sm font-bold text-slate-900 mt-1">Next.js App Router</div>
                     <div className="text-[10px] text-emerald-400 mt-1">✓ 100% Type-Safe</div>
                   </div>
                   <div className="p-3.5 rounded-xl bg-[#090D15] border border-slate-800">
-                    <div className="text-slate-400 text-[10px] font-bold">CORE BACKEND</div>
-                    <div className="text-sm font-bold text-white mt-1">Spring Boot 3 + Redis</div>
+                    <div className="text-slate-600 text-[10px] font-bold">CORE BACKEND</div>
+                    <div className="text-sm font-bold text-slate-900 mt-1">Spring Boot 3 + Redis</div>
                     <div className="text-[10px] text-cyan-400 mt-1">✓ Kafka Event Streams</div>
                   </div>
                   <div className="p-3.5 rounded-xl bg-[#090D15] border border-slate-800">
-                    <div className="text-slate-400 text-[10px] font-bold">DATABASE LAYER</div>
-                    <div className="text-sm font-bold text-white mt-1">PostgreSQL Shards</div>
+                    <div className="text-slate-600 text-[10px] font-bold">DATABASE LAYER</div>
+                    <div className="text-sm font-bold text-slate-900 mt-1">PostgreSQL Shards</div>
                     <div className="text-[10px] text-[#9CBDB7] mt-1">✓ ACID Guaranteed</div>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between text-xs text-slate-400 pt-2 border-t border-slate-800">
-                  <span className="text-slate-300">Reviewed by Staff Engineers at Google &amp; Adobe</span>
+                <div className="flex items-center justify-between text-xs text-slate-600 pt-2 border-t border-slate-800">
+                  <span className="text-slate-700">Reviewed by Staff Engineers at Google &amp; Adobe</span>
                   <span className="text-emerald-400 font-bold">Production Approved</span>
                 </div>
               </div>
@@ -491,7 +491,7 @@ export function PlacementJourneySection() {
             <div className="lg:col-span-4 flex items-center gap-6 lg:sticky lg:top-36">
               <div className="flex flex-col items-center">
                 <div className={`w-4 h-4 rounded-full border-2 transition-all duration-300 ${
-                  activeStage >= 3 ? 'border-[#7A9D96] bg-[#7A9D96] ring-4 ring-[#7A9D96]/20' : 'border-slate-600 bg-[#0A0A0D]'
+                  activeStage >= 3 ? 'border-[#7A9D96] bg-[#7A9D96] ring-4 ring-[#7A9D96]/20' : 'border-slate-600 bg-[#F8F9FB]'
                 }`} />
                 <div className="w-0.5 h-56 bg-slate-800 my-2 hidden lg:block" />
               </div>
@@ -500,7 +500,7 @@ export function PlacementJourneySection() {
                   Stage 04
                 </span>
                 <h3 className={`text-3xl sm:text-4xl lg:text-5xl font-extrabold transition-colors duration-300 ${
-                  activeStage === 3 ? 'text-white' : 'text-slate-500'
+                  activeStage === 3 ? 'text-slate-900' : 'text-slate-500'
                 }`}>
                   Prepare
                 </h3>
@@ -509,11 +509,11 @@ export function PlacementJourneySection() {
 
             <div className="lg:col-span-8 space-y-8">
               <div>
-                <p className="text-lg sm:text-xl text-white font-medium leading-relaxed mb-5">
+                <p className="text-lg sm:text-xl text-slate-900 font-medium leading-relaxed mb-5">
                   {stages[3].subtitle}
                 </p>
 
-                <ul className="space-y-3 text-sm text-slate-300 mb-6">
+                <ul className="space-y-3 text-sm text-slate-700 mb-6">
                   {stages[3].bullets.map((b) => (
                     <li key={b} className="flex items-start gap-2.5">
                       <span className="text-[#7A9D96] font-bold text-base">•</span>
@@ -524,8 +524,8 @@ export function PlacementJourneySection() {
 
                 <div className="flex items-center gap-4">
                   {stages[3].metrics.map((m) => (
-                    <div key={m.label} className="p-4 rounded-xl bg-[#111116] border border-white/10 min-w-[140px]">
-                      <div className="text-xl font-bold text-white">{m.value}</div>
+                    <div key={m.label} className="p-4 rounded-xl bg-white shadow-sm border border-black/8 min-w-[140px]">
+                      <div className="text-xl font-bold text-slate-900">{m.value}</div>
                       <div className="text-[10px] uppercase font-bold tracking-wider text-slate-500 mt-0.5">
                         {m.label}
                       </div>
@@ -552,21 +552,21 @@ export function PlacementJourneySection() {
                       <div className="w-8 h-8 rounded-full bg-slate-300 flex items-center justify-center text-slate-800 text-xs font-bold">
                         👤
                       </div>
-                      <span className="text-xs font-bold text-slate-400">Interviewer (Staff Engineer)</span>
+                      <span className="text-xs font-bold text-slate-600">Interviewer (Staff Engineer)</span>
                     </div>
-                    <div className="text-xs text-slate-300 bg-[#111827] p-2.5 rounded-lg border border-slate-800 leading-relaxed italic">
+                    <div className="text-xs text-slate-700 bg-[#111827] p-2.5 rounded-lg border border-slate-800 leading-relaxed italic">
                       "Walk me through your approach to binary search on answer space."
                     </div>
                   </div>
 
                   <div className="p-4 rounded-xl bg-[#090D15] border border-slate-800 flex flex-col justify-between min-h-[140px]">
                     <div className="flex items-center gap-2 mb-3">
-                      <div className="w-8 h-8 rounded-full bg-[#2563EB] flex items-center justify-center text-white text-xs font-bold">
+                      <div className="w-8 h-8 rounded-full bg-[#2563EB] flex items-center justify-center text-slate-900 text-xs font-bold">
                         🎓
                       </div>
-                      <span className="text-xs font-bold text-slate-400">You (Student)</span>
+                      <span className="text-xs font-bold text-slate-600">You (Student)</span>
                     </div>
-                    <div className="text-xs text-slate-300 bg-[#111827] p-2.5 rounded-lg border border-slate-800 leading-relaxed italic">
+                    <div className="text-xs text-slate-700 bg-[#111827] p-2.5 rounded-lg border border-slate-800 leading-relaxed italic">
                       "I'd set lo/hi on the answer space, then check feasibility with mid in O(N)..."
                     </div>
                   </div>
@@ -574,20 +574,20 @@ export function PlacementJourneySection() {
 
                 <div className="grid grid-cols-3 gap-2 mb-3 text-center text-xs">
                   <div className="p-2.5 rounded-xl bg-[#0B251E] border border-emerald-500/20 text-emerald-400">
-                    <div className="text-[10px] font-mono text-slate-400 uppercase">Clarity</div>
+                    <div className="text-[10px] font-mono text-slate-600 uppercase">Clarity</div>
                     <div className="text-sm font-bold">9/10</div>
                   </div>
                   <div className="p-2.5 rounded-xl bg-[#0F2033] border border-cyan-500/20 text-cyan-400">
-                    <div className="text-[10px] font-mono text-slate-400 uppercase">DSA Depth</div>
+                    <div className="text-[10px] font-mono text-slate-600 uppercase">DSA Depth</div>
                     <div className="text-sm font-bold">8.5/10</div>
                   </div>
                   <div className="p-2.5 rounded-xl bg-[#2E200F] border border-[#7A9D96]/20 text-[#9CBDB7]">
-                    <div className="text-[10px] font-mono text-slate-400 uppercase">STAR Format</div>
+                    <div className="text-[10px] font-mono text-slate-600 uppercase">STAR Format</div>
                     <div className="text-sm font-bold">Excellent</div>
                   </div>
                 </div>
 
-                <div className="text-[11px] text-slate-400 text-center font-medium pt-2 border-t border-slate-800">
+                <div className="text-[11px] text-slate-600 text-center font-medium pt-2 border-t border-slate-800">
                   Mentor note: Strong fundamentals. Practice high-scale distributed caching next.
                 </div>
               </div>
@@ -601,7 +601,7 @@ export function PlacementJourneySection() {
             <div className="lg:col-span-4 flex items-center gap-6 lg:sticky lg:top-36">
               <div className="flex flex-col items-center">
                 <div className={`w-4 h-4 rounded-full border-2 transition-all duration-300 ${
-                  activeStage >= 4 ? 'border-[#7A9D96] bg-[#7A9D96] ring-4 ring-[#7A9D96]/20' : 'border-slate-600 bg-[#0A0A0D]'
+                  activeStage >= 4 ? 'border-[#7A9D96] bg-[#7A9D96] ring-4 ring-[#7A9D96]/20' : 'border-slate-600 bg-[#F8F9FB]'
                 }`} />
                 <div className="w-0.5 h-56 bg-slate-800 my-2 hidden lg:block" />
               </div>
@@ -610,7 +610,7 @@ export function PlacementJourneySection() {
                   Stage 05
                 </span>
                 <h3 className={`text-3xl sm:text-4xl lg:text-5xl font-extrabold transition-colors duration-300 ${
-                  activeStage === 4 ? 'text-white' : 'text-slate-500'
+                  activeStage === 4 ? 'text-slate-900' : 'text-slate-500'
                 }`}>
                   Improve
                 </h3>
@@ -619,11 +619,11 @@ export function PlacementJourneySection() {
 
             <div className="lg:col-span-8 space-y-8">
               <div>
-                <p className="text-lg sm:text-xl text-white font-medium leading-relaxed mb-5">
+                <p className="text-lg sm:text-xl text-slate-900 font-medium leading-relaxed mb-5">
                   {stages[4].subtitle}
                 </p>
 
-                <ul className="space-y-3 text-sm text-slate-300 mb-6">
+                <ul className="space-y-3 text-sm text-slate-700 mb-6">
                   {stages[4].bullets.map((b) => (
                     <li key={b} className="flex items-start gap-2.5">
                       <span className="text-[#7A9D96] font-bold text-base">•</span>
@@ -634,8 +634,8 @@ export function PlacementJourneySection() {
 
                 <div className="flex items-center gap-4">
                   {stages[4].metrics.map((m) => (
-                    <div key={m.label} className="p-4 rounded-xl bg-[#111116] border border-white/10 min-w-[140px]">
-                      <div className="text-xl font-bold text-white">{m.value}</div>
+                    <div key={m.label} className="p-4 rounded-xl bg-white shadow-sm border border-black/8 min-w-[140px]">
+                      <div className="text-xl font-bold text-slate-900">{m.value}</div>
                       <div className="text-[10px] uppercase font-bold tracking-wider text-slate-500 mt-0.5">
                         {m.label}
                       </div>
@@ -649,7 +649,7 @@ export function PlacementJourneySection() {
                 <div className="flex items-center justify-between pb-3 border-b border-slate-800 text-xs">
                   <div className="flex items-center gap-2">
                     <Cpu size={14} className="text-[#EC4899]" />
-                    <span className="font-bold text-white uppercase text-[10px] tracking-wider">
+                    <span className="font-bold text-slate-900 uppercase text-[10px] tracking-wider">
                       AI &amp; MENTOR DIAGNOSTICS DASHBOARD
                     </span>
                   </div>
@@ -660,20 +660,20 @@ export function PlacementJourneySection() {
 
                 <div className="grid grid-cols-2 gap-3 text-xs">
                   <div className="p-3.5 rounded-xl bg-[#090D15] border border-slate-800">
-                    <div className="text-[10px] text-slate-400 uppercase font-bold">Speech Clarity Index</div>
+                    <div className="text-[10px] text-slate-600 uppercase font-bold">Speech Clarity Index</div>
                     <div className="text-xl font-extrabold text-emerald-400 mt-1">94%</div>
-                    <div className="text-[10px] text-slate-400 mt-0.5">Pace: 135 WPM (Optimal)</div>
+                    <div className="text-[10px] text-slate-600 mt-0.5">Pace: 135 WPM (Optimal)</div>
                   </div>
                   <div className="p-3.5 rounded-xl bg-[#090D15] border border-slate-800">
-                    <div className="text-[10px] text-slate-400 uppercase font-bold">Resume ATS Score</div>
+                    <div className="text-[10px] text-slate-600 uppercase font-bold">Resume ATS Score</div>
                     <div className="text-xl font-extrabold text-cyan-400 mt-1">96 / 100</div>
-                    <div className="text-[10px] text-slate-400 mt-0.5">Keywords: 100% Matched</div>
+                    <div className="text-[10px] text-slate-600 mt-0.5">Keywords: 100% Matched</div>
                   </div>
                 </div>
 
                 <div className="p-3.5 rounded-xl bg-[#080B11] border border-slate-800 text-xs">
-                  <div className="text-[11px] font-bold text-white mb-1">Mentor Growth Recommendation:</div>
-                  <p className="text-[11px] text-slate-300 leading-relaxed">
+                  <div className="text-[11px] font-bold text-slate-900 mb-1">Mentor Growth Recommendation:</div>
+                  <p className="text-[11px] text-slate-700 leading-relaxed">
                     "Solid understanding of asynchronous concurrency. Emphasize impact metrics and latency reduction in capstone project walkthroughs."
                   </p>
                 </div>
@@ -688,7 +688,7 @@ export function PlacementJourneySection() {
             <div className="lg:col-span-4 flex items-center gap-6 lg:sticky lg:top-36">
               <div className="flex flex-col items-center">
                 <div className={`w-4 h-4 rounded-full border-2 transition-all duration-300 ${
-                  activeStage >= 5 ? 'border-[#7A9D96] bg-[#7A9D96] ring-4 ring-[#7A9D96]/20' : 'border-slate-600 bg-[#0A0A0D]'
+                  activeStage >= 5 ? 'border-[#7A9D96] bg-[#7A9D96] ring-4 ring-[#7A9D96]/20' : 'border-slate-600 bg-[#F8F9FB]'
                 }`} />
                 <div className="w-0.5 h-56 bg-slate-800 my-2 hidden lg:block" />
               </div>
@@ -697,7 +697,7 @@ export function PlacementJourneySection() {
                   Stage 06
                 </span>
                 <h3 className={`text-3xl sm:text-4xl lg:text-5xl font-extrabold transition-colors duration-300 ${
-                  activeStage === 5 ? 'text-white' : 'text-slate-500'
+                  activeStage === 5 ? 'text-slate-900' : 'text-slate-500'
                 }`}>
                   Interview
                 </h3>
@@ -706,11 +706,11 @@ export function PlacementJourneySection() {
 
             <div className="lg:col-span-8 space-y-8">
               <div>
-                <p className="text-lg sm:text-xl text-white font-medium leading-relaxed mb-5">
+                <p className="text-lg sm:text-xl text-slate-900 font-medium leading-relaxed mb-5">
                   {stages[5].subtitle}
                 </p>
 
-                <ul className="space-y-3 text-sm text-slate-300 mb-6">
+                <ul className="space-y-3 text-sm text-slate-700 mb-6">
                   {stages[5].bullets.map((b) => (
                     <li key={b} className="flex items-start gap-2.5">
                       <span className="text-[#7A9D96] font-bold text-base">•</span>
@@ -721,8 +721,8 @@ export function PlacementJourneySection() {
 
                 <div className="flex items-center gap-4">
                   {stages[5].metrics.map((m) => (
-                    <div key={m.label} className="p-4 rounded-xl bg-[#111116] border border-white/10 min-w-[140px]">
-                      <div className="text-xl font-bold text-white">{m.value}</div>
+                    <div key={m.label} className="p-4 rounded-xl bg-white shadow-sm border border-black/8 min-w-[140px]">
+                      <div className="text-xl font-bold text-slate-900">{m.value}</div>
                       <div className="text-[10px] uppercase font-bold tracking-wider text-slate-500 mt-0.5">
                         {m.label}
                       </div>
@@ -740,31 +740,31 @@ export function PlacementJourneySection() {
                       CAMPUS HIRING DRIVE
                     </span>
                   </div>
-                  <span className="text-slate-400 font-mono text-xs">Phase 03 Active</span>
+                  <span className="text-slate-600 font-mono text-xs">Phase 03 Active</span>
                 </div>
 
                 <div className="grid sm:grid-cols-3 gap-3 text-xs mb-4">
                   <div className="p-3 rounded-xl bg-[#080B11] border border-slate-800">
-                    <div className="text-slate-400 text-[10px] uppercase font-bold">Applied</div>
-                    <div className="text-xl font-bold text-white mt-1">420</div>
+                    <div className="text-slate-600 text-[10px] uppercase font-bold">Applied</div>
+                    <div className="text-xl font-bold text-slate-900 mt-1">420</div>
                     <div className="text-[10px] text-slate-500 mt-0.5">Online Assessment</div>
                   </div>
 
                   <div className="p-3 rounded-xl bg-[#080B11] border border-slate-800">
-                    <div className="text-slate-400 text-[10px] uppercase font-bold">Shortlisted</div>
+                    <div className="text-slate-600 text-[10px] uppercase font-bold">Shortlisted</div>
                     <div className="text-xl font-bold text-[#9CBDB7] mt-1">96</div>
                     <div className="text-[10px] text-slate-500 mt-0.5">Tech Interview Panels</div>
                   </div>
 
                   <div className="p-3 rounded-xl bg-[#080B11] border border-slate-800">
-                    <div className="text-slate-400 text-[10px] uppercase font-bold">Offers Rolled</div>
+                    <div className="text-slate-600 text-[10px] uppercase font-bold">Offers Rolled</div>
                     <div className="text-xl font-bold text-emerald-400 mt-1">38</div>
                     <div className="text-[10px] text-slate-500 mt-0.5">Avg: ₹8.4 LPA</div>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between text-xs text-slate-400 pt-2 border-t border-slate-800">
-                  <span className="text-slate-300 font-semibold">Tier-1 Drives Executed This Season</span>
+                <div className="flex items-center justify-between text-xs text-slate-600 pt-2 border-t border-slate-800">
+                  <span className="text-slate-700 font-semibold">Tier-1 Drives Executed This Season</span>
                   <span className="text-[#9CBDB7] font-bold">100% Verified</span>
                 </div>
               </div>
@@ -778,7 +778,7 @@ export function PlacementJourneySection() {
             <div className="lg:col-span-4 flex items-center gap-6 lg:sticky lg:top-36">
               <div className="flex flex-col items-center">
                 <div className={`w-4 h-4 rounded-full border-2 transition-all duration-300 ${
-                  activeStage >= 6 ? 'border-emerald-400 bg-emerald-400 ring-4 ring-emerald-400/20' : 'border-slate-600 bg-[#0A0A0D]'
+                  activeStage >= 6 ? 'border-emerald-400 bg-emerald-400 ring-4 ring-emerald-400/20' : 'border-slate-600 bg-[#F8F9FB]'
                 }`} />
               </div>
               <div>
@@ -786,7 +786,7 @@ export function PlacementJourneySection() {
                   Stage 07
                 </span>
                 <h3 className={`text-3xl sm:text-4xl lg:text-5xl font-extrabold transition-colors duration-300 ${
-                  activeStage === 6 ? 'text-white' : 'text-slate-500'
+                  activeStage === 6 ? 'text-slate-900' : 'text-slate-500'
                 }`}>
                   Get Placed
                 </h3>
@@ -795,11 +795,11 @@ export function PlacementJourneySection() {
 
             <div className="lg:col-span-8 space-y-8">
               <div>
-                <p className="text-lg sm:text-xl text-white font-medium leading-relaxed mb-5">
+                <p className="text-lg sm:text-xl text-slate-900 font-medium leading-relaxed mb-5">
                   {stages[6].subtitle}
                 </p>
 
-                <ul className="space-y-3 text-sm text-slate-300 mb-6">
+                <ul className="space-y-3 text-sm text-slate-700 mb-6">
                   {stages[6].bullets.map((b) => (
                     <li key={b} className="flex items-start gap-2.5">
                       <span className="text-emerald-400 font-bold text-base">•</span>
@@ -810,7 +810,7 @@ export function PlacementJourneySection() {
 
                 <div className="flex items-center gap-4">
                   {stages[6].metrics.map((m) => (
-                    <div key={m.label} className="p-4 rounded-xl bg-[#111116] border border-white/10 min-w-[140px]">
+                    <div key={m.label} className="p-4 rounded-xl bg-white shadow-sm border border-black/8 min-w-[140px]">
                       <div className="text-xl font-bold text-emerald-400">{m.value}</div>
                       <div className="text-[10px] uppercase font-bold tracking-wider text-slate-500 mt-0.5">
                         {m.label}
@@ -836,25 +836,25 @@ export function PlacementJourneySection() {
 
                 <div className="p-4 rounded-xl bg-[#06120D] border border-emerald-500/30 space-y-2 text-xs">
                   <div className="flex items-center justify-between">
-                    <span className="text-slate-400">Position:</span>
-                    <span className="font-bold text-white">Full-Stack Software Development Engineer</span>
+                    <span className="text-slate-600">Position:</span>
+                    <span className="font-bold text-slate-900">Full-Stack Software Development Engineer</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-slate-400">Compensation (CTC):</span>
+                    <span className="text-slate-600">Compensation (CTC):</span>
                     <span className="font-extrabold text-emerald-400 text-sm">₹12.50 LPA</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-slate-400">Joining Status:</span>
+                    <span className="text-slate-600">Joining Status:</span>
                     <span className="text-cyan-300 font-semibold">Offer Accepted &amp; Verified</span>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between text-xs text-slate-300 pt-2 border-t border-emerald-500/20">
+                <div className="flex items-center justify-between text-xs text-slate-700 pt-2 border-t border-emerald-500/20">
                   <span className="flex items-center gap-1.5 text-emerald-400 font-semibold">
                     <FileCheck size={14} />
                     Signed &amp; Transition Support Active
                   </span>
-                  <span className="text-slate-400">Cohort 2026</span>
+                  <span className="text-slate-600">Cohort 2026</span>
                 </div>
               </div>
             </div>

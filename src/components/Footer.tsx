@@ -17,13 +17,13 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-[#050508] text-slate-400 pt-20 pb-12 relative overflow-hidden border-t border-white/5 selection:bg-[#7A9D96] selection:text-white">
+    <footer className="bg-[#161920] text-slate-400 pt-20 pb-12 relative overflow-hidden border-t border-black/10 selection:bg-[#7A9D96] selection:text-white">
       {/* Background Subtle Gradient & Shadow */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
 
       {/* Giant "GROW 360" Background Watermark Typography - Perfectly Centered */}
       <div className="absolute inset-x-0 bottom-8 sm:bottom-12 w-full flex items-center justify-center select-none pointer-events-none z-0 overflow-hidden">
-        <span className="text-6xl sm:text-8xl md:text-[11rem] lg:text-[14rem] font-extrabold text-white/[0.035] tracking-tight whitespace-nowrap text-center leading-none">
+        <span className="text-6xl sm:text-8xl md:text-[11rem] lg:text-[14rem] font-extrabold text-white/[0.025] tracking-tight whitespace-nowrap text-center leading-none">
           GROW 360°
         </span>
       </div>
@@ -48,7 +48,7 @@ export function Footer() {
                 />
                 <div className="flex flex-col leading-tight">
                   <span className="text-2xl font-extrabold text-white tracking-tight font-[family-name:var(--font-display)] flex items-center">
-                    GROW<span className="text-[#00B4D8]">360°</span>
+                    GROW<span className="text-[#7A9D96]">360°</span>
                   </span>
                   <span className="text-[11px] font-mono text-slate-400 tracking-wider">
                     Decoding the corporate world

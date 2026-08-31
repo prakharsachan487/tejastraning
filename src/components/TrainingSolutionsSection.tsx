@@ -3,7 +3,7 @@ import { Rocket, GraduationCap, Check } from 'lucide-react';
 
 export function TrainingSolutionsSection() {
   return (
-    <section id="training" className="py-20 lg:py-28 bg-[#0A0A0D] relative border-b border-white/5">
+    <section id="training" className="py-20 lg:py-28 bg-[#F8F9FB] relative border-b border-black/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -17,13 +17,13 @@ export function TrainingSolutionsSection() {
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#7A9D96]/10 border border-[#7A9D96]/25 text-[#9CBDB7] text-xs font-semibold tracking-wide mb-4">
             <span>Flagship Delivery Models</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
             Industry Engineers.{' '}
             <span className="bg-gradient-to-r from-[#7A9D96] via-[#9CBDB7] to-[#9CBDB7] bg-clip-text text-transparent">
               On Your Campus.
             </span>
           </h2>
-          <p className="mt-4 text-base text-slate-400">
+          <p className="mt-4 text-base text-slate-600">
             Simple, structured training formats tailored for institutional campus placements.
           </p>
         </motion.div>
@@ -43,7 +43,7 @@ export function TrainingSolutionsSection() {
               {/* Header */}
               <div className="flex items-start justify-between mb-8">
                 <div>
-                  <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
                     Impact Training
                   </h3>
                   <div className="text-sm font-semibold text-[#38BDF8] mt-1.5">
@@ -56,7 +56,7 @@ export function TrainingSolutionsSection() {
               </div>
 
               {/* Bullet Points with Checkmarks */}
-              <div className="space-y-4 mb-8 text-sm text-slate-300">
+              <div className="space-y-4 mb-8 text-sm text-slate-700">
                 <div className="flex items-center gap-3">
                   <Check size={16} className="text-[#38BDF8] shrink-0" />
                   <span><strong className="text-slate-200">Audience:</strong> Final-year batches</span>
@@ -76,27 +76,27 @@ export function TrainingSolutionsSection() {
               </div>
 
               {/* Short Paragraph Description */}
-              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mb-8">
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-8">
                 A high-intensity program built to lift selection rates in upcoming campus drives. Aptitude, coding, and interview readiness, delivered as one package.
               </p>
             </div>
 
             {/* Bottom Footer: Mapped Recruiters */}
-            <div className="pt-6 border-t border-white/10">
-              <div className="text-xs text-slate-400 font-medium mb-3">
+            <div className="pt-6 border-t border-black/8">
+              <div className="text-xs text-slate-600 font-medium mb-3">
                 Mapped to recruiters like
               </div>
-              <div className="flex items-center gap-3 text-xs font-semibold text-slate-300">
-                <span className="px-2.5 py-1 rounded bg-[#161622] border border-white/5 text-[#005696] font-bold">
+              <div className="flex items-center gap-3 text-xs font-semibold text-slate-700">
+                <span className="px-2.5 py-1 rounded bg-[#161622] border border-black/5 text-[#005696] font-bold">
                   TCS
                 </span>
-                <span className="px-2.5 py-1 rounded bg-[#161622] border border-white/5 text-[#007CC3] font-bold">
+                <span className="px-2.5 py-1 rounded bg-[#161622] border border-black/5 text-[#007CC3] font-bold">
                   Infosys
                 </span>
-                <span className="px-2.5 py-1 rounded bg-[#161622] border border-white/5 text-[#92278F] font-bold">
+                <span className="px-2.5 py-1 rounded bg-[#161622] border border-black/5 text-[#92278F] font-bold">
                   Wipro
                 </span>
-                <span className="text-xs text-slate-400 font-medium">
+                <span className="text-xs text-slate-600 font-medium">
                   + more
                 </span>
               </div>
@@ -115,7 +115,7 @@ export function TrainingSolutionsSection() {
               {/* Header */}
               <div className="flex items-start justify-between mb-8">
                 <div>
-                  <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
                     MARQUEE Training
                   </h3>
                   <div className="text-sm font-semibold text-[#C084FC] mt-1.5">
@@ -128,7 +128,7 @@ export function TrainingSolutionsSection() {
               </div>
 
               {/* Bullet Points with Checkmarks */}
-              <div className="space-y-4 mb-8 text-sm text-slate-300">
+              <div className="space-y-4 mb-8 text-sm text-slate-700">
                 <div className="flex items-center gap-3">
                   <Check size={16} className="text-[#C084FC] shrink-0" />
                   <span><strong className="text-slate-200">Audience:</strong> Years 1 through 4</span>
@@ -144,14 +144,14 @@ export function TrainingSolutionsSection() {
               </div>
 
               {/* Short Paragraph Description */}
-              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mb-8">
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-8">
                 We operate as your technical training partner, embedded in the academic timetable to build foundations from year one.
               </p>
             </div>
 
             {/* Bottom Footer: Aligned Top Tier Tech Companies */}
-            <div className="pt-6 border-t border-white/10">
-              <div className="text-xs text-slate-400 font-medium mb-3">
+            <div className="pt-6 border-t border-black/8">
+              <div className="text-xs text-slate-600 font-medium mb-3">
                 Aligned to hiring bars at
               </div>
               <div className="flex items-center gap-3">
@@ -177,7 +177,7 @@ export function TrainingSolutionsSection() {
                   <path fill="#FF9900" d="M14.9 13.2c-.3-.4-1.9-.2-2.6 0-.2 0-.3-.2-.1-.3 1.1-.9 3-1 3.3-.6.4.4.1 2.3-.9 3.3-.2.1-.3.1-.4 0-.1-.2.2-1.8.7-2.4z"/>
                 </svg>
 
-                <span className="text-xs text-slate-400 font-medium ml-1">
+                <span className="text-xs text-slate-600 font-medium ml-1">
                   + more
                 </span>
               </div>

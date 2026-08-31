@@ -158,25 +158,25 @@ export function EnquiryModal() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 30, scale: 0.98 }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-4 sm:inset-auto sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 sm:w-full sm:max-w-xl sm:max-h-[90vh] bg-[#111116] rounded-3xl border border-white/10 z-[101] overflow-y-auto shadow-2xl"
+            className="fixed inset-4 sm:inset-auto sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 sm:w-full sm:max-w-xl sm:max-h-[90vh] bg-white shadow-sm rounded-3xl border border-black/8 z-[101] overflow-y-auto shadow-2xl"
           >
             {/* Top Flame Accent Strip */}
             <div className="h-1.5 bg-gradient-to-r from-[#7A9D96] via-[#9CBDB7] to-[#9CBDB7]" />
 
             {/* Header */}
-            <div className="flex items-center justify-between px-6 py-5 border-b border-white/10">
+            <div className="flex items-center justify-between px-6 py-5 border-b border-black/8">
               <div>
                 <div className="inline-flex items-center gap-1.5 font-mono text-[10px] font-bold tracking-wider text-[#7A9D96] uppercase mb-1">
                   <Sparkles size={12} className="text-[#7A9D96]" />
                   <span>Institutional Placement Infrastructure</span>
                 </div>
-                <h2 className="text-xl font-extrabold text-white tracking-tight font-[family-name:var(--font-display)]">
+                <h2 className="text-xl font-extrabold text-slate-900 tracking-tight font-[family-name:var(--font-display)]">
                   {title}
                 </h2>
               </div>
               <button
                 onClick={closeEnquiry}
-                className="p-2 text-slate-400 hover:text-white hover:bg-white/10 rounded-xl transition-colors cursor-pointer"
+                className="p-2 text-slate-600 hover:text-slate-900 hover:bg-white/10 rounded-xl transition-colors cursor-pointer"
                 aria-label="Close"
               >
                 <X size={20} />
@@ -298,10 +298,10 @@ function SuccessState({ onClose }: { onClose: () => void }) {
       <div className="w-16 h-16 mx-auto mb-6 rounded-2xl border border-emerald-500/40 flex items-center justify-center bg-emerald-500/10 text-emerald-400 shadow-lg">
         <CheckCircle2 size={32} />
       </div>
-      <h3 className="text-xl font-bold text-white tracking-tight mb-2 font-[family-name:var(--font-display)]">
+      <h3 className="text-xl font-bold text-slate-900 tracking-tight mb-2 font-[family-name:var(--font-display)]">
         Demo Request Received
       </h3>
-      <p className="text-sm text-slate-400 leading-relaxed max-w-md mx-auto mb-8">
+      <p className="text-sm text-slate-600 leading-relaxed max-w-md mx-auto mb-8">
         Thank you for contacting Grow360. Our Institutional Partnerships team will review your requirements and reach out within 1 business day.
       </p>
       <button
@@ -337,7 +337,7 @@ function FormField({
 }: FormFieldProps) {
   return (
     <div>
-      <label className="block text-xs font-bold text-slate-300 uppercase tracking-wide mb-1.5 font-mono">
+      <label className="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-1.5 font-mono">
         {label}
         {required && <span className="text-[#7A9D96] ml-0.5">*</span>}
       </label>

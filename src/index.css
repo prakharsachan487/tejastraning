@@ -1,28 +1,27 @@
 @import "tailwindcss";
 
 /* ═══════════════════════════════════════════════════════
-   TEJAS — CLEAN FAMILIAR SANS-SERIF DESIGN SYSTEM
+   GROW360 — EDITORIAL SERIF & WARM LUXE LIGHT PALETTE
    ═══════════════════════════════════════════════════════ */
 
 @theme {
-  /* ── Rich Dark Palette (No Flat #000000) ── */
-  --color-bg-dark: #0A0A0D;
-  --color-bg-card: #111116;
-  --color-bg-card-dark: #0D0D12;
-  --color-bg-card-elevated: #181820;
-  --color-border-subtle: rgba(255, 255, 255, 0.08);
-  --color-border-hover: rgba(122, 157, 150, 0.4);
+  /* ── Reference Warm Light & Off-White Palette ── */
+  --color-bg-base: #F8F9FB;
+  --color-bg-alt: #F2F4F7;
+  --color-bg-card: #FFFFFF;
+  --color-bg-dark: #1A1D24;
+  --color-border-subtle: rgba(0, 0, 0, 0.07);
+  --color-border-hover: rgba(122, 157, 150, 0.5);
 
-  /* ── Mist Green Accents (#7A9D96) ── */
-  --color-accent-orange: #7A9D96;
-  --color-accent-flame: #8FB1AA;
-  --color-accent-amber: #8FB1AA;
-  --color-accent-yellow: #FACC15;
-  --color-accent-emerald: #10B981;
+  /* ── Mist Accent (#7A9D96) ── */
+  --color-accent-mist: #7A9D96;
+  --color-accent-mist-dark: #688A83;
+  --color-accent-mist-light: #EAF2F0;
 
-  /* ── Familiar Typography (Clean Inter / Plus Jakarta Sans) ── */
-  --font-sans: 'Inter', 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-display: 'Inter', 'Plus Jakarta Sans', system-ui, sans-serif;
+  /* ── Reference Typography (Editorial Serif + Plus Jakarta Sans) ── */
+  --font-display: 'DM Serif Display', 'Playfair Display', Georgia, serif;
+  --font-serif: 'Playfair Display', 'DM Serif Display', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'Inter', 'Plus Jakarta Sans', system-ui, sans-serif;
 
   /* ── Animations ── */
@@ -59,43 +58,52 @@
 }
 
 /* ═══════════════════════════════════════
-   GLOBAL DARK STYLES
+   GLOBAL STYLES & LUXE LIGHT BASE
    ═══════════════════════════════════════ */
 html {
   scroll-behavior: auto;
-  color-scheme: dark;
-  background-color: #0A0A0D;
+  background-color: #F8F9FB;
+  color: #1A1D24;
 }
 
 body {
   font-family: var(--font-sans);
-  background-color: #0A0A0D;
-  color: #F1F5F9;
+  background-color: #F8F9FB;
+  color: #1A1D24;
   overflow-x: hidden;
 }
 
+/* Editorial Heading Styling */
+h1, h2, h3, .font-serif-heading {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
 /* ═══════════════════════════════════════
-   DARK BENTO CARD UTILITIES
+   CRISP LUXE CARD UTILITIES
    ═══════════════════════════════════════ */
 .bento-card {
-  background: #111116;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 1.25rem;
-  transition: border-color 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04);
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .bento-card:hover {
   border-color: rgba(122, 157, 150, 0.5);
+  box-shadow: 0 10px 30px -4px rgba(122, 157, 150, 0.12);
   transform: translateY(-2px);
 }
 
 .bento-card-highlight {
-  background: #14141A;
+  background: #FFFFFF;
   border: 1px solid rgba(122, 157, 150, 0.4);
+  box-shadow: 0 8px 25px -3px rgba(122, 157, 150, 0.1);
 }
 
 /* ═══════════════════════════════════════
-   PILL BUTTONS (Flat Solid High-Contrast)
+   PILL BUTTONS (Refined High-Contrast)
    ═══════════════════════════════════════ */
 .btn-pill-primary {
   display: inline-flex;
@@ -107,11 +115,13 @@ body {
   color: #FFFFFF;
   font-size: 0.875rem;
   font-weight: 700;
+  box-shadow: 0 4px 14px rgba(122, 157, 150, 0.3);
   transition: all 0.2s ease;
 }
 
 .btn-pill-primary:hover {
-  background: #8FB1AA;
+  background: #688A83;
+  box-shadow: 0 6px 20px rgba(122, 157, 150, 0.4);
   transform: translateY(-1px);
 }
 
@@ -121,18 +131,19 @@ body {
   gap: 0.5rem;
   padding: 0.75rem 1.5rem;
   border-radius: 9999px;
-  background-color: #16161D;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #F8FAFC;
+  background-color: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  color: #1A1D24;
   font-size: 0.875rem;
   font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
   transition: all 0.2s ease;
 }
 
 .btn-pill-secondary:hover {
-  background-color: #1E1E26;
+  background-color: #F8F9FA;
   border-color: rgba(122, 157, 150, 0.5);
-  color: #8FB1AA;
+  color: #7A9D96;
   transform: translateY(-1px);
 }
 
@@ -142,25 +153,25 @@ body {
   gap: 0.5rem;
   padding: 0.75rem 1.5rem;
   border-radius: 9999px;
-  background-color: #FFFFFF;
-  color: #0A0A0D;
+  background-color: #1A1D24;
+  color: #FFFFFF;
   font-size: 0.875rem;
   font-weight: 700;
   transition: all 0.2s ease;
 }
 
 .btn-pill-white:hover {
-  background-color: #F1F5F9;
+  background-color: #2D313A;
   transform: translateY(-1px);
 }
 
 /* ═══════════════════════════════════════
-   SUBTLE GRID BACKGROUND
+   SUBTLE PATTERN BACKGROUND
    ═══════════════════════════════════════ */
 .obsidian-grid {
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
   background-size: 48px 48px;
 }
 

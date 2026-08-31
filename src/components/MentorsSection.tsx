@@ -130,7 +130,7 @@ export function MentorsSection() {
   const visibleMentors = mentors.slice(currentPage * mentorsPerPage, (currentPage + 1) * mentorsPerPage);
 
   return (
-    <section className="py-20 lg:py-28 bg-[#0A0A0D] relative border-b border-white/5 overflow-hidden">
+    <section className="py-20 lg:py-28 bg-[#F8F9FB] relative border-b border-black/5 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -142,17 +142,17 @@ export function MentorsSection() {
             transition={{ duration: 0.5 }}
             className="max-w-3xl text-left"
           >
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#7A9D96]/10 border border-[#7A9D96]/25 text-[#9CBDB7] text-xs font-semibold tracking-wide mb-4">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#7A9D96]/10 border border-[#7A9D96]/25 text-[#7A9D96] text-xs font-semibold tracking-wide mb-4">
               <Sparkles size={14} className="text-[#7A9D96]" />
               <span>Top Tier Engineering Faculty</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#12151B] font-[family-name:var(--font-display)] leading-tight">
               Meet Our{' '}
-              <span className="bg-gradient-to-r from-[#7A9D96] via-[#9CBDB7] to-[#9CBDB7] bg-clip-text text-transparent">
+              <span className=" text-[#7A9D96]">
                 Industry Leaders
               </span>
             </h2>
-            <p className="mt-4 text-base text-slate-400">
+            <p className="mt-4 text-base text-slate-600">
               Working engineers from global tech companies who mentor cohorts, conduct mock panels, and elevate student standards.
             </p>
           </motion.div>
@@ -163,18 +163,18 @@ export function MentorsSection() {
               <button
                 onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
                 disabled={currentPage === 0}
-                className="w-10 h-10 rounded-full bg-[#14141C] border border-white/10 flex items-center justify-center text-white hover:border-[#7A9D96]/50 transition-all disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
+                className="w-10 h-10 rounded-full bg-white shadow-sm border border-black/8 flex items-center justify-center text-slate-900 hover:border-[#7A9D96]/50 transition-all disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
                 aria-label="Previous Mentors"
               >
                 <ChevronLeft size={18} />
               </button>
-              <span className="text-xs text-slate-400 font-medium px-2">
+              <span className="text-xs text-slate-600 font-medium px-2">
                 {currentPage + 1} / {totalPages}
               </span>
               <button
                 onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1))}
                 disabled={currentPage === totalPages - 1}
-                className="w-10 h-10 rounded-full bg-[#14141C] border border-white/10 flex items-center justify-center text-white hover:border-[#7A9D96]/50 transition-all disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
+                className="w-10 h-10 rounded-full bg-white shadow-sm border border-black/8 flex items-center justify-center text-slate-900 hover:border-[#7A9D96]/50 transition-all disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
                 aria-label="Next Mentors"
               >
                 <ChevronRight size={18} />
@@ -185,12 +185,12 @@ export function MentorsSection() {
 
         {/* Top Connecting Node Wire / Hierarchy Circuit */}
         <div className="hidden lg:block relative w-full mb-2">
-          <div className="w-full h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent" />
+          <div className="w-full h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent" />
           <div className="grid grid-cols-4 w-full">
             {visibleMentors.map((m) => (
               <div key={`wire-${m.name}`} className="flex flex-col items-center">
-                <div className="w-2.5 h-2.5 -mt-1.5 rounded-full bg-slate-500 border-2 border-[#0A0A0D]" />
-                <div className="w-px h-6 bg-slate-700" />
+                <div className="w-2.5 h-2.5 -mt-1.5 rounded-full bg-slate-400 border-2 border-white" />
+                <div className="w-px h-6 bg-slate-300" />
               </div>
             ))}
           </div>
@@ -206,11 +206,11 @@ export function MentorsSection() {
               whileHover={{ y: -8, rotate: 0, transition: { duration: 0.25 } }}
               style={{ rotate: mentor.tilt }}
               transition={{ duration: 0.5 }}
-              className="bento-card overflow-hidden flex flex-col justify-between group hover:border-[#7A9D96]/50 bg-[#111116] border border-white/10 rounded-2xl transition-all duration-300"
+              className="bento-card overflow-hidden flex flex-col justify-between group hover:border-[#7A9D96]/50 bg-white border border-black/8 rounded-2xl transition-all duration-300"
             >
               <div>
                 {/* Portrait Photo Container with Top Left Company Badge */}
-                <div className="relative w-full h-64 sm:h-72 overflow-hidden bg-slate-900">
+                <div className="relative w-full h-64 sm:h-72 overflow-hidden bg-slate-100">
                   <img
                     src={mentor.image}
                     alt={mentor.name}
@@ -219,10 +219,10 @@ export function MentorsSection() {
                   />
                   
                   {/* Subtle Gradient Vignette */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#111116] via-transparent to-black/30" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-black/30" />
 
                   {/* Top-Left Company Logo Badge */}
-                  <div className="absolute top-3.5 left-3.5 w-9 h-9 rounded-full bg-[#111116]/90 backdrop-blur-md border border-white/15 flex items-center justify-center shadow-lg">
+                  <div className="absolute top-3.5 left-3.5 w-9 h-9 rounded-full bg-white/90 backdrop-blur-md border border-black/10 flex items-center justify-center shadow-lg">
                     {mentor.companyLogo}
                   </div>
                 </div>
@@ -230,7 +230,7 @@ export function MentorsSection() {
                 {/* Mentor Content */}
                 <div className="p-5 sm:p-6">
                   {/* Name */}
-                  <h3 className="text-lg font-bold text-white tracking-tight leading-tight">
+                  <h3 className="text-lg font-bold text-slate-900 tracking-tight leading-tight">
                     {mentor.name}
                   </h3>
 
@@ -239,17 +239,17 @@ export function MentorsSection() {
                     <span className="w-3.5 h-3.5 flex items-center justify-center shrink-0">
                       {mentor.companyLogo}
                     </span>
-                    <span className="text-xs font-bold text-slate-200">
+                    <span className="text-xs font-bold text-slate-800">
                       {mentor.company}
                     </span>
                   </div>
 
-                  <p className="text-[11px] font-medium text-slate-400 leading-tight mb-4">
+                  <p className="text-[11px] font-medium text-slate-600 leading-tight mb-4">
                     {mentor.role}
                   </p>
 
                   {/* Direct Quote / Bio */}
-                  <p className="text-xs text-slate-300 leading-relaxed font-normal">
+                  <p className="text-xs text-slate-700 leading-relaxed font-normal">
                     {mentor.quote}
                   </p>
                 </div>
@@ -260,8 +260,8 @@ export function MentorsSection() {
 
         {/* Bottom Callout to Become a Mentor */}
         <div className="mt-14 text-center">
-          <div className="inline-flex items-center gap-3 p-2 pr-5 rounded-full bg-[#14141C] border border-white/10 text-xs text-slate-300">
-            <span className="px-3 py-1 rounded-full bg-[#7A9D96]/15 text-[#9CBDB7] font-bold font-mono">
+          <div className="inline-flex items-center gap-3 p-2 pr-5 rounded-full bg-white shadow-sm border border-black/8 text-xs text-slate-700">
+            <span className="px-3 py-1 rounded-full bg-[#7A9D96]/15 text-[#7A9D96] font-bold font-mono">
               Join Our Network
             </span>
             <span>Are you an engineering leader or senior developer?</span>
@@ -270,7 +270,7 @@ export function MentorsSection() {
                 window.location.hash = '#mentor';
                 window.scrollTo({ top: 0, behavior: 'instant' });
               }}
-              className="text-[#7A9D96] font-bold hover:text-white transition-colors cursor-pointer flex items-center gap-1 ml-1"
+              className="text-[#7A9D96] font-bold hover:text-slate-900 transition-colors cursor-pointer flex items-center gap-1 ml-1"
             >
               <span>Become a Mentor</span>
               <span aria-hidden="true">→</span>

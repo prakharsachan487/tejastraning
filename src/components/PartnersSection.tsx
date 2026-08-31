@@ -318,19 +318,19 @@ const row2Partners: CompanyPartner[] = [
 
 export function PartnersSection() {
   return (
-    <section id="recruiters" className="py-20 bg-[#0A0A0D] border-y border-white/5 overflow-hidden relative">
+    <section id="recruiters" className="py-20 bg-[#F2F4F7] border-y border-black/5 overflow-hidden relative">
       {/* Glow Effects */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[300px] bg-gradient-to-r from-[#7A9D96]/5 via-[#9CBDB7]/5 to-transparent blur-[140px] pointer-events-none rounded-full" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 relative z-10">
         <div className="text-center">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#7A9D96]/10 border border-[#7A9D96]/25 text-[#9CBDB7] text-xs font-semibold tracking-wide mb-3">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#7A9D96]/10 border border-[#7A9D96]/25 text-[#7A9D96] text-xs font-semibold tracking-wide mb-3">
             <span>Campus Hiring Ecosystem</span>
           </div>
-          <h3 className="text-2xl sm:text-4xl font-extrabold text-white font-[family-name:var(--font-display)] tracking-tight">
-            Trusted by <span className="bg-gradient-to-r from-[#7A9D96] via-[#9CBDB7] to-[#9CBDB7] bg-clip-text text-transparent">35+ Top Hiring Partners</span> for Campus Drives
+          <h3 className="text-2xl sm:text-4xl font-bold text-[#12151B] font-[family-name:var(--font-display)] tracking-tight">
+            Trusted by <span className="text-[#7A9D96]">35+ Top Hiring Partners</span> for Campus Drives
           </h3>
-          <p className="mt-3 text-xs sm:text-sm text-slate-400 max-w-xl mx-auto">
+          <p className="mt-3 text-xs sm:text-sm text-slate-600 max-w-xl mx-auto">
             From Tier-1 global IT conglomerates to hyper-growth tech unicorns, our campus cohorts are directly recruited across India.
           </p>
         </div>
@@ -345,7 +345,7 @@ export function PartnersSection() {
               style={{
                 '--brand-border': partner.borderColor,
               } as React.CSSProperties}
-              className="flex items-center gap-3 px-4 sm:px-5 py-2.5 rounded-2xl bg-[#121218] border border-white/10 hover:border-[var(--brand-border)] hover:bg-[#181822] hover:shadow-lg hover:shadow-black/60 transition-all duration-300 whitespace-nowrap select-none cursor-default group"
+              className="flex items-center gap-3 px-4 sm:px-5 py-2.5 rounded-2xl bg-white border border-black/8 shadow-sm hover:border-[var(--brand-border)] hover:shadow-md transition-all duration-300 whitespace-nowrap select-none cursor-default group"
             >
               <div className="group-hover:scale-110 transition-transform duration-200">
                 {partner.logo}
@@ -357,7 +357,7 @@ export function PartnersSection() {
                 >
                   {partner.name}
                 </span>
-                <span className="text-[10px] font-mono text-slate-400 group-hover:text-slate-300">
+                <span className="text-[10px] font-mono text-slate-500 group-hover:text-slate-700">
                   {partner.category}
                 </span>
               </div>
@@ -375,7 +375,7 @@ export function PartnersSection() {
               style={{
                 '--brand-border': partner.borderColor,
               } as React.CSSProperties}
-              className="flex items-center gap-3 px-4 sm:px-5 py-2.5 rounded-2xl bg-[#121218] border border-white/10 hover:border-[var(--brand-border)] hover:bg-[#181822] hover:shadow-lg hover:shadow-black/60 transition-all duration-300 whitespace-nowrap select-none cursor-default group"
+              className="flex items-center gap-3 px-4 sm:px-5 py-2.5 rounded-2xl bg-white border border-black/8 shadow-sm hover:border-[var(--brand-border)] hover:shadow-md transition-all duration-300 whitespace-nowrap select-none cursor-default group"
             >
               <div className="group-hover:scale-110 transition-transform duration-200">
                 {partner.logo}
@@ -387,7 +387,7 @@ export function PartnersSection() {
                 >
                   {partner.name}
                 </span>
-                <span className="text-[10px] font-mono text-slate-400 group-hover:text-slate-300">
+                <span className="text-[10px] font-mono text-slate-500 group-hover:text-slate-700">
                   {partner.category}
                 </span>
               </div>

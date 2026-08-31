@@ -52,7 +52,7 @@ export function MetricsSection() {
   const inView = useInView(ref, { once: true, margin: '-60px' });
 
   return (
-    <section ref={ref} className="py-20 lg:py-24 bg-[#0A0A0D] border-y border-white/10 relative">
+    <section ref={ref} className="py-20 lg:py-24 bg-[#F2F4F7] border-y border-black/5 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Title */}
@@ -63,12 +63,12 @@ export function MetricsSection() {
           transition={{ duration: 0.5 }}
           className="text-center max-w-3xl mx-auto mb-14"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#7A9D96]/10 border border-[#7A9D96]/25 text-[#9CBDB7] text-xs font-semibold tracking-wide mb-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#7A9D96]/10 border border-[#7A9D96]/25 text-[#7A9D96] text-xs font-semibold tracking-wide mb-4">
             <span>Verified Track Record</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white font-[family-name:var(--font-display)]">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#12151B] font-[family-name:var(--font-display)]">
             Numbers That{' '}
-            <span className="bg-gradient-to-r from-[#7A9D96] via-[#9CBDB7] to-[#9CBDB7] bg-clip-text text-transparent">
+            <span className="text-[#7A9D96]">
               Move the Needle
             </span>
           </h2>
@@ -83,9 +83,9 @@ export function MetricsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="bento-card p-5 sm:p-6 text-center hover:border-[#7A9D96]/40 transition-colors"
+              className="bento-card p-5 sm:p-6 text-center hover:border-[#7A9D96]/40 transition-colors bg-white shadow-sm"
             >
-              <div className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-mono bg-gradient-to-r from-white via-slate-100 to-[#9CBDB7] bg-clip-text text-transparent mb-1">
+              <div className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-mono text-[#12151B] mb-1">
                 <AnimatedCounter
                   value={m.value}
                   prefix={m.prefix}
@@ -93,7 +93,7 @@ export function MetricsSection() {
                   inView={inView}
                 />
               </div>
-              <div className="text-xs font-bold text-white font-[family-name:var(--font-display)]">
+              <div className="text-xs font-bold text-slate-800 font-[family-name:var(--font-display)]">
                 {m.label}
               </div>
               <div className="text-[10px] font-mono text-slate-500 mt-0.5">

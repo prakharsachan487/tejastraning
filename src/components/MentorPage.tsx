@@ -203,7 +203,7 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
   };
 
   return (
-    <div className="min-h-screen bg-[#07070A] text-slate-100 font-sans selection:bg-[#7A9D96] selection:text-white">
+    <div className="min-h-screen bg-[#F8F9FB] text-slate-100 font-sans selection:bg-[#7A9D96] selection:text-slate-900">
 
       {/* Main Content */}
       <main className="pt-24">
@@ -222,13 +222,13 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
               <div className="lg:col-span-7 text-left">
                 
                 {/* Pill Badge */}
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#00B4D8]/10 border border-[#00B4D8]/30 text-[#00B4D8] text-xs font-semibold tracking-wide mb-6">
-                  <Sparkles size={14} className="text-[#00B4D8]" />
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#7A9D96]/10 border border-[#7A9D96]/30 text-[#7A9D96] text-xs font-semibold tracking-wide mb-6">
+                  <Sparkles size={14} className="text-[#7A9D96]" />
                   <span>Mentor with Grow360</span>
                 </div>
 
                 {/* Main Headline */}
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.1] font-[family-name:var(--font-display)] mb-6">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.1] font-[family-name:var(--font-display)] mb-6">
                   Coach the interviews <br />
                   <span className="bg-gradient-to-r from-[#7A9D96] via-[#9CBDB7] to-[#9CBDB7] bg-clip-text text-transparent">
                     you already cleared.
@@ -236,7 +236,7 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
                 </h1>
 
                 {/* Subtitle */}
-                <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-xl mb-8">
+                <p className="text-sm sm:text-base text-slate-700 leading-relaxed max-w-xl mb-8">
                   Guide ambitious engineering students across 50+ tier-2/3 campuses. Conduct high-impact 1-on-1 mock interviews, review architecture capstones, and get compensated on your own 100% flexible schedule.
                 </p>
 
@@ -259,7 +259,7 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
                 </div>
 
                 {/* Social Proof Strip */}
-                <div className="flex items-center gap-4 pt-6 border-t border-white/10">
+                <div className="flex items-center gap-4 pt-6 border-t border-black/8">
                   <div className="flex -space-x-2.5">
                     {fellowMentors.map((m, idx) => (
                       <img
@@ -270,8 +270,8 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
                       />
                     ))}
                   </div>
-                  <div className="text-xs text-slate-400">
-                    <span className="text-white font-bold">80+ Senior Engineers</span> from Google, Microsoft, Amazon & Adobe are already mentoring.
+                  <div className="text-xs text-slate-600">
+                    <span className="text-slate-900 font-bold">80+ Senior Engineers</span> from Google, Microsoft, Amazon & Adobe are already mentoring.
                   </div>
                 </div>
 
@@ -279,13 +279,13 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
 
               {/* Right Column: Interactive Mock Visualizer Card */}
               <div className="lg:col-span-5">
-                <div className="relative rounded-3xl bg-[#111116] border border-white/15 p-6 shadow-2xl shadow-black overflow-hidden">
+                <div className="relative rounded-3xl bg-white shadow-sm border border-black/10 p-6 shadow-2xl shadow-black overflow-hidden">
                   
                   {/* Card Header */}
-                  <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-5">
+                  <div className="flex items-center justify-between pb-4 border-b border-black/8 mb-5">
                     <div className="flex items-center gap-2.5">
                       <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
-                      <span className="text-xs font-mono font-bold text-white">Live Mock Session #482</span>
+                      <span className="text-xs font-mono font-bold text-slate-900">Live Mock Session #482</span>
                     </div>
                     <span className="text-[10px] font-mono px-2.5 py-1 rounded bg-[#7A9D96]/15 text-[#9CBDB7] border border-[#7A9D96]/30 font-bold">
                       ₹3,500 / hr Honorarium
@@ -296,10 +296,10 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
                   <div className="space-y-4">
                     
                     {/* Simulated Candidate */}
-                    <div className="p-3.5 rounded-2xl bg-[#09090D] border border-white/10 flex items-center justify-between">
+                    <div className="p-3.5 rounded-2xl bg-slate-50 border border-black/8 flex items-center justify-between">
                       <div>
-                        <div className="text-xs font-bold text-white">Aditya Verma (Final Year CSE)</div>
-                        <div className="text-[11px] text-slate-400 font-mono">Target: SDE 1 at Tier-1 Startup</div>
+                        <div className="text-xs font-bold text-slate-900">Aditya Verma (Final Year CSE)</div>
+                        <div className="text-[11px] text-slate-600 font-mono">Target: SDE 1 at Tier-1 Startup</div>
                       </div>
                       <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20">
                         System Design
@@ -307,7 +307,7 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
                     </div>
 
                     {/* Simulated IDE Snippet */}
-                    <div className="p-3.5 rounded-2xl bg-[#09090D] border border-white/10 font-mono text-[11px] text-slate-300">
+                    <div className="p-3.5 rounded-2xl bg-slate-50 border border-black/8 font-mono text-[11px] text-slate-700">
                       <div className="text-slate-500 text-[10px] mb-1.5">// Mentor Feedback Evaluation</div>
                       <div className="text-emerald-400">✓ Graph Traversal Optimality: 95/100</div>
                       <div className="text-[#9CBDB7]">⚠ Distributed Cache Eviction: Discuss Redis TTL</div>
@@ -315,7 +315,7 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
                     </div>
 
                     {/* Honorarium & Scheduling Guarantee */}
-                    <div className="p-4 rounded-2xl bg-gradient-to-br from-[#181822] to-[#111116] border border-white/10 flex items-center justify-between">
+                    <div className="p-4 rounded-2xl bg-gradient-to-br from-[#181822] to-[#111116] border border-black/8 flex items-center justify-between">
                       <div className="flex items-center gap-2.5">
                         <Clock size={16} className="text-[#9CBDB7]" />
                         <div className="text-xs font-medium text-slate-200">
@@ -339,14 +339,14 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
         {/* ========================================================
             02. HERE'S HOW YOU JOIN US (4 STEPS)
         ======================================================== */}
-        <section id="how-it-works" className="py-20 bg-[#0A0A0D] border-t border-white/5 relative">
+        <section id="how-it-works" className="py-20 bg-[#F8F9FB] border-t border-black/5 relative">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
             <div className="text-center max-w-2xl mx-auto mb-16">
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-[family-name:var(--font-display)]">
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-[family-name:var(--font-display)]">
                 Here's how you <span className="text-[#9CBDB7]">join us</span>
               </h2>
-              <p className="mt-3 text-xs sm:text-sm text-slate-400">
+              <p className="mt-3 text-xs sm:text-sm text-slate-600">
                 A simple, friction-free 4-step onboarding designed for busy working engineers.
               </p>
             </div>
@@ -356,7 +356,7 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
               {steps.map((item, idx) => (
                 <div
                   key={idx}
-                  className="p-6 rounded-3xl bg-[#111116] border border-white/10 hover:border-[#7A9D96]/40 transition-all duration-300 flex flex-col justify-between group"
+                  className="p-6 rounded-3xl bg-white shadow-sm border border-black/8 hover:border-[#7A9D96]/40 transition-all duration-300 flex flex-col justify-between group"
                 >
                   <div>
                     <div
@@ -365,10 +365,10 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
                     >
                       {item.step}
                     </div>
-                    <h3 className="text-base font-bold text-white mb-2 group-hover:text-[#9CBDB7] transition-colors">
+                    <h3 className="text-base font-bold text-slate-900 mb-2 group-hover:text-[#9CBDB7] transition-colors">
                       {item.title}
                     </h3>
-                    <p className="text-xs text-slate-400 leading-relaxed">
+                    <p className="text-xs text-slate-600 leading-relaxed">
                       {item.desc}
                     </p>
                   </div>
@@ -398,14 +398,14 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
         {/* ========================================================
             04. WHAT YOU ACTUALLY DO (RESPONSIBILITIES)
         ======================================================== */}
-        <section id="what-you-do" className="py-20 bg-[#07070A] border-t border-white/5 relative">
+        <section id="what-you-do" className="py-20 bg-[#F8F9FB] border-t border-black/5 relative">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
             <div className="text-center max-w-2xl mx-auto mb-16">
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-[family-name:var(--font-display)]">
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-[family-name:var(--font-display)]">
                 What you actually <span className="bg-gradient-to-r from-[#7A9D96] to-[#9CBDB7] bg-clip-text text-transparent">do as a mentor</span>
               </h2>
-              <p className="mt-3 text-xs sm:text-sm text-slate-400">
+              <p className="mt-3 text-xs sm:text-sm text-slate-600">
                 Pick the activities you enjoy most. Zero micromanagement and full creative freedom.
               </p>
             </div>
@@ -416,25 +416,25 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
                 return (
                   <div
                     key={idx}
-                    className="p-6 sm:p-8 rounded-3xl bg-[#111116] border border-white/10 hover:border-[#7A9D96]/40 transition-all group"
+                    className="p-6 sm:p-8 rounded-3xl bg-white shadow-sm border border-black/8 hover:border-[#7A9D96]/40 transition-all group"
                   >
                     <div className="flex items-start justify-between mb-6">
                       <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#7A9D96]/20 to-[#9CBDB7]/10 border border-[#7A9D96]/30 flex items-center justify-center text-[#9CBDB7] shrink-0">
                         <Icon size={22} />
                       </div>
-                      <span className="text-[10px] font-mono px-2.5 py-1 rounded-md bg-white/5 text-slate-300 border border-white/10 font-bold">
+                      <span className="text-[10px] font-mono px-2.5 py-1 rounded-md bg-white/5 text-slate-700 border border-black/8 font-bold">
                         {r.badge}
                       </span>
                     </div>
 
-                    <h3 className="text-lg font-bold text-white mb-2 group-hover:text-[#9CBDB7] transition-colors">
+                    <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-[#9CBDB7] transition-colors">
                       {r.title}
                     </h3>
-                    <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mb-6">
+                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-6">
                       {r.desc}
                     </p>
 
-                    <div className="pt-4 border-t border-white/10 text-xs font-mono text-slate-400 flex items-center gap-2">
+                    <div className="pt-4 border-t border-black/8 text-xs font-mono text-slate-600 flex items-center gap-2">
                       <Clock size={13} className="text-[#7A9D96]" />
                       <span>{r.meta}</span>
                     </div>
@@ -449,14 +449,14 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
         {/* ========================================================
             04. BENEFITS YOU GET (4 NUMBERED BENTO CARDS)
         ======================================================== */}
-        <section id="benefits" className="py-20 bg-[#0A0A0D] border-t border-white/5 relative">
+        <section id="benefits" className="py-20 bg-[#F8F9FB] border-t border-black/5 relative">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
             <div className="text-center max-w-2xl mx-auto mb-16">
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-[family-name:var(--font-display)]">
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-[family-name:var(--font-display)]">
                 Benefits <span className="text-[#9CBDB7]">you get</span>
               </h2>
-              <p className="mt-3 text-xs sm:text-sm text-slate-400">
+              <p className="mt-3 text-xs sm:text-sm text-slate-600">
                 Rewarding both financially and in meaningful community impact.
               </p>
             </div>
@@ -465,9 +465,9 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
               {benefits.map((b, idx) => (
                 <div
                   key={idx}
-                  className="p-8 rounded-3xl bg-[#111116] border border-white/10 hover:border-white/20 transition-all flex flex-col justify-between relative overflow-hidden group"
+                  className="p-8 rounded-3xl bg-white shadow-sm border border-black/8 hover:border-white/20 transition-all flex flex-col justify-between relative overflow-hidden group"
                 >
-                  <span className="text-6xl font-black text-white/[0.04] absolute top-4 right-6 select-none font-mono">
+                  <span className="text-6xl font-black text-slate-900/[0.04] absolute top-4 right-6 select-none font-mono">
                     {b.num}
                   </span>
 
@@ -478,10 +478,10 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
                     >
                       Advantage {b.num}
                     </span>
-                    <h3 className="text-xl font-bold text-white mb-3 group-hover:text-[#9CBDB7] transition-colors">
+                    <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-[#9CBDB7] transition-colors">
                       {b.title}
                     </h3>
-                    <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                       {b.desc}
                     </p>
                   </div>
@@ -495,14 +495,14 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
         {/* ========================================================
             05. WHAT STUDENTS EXPECT FROM YOU (3 CARDS)
         ======================================================== */}
-        <section className="py-20 bg-[#07070A] border-t border-white/5 relative">
+        <section className="py-20 bg-[#F8F9FB] border-t border-black/5 relative">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
             <div className="text-center max-w-2xl mx-auto mb-16">
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-[family-name:var(--font-display)]">
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-[family-name:var(--font-display)]">
                 What students <span className="text-[#38BDF8]">expect from you</span>
               </h2>
-              <p className="mt-3 text-xs sm:text-sm text-slate-400">
+              <p className="mt-3 text-xs sm:text-sm text-slate-600">
                 Actionable, honest, and constructive mentorship that changes their placement trajectory.
               </p>
             </div>
@@ -513,16 +513,16 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
                 return (
                   <div
                     key={idx}
-                    className="p-6 rounded-3xl bg-[#111116] border border-white/10 flex flex-col justify-between"
+                    className="p-6 rounded-3xl bg-white shadow-sm border border-black/8 flex flex-col justify-between"
                   >
                     <div>
-                      <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#9CBDB7] mb-5">
+                      <div className="w-10 h-10 rounded-xl bg-white/5 border border-black/8 flex items-center justify-center text-[#9CBDB7] mb-5">
                         <Icon size={20} />
                       </div>
-                      <h3 className="text-base font-bold text-white mb-2">
+                      <h3 className="text-base font-bold text-slate-900 mb-2">
                         {exp.title}
                       </h3>
-                      <p className="text-xs text-slate-400 leading-relaxed">
+                      <p className="text-xs text-slate-600 leading-relaxed">
                         {exp.desc}
                       </p>
                     </div>
@@ -537,14 +537,14 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
         {/* ========================================================
             06. YOU'LL BE IN GOOD COMPANY (MENTOR SHOWCASE)
         ======================================================== */}
-        <section id="mentors" className="py-20 bg-[#0A0A0D] border-t border-white/5 relative">
+        <section id="mentors" className="py-20 bg-[#F8F9FB] border-t border-black/5 relative">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
             <div className="text-center max-w-2xl mx-auto mb-16">
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-[family-name:var(--font-display)]">
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-[family-name:var(--font-display)]">
                 You'll be in <span className="text-[#9CBDB7]">good company</span>
               </h2>
-              <p className="mt-3 text-xs sm:text-sm text-slate-400">
+              <p className="mt-3 text-xs sm:text-sm text-slate-600">
                 Join senior engineers from tier-1 firms already guiding college cohorts on Grow360.
               </p>
             </div>
@@ -553,17 +553,17 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
               {fellowMentors.map((m, idx) => (
                 <div
                   key={idx}
-                  className="p-5 rounded-3xl bg-[#111116] border border-white/10 hover:border-[#7A9D96]/40 transition-all flex flex-col justify-between"
+                  className="p-5 rounded-3xl bg-white shadow-sm border border-black/8 hover:border-[#7A9D96]/40 transition-all flex flex-col justify-between"
                 >
                   <div>
                     <div className="flex items-center gap-3.5 mb-4">
                       <img
                         src={m.image}
                         alt={m.name}
-                        className="w-12 h-12 rounded-2xl object-cover border border-white/15"
+                        className="w-12 h-12 rounded-2xl object-cover border border-black/10"
                       />
                       <div>
-                        <div className="text-sm font-bold text-white leading-tight">{m.name}</div>
+                        <div className="text-sm font-bold text-slate-900 leading-tight">{m.name}</div>
                         <div 
                           style={{ color: m.color }}
                           className="text-xs font-bold mt-0.5"
@@ -573,12 +573,12 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
                       </div>
                     </div>
 
-                    <p className="text-xs text-slate-400 mb-4">
+                    <p className="text-xs text-slate-600 mb-4">
                       {m.role}
                     </p>
                   </div>
 
-                  <div className="pt-3 border-t border-white/10 flex items-center justify-between text-xs font-mono text-slate-400">
+                  <div className="pt-3 border-t border-black/8 flex items-center justify-between text-xs font-mono text-slate-600">
                     <div className="flex items-center gap-1 text-[#9CBDB7]">
                       <span>★</span>
                       <span>{m.rating}</span>
@@ -595,21 +595,21 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
         {/* ========================================================
             07. READY TO MENTOR (GRADIENT CTA BANNER)
         ======================================================== */}
-        <section className="py-16 bg-[#07070A] border-t border-white/5 relative">
+        <section className="py-16 bg-[#F8F9FB] border-t border-black/5 relative">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-[#1A1A26] via-[#14141C] to-[#101014] border border-white/15 shadow-2xl relative overflow-hidden">
+            <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-[#1A1A26] via-[#14141C] to-[#101014] border border-black/10 shadow-2xl relative overflow-hidden">
               
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                 
                 {/* Left CTA */}
                 <div className="lg:col-span-7">
-                  <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-[family-name:var(--font-display)]">
+                  <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-[family-name:var(--font-display)]">
                     Ready to mentor with{' '}
                     <span className="bg-gradient-to-r from-[#00B4D8] via-[#0077B6] to-[#90E0EF] bg-clip-text text-transparent">
                       Grow360?
                     </span>
                   </h2>
-                  <p className="mt-3 text-xs sm:text-sm text-slate-300 max-w-lg leading-relaxed mb-8">
+                  <p className="mt-3 text-xs sm:text-sm text-slate-700 max-w-lg leading-relaxed mb-8">
                     Apply in 2 minutes. Start taking flexible mock interviews and empower the next generation of engineers.
                   </p>
                   <button
@@ -650,14 +650,14 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
         {/* ========================================================
             08. FREQUENTLY ASKED QUESTIONS (FAQ)
         ======================================================== */}
-        <section id="faq" className="py-20 bg-[#0A0A0D] border-t border-white/5 relative">
+        <section id="faq" className="py-20 bg-[#F8F9FB] border-t border-black/5 relative">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             
             <div className="text-center mb-14">
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-[family-name:var(--font-display)]">
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-[family-name:var(--font-display)]">
                 Frequently asked <span className="text-[#9CBDB7]">questions</span>
               </h2>
-              <p className="mt-3 text-xs sm:text-sm text-slate-400">
+              <p className="mt-3 text-xs sm:text-sm text-slate-600">
                 Everything you need to know about becoming a mentor on Grow360.
               </p>
             </div>
@@ -668,18 +668,18 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
                 return (
                   <div
                     key={idx}
-                    className="rounded-2xl bg-[#111116] border border-white/10 overflow-hidden transition-colors"
+                    className="rounded-2xl bg-white shadow-sm border border-black/8 overflow-hidden transition-colors"
                   >
                     <button
                       onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
                       className="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 cursor-pointer"
                     >
-                      <span className="text-sm sm:text-base font-bold text-white">
+                      <span className="text-sm sm:text-base font-bold text-slate-900">
                         {faq.q}
                       </span>
                       <ChevronDown
                         size={18}
-                        className={`text-slate-400 transition-transform duration-200 shrink-0 ${
+                        className={`text-slate-600 transition-transform duration-200 shrink-0 ${
                           isOpen ? 'rotate-180 text-[#7A9D96]' : ''
                         }`}
                       />
@@ -692,7 +692,7 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
                           animate={{ height: 'auto', opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
                           transition={{ duration: 0.2 }}
-                          className="px-5 sm:px-6 pb-5 sm:pb-6 text-xs sm:text-sm text-slate-400 leading-relaxed border-t border-white/5 pt-3"
+                          className="px-5 sm:px-6 pb-5 sm:pb-6 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-black/5 pt-3"
                         >
                           {faq.a}
                         </motion.div>

@@ -87,10 +87,28 @@ const companyLogos = [
     ),
   },
   {
+    name: 'Goldman Sachs',
+    logo: (
+      <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24">
+        <rect width="24" height="24" rx="4" fill="#7399C6"/>
+        <text x="12" y="16" textAnchor="middle" fill="#FFFFFF" fontSize="10" fontWeight="bold">GS</text>
+      </svg>
+    ),
+  },
+  {
+    name: 'Atlassian',
+    logo: (
+      <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24">
+        <path fill="#0052CC" d="M11.53 2c0 2.4-1.2 4.6-3.1 5.9L4.8 10.7c-2.3 1.6-3.7 4.2-3.7 7 0 3.5 2.1 6.3 5.4 6.3h7.2c-2-2.3-3.2-5.3-3.2-8.6 0-3.3 1.3-6.4 3.4-8.7L11.53 2z"/>
+        <path fill="#2684FF" d="M12.47 22c0-2.4 1.2-4.6 3.1-5.9l3.63-2.8c2.3-1.6 3.7-4.2 3.7-7 0-3.5-2.1-6.3-5.4-6.3h-7.2c2 2.3 3.2 5.3 3.2 8.6 0 3.3-1.3 6.4-3.4 8.7L12.47 22z"/>
+      </svg>
+    ),
+  },
+  {
     name: 'Infosys',
     logo: (
       <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24">
-        <rect width="24" height="24" rx="6" fill="#007CC3"/>
+        <rect width="24" height="24" rx="5" fill="#007CC3"/>
         <text x="12" y="16" textAnchor="middle" fill="#FFFFFF" fontSize="10" fontWeight="bold">Infy</text>
       </svg>
     ),
@@ -99,7 +117,7 @@ const companyLogos = [
     name: 'TCS',
     logo: (
       <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24">
-        <rect width="24" height="24" rx="6" fill="#005696"/>
+        <rect width="24" height="24" rx="5" fill="#1A3B8B"/>
         <text x="12" y="16" textAnchor="middle" fill="#FFFFFF" fontSize="9" fontWeight="bold">TCS</text>
       </svg>
     ),
@@ -108,7 +126,7 @@ const companyLogos = [
     name: 'Uber',
     logo: (
       <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24">
-        <rect width="24" height="24" rx="6" fill="#000000" stroke="#FFFFFF" strokeWidth="1.2"/>
+        <rect width="24" height="24" rx="6" fill="#000000"/>
         <text x="12" y="16" textAnchor="middle" fill="#FFFFFF" fontSize="9" fontWeight="bold">Uber</text>
       </svg>
     ),
@@ -117,9 +135,9 @@ const companyLogos = [
 
 export function TrustStrip() {
   return (
-    <section className="py-8 bg-[#0A0A0D] border-y border-white/5 overflow-hidden relative">
+    <section className="py-8 bg-[#F2F4F7] border-y border-black/5 overflow-hidden relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <p className="text-center text-xs font-semibold uppercase tracking-wider text-slate-400 mb-6">
+        <p className="text-center text-xs font-semibold uppercase tracking-wider text-slate-500 mb-6 font-mono">
           Curriculum Built with Engineers from Industry Leaders
         </p>
       </div>
@@ -129,10 +147,10 @@ export function TrustStrip() {
           {[...companyLogos, ...companyLogos, ...companyLogos].map((item, index) => (
             <div
               key={`${item.name}-${index}`}
-              className="flex items-center gap-3 px-4 sm:px-5 py-2.5 rounded-full bg-[#14141C] border border-white/10 hover:border-[#7A9D96]/40 transition-all whitespace-nowrap select-none cursor-default group"
+              className="flex items-center gap-3 px-4 sm:px-5 py-2.5 rounded-full bg-white border border-black/8 shadow-sm hover:border-[#7A9D96]/50 transition-all whitespace-nowrap select-none cursor-default group"
             >
               {item.logo}
-              <span className="text-xs sm:text-sm font-semibold text-slate-200 group-hover:text-white">
+              <span className="text-xs sm:text-sm font-semibold text-slate-800 group-hover:text-black">
                 {item.name}
               </span>
             </div>

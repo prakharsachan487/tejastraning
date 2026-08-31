@@ -93,8 +93,8 @@ export function Navbar() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? 'bg-[#0A0A0D]/95 backdrop-blur-xl border-b border-white/10'
-            : 'bg-[#0A0A0D]/80 backdrop-blur-md border-b border-white/5'
+            ? 'bg-white/90 backdrop-blur-xl border-b border-black/8 shadow-sm'
+            : 'bg-white/80 backdrop-blur-md border-b border-black/5'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -122,17 +122,17 @@ export function Navbar() {
                 className="h-10 w-auto object-contain rounded-lg group-hover:scale-105 transition-transform"
               />
               <div className="flex flex-col leading-tight">
-                <span className="text-xl font-extrabold tracking-tight text-white font-[family-name:var(--font-display)] flex items-center">
+                <span className="text-xl font-extrabold tracking-tight text-[#1A1D24] font-[family-name:var(--font-display)] flex items-center">
                   GROW<span className="text-[#7A9D96]">360°</span>
                 </span>
-                <span className="text-[10px] font-mono text-slate-400 tracking-wider hidden sm:block">
+                <span className="text-[10px] font-mono text-slate-500 tracking-wider hidden sm:block">
                   Decoding the corporate world
                 </span>
               </div>
             </a>
 
             {/* Desktop Navigation Links */}
-            <nav className="hidden md:flex items-center gap-1.5 bg-[#14141C] p-1.5 rounded-full border border-white/10">
+            <nav className="hidden md:flex items-center gap-1.5 bg-slate-100/90 p-1.5 rounded-full border border-black/5 shadow-inner">
               {navItems.map((item) => {
                 const isActive = activeSection === item.href.replace('#', '');
                 return (
@@ -141,8 +141,8 @@ export function Navbar() {
                     onClick={() => handleNavClick(item.href)}
                     className={`px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-all cursor-pointer ${
                       isActive
-                        ? 'bg-white/15 text-[#7A9D96] font-bold border border-[#7A9D96]/40'
-                        : 'text-slate-300 hover:text-white hover:bg-white/5'
+                        ? 'bg-white text-[#7A9D96] font-bold shadow-sm border border-black/5'
+                        : 'text-slate-600 hover:text-black hover:bg-white/60'
                     }`}
                   >
                     {item.label}
@@ -155,14 +155,14 @@ export function Navbar() {
             <div className="hidden lg:flex items-center gap-3">
               <button
                 onClick={() => openEnquiry('CONTACT')}
-                className="btn-pill-secondary px-4 py-2 text-xs font-semibold cursor-pointer flex items-center gap-1.5 hover:text-white"
+                className="btn-pill-secondary px-4 py-2 text-xs font-semibold cursor-pointer flex items-center gap-1.5 hover:text-[#7A9D96]"
               >
                 <Mail size={13} className="text-[#7A9D96]" />
                 <span>Contact Us</span>
               </button>
 
               {user ? (
-                <div className="flex items-center gap-2.5 bg-[#14141C] pl-2 pr-3 py-1.5 rounded-full border border-white/10 shadow-sm">
+                <div className="flex items-center gap-2.5 bg-white pl-2 pr-3 py-1.5 rounded-full border border-black/10 shadow-sm">
                   <div
                     onClick={() => {
                       window.location.hash = '#dashboard';
@@ -176,14 +176,14 @@ export function Navbar() {
                       className="w-7 h-7 rounded-full object-cover border border-[#7A9D96]/40 group-hover:scale-105 transition-transform"
                     />
                     <div className="flex flex-col text-left">
-                      <span className="text-xs font-bold text-white leading-none group-hover:text-[#9CBDB7] transition-colors">{user.name}</span>
-                      <span className="text-[10px] text-[#9CBDB7] font-mono leading-none mt-0.5">{user.role}</span>
+                      <span className="text-xs font-bold text-slate-800 leading-none group-hover:text-[#7A9D96] transition-colors">{user.name}</span>
+                      <span className="text-[10px] text-[#7A9D96] font-mono leading-none mt-0.5">{user.role}</span>
                     </div>
                   </div>
                   <button
                     onClick={logout}
                     title="Sign Out"
-                    className="ml-1 p-1 hover:text-red-400 text-slate-400 transition-colors cursor-pointer"
+                    className="ml-1 p-1 hover:text-red-500 text-slate-400 transition-colors cursor-pointer"
                   >
                     <LogOut size={13} />
                   </button>
@@ -193,7 +193,7 @@ export function Navbar() {
                   onClick={() => {
                     window.location.hash = '#login';
                   }}
-                  className="btn-pill-primary px-5 py-2.5 text-xs font-bold cursor-pointer flex items-center gap-1.5 shadow-md shadow-[#7A9D96]/20"
+                  className="btn-pill-primary px-5 py-2.5 text-xs font-bold cursor-pointer flex items-center gap-1.5 shadow-md"
                 >
                   <LogIn size={14} className="text-white" />
                   <span>Login</span>
@@ -204,7 +204,7 @@ export function Navbar() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileOpen(!isMobileOpen)}
-              className="md:hidden p-2 rounded-xl text-slate-300 hover:bg-white/10 focus:outline-none"
+              className="md:hidden p-2 rounded-xl text-slate-700 hover:bg-slate-100 focus:outline-none"
               aria-label="Toggle Navigation"
             >
               {isMobileOpen ? <X size={24} /> : <Menu size={24} />}
@@ -221,7 +221,7 @@ export function Navbar() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 md:hidden"
+              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 md:hidden"
               onClick={() => setIsMobileOpen(false)}
             />
             <motion.div
@@ -229,23 +229,23 @@ export function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 28, stiffness: 280 }}
-              className="fixed right-0 top-0 bottom-0 w-80 max-w-[85vw] bg-[#111116] z-50 md:hidden flex flex-col justify-between p-6 border-l border-white/10"
+              className="fixed right-0 top-0 bottom-0 w-80 max-w-[85vw] bg-white z-50 md:hidden flex flex-col justify-between p-6 border-l border-black/10 shadow-2xl"
             >
               <div>
-                <div className="flex items-center justify-between pb-6 border-b border-white/10">
+                <div className="flex items-center justify-between pb-6 border-b border-black/10">
                   <div className="flex items-center gap-2.5">
                     <img
                       src="/grow360-logo.png"
                       alt="Grow360 Logo"
                       className="h-8 w-auto object-contain rounded-lg"
                     />
-                    <span className="font-extrabold text-lg text-white font-[family-name:var(--font-display)] flex items-center">
+                    <span className="font-extrabold text-lg text-slate-900 font-[family-name:var(--font-display)] flex items-center">
                       GROW<span className="text-[#7A9D96]">360°</span>
                     </span>
                   </div>
                   <button
                     onClick={() => setIsMobileOpen(false)}
-                    className="p-1.5 rounded-lg text-slate-400 hover:text-white"
+                    className="p-1.5 rounded-lg text-slate-500 hover:text-black"
                   >
                     <X size={20} />
                   </button>
@@ -256,16 +256,16 @@ export function Navbar() {
                     <button
                       key={item.href}
                       onClick={() => handleNavClick(item.href)}
-                      className="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-[#9CBDB7] hover:bg-white/5 transition-colors text-left"
+                      className="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:text-[#7A9D96] hover:bg-slate-50 transition-colors text-left"
                     >
                       <span>{item.label}</span>
-                      <ChevronRight size={16} className="text-slate-500" />
+                      <ChevronRight size={16} className="text-slate-400" />
                     </button>
                   ))}
                 </div>
               </div>
 
-              <div className="pt-6 border-t border-white/10 flex flex-col gap-3">
+              <div className="pt-6 border-t border-black/10 flex flex-col gap-3">
                 <button
                   onClick={() => {
                     setIsMobileOpen(false);
@@ -278,7 +278,7 @@ export function Navbar() {
                 </button>
 
                 {user ? (
-                  <div className="flex items-center justify-between p-3 rounded-2xl bg-[#09090D] border border-white/10">
+                  <div className="flex items-center justify-between p-3 rounded-2xl bg-slate-50 border border-black/10">
                     <div
                       onClick={() => {
                         window.location.hash = '#dashboard';
@@ -292,8 +292,8 @@ export function Navbar() {
                         className="w-8 h-8 rounded-full object-cover border border-[#7A9D96]/40"
                       />
                       <div className="text-left">
-                        <div className="text-xs font-bold text-white">{user.name}</div>
-                        <div className="text-[10px] text-[#9CBDB7] font-mono">{user.role} · Tap to open Dashboard</div>
+                        <div className="text-xs font-bold text-slate-900">{user.name}</div>
+                        <div className="text-[10px] text-[#7A9D96] font-mono">{user.role} · Tap to open Dashboard</div>
                       </div>
                     </div>
                     <button
@@ -301,7 +301,7 @@ export function Navbar() {
                         logout();
                         setIsMobileOpen(false);
                       }}
-                      className="p-2 text-slate-400 hover:text-red-400 transition-colors"
+                      className="p-2 text-slate-400 hover:text-red-500 transition-colors"
                     >
                       <LogOut size={16} />
                     </button>
@@ -312,7 +312,7 @@ export function Navbar() {
                       setIsMobileOpen(false);
                       window.location.hash = '#login';
                     }}
-                    className="btn-pill-primary w-full justify-center text-xs py-3 flex items-center gap-2 shadow-md shadow-[#7A9D96]/"
+                    className="btn-pill-primary w-full justify-center text-xs py-3 flex items-center gap-2"
                   >
                     <LogIn size={14} className="text-white" />
                     <span>Login / Sign Up</span>

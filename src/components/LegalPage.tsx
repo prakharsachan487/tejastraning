@@ -42,30 +42,30 @@ export function LegalPage({ initialTab = 'privacy', onBackToHome: _ }: LegalPage
   };
 
   return (
-    <div className="min-h-screen bg-[#07070A] text-slate-100 font-sans selection:bg-[#7A9D96] selection:text-white">
+    <div className="min-h-screen bg-[#F8F9FB] text-slate-100 font-sans selection:bg-[#7A9D96] selection:text-slate-900">
       {/* Main Container */}
       <main className="pt-28 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           
           {/* Header Title Card */}
-          <div className="mb-10 p-6 sm:p-8 rounded-3xl bg-[#111116] border border-white/10 relative overflow-hidden">
+          <div className="mb-10 p-6 sm:p-8 rounded-3xl bg-white shadow-sm border border-black/8 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-[#7A9D96]/10 to-transparent blur-3xl pointer-events-none" />
 
             <div className="relative z-10">
               <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-[#7A9D96]">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-black/8 text-xs font-mono text-[#7A9D96]">
                   <Sparkles size={12} />
                   <span>Grow360 Trust &amp; Compliance</span>
                 </div>
 
                 {/* Tab Selector Buttons */}
-                <div className="flex items-center gap-1.5 p-1 bg-white/5 border border-white/10 rounded-2xl">
+                <div className="flex items-center gap-1.5 p-1 bg-white/5 border border-black/8 rounded-2xl">
                   <button
                     onClick={() => handleTabChange('privacy')}
                     className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all cursor-pointer flex items-center gap-1.5 ${
                       activeTab === 'privacy'
-                        ? 'bg-gradient-to-r from-[#7A9D96] to-[#6B8E87] text-white font-bold shadow-md'
-                        : 'text-slate-400 hover:text-white'
+                        ? 'bg-gradient-to-r from-[#7A9D96] to-[#6B8E87] text-slate-900 font-bold shadow-md'
+                        : 'text-slate-600 hover:text-slate-900'
                     }`}
                   >
                     <ShieldCheck size={13} />
@@ -76,8 +76,8 @@ export function LegalPage({ initialTab = 'privacy', onBackToHome: _ }: LegalPage
                     onClick={() => handleTabChange('terms')}
                     className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all cursor-pointer flex items-center gap-1.5 ${
                       activeTab === 'terms'
-                        ? 'bg-gradient-to-r from-[#7A9D96] to-[#6B8E87] text-white font-bold shadow-md'
-                        : 'text-slate-400 hover:text-white'
+                        ? 'bg-gradient-to-r from-[#7A9D96] to-[#6B8E87] text-slate-900 font-bold shadow-md'
+                        : 'text-slate-600 hover:text-slate-900'
                     }`}
                   >
                     <FileText size={13} />
@@ -88,8 +88,8 @@ export function LegalPage({ initialTab = 'privacy', onBackToHome: _ }: LegalPage
                     onClick={() => handleTabChange('cookies')}
                     className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all cursor-pointer flex items-center gap-1.5 ${
                       activeTab === 'cookies'
-                        ? 'bg-gradient-to-r from-[#7A9D96] to-[#6B8E87] text-white font-bold shadow-md'
-                        : 'text-slate-400 hover:text-white'
+                        ? 'bg-gradient-to-r from-[#7A9D96] to-[#6B8E87] text-slate-900 font-bold shadow-md'
+                        : 'text-slate-600 hover:text-slate-900'
                     }`}
                   >
                     <Cookie size={13} />
@@ -99,13 +99,13 @@ export function LegalPage({ initialTab = 'privacy', onBackToHome: _ }: LegalPage
                 </div>
               </div>
 
-              <h1 className="text-2xl sm:text-4xl font-extrabold text-white font-[family-name:var(--font-display)] tracking-tight mb-3">
+              <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 font-[family-name:var(--font-display)] tracking-tight mb-3">
                 {activeTab === 'privacy' && 'Privacy Policy'}
                 {activeTab === 'terms' && 'Terms of Service'}
                 {activeTab === 'cookies' && 'Cookie Policy'}
               </h1>
 
-              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed max-w-2xl">
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-2xl">
                 {activeTab === 'privacy' &&
                   'Learn how Grow360 collects, protects, processes, and respects your personal and institutional placement information.'}
                 {activeTab === 'terms' &&
@@ -114,7 +114,7 @@ export function LegalPage({ initialTab = 'privacy', onBackToHome: _ }: LegalPage
                   'Details on how we use cookies, session identifiers, and browser technologies to provide secure, reliable platform experiences.'}
               </p>
 
-              <div className="mt-6 pt-4 border-t border-white/10 flex flex-wrap items-center gap-4 text-[11px] font-mono text-slate-500">
+              <div className="mt-6 pt-4 border-t border-black/8 flex flex-wrap items-center gap-4 text-[11px] font-mono text-slate-500">
                 <span>Last Updated: August 2026</span>
                 <span>•</span>
                 <span>Version 2.4</span>
@@ -125,7 +125,7 @@ export function LegalPage({ initialTab = 'privacy', onBackToHome: _ }: LegalPage
           </div>
 
           {/* Document Content View */}
-          <div className="bg-[#0C0C10] rounded-3xl border border-white/10 p-6 sm:p-10 shadow-xl">
+          <div className="bg-[#0C0C10] rounded-3xl border border-black/8 p-6 sm:p-10 shadow-xl">
             <AnimatePresence mode="wait">
               {activeTab === 'privacy' && <PrivacyContent key="privacy" />}
               {activeTab === 'terms' && <TermsContent key="terms" />}
@@ -152,54 +152,54 @@ function PrivacyContent() {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -15 }}
       transition={{ duration: 0.2 }}
-      className="space-y-10 text-slate-300 text-xs sm:text-sm leading-relaxed"
+      className="space-y-10 text-slate-700 text-xs sm:text-sm leading-relaxed"
     >
       <section>
-        <div className="flex items-center gap-2.5 text-white font-bold text-base sm:text-lg mb-3">
-          <Eye size={18} className="text-[#00B4D8]" />
+        <div className="flex items-center gap-2.5 text-slate-900 font-bold text-base sm:text-lg mb-3">
+          <Eye size={18} className="text-[#7A9D96]" />
           <h3>1. Introduction & Overview</h3>
         </div>
         <p className="mb-3">
-          Welcome to <strong className="text-white">Grow360</strong> ("we", "our", or "us"). Grow360 — Decoding the corporate world is an institutional Training and Placement Infrastructure provider dedicated to bridging engineering colleges with top hiring partners, mentorship programs, and AI-driven placement readiness assessments.
+          Welcome to <strong className="text-slate-900">Grow360</strong> ("we", "our", or "us"). Grow360 — Decoding the corporate world is an institutional Training and Placement Infrastructure provider dedicated to bridging engineering colleges with top hiring partners, mentorship programs, and AI-driven placement readiness assessments.
         </p>
         <p>
           This Privacy Policy describes how we collect, store, utilize, and safeguard data when colleges, students, mentors, and recruiters access our website, web application, and training portals.
         </p>
       </section>
 
-      <section className="border-t border-white/10 pt-8">
-        <div className="flex items-center gap-2.5 text-white font-bold text-base sm:text-lg mb-3">
+      <section className="border-t border-black/8 pt-8">
+        <div className="flex items-center gap-2.5 text-slate-900 font-bold text-base sm:text-lg mb-3">
           <Database size={18} className="text-[#38BDF8]" />
           <h3>2. Information We Collect</h3>
         </div>
         <div className="space-y-3">
-          <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/5">
-            <strong className="text-white block mb-1">A. Student Data</strong>
-            <p className="text-xs text-slate-400">
+          <div className="p-4 rounded-2xl bg-white/[0.02] border border-black/5">
+            <strong className="text-slate-900 block mb-1">A. Student Data</strong>
+            <p className="text-xs text-slate-600">
               Name, email address, contact numbers, college affiliation, academic transcripts, technical assessment telemetry, coding submissions, and uploaded resumes/CV links.
             </p>
           </div>
-          <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/5">
-            <strong className="text-white block mb-1">B. Institutional & TPO Data</strong>
-            <p className="text-xs text-slate-400">
+          <div className="p-4 rounded-2xl bg-white/[0.02] border border-black/5">
+            <strong className="text-slate-900 block mb-1">B. Institutional & TPO Data</strong>
+            <p className="text-xs text-slate-600">
               College name, authorized coordinator contact details, department designations, batch sizes, and placement drive participation history.
             </p>
           </div>
-          <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/5">
-            <strong className="text-white block mb-1">C. Mentor & Interviewer Data</strong>
-            <p className="text-xs text-slate-400">
+          <div className="p-4 rounded-2xl bg-white/[0.02] border border-black/5">
+            <strong className="text-slate-900 block mb-1">C. Mentor & Interviewer Data</strong>
+            <p className="text-xs text-slate-600">
               Professional LinkedIn profiles, current engineering domains, honorarium payment information, and session feedback logs.
             </p>
           </div>
         </div>
       </section>
 
-      <section className="border-t border-white/10 pt-8">
-        <div className="flex items-center gap-2.5 text-white font-bold text-base sm:text-lg mb-3">
+      <section className="border-t border-black/8 pt-8">
+        <div className="flex items-center gap-2.5 text-slate-900 font-bold text-base sm:text-lg mb-3">
           <Lock size={18} className="text-[#9CBDB7]" />
           <h3>3. How We Use Information</h3>
         </div>
-        <ul className="space-y-2 list-disc list-inside text-slate-300">
+        <ul className="space-y-2 list-disc list-inside text-slate-700">
           <li>Delivering customized technical curriculum modules and AI mock interview feedback.</li>
           <li>Generating verified placement scorecards for student profiles.</li>
           <li>Facilitating recruitment shortlisting and campus drive scheduling with hiring partners.</li>
@@ -207,24 +207,24 @@ function PrivacyContent() {
         </ul>
       </section>
 
-      <section className="border-t border-white/10 pt-8">
-        <div className="flex items-center gap-2.5 text-white font-bold text-base sm:text-lg mb-3">
+      <section className="border-t border-black/8 pt-8">
+        <div className="flex items-center gap-2.5 text-slate-900 font-bold text-base sm:text-lg mb-3">
           <ShieldCheck size={18} className="text-[#22C55E]" />
           <h3>4. Data Sharing & Third Parties</h3>
         </div>
         <p className="mb-3">
           Grow360 never sells personal or academic data to third-party advertisers. Data is shared exclusively under the following strict circumstances:
         </p>
-        <ul className="space-y-2 list-disc list-inside text-slate-300">
+        <ul className="space-y-2 list-disc list-inside text-slate-700">
           <li><strong>Partner Hiring Companies:</strong> With student consent, resume and technical assessment performance data are shared with hiring partners for recruitment drives.</li>
           <li><strong>Partner Colleges:</strong> Institutional placement analytics and cohort attendance reports are shared with the respective college placement cell.</li>
           <li><strong>Service Infrastructure:</strong> Secure cloud database and communication providers (e.g. Supabase, AWS, Render, Vercel) bound by strict confidentiality agreements.</li>
         </ul>
       </section>
 
-      <section className="border-t border-white/10 pt-8">
-        <div className="flex items-center gap-2.5 text-white font-bold text-base sm:text-lg mb-3">
-          <ShieldCheck size={18} className="text-[#00B4D8]" />
+      <section className="border-t border-black/8 pt-8">
+        <div className="flex items-center gap-2.5 text-slate-900 font-bold text-base sm:text-lg mb-3">
+          <ShieldCheck size={18} className="text-[#7A9D96]" />
           <h3>5. Data Security & Storage</h3>
         </div>
         <p>
@@ -232,18 +232,18 @@ function PrivacyContent() {
         </p>
       </section>
 
-      <section className="border-t border-white/10 pt-8">
-        <div className="flex items-center gap-2.5 text-white font-bold text-base sm:text-lg mb-3">
+      <section className="border-t border-black/8 pt-8">
+        <div className="flex items-center gap-2.5 text-slate-900 font-bold text-base sm:text-lg mb-3">
           <Scale size={18} className="text-[#A855F7]" />
           <h3>6. Your Rights & Contact</h3>
         </div>
         <p className="mb-4">
           You have the right to access, rectify, or request deletion of your personal data stored on Grow360 at any time. For privacy inquiries or grievance redressal, please contact our Data Protection Team:
         </p>
-        <div className="p-4 rounded-2xl bg-[#111116] border border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="p-4 rounded-2xl bg-white shadow-sm border border-black/8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
-            <div className="text-white font-bold">Grow360 Privacy & Grievance Desk</div>
-            <div className="text-xs text-slate-400 font-mono mt-0.5">Email: privacy@grow360.in</div>
+            <div className="text-slate-900 font-bold">Grow360 Privacy & Grievance Desk</div>
+            <div className="text-xs text-slate-600 font-mono mt-0.5">Email: privacy@grow360.in</div>
           </div>
           <a
             href="mailto:privacy@grow360.in"
@@ -267,11 +267,11 @@ function TermsContent() {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -15 }}
       transition={{ duration: 0.2 }}
-      className="space-y-10 text-slate-300 text-xs sm:text-sm leading-relaxed"
+      className="space-y-10 text-slate-700 text-xs sm:text-sm leading-relaxed"
     >
       <section>
-        <div className="flex items-center gap-2.5 text-white font-bold text-base sm:text-lg mb-3">
-          <Scale size={18} className="text-[#00B4D8]" />
+        <div className="flex items-center gap-2.5 text-slate-900 font-bold text-base sm:text-lg mb-3">
+          <Scale size={18} className="text-[#7A9D96]" />
           <h3>1. Acceptance of Terms</h3>
         </div>
         <p>
@@ -279,27 +279,27 @@ function TermsContent() {
         </p>
       </section>
 
-      <section className="border-t border-white/10 pt-8">
-        <div className="flex items-center gap-2.5 text-white font-bold text-base sm:text-lg mb-3">
+      <section className="border-t border-black/8 pt-8">
+        <div className="flex items-center gap-2.5 text-slate-900 font-bold text-base sm:text-lg mb-3">
           <CheckCircle2 size={18} className="text-[#22C55E]" />
           <h3>2. Platform Services & Eligibility</h3>
         </div>
         <p className="mb-3">
           Grow360 provides specialized engineering placement training, algorithmic assessments, live mock interviews, ATS optimization, and recruitment networking.
         </p>
-        <ul className="space-y-2 list-disc list-inside text-slate-300">
+        <ul className="space-y-2 list-disc list-inside text-slate-700">
           <li>Users must provide accurate, verifiable information during account registration and profile setup.</li>
           <li>Accounts are non-transferable and intended solely for the registered student, educator, mentor, or recruiter.</li>
         </ul>
       </section>
 
-      <section className="border-t border-white/10 pt-8">
-        <div className="flex items-center gap-2.5 text-white font-bold text-base sm:text-lg mb-3">
+      <section className="border-t border-black/8 pt-8">
+        <div className="flex items-center gap-2.5 text-slate-900 font-bold text-base sm:text-lg mb-3">
           <AlertCircle size={18} className="text-[#9CBDB7]" />
           <h3>3. User Conduct & Acceptable Use</h3>
         </div>
         <p className="mb-3">When using Grow360, you agree not to:</p>
-        <ul className="space-y-2 list-disc list-inside text-slate-300">
+        <ul className="space-y-2 list-disc list-inside text-slate-700">
           <li>Engage in plagiarism or automated cheating during algorithmic assessments or coding evaluations.</li>
           <li>Submit falsified resume credentials, academic transcripts, or employment records.</li>
           <li>Attempt to decompile, reverse-engineer, or scrape any portion of our web portals or question banks.</li>
@@ -307,8 +307,8 @@ function TermsContent() {
         </ul>
       </section>
 
-      <section className="border-t border-white/10 pt-8">
-        <div className="flex items-center gap-2.5 text-white font-bold text-base sm:text-lg mb-3">
+      <section className="border-t border-black/8 pt-8">
+        <div className="flex items-center gap-2.5 text-slate-900 font-bold text-base sm:text-lg mb-3">
           <Lock size={18} className="text-[#38BDF8]" />
           <h3>4. Mentor & Honorarium Terms</h3>
         </div>
@@ -317,8 +317,8 @@ function TermsContent() {
         </p>
       </section>
 
-      <section className="border-t border-white/10 pt-8">
-        <div className="flex items-center gap-2.5 text-white font-bold text-base sm:text-lg mb-3">
+      <section className="border-t border-black/8 pt-8">
+        <div className="flex items-center gap-2.5 text-slate-900 font-bold text-base sm:text-lg mb-3">
           <ShieldCheck size={18} className="text-[#A855F7]" />
           <h3>5. Intellectual Property</h3>
         </div>
@@ -327,9 +327,9 @@ function TermsContent() {
         </p>
       </section>
 
-      <section className="border-t border-white/10 pt-8">
-        <div className="flex items-center gap-2.5 text-white font-bold text-base sm:text-lg mb-3">
-          <Scale size={18} className="text-[#00B4D8]" />
+      <section className="border-t border-black/8 pt-8">
+        <div className="flex items-center gap-2.5 text-slate-900 font-bold text-base sm:text-lg mb-3">
+          <Scale size={18} className="text-[#7A9D96]" />
           <h3>6. Governing Law & Dispute Resolution</h3>
         </div>
         <p>
@@ -350,10 +350,10 @@ function CookiesContent() {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -15 }}
       transition={{ duration: 0.2 }}
-      className="space-y-10 text-slate-300 text-xs sm:text-sm leading-relaxed"
+      className="space-y-10 text-slate-700 text-xs sm:text-sm leading-relaxed"
     >
       <section>
-        <div className="flex items-center gap-2.5 text-white font-bold text-base sm:text-lg mb-3">
+        <div className="flex items-center gap-2.5 text-slate-900 font-bold text-base sm:text-lg mb-3">
           <Cookie size={18} className="text-[#9CBDB7]" />
           <h3>1. What Are Cookies?</h3>
         </div>
@@ -362,35 +362,35 @@ function CookiesContent() {
         </p>
       </section>
 
-      <section className="border-t border-white/10 pt-8">
-        <div className="flex items-center gap-2.5 text-white font-bold text-base sm:text-lg mb-3">
+      <section className="border-t border-black/8 pt-8">
+        <div className="flex items-center gap-2.5 text-slate-900 font-bold text-base sm:text-lg mb-3">
           <Database size={18} className="text-[#38BDF8]" />
           <h3>2. Cookies We Use on Grow360</h3>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/5">
-            <strong className="text-white block mb-1 text-xs sm:text-sm">Essential & Authentication Cookies</strong>
-            <p className="text-xs text-slate-400">
+          <div className="p-4 rounded-2xl bg-white/[0.02] border border-black/5">
+            <strong className="text-slate-900 block mb-1 text-xs sm:text-sm">Essential & Authentication Cookies</strong>
+            <p className="text-xs text-slate-600">
               Required for security, user authentication, session maintenance, and student dashboard persistence.
             </p>
           </div>
-          <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/5">
-            <strong className="text-white block mb-1 text-xs sm:text-sm">Performance & Analytics Cookies</strong>
-            <p className="text-xs text-slate-400">
+          <div className="p-4 rounded-2xl bg-white/[0.02] border border-black/5">
+            <strong className="text-slate-900 block mb-1 text-xs sm:text-sm">Performance & Analytics Cookies</strong>
+            <p className="text-xs text-slate-600">
               Help us measure page load speeds, diagnose bottlenecks, and understand feature utilization across devices.
             </p>
           </div>
-          <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/5">
-            <strong className="text-white block mb-1 text-xs sm:text-sm">Preference & Customization Cookies</strong>
-            <p className="text-xs text-slate-400">
+          <div className="p-4 rounded-2xl bg-white/[0.02] border border-black/5">
+            <strong className="text-slate-900 block mb-1 text-xs sm:text-sm">Preference & Customization Cookies</strong>
+            <p className="text-xs text-slate-600">
               Remember your selected filters (e.g. mentor domain tags, employment type, location preferences).
             </p>
           </div>
         </div>
       </section>
 
-      <section className="border-t border-white/10 pt-8">
-        <div className="flex items-center gap-2.5 text-white font-bold text-base sm:text-lg mb-3">
+      <section className="border-t border-black/8 pt-8">
+        <div className="flex items-center gap-2.5 text-slate-900 font-bold text-base sm:text-lg mb-3">
           <Lock size={18} className="text-[#22C55E]" />
           <h3>3. Managing Cookie Preferences</h3>
         </div>

@@ -184,7 +184,7 @@ export function ProgramsSection() {
   const currentCategory = categories.find((c) => c.id === activeId) || categories[0];
 
   return (
-    <section id="programs" className="py-20 lg:py-28 bg-[#0A0A0D] relative obsidian-grid overflow-hidden">
+    <section id="programs" className="py-20 lg:py-28 bg-[#F8F9FB] relative obsidian-grid overflow-hidden">
       {/* Background Subtle Gradient Glows */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-gradient-to-br from-[#7A9D96]/10 via-[#9CBDB7]/5 to-transparent blur-[120px] pointer-events-none rounded-full" />
       
@@ -203,28 +203,28 @@ export function ProgramsSection() {
             <span>Comprehensive Curriculum</span>
           </div>
           
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight font-[family-name:var(--font-display)]">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight font-[family-name:var(--font-display)]">
             Industry-Ready Programs.{' '}
             <span className="bg-gradient-to-r from-[#7A9D96] via-[#9CBDB7] to-[#9CBDB7] bg-clip-text text-transparent">
               Built for Your Campus.
             </span>
           </h2>
           
-          <p className="mt-4 text-sm sm:text-base text-slate-400 max-w-2xl mx-auto">
+          <p className="mt-4 text-sm sm:text-base text-slate-600 max-w-2xl mx-auto">
             Practical, credit-mapped engineering & employability tracks tailored to your semester schedules and top hiring standards.
           </p>
 
           {/* Quick Value Badges */}
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-4 text-xs font-medium text-slate-300">
-            <div className="flex items-center gap-1.5 bg-[#14141C] px-3 py-1.5 rounded-full border border-white/10">
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-4 text-xs font-medium text-slate-700">
+            <div className="flex items-center gap-1.5 bg-white shadow-sm px-3 py-1.5 rounded-full border border-black/8">
               <Award size={14} className="text-[#9CBDB7]" />
               <span>University Credit Aligned</span>
             </div>
-            <div className="flex items-center gap-1.5 bg-[#14141C] px-3 py-1.5 rounded-full border border-white/10">
+            <div className="flex items-center gap-1.5 bg-white shadow-sm px-3 py-1.5 rounded-full border border-black/8">
               <Terminal size={14} className="text-[#38BDF8]" />
               <span>Live Engineer Mentorship</span>
             </div>
-            <div className="flex items-center gap-1.5 bg-[#14141C] px-3 py-1.5 rounded-full border border-white/10">
+            <div className="flex items-center gap-1.5 bg-white shadow-sm px-3 py-1.5 rounded-full border border-black/8">
               <Zap size={14} className="text-[#22C55E]" />
               <span>Placement-Guaranteed Sprints</span>
             </div>
@@ -233,7 +233,7 @@ export function ProgramsSection() {
 
         {/* Interactive Category Navigation Tabs */}
         <div className="flex justify-center mb-10">
-          <div className="inline-flex p-1.5 bg-[#121218] border border-white/10 rounded-2xl max-w-full overflow-x-auto no-scrollbar gap-1.5">
+          <div className="inline-flex p-1.5 bg-[#121218] border border-black/8 rounded-2xl max-w-full overflow-x-auto no-scrollbar gap-1.5">
             {categories.map((cat) => {
               const Icon = cat.icon;
               const isActive = activeId === cat.id;
@@ -242,7 +242,7 @@ export function ProgramsSection() {
                   key={cat.id}
                   onClick={() => setActiveId(cat.id)}
                   className={`relative px-4 sm:px-6 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 flex items-center gap-2 cursor-pointer shrink-0 ${
-                    isActive ? 'text-white font-bold' : 'text-slate-400 hover:text-slate-200 hover:bg-white/5'
+                    isActive ? 'text-slate-900 font-bold' : 'text-slate-600 hover:text-slate-200 hover:bg-white/5'
                   }`}
                 >
                   {isActive && (
@@ -252,7 +252,7 @@ export function ProgramsSection() {
                       transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                     />
                   )}
-                  <Icon size={16} className={isActive ? 'text-white' : 'text-slate-400'} />
+                  <Icon size={16} className={isActive ? 'text-slate-900' : 'text-slate-600'} />
                   <span>{cat.shortName}</span>
                 </button>
               );
@@ -266,7 +266,7 @@ export function ProgramsSection() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
-          className="mb-8 flex flex-col sm:flex-row items-center justify-between gap-4 p-4 sm:p-5 rounded-2xl bg-[#14141C] border border-white/10"
+          className="mb-8 flex flex-col sm:flex-row items-center justify-between gap-4 p-4 sm:p-5 rounded-2xl bg-white shadow-sm border border-black/8"
         >
           <div className="flex items-center gap-3.5 text-left">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#7A9D96]/20 to-[#9CBDB7]/10 border border-[#7A9D96]/30 flex items-center justify-center text-[#9CBDB7] shrink-0">
@@ -274,20 +274,20 @@ export function ProgramsSection() {
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="text-base font-bold text-white">
+                <h3 className="text-base font-bold text-slate-900">
                   {currentCategory.name}
                 </h3>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/10 text-slate-300 font-medium">
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/10 text-slate-700 font-medium">
                   {currentCategory.badge}
                 </span>
               </div>
-              <p className="text-xs text-slate-400 mt-0.5">
+              <p className="text-xs text-slate-600 mt-0.5">
                 {currentCategory.tagline}
               </p>
             </div>
           </div>
 
-          <div className="shrink-0 px-3.5 py-1.5 rounded-xl bg-white/5 border border-white/10 text-xs font-mono text-[#9CBDB7] flex items-center gap-2">
+          <div className="shrink-0 px-3.5 py-1.5 rounded-xl bg-white/5 border border-black/8 text-xs font-mono text-[#9CBDB7] flex items-center gap-2">
             <Sparkles size={13} className="text-[#7A9D96]" />
             <span>{currentCategory.stat}</span>
           </div>
@@ -303,7 +303,7 @@ export function ProgramsSection() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -15, scale: 0.98 }}
                 transition={{ duration: 0.35, delay: i * 0.08 }}
-                className="group relative rounded-2xl bg-[#111116] border border-white/10 p-6 flex flex-col justify-between hover:border-[#7A9D96]/50 transition-all duration-300 hover:shadow-xl hover:shadow-teal-950/20"
+                className="group relative rounded-2xl bg-white shadow-sm border border-black/8 p-6 flex flex-col justify-between hover:border-[#7A9D96]/50 transition-all duration-300 hover:shadow-xl hover:shadow-teal-950/20"
               >
                 <div>
                   {/* Top Bar with Duration & Level */}
@@ -312,13 +312,13 @@ export function ProgramsSection() {
                       <Clock size={12} />
                       <span>{track.duration}</span>
                     </div>
-                    <span className="text-[11px] font-mono text-slate-400 bg-white/5 px-2 py-0.5 rounded border border-white/5">
+                    <span className="text-[11px] font-mono text-slate-600 bg-white/5 px-2 py-0.5 rounded border border-black/5">
                       {track.level}
                     </span>
                   </div>
 
                   {/* Track Title */}
-                  <h3 className="text-lg font-bold text-white group-hover:text-[#9CBDB7] transition-colors leading-snug mb-3 font-[family-name:var(--font-display)]">
+                  <h3 className="text-lg font-bold text-slate-900 group-hover:text-[#9CBDB7] transition-colors leading-snug mb-3 font-[family-name:var(--font-display)]">
                     {track.title}
                   </h3>
 
@@ -327,7 +327,7 @@ export function ProgramsSection() {
                     {track.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-[#181822] text-slate-300 border border-white/10 group-hover:border-white/20 transition-colors"
+                        className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-[#181822] text-slate-700 border border-black/8 group-hover:border-white/20 transition-colors"
                       >
                         {tag}
                       </span>
@@ -337,7 +337,7 @@ export function ProgramsSection() {
                   {/* Highlights with Icons */}
                   <div className="space-y-2 mb-5">
                     {track.highlights.map((item) => (
-                      <div key={item} className="flex items-start gap-2 text-xs text-slate-300">
+                      <div key={item} className="flex items-start gap-2 text-xs text-slate-700">
                         <CheckCircle2 size={13} className="text-[#22C55E] shrink-0 mt-0.5" />
                         <span>{item}</span>
                       </div>
@@ -346,9 +346,9 @@ export function ProgramsSection() {
                 </div>
 
                 {/* Bottom Outcome & CTA */}
-                <div className="pt-4 border-t border-white/10">
-                  <div className="mb-3.5 p-2.5 rounded-lg bg-white/[0.03] border border-white/5">
-                    <div className="text-[10px] uppercase font-mono tracking-wider text-slate-400 mb-0.5">
+                <div className="pt-4 border-t border-black/8">
+                  <div className="mb-3.5 p-2.5 rounded-lg bg-white/[0.03] border border-black/5">
+                    <div className="text-[10px] uppercase font-mono tracking-wider text-slate-600 mb-0.5">
                       Target Outcome
                     </div>
                     <div className="text-xs font-medium text-slate-200 leading-snug">
@@ -358,7 +358,7 @@ export function ProgramsSection() {
 
                   <button
                     onClick={() => openEnquiry('PROPOSAL')}
-                    className="w-full py-2.5 px-4 rounded-xl bg-white/5 hover:bg-[#7A9D96] text-slate-200 hover:text-white text-xs font-bold transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer group/btn"
+                    className="w-full py-2.5 px-4 rounded-xl bg-white/5 hover:bg-[#7A9D96] text-slate-200 hover:text-slate-900 text-xs font-bold transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer group/btn"
                   >
                     <span>Request Syllabus</span>
                     <ArrowRight size={13} className="transition-transform group-hover/btn:translate-x-1" />
@@ -375,17 +375,17 @@ export function ProgramsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mt-12 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-[#181824] via-[#14141C] to-[#121218] border border-white/10 flex flex-col md:flex-row items-center justify-between gap-6"
+          className="mt-12 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-[#181824] via-[#14141C] to-[#121218] border border-black/8 flex flex-col md:flex-row items-center justify-between gap-6"
         >
           <div className="flex items-center gap-4 text-left">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#7A9D96] to-[#9CBDB7] flex items-center justify-center text-white shrink-0 shadow-lg shadow-[#7A9D96]/">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#7A9D96] to-[#9CBDB7] flex items-center justify-center text-slate-900 shrink-0 shadow-lg shadow-[#7A9D96]/">
               <FileCode size={24} />
             </div>
             <div>
-              <h3 className="text-lg font-bold text-white font-[family-name:var(--font-display)]">
+              <h3 className="text-lg font-bold text-slate-900 font-[family-name:var(--font-display)]">
                 Need a Custom Syllabus Aligned to Your University?
               </h3>
-              <p className="text-xs sm:text-sm text-slate-400 mt-1 max-w-xl">
+              <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-xl">
                 We customize modules, practical lab exercises, and assessments according to your college branch, academic timetable, and semester exam dates.
               </p>
             </div>
@@ -395,7 +395,7 @@ export function ProgramsSection() {
             onClick={() => openEnquiry('CONSULTATION')}
             className="btn-pill-primary shrink-0 py-3 px-6 text-xs sm:text-sm cursor-pointer whitespace-nowrap"
           >
-            <Sparkles size={15} className="text-white" />
+            <Sparkles size={15} className="text-slate-900" />
             <span>Request Custom Syllabus</span>
             <ArrowRight size={15} />
           </button>

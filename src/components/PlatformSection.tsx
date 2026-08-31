@@ -6,7 +6,7 @@ export function PlatformSection() {
   const { openEnquiry } = useEnquiry();
 
   return (
-    <section id="solutions" className="py-20 lg:py-28 bg-[#0A0A0D] relative obsidian-grid border-b border-white/5">
+    <section id="solutions" className="py-20 lg:py-28 bg-[#F8F9FB] relative obsidian-grid border-b border-black/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -21,13 +21,13 @@ export function PlatformSection() {
             <Sparkles size={14} className="text-[#7A9D96]" />
             <span>Complete Placement Infrastructure</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#12151B] font-[family-name:var(--font-display)] leading-tight">
             One Platform.{' '}
-            <span className="bg-gradient-to-r from-[#7A9D96] via-[#9CBDB7] to-[#9CBDB7] bg-clip-text text-transparent">
+            <span className=" text-[#7A9D96]">
               Complete Infrastructure.
             </span>
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-slate-400">
+          <p className="mt-4 text-base sm:text-lg text-slate-600">
             From diagnostic testing to live mock rounds, batch readiness dashboards, verified certifications, and recruiter drive pipelines.
           </p>
         </motion.div>
@@ -46,19 +46,19 @@ export function PlatformSection() {
             className="bento-card p-7 sm:p-9 flex flex-col justify-between group hover:border-[#7A9D96]/50"
           >
             <div>
-              <h3 className="text-2xl font-bold text-white mb-2">
+              <h3 className="text-2xl font-bold text-slate-900 mb-2">
                 AI Mock Interviews
               </h3>
-              <p className="text-sm text-slate-400 leading-relaxed max-w-lg mb-4">
+              <p className="text-sm text-slate-600 leading-relaxed max-w-lg mb-4">
                 Scale mock interviews across batches with AI feedback on communication, technical depth, and confidence before drives begin.
               </p>
 
               {/* Tag Pill Link */}
               <button
                 onClick={() => openEnquiry('CONSULTATION')}
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1A1A26] border border-white/10 hover:border-[#7A9D96]/40 transition-colors text-xs font-medium text-slate-300 mb-8 cursor-pointer group/btn"
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 border border-black/10 hover:border-[#7A9D96]/40 transition-colors text-xs font-medium text-slate-700 mb-8 cursor-pointer group/btn"
               >
-                <span className="px-2 py-0.5 rounded-md bg-[#2563EB] text-white text-[10px] font-bold">
+                <span className="px-2 py-0.5 rounded-md bg-[#2563EB] text-slate-900 text-[10px] font-bold">
                   NEW
                 </span>
                 <span>Grow360 AI Interview Module</span>
@@ -67,16 +67,16 @@ export function PlatformSection() {
             </div>
 
             {/* Inner Interactive Widget: AI Voice Interview Simulator */}
-            <div className="rounded-2xl bg-[#0D0D12] border border-white/10 p-5 sm:p-6 shadow-2xl">
+            <div className="rounded-2xl bg-slate-50 border border-black/10 p-5 sm:p-6 shadow-2xl">
               {/* Header */}
-              <div className="flex items-center justify-between pb-4 border-b border-white/5 mb-5">
+              <div className="flex items-center justify-between pb-4 border-b border-black/5 mb-5">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[#2563EB] flex items-center justify-center text-white font-bold text-xs">
+                  <div className="w-10 h-10 rounded-full bg-[#2563EB] flex items-center justify-center text-slate-900 font-bold text-xs">
                     AI
                   </div>
                   <div>
-                    <div className="text-sm font-bold text-white leading-tight">AI Interviewer</div>
-                    <div className="text-[11px] text-slate-400">Grow360 Mock Round</div>
+                    <div className="text-sm font-bold text-slate-900 leading-tight">AI Interviewer</div>
+                    <div className="text-[11px] text-slate-600">Grow360 Mock Round</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-rose-950/40 border border-rose-500/30 text-rose-400 text-[11px] font-medium">
@@ -86,12 +86,12 @@ export function PlatformSection() {
               </div>
 
               {/* Prompt Box */}
-              <div className="p-4 rounded-xl bg-[#14141C] border border-white/5 text-sm text-slate-200 mb-5 italic">
+              <div className="p-4 rounded-xl bg-white border border-black/5 text-sm text-slate-800 mb-5 italic">
                 "Tell me about a project you're proud of."
               </div>
 
               {/* Audio Waveform Equalizer */}
-              <div className="flex items-center justify-center gap-1.5 h-10 px-3 bg-[#111118] rounded-xl border border-white/5 mb-5">
+              <div className="flex items-center justify-center gap-1.5 h-10 px-3 bg-slate-100 rounded-xl border border-black/5 mb-5">
                 {[18, 28, 40, 24, 38, 52, 30, 48, 60, 42, 28, 36, 50, 26, 44, 58, 32, 22].map((h, i) => (
                   <div
                     key={i}
@@ -105,8 +105,8 @@ export function PlatformSection() {
               </div>
 
               {/* Bottom Status Bar */}
-              <div className="flex items-center justify-between text-xs text-slate-400 mb-2">
-                <div className="flex items-center gap-1.5 text-slate-300">
+              <div className="flex items-center justify-between text-xs text-slate-600 mb-2">
+                <div className="flex items-center gap-1.5 text-slate-700">
                   <Mic size={14} className="text-[#3B82F6]" />
                   <span>Listening</span>
                 </div>
@@ -129,10 +129,10 @@ export function PlatformSection() {
             className="bento-card p-7 sm:p-9 flex flex-col justify-between group hover:border-[#7A9D96]/50"
           >
             <div>
-              <h3 className="text-2xl font-bold text-white mb-2">
+              <h3 className="text-2xl font-bold text-slate-900 mb-2">
                 Batch Readiness
               </h3>
-              <p className="text-sm text-slate-400 leading-relaxed max-w-lg mb-8">
+              <p className="text-sm text-slate-600 leading-relaxed max-w-lg mb-8">
                 Give TPOs a live view of skill gaps and placement readiness across the batch.
               </p>
             </div>
@@ -179,35 +179,35 @@ export function PlatformSection() {
                 {/* Connected Flowchart Nodes */}
                 <div className="grid grid-cols-5 gap-1.5 text-center text-[10px]">
                   <div className="p-2 rounded-lg bg-blue-50 border border-blue-200">
-                    <div className="w-4 h-4 mx-auto mb-1 rounded-full bg-[#2563EB] text-white flex items-center justify-center text-[8px] font-bold">
+                    <div className="w-4 h-4 mx-auto mb-1 rounded-full bg-[#2563EB] text-slate-900 flex items-center justify-center text-[8px] font-bold">
                       ✓
                     </div>
                     <div className="font-bold text-blue-900 text-[9px]">Basics</div>
                   </div>
 
                   <div className="p-2 rounded-lg bg-slate-50 border border-slate-200">
-                    <div className="w-4 h-4 mx-auto mb-1 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[8px] font-bold">
+                    <div className="w-4 h-4 mx-auto mb-1 rounded-full bg-emerald-500 text-slate-900 flex items-center justify-center text-[8px] font-bold">
                       ✓
                     </div>
                     <div className="font-bold text-slate-700 text-[9px]">Core CS</div>
                   </div>
 
                   <div className="p-2 rounded-lg bg-slate-50 border border-slate-200">
-                    <div className="w-4 h-4 mx-auto mb-1 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[8px] font-bold">
+                    <div className="w-4 h-4 mx-auto mb-1 rounded-full bg-emerald-500 text-slate-900 flex items-center justify-center text-[8px] font-bold">
                       ✓
                     </div>
                     <div className="font-bold text-slate-700 text-[9px]">Full Stack</div>
                   </div>
 
                   <div className="p-2 rounded-lg bg-slate-50 border border-slate-200">
-                    <div className="w-4 h-4 mx-auto mb-1 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[8px] font-bold">
+                    <div className="w-4 h-4 mx-auto mb-1 rounded-full bg-emerald-500 text-slate-900 flex items-center justify-center text-[8px] font-bold">
                       ✓
                     </div>
                     <div className="font-bold text-slate-700 text-[9px]">Cloud AWS</div>
                   </div>
 
                   <div className="p-2 rounded-lg bg-[#7A9D96]/10 border border-[#7A9D96]/30">
-                    <div className="w-4 h-4 mx-auto mb-1 rounded-full bg-[#7A9D96] text-white flex items-center justify-center text-[8px] font-bold">
+                    <div className="w-4 h-4 mx-auto mb-1 rounded-full bg-[#7A9D96] text-slate-900 flex items-center justify-center text-[8px] font-bold">
                       ★
                     </div>
                     <div className="font-bold text-[#7A9D96] text-[9px]">Drive Ready</div>
@@ -243,30 +243,30 @@ export function PlatformSection() {
             className="bento-card p-6 flex flex-col justify-between group hover:border-[#7A9D96]/50"
           >
             <div>
-              <h3 className="text-lg font-bold text-white mb-1.5">
+              <h3 className="text-lg font-bold text-slate-900 mb-1.5">
                 Non-Tech Profiles
               </h3>
-              <p className="text-xs text-slate-400 leading-relaxed mb-5">
+              <p className="text-xs text-slate-600 leading-relaxed mb-5">
                 Prepare learners for high-growth roles beyond software engineering with focused profile tracks.
               </p>
             </div>
 
             {/* Inner JSON / Code Snippet Panel */}
-            <div className="rounded-xl bg-[#0D0D12] border border-white/10 p-3.5 text-xs">
-              <div className="flex items-center justify-between pb-2 mb-2.5 border-b border-white/5 text-[10px] text-slate-400">
-                <span className="font-bold text-slate-300">PROFILE_TRACKS.JSON</span>
+            <div className="rounded-xl bg-slate-50 border border-black/10 p-3.5 text-xs">
+              <div className="flex items-center justify-between pb-2 mb-2.5 border-b border-black/5 text-[10px] text-slate-600">
+                <span className="font-bold text-slate-700">PROFILE_TRACKS.JSON</span>
                 <span className="text-emerald-400">● Active</span>
               </div>
               <div className="space-y-1.5 text-[10px]">
-                <div className="flex justify-between items-center text-slate-300">
+                <div className="flex justify-between items-center text-slate-700">
                   <span>• Product Management</span>
                   <span className="text-[#9CBDB7] font-bold">12 PRDs</span>
                 </div>
-                <div className="flex justify-between items-center text-slate-300">
+                <div className="flex justify-between items-center text-slate-700">
                   <span>• Data Analytics</span>
                   <span className="text-[#3B82F6] font-bold">SQL / Tableau</span>
                 </div>
-                <div className="flex justify-between items-center text-slate-300">
+                <div className="flex justify-between items-center text-slate-700">
                   <span>• Business Consulting</span>
                   <span className="text-emerald-400 font-bold">Case Frameworks</span>
                 </div>
@@ -283,10 +283,10 @@ export function PlatformSection() {
             className="bento-card p-6 flex flex-col justify-between group hover:border-[#7A9D96]/50"
           >
             <div>
-              <h3 className="text-lg font-bold text-white mb-1.5">
+              <h3 className="text-lg font-bold text-slate-900 mb-1.5">
                 Resume Builder &amp; ATS
               </h3>
-              <p className="text-xs text-slate-400 leading-relaxed mb-5">
+              <p className="text-xs text-slate-600 leading-relaxed mb-5">
                 Help batches ship 90%+ parse rate ATS-ready resumes before campus hiring opens.
               </p>
             </div>
@@ -319,37 +319,37 @@ export function PlatformSection() {
             className="bento-card p-6 flex flex-col justify-between group hover:border-[#7A9D96]/50"
           >
             <div>
-              <h3 className="text-lg font-bold text-white mb-1.5">
+              <h3 className="text-lg font-bold text-slate-900 mb-1.5">
                 Tech Profiles Training
               </h3>
-              <p className="text-xs text-slate-400 leading-relaxed mb-5">
+              <p className="text-xs text-slate-600 leading-relaxed mb-5">
                 Targeted patterns, mocks, and company-specific interview sprint tracks.
               </p>
             </div>
 
             {/* Inner Company Target Icons & Prep Modules */}
-            <div className="rounded-xl bg-[#0D0D12] border border-white/10 p-3.5">
-              <div className="text-[9.5px] font-bold text-slate-400 uppercase tracking-wider mb-2">
+            <div className="rounded-xl bg-slate-50 border border-black/10 p-3.5">
+              <div className="text-[9.5px] font-bold text-slate-600 uppercase tracking-wider mb-2">
                 Target Company Tracks
               </div>
               
               {/* Company Logo Badges */}
               <div className="grid grid-cols-4 gap-1.5 mb-2.5">
-                <div className="p-1 rounded bg-[#14141C] border border-white/5 text-center text-[9px] font-bold text-[#9CBDB7]">
+                <div className="p-1 rounded bg-white border border-black/5 text-center text-[9px] font-bold text-[#9CBDB7]">
                   Amazon
                 </div>
-                <div className="p-1 rounded bg-[#14141C] border border-white/5 text-center text-[9px] font-bold text-[#3B82F6]">
+                <div className="p-1 rounded bg-white border border-black/5 text-center text-[9px] font-bold text-[#3B82F6]">
                   Google
                 </div>
-                <div className="p-1 rounded bg-[#14141C] border border-white/5 text-center text-[9px] font-bold text-emerald-400">
+                <div className="p-1 rounded bg-white border border-black/5 text-center text-[9px] font-bold text-emerald-400">
                   Microsoft
                 </div>
-                <div className="p-1 rounded bg-[#14141C] border border-white/5 text-center text-[9px] font-bold text-rose-400">
+                <div className="p-1 rounded bg-white border border-black/5 text-center text-[9px] font-bold text-rose-400">
                   Adobe
                 </div>
               </div>
 
-              <div className="flex items-center justify-between text-[10px] text-slate-300 pt-1.5 border-t border-white/5">
+              <div className="flex items-center justify-between text-[10px] text-slate-700 pt-1.5 border-t border-black/5">
                 <span>700+ LeetCode Patterns</span>
                 <span className="text-[#9CBDB7] font-bold">50+ Mocks</span>
               </div>
@@ -365,17 +365,17 @@ export function PlatformSection() {
             className="bento-card p-6 flex flex-col justify-between group hover:border-[#7A9D96]/50"
           >
             <div>
-              <h3 className="text-lg font-bold text-white mb-1.5">
+              <h3 className="text-lg font-bold text-slate-900 mb-1.5">
                 Verified Certificates
               </h3>
-              <p className="text-xs text-slate-400 leading-relaxed mb-5">
+              <p className="text-xs text-slate-600 leading-relaxed mb-5">
                 Tamper-proof, QR-verifiable industry credentials recognized by corporate recruiters.
               </p>
             </div>
 
             {/* Inner Certificate Mockup Widget */}
             <div className="rounded-xl bg-gradient-to-br from-[#161622] to-[#0D0D12] border border-[#9CBDB7]/30 p-3.5 text-xs shadow-md">
-              <div className="flex items-center justify-between pb-2 mb-2 border-b border-white/10">
+              <div className="flex items-center justify-between pb-2 mb-2 border-b border-black/10">
                 <div className="flex items-center gap-1.5">
                   <div className="w-5 h-5 rounded-full bg-[#9CBDB7]/20 flex items-center justify-center text-[#9CBDB7]">
                     <Award size={12} />
@@ -387,14 +387,14 @@ export function PlatformSection() {
                 </span>
               </div>
 
-              <div className="text-[10.5px] font-bold text-white mb-0.5">
+              <div className="text-[10.5px] font-bold text-slate-900 mb-0.5">
                 Full Stack &amp; System Design
               </div>
-              <div className="text-[9px] text-slate-400 mb-2.5">
+              <div className="text-[9px] text-slate-600 mb-2.5">
                 Credential ID: G360-2026-8942
               </div>
 
-              <div className="flex items-center justify-between text-[9px] pt-2 border-t border-white/10 text-slate-400">
+              <div className="flex items-center justify-between text-[9px] pt-2 border-t border-black/10 text-slate-600">
                 <span>4 Academic Credits</span>
                 <span className="flex items-center gap-1 text-[#9CBDB7] font-semibold">
                   <Share2 size={10} /> LinkedIn
