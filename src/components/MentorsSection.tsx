@@ -153,9 +153,9 @@ export function MentorsSection() {
             </p>
           </motion.div>
 
-          {/* Navigation Page Controls */}
+          {/* Navigation Page Controls (Desktop/Tablet) */}
           {totalPages > 1 && (
-            <div className="flex items-center gap-2.5 self-start sm:self-end">
+            <div className="hidden sm:flex items-center gap-2.5 self-start sm:self-end">
               <button
                 onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
                 disabled={currentPage === 0}
@@ -179,7 +179,7 @@ export function MentorsSection() {
           )}
         </div>
 
-        {/* Top Connecting Node Wire / Hierarchy Circuit */}
+        {/* Top Connecting Node Wire / Hierarchy Circuit (Desktop Only) */}
         <div className="hidden lg:block relative w-full mb-2">
           <div className="w-full h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent" />
           <div className="grid grid-cols-4 w-full">
@@ -192,8 +192,67 @@ export function MentorsSection() {
           </div>
         </div>
 
-        {/* 4 Hanging Mentor Cards Matching Target Design */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
+        {/* ── MOBILE VIEW (< sm): Smooth Horizontal Swipe Scroll with All Mentors ── */}
+        <div className="sm:hidden -mx-4 px-4 overflow-x-auto snap-x snap-mandatory flex gap-4 pb-4 scrollbar-none touch-pan-x">
+          {mentors.map((mentor) => (
+            <div
+              key={`mobile-${mentor.name}`}
+              className="w-[82vw] max-w-[300px] shrink-0 snap-center bento-card overflow-hidden flex flex-col justify-between bg-white border border-black/8 rounded-2xl shadow-sm"
+            >
+              <div>
+                {/* Full Color Portrait Photo */}
+                <div className="relative w-full h-64 overflow-hidden bg-slate-100">
+                  <img
+                    src={mentor.image}
+                    alt={mentor.name}
+                    className="w-full h-full object-cover object-top"
+                    loading="lazy"
+                  />
+                  
+                  {/* Subtle Gradient Vignette */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-black/20" />
+
+                  {/* Top-Left Company Logo Badge */}
+                  <div className="absolute top-3.5 left-3.5 w-9 h-9 rounded-full bg-white/95 backdrop-blur-md border border-black/10 flex items-center justify-center shadow-md">
+                    {mentor.companyLogo}
+                  </div>
+                </div>
+
+                {/* Mentor Content */}
+                <div className="p-5">
+                  <h3 className="text-base font-bold text-slate-900 tracking-tight leading-tight">
+                    {mentor.name}
+                  </h3>
+
+                  <div className="flex items-center gap-1.5 mt-1.5 mb-1">
+                    <span className="w-3.5 h-3.5 flex items-center justify-center shrink-0">
+                      {mentor.companyLogo}
+                    </span>
+                    <span className="text-xs font-bold text-slate-800">
+                      {mentor.company}
+                    </span>
+                  </div>
+
+                  <p className="text-[11px] font-medium text-slate-600 leading-tight mb-3">
+                    {mentor.role}
+                  </p>
+
+                  <p className="text-xs text-slate-700 leading-relaxed font-normal">
+                    {mentor.quote}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Mobile Swipe Navigation Hint */}
+        <div className="sm:hidden flex items-center justify-center gap-2 mt-2 text-[11px] font-mono font-medium text-slate-400">
+          <span>← Swipe to explore all 8 mentors →</span>
+        </div>
+
+        {/* ── DESKTOP / TABLET VIEW (>= sm): Paginated 4-Grid Hanging Cards ── */}
+        <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
           {visibleMentors.map((mentor) => (
             <motion.div
               key={mentor.name}
@@ -202,23 +261,23 @@ export function MentorsSection() {
               whileHover={{ y: -8, rotate: 0, transition: { duration: 0.25 } }}
               style={{ rotate: mentor.tilt }}
               transition={{ duration: 0.5 }}
-              className="bento-card overflow-hidden flex flex-col justify-between group hover:border-[#2563EB]/50 bg-white border border-black/8 rounded-2xl transition-all duration-300"
+              className="bento-card overflow-hidden flex flex-col justify-between group hover:border-[#2563EB]/50 bg-white border border-black/8 rounded-2xl transition-all duration-300 shadow-sm"
             >
               <div>
-                {/* Portrait Photo Container with Top Left Company Badge */}
+                {/* Full Color Portrait Photo with Top Left Company Badge */}
                 <div className="relative w-full h-64 sm:h-72 overflow-hidden bg-slate-100">
                   <img
                     src={mentor.image}
                     alt={mentor.name}
-                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500 grayscale group-hover:grayscale-0"
+                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"
                   />
                   
                   {/* Subtle Gradient Vignette */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-black/30" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-black/25" />
 
                   {/* Top-Left Company Logo Badge */}
-                  <div className="absolute top-3.5 left-3.5 w-9 h-9 rounded-full bg-white/90 backdrop-blur-md border border-black/10 flex items-center justify-center shadow-lg">
+                  <div className="absolute top-3.5 left-3.5 w-9 h-9 rounded-full bg-white/95 backdrop-blur-md border border-black/10 flex items-center justify-center shadow-md">
                     {mentor.companyLogo}
                   </div>
                 </div>
