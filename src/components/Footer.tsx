@@ -175,7 +175,7 @@ export function Footer() {
               <div className="flex items-start gap-2 text-slate-700">
                 <MapPin size={16} className="text-[#2563EB] shrink-0 mt-0.5" />
                 <span className="leading-relaxed">
-                  A-301 GODREJ PRANA, near dhruv global school, undri, pune, maharashtra, 411060
+                  A-301, Godrej Prana, Near Dhruv Global School, Undri, Pune, Maharashtra – 411060
                 </span>
               </div>
               <div className="flex items-center gap-2 pt-0.5">
