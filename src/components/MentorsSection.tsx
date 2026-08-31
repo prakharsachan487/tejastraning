@@ -114,7 +114,7 @@ const mentors = [
     ),
     role: 'Senior Full-Stack Engineer · Agentic AI & RAG',
     quote: 'Senior Full-Stack Engineer building intelligent web platforms with deep expertise in React, Node.js, MongoDB, Agentic AI, and RAG architectures.',
-    image: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=600&q=80',
+    image: '/mentors/siddhartha_kumar.jpg',
     tilt: '0.7deg',
   },
 ];

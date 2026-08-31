@@ -192,7 +192,7 @@ const fellowMentors = [
     role: 'Senior Full-Stack Engineer · Agentic AI & RAG',
     rating: '4.96',
     sessions: '80+ Sessions',
-    image: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=400&q=80',
+    image: '/mentors/siddhartha_kumar.jpg',
     color: '#8B5CF6',
   },
 ];
