@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Search,
@@ -16,11 +16,14 @@ import {
   Send,
   ArrowRight,
   SlidersHorizontal,
-  Upload
+  Upload,
+  AlertCircle,
+  Loader2
 } from 'lucide-react';
+import { supabase } from '../lib/supabase';
 
 export interface JobOpening {
-  id: string;
+  id: string | number;
   title: string;
   domain: 'Tech' | 'Non-Tech' | 'Academics' | 'Sales';
   type: 'Full-time' | 'Contract' | 'Part-time' | 'Remote Mentorship';
@@ -290,7 +293,60 @@ const DATE_POSTED_OPTIONS = [
 ];
 const LOCATIONS = ['All', 'Remote', 'Bareilly', 'Phagwara', 'Vadodara', 'Noida', 'Bangalore'] as const;
 
+function mapSupabaseJob(row: any): JobOpening {
+  const dateStr = row.posted_date || row.created_at;
+  let postedDaysAgo = 1;
+  let postedDate = '24 hrs ago';
+  if (dateStr) {
+    const diffMs = Date.now() - new Date(dateStr).getTime();
+    const days = Math.max(0, Math.floor(diffMs / (1000 * 60 * 60 * 24)));
+    postedDaysAgo = days;
+    if (days === 0) postedDate = 'Today';
+    else if (days === 1) postedDate = '24 hrs ago';
+    else if (days < 7) postedDate = `${days} days ago`;
+    else if (days < 30) postedDate = `${Math.floor(days / 7)} weeks ago`;
+    else postedDate = `${Math.floor(days / 30)} months ago`;
+  }
+
+  const parseArray = (val: any): string[] => {
+    if (Array.isArray(val)) return val;
+    if (typeof val === 'string') {
+      try {
+        const parsed = JSON.parse(val);
+        if (Array.isArray(parsed)) return parsed;
+      } catch {
+        if (val.startsWith('{') && val.endsWith('}')) {
+          return val.slice(1, -1).split(',').map((s: string) => s.replace(/^"|"$/g, '').trim());
+        }
+      }
+      return [val];
+    }
+    return [];
+  };
+
+  return {
+    id: row.id,
+    title: row.title || 'Untitled Role',
+    domain: (row.domain as JobOpening['domain']) || 'Tech',
+    type: (row.job_type || row.type as JobOpening['type']) || 'Full-time',
+    location: row.location || 'Remote',
+    locationCategory: (row.location_category || row.locationCategory as JobOpening['locationCategory']) || 'Remote',
+    salary: row.salary || 'Competitive',
+    postedDate,
+    postedDaysAgo,
+    skills: parseArray(row.skills),
+    summary: row.summary || row.description || '',
+    responsibilities: parseArray(row.responsibilities),
+    requirements: parseArray(row.requirements),
+    openings: typeof row.openings === 'number' ? row.openings : 1,
+  };
+}
+
 export function MentorJobPortal() {
+  // Jobs State (Fetched from Supabase with static fallback)
+  const [jobs, setJobs] = useState<JobOpening[]>(JOB_LISTINGS);
+  const [isLoadingJobs, setIsLoadingJobs] = useState<boolean>(true);
+
   // Filter States
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedDomain, setSelectedDomain] = useState<string>('All');
@@ -304,26 +360,65 @@ export function MentorJobPortal() {
   const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
   const [applySuccess, setApplySuccess] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   // Application Form State (Name, Email, Phone, Resume File OR Link)
   const [applicantName, setApplicantName] = useState('');
   const [applicantEmail, setApplicantEmail] = useState('');
   const [applicantPhone, setApplicantPhone] = useState('');
   const [resumeFileName, setResumeFileName] = useState('');
+  const [resumeFileObject, setResumeFileObject] = useState<File | null>(null);
   const [resumeLink, setResumeLink] = useState('');
+
+  // ─── Fetch Jobs from Supabase ─────────────────────────
+  useEffect(() => {
+    let isMounted = true;
+
+    async function fetchJobs() {
+      try {
+        setIsLoadingJobs(true);
+        const { data, error } = await supabase
+          .from('mentor_jobs')
+          .select('*')
+          .order('id', { ascending: true });
+
+        if (error) {
+          console.warn('[Supabase] Could not fetch mentor_jobs, using default listings:', error.message);
+          return;
+        }
+
+        if (data && data.length > 0 && isMounted) {
+          const mapped = data.map((row) => mapSupabaseJob(row));
+          setJobs(mapped);
+        }
+      } catch (err) {
+        console.warn('[Supabase] Exception fetching mentor_jobs:', err);
+      } finally {
+        if (isMounted) {
+          setIsLoadingJobs(false);
+        }
+      }
+    }
+
+    fetchJobs();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   // Extract all unique skills
   const allSkills = useMemo(() => {
     const skillsSet = new Set<string>();
-    JOB_LISTINGS.forEach(job => {
+    jobs.forEach(job => {
       job.skills.forEach(s => skillsSet.add(s));
     });
     return Array.from(skillsSet).slice(0, 14);
-  }, []);
+  }, [jobs]);
 
   // Filter logic
   const filteredJobs = useMemo(() => {
-    return JOB_LISTINGS.filter(job => {
+    return jobs.filter(job => {
       // Search match
       if (searchQuery.trim()) {
         const q = searchQuery.toLowerCase();
@@ -370,7 +465,7 @@ export function MentorJobPortal() {
 
       return true;
     });
-  }, [searchQuery, selectedDomain, selectedType, selectedDatePosted, selectedLocation, selectedSkill]);
+  }, [jobs, searchQuery, selectedDomain, selectedType, selectedDatePosted, selectedLocation, selectedSkill]);
 
   const hasActiveFilters =
     searchQuery !== '' ||
@@ -393,15 +488,87 @@ export function MentorJobPortal() {
     setSelectedJob(job);
     setIsApplyModalOpen(true);
     setApplySuccess(false);
+    setSubmitError('');
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!selectedJob) return;
+
+    if (!resumeFileName && !resumeLink.trim()) {
+      setSubmitError('Please upload a resume file or provide a link.');
+      return;
+    }
+
     setIsSubmitting(true);
-    setTimeout(() => {
+    setSubmitError('');
+
+    try {
+      let uploadedResumePath: string | null = null;
+
+      // 1. Upload resume to Supabase Storage if file object provided
+      if (resumeFileObject) {
+        try {
+          const fileExt = resumeFileObject.name.split('.').pop() || 'pdf';
+          const cleanFileName = resumeFileObject.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+          const storagePath = `mentor_${Date.now()}_${cleanFileName}`;
+
+          const { data: uploadRes, error: uploadErr } = await supabase.storage
+            .from('resumes')
+            .upload(storagePath, resumeFileObject, {
+              contentType: resumeFileObject.type || (fileExt === 'pdf' ? 'application/pdf' : 'application/octet-stream'),
+              upsert: true
+            });
+
+          if (!uploadErr && uploadRes?.path) {
+            uploadedResumePath = uploadRes.path;
+          } else {
+            uploadedResumePath = resumeFileName;
+          }
+        } catch (storageErr) {
+          console.warn('[Supabase Storage] Fallback to file name:', storageErr);
+          uploadedResumePath = resumeFileName;
+        }
+      } else if (resumeFileName) {
+        uploadedResumePath = resumeFileName;
+      }
+
+      // 2. Parse numeric job_id
+      const numericJobId = typeof selectedJob.id === 'number'
+        ? selectedJob.id
+        : parseInt(String(selectedJob.id).replace(/\D/g, ''), 10) || 1;
+
+      // 3. Insert record into public.mentor_applications
+      const { data: insertData, error: insertErr } = await supabase
+        .from('mentor_applications')
+        .insert([
+          {
+            job_id: numericJobId,
+            full_name: applicantName.trim(),
+            email: applicantEmail.trim(),
+            phone: applicantPhone.trim(),
+            resume_path: uploadedResumePath,
+            resume_link: resumeLink.trim() || null,
+            status: 'pending'
+          }
+        ])
+        .select();
+
+      if (insertErr) {
+        console.error('[Supabase] Application submission error:', insertErr);
+        setSubmitError(insertErr.message || 'Failed to submit application. Please try again.');
+        setIsSubmitting(false);
+        return;
+      }
+
+      console.log('[Supabase] Application submitted successfully:', insertData);
       setIsSubmitting(false);
       setApplySuccess(true);
-    }, 700);
+    } catch (err: any) {
+      console.error('[Supabase] Application submission exception:', err);
+      setSubmitError(err?.message || 'Network error occurred. Please try again.');
+      setIsSubmitting(false);
+    }
   };
 
   const handleCloseModal = () => {
@@ -412,7 +579,9 @@ export function MentorJobPortal() {
     setApplicantEmail('');
     setApplicantPhone('');
     setResumeFileName('');
+    setResumeFileObject(null);
     setResumeLink('');
+    setSubmitError('');
   };
 
   return (
@@ -722,8 +891,11 @@ export function MentorJobPortal() {
             
             {/* Header info bar */}
             <div className="flex items-center justify-between px-2 py-1 text-xs text-slate-400">
-              <div>
-                Showing <span className="font-bold text-white">{filteredJobs.length}</span> positions
+              <div className="flex items-center gap-1.5">
+                <span>Showing <span className="font-bold text-white">{filteredJobs.length}</span> positions</span>
+                {isLoadingJobs && (
+                  <span className="inline-block w-3 h-3 border-2 border-orange-500/30 border-t-[#FF4500] rounded-full animate-spin" />
+                )}
                 {hasActiveFilters && <span className="text-[#FFA000] ml-1">(Filtered)</span>}
               </div>
               <div className="text-[11px] font-mono text-slate-400">
@@ -1079,6 +1251,13 @@ export function MentorJobPortal() {
                       <span>Apply for this position</span>
                     </h4>
 
+                    {submitError && (
+                      <div className="mb-4 p-3.5 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-400 text-xs flex items-center gap-2">
+                        <AlertCircle size={15} className="shrink-0 text-rose-400" />
+                        <span>{submitError}</span>
+                      </div>
+                    )}
+
                     <form onSubmit={handleFormSubmit} className="space-y-4">
                       {/* Row 1: Full Name & Email */}
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -1162,6 +1341,7 @@ export function MentorJobPortal() {
                                   const file = e.target.files?.[0];
                                   if (file) {
                                     setResumeFileName(file.name);
+                                    setResumeFileObject(file);
                                   }
                                 }}
                               />
@@ -1206,7 +1386,10 @@ export function MentorJobPortal() {
                           className="w-full btn-pill-primary py-3.5 text-xs font-bold cursor-pointer justify-center flex items-center gap-2 shadow-lg shadow-orange-500/20 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           {isSubmitting ? (
-                            <span>Submitting Application...</span>
+                            <>
+                              <Loader2 size={15} className="animate-spin" />
+                              <span>Submitting Application to Database...</span>
+                            </>
                           ) : (
                             <>
                               <span>Submit Application for {selectedJob.title}</span>
