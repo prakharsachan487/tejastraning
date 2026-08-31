@@ -954,47 +954,52 @@ export function MentorJobPortal() {
         </div>
 
         {/* ========================================================
-            02. JOB CARDS LIST (Full Width Clean Layout)
+            02. JOB CARDS LIST (Balanced 2-Column Modern Grid)
         ======================================================== */}
-        <div className="space-y-4">
+        <div className="max-w-6xl mx-auto space-y-6">
           
           {/* Header info bar */}
           <div className="flex items-center justify-between px-2 py-1 text-xs text-slate-400">
-            <div className="flex items-center gap-1.5">
-              <span>Showing <span className="font-bold text-white">{filteredJobs.length}</span> open positions</span>
+            <div className="flex items-center gap-2">
+              <span>Showing <span className="font-bold text-white text-sm">{filteredJobs.length}</span> positions</span>
               {isLoadingJobs && (
                 <span className="inline-block w-3 h-3 border-2 border-cyan-500/30 border-t-[#00B4D8] rounded-full animate-spin" />
               )}
-              {hasActiveFilters && <span className="text-[#00B4D8] ml-1">(Filtered)</span>}
+              {hasActiveFilters && (
+                <span className="text-xs px-2 py-0.5 rounded-full bg-[#00B4D8]/15 text-[#00B4D8] font-mono font-bold">
+                  Filtered
+                </span>
+              )}
             </div>
-            <div className="text-[11px] font-mono text-slate-400">
+            <div className="text-[11px] font-mono text-slate-400 hidden sm:block">
               Sorted by: <span className="text-slate-200">Recommended</span>
             </div>
           </div>
 
-            {/* Empty State */}
-            {filteredJobs.length === 0 && (
-              <div className="rounded-3xl bg-[#111116] border border-white/10 p-12 text-center">
-                <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 mx-auto mb-4">
-                  <Search size={24} />
-                </div>
-                <h3 className="text-lg font-bold text-white mb-1 font-[family-name:var(--font-display)]">
-                  No open positions found
-                </h3>
-                <p className="text-xs text-slate-400 max-w-sm mx-auto mb-6">
-                  Try clearing some filters or searching with different keywords like 'DSA', 'Remote', or 'Full-time'.
-                </p>
-                <button
-                  onClick={handleClearFilters}
-                  className="btn-pill-secondary text-xs py-2.5 px-6 cursor-pointer"
-                >
-                  <RotateCcw size={14} />
-                  <span>Reset All Filters</span>
-                </button>
+          {/* Empty State */}
+          {filteredJobs.length === 0 && (
+            <div className="rounded-3xl bg-[#111116] border border-white/10 p-12 text-center">
+              <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 mx-auto mb-4">
+                <Search size={24} />
               </div>
-            )}
+              <h3 className="text-lg font-bold text-white mb-1 font-[family-name:var(--font-display)]">
+                No open positions found
+              </h3>
+              <p className="text-xs text-slate-400 max-w-sm mx-auto mb-6">
+                Try clearing your search query or selecting a different domain category.
+              </p>
+              <button
+                onClick={handleClearFilters}
+                className="btn-pill-secondary text-xs py-2.5 px-6 cursor-pointer"
+              >
+                <RotateCcw size={14} />
+                <span>Reset Filters</span>
+              </button>
+            </div>
+          )}
 
-            {/* List of Job Cards */}
+          {/* 2-Column Responsive Grid of Job Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
             {filteredJobs.map((job) => {
               return (
                 <motion.div
@@ -1003,19 +1008,15 @@ export function MentorJobPortal() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.2 }}
-                  className="rounded-3xl bg-[#111116] border border-white/10 hover:border-[#00B4D8]/50 transition-all p-6 sm:p-7 shadow-lg group relative overflow-hidden"
+                  className="rounded-3xl bg-[#111116] border border-white/10 hover:border-[#00B4D8]/50 transition-all duration-300 p-6 sm:p-7 shadow-lg hover:shadow-2xl hover:shadow-cyan-500/10 group flex flex-col justify-between relative overflow-hidden"
                 >
-                  {/* Subtle hover accent gradient */}
-                  <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-bl from-[#00B4D8]/5 via-transparent to-transparent pointer-events-none group-hover:from-[#00B4D8]/10 transition-colors" />
+                  {/* Top Ambient Glow */}
+                  <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-bl from-[#00B4D8]/10 via-transparent to-transparent pointer-events-none group-hover:from-[#00B4D8]/20 transition-colors" />
 
-                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-4">
-                    <div>
-                      {/* Job Title & Badges */}
-                      <div className="flex flex-wrap items-center gap-2 mb-2">
-                        <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-[#00B4D8] transition-colors font-[family-name:var(--font-display)]">
-                          {job.title}
-                        </h3>
-                        
+                  <div>
+                    {/* Top Badges & Posted Time */}
+                    <div className="flex items-center justify-between gap-2 mb-3">
+                      <div className="flex flex-wrap items-center gap-1.5">
                         <span className={`text-[10px] font-mono px-2.5 py-0.5 rounded-full font-bold border ${
                           job.domain === 'Tech' 
                             ? 'bg-blue-500/10 text-blue-400 border-blue-500/30' 
@@ -1033,81 +1034,72 @@ export function MentorJobPortal() {
                         </span>
                       </div>
 
-                      {/* Location & Compensation */}
-                      <div className="flex flex-wrap items-center gap-4 text-xs font-medium text-slate-300">
-                        <div className="flex items-center gap-1.5 text-slate-400">
-                          <MapPin size={14} className="text-[#38BDF8]" />
-                          <span>{job.location}</span>
-                        </div>
-
-                        <div className="flex items-center gap-1 font-mono text-[#FFA000]">
-                          <IndianRupee size={14} />
-                          <span className="font-bold text-white">{job.salary}</span>
-                        </div>
-
-                        <div className="text-[11px] text-slate-400 font-mono">
-                          {job.openings} {job.openings === 1 ? 'opening' : 'openings'}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Action Button: View & Apply (Desktop) */}
-                    <div className="shrink-0 hidden sm:block">
-                      <button
-                        onClick={() => handleOpenJobApply(job)}
-                        className="btn-pill-primary text-xs py-2.5 px-5 font-bold cursor-pointer shadow-md shadow-cyan-500/15 flex items-center gap-2 group/btn"
-                      >
-                        <span>View &amp; Apply</span>
-                        <ArrowRight size={14} className="group-hover/btn:translate-x-0.5 transition-transform" />
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Summary Snippet */}
-                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4">
-                    {job.summary}
-                  </p>
-
-                  {/* Responsibilities list snippet */}
-                  <div className="mb-4 space-y-1.5">
-                    {job.responsibilities.slice(0, 2).map((resp, rIdx) => (
-                      <div key={rIdx} className="text-xs text-slate-400 flex items-start gap-2">
-                        <span className="text-[#00B4D8] font-bold">›</span>
-                        <span className="leading-normal">{resp}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Skills tags list */}
-                  <div className="flex flex-wrap gap-1.5 pt-4 border-t border-white/5 mb-4">
-                    {job.skills.map((skill, sIdx) => (
-                      <span
-                        key={sIdx}
-                        className="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-[#09090D] text-slate-300 border border-white/10"
-                      >
-                        {skill}
+                      <span className="text-[10px] font-mono text-slate-500">
+                        {job.postedDate}
                       </span>
-                    ))}
+                    </div>
+
+                    {/* Job Title */}
+                    <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-[#00B4D8] transition-colors font-[family-name:var(--font-display)] leading-snug mb-2 line-clamp-1">
+                      {job.title}
+                    </h3>
+
+                    {/* Location & Compensation Meta */}
+                    <div className="flex flex-wrap items-center gap-3 text-xs text-slate-300 mb-3.5">
+                      <div className="flex items-center gap-1 text-slate-400">
+                        <MapPin size={13} className="text-[#38BDF8] shrink-0" />
+                        <span className="truncate max-w-[160px]">{job.location}</span>
+                      </div>
+
+                      <div className="flex items-center gap-1 font-mono text-[#FFA000]">
+                        <IndianRupee size={13} className="shrink-0" />
+                        <span className="font-bold text-white">{job.salary}</span>
+                      </div>
+                    </div>
+
+                    {/* Summary Snippet */}
+                    <p className="text-xs sm:text-sm text-slate-400 leading-relaxed line-clamp-2 mb-4">
+                      {job.summary}
+                    </p>
+
+                    {/* Skills tags list */}
+                    <div className="flex flex-wrap gap-1.5 mb-5">
+                      {job.skills.slice(0, 4).map((skill, sIdx) => (
+                        <span
+                          key={sIdx}
+                          className="text-[10px] font-mono px-2 py-0.5 rounded-lg bg-[#09090D] text-slate-300 border border-white/10"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                      {job.skills.length > 4 && (
+                        <span className="text-[10px] font-mono px-1.5 py-0.5 rounded-lg bg-white/5 text-slate-500">
+                          +{job.skills.length - 4} more
+                        </span>
+                      )}
+                    </div>
                   </div>
 
-                  {/* Mobile Action Button & Posted Date */}
-                  <div className="flex items-center justify-between pt-2 text-[11px] font-mono text-slate-400">
-                    <span>Posted {job.postedDate}</span>
-                    <div className="sm:hidden">
-                      <button
-                        onClick={() => handleOpenJobApply(job)}
-                        className="btn-pill-primary text-xs py-2 px-4 font-bold cursor-pointer flex items-center gap-1.5"
-                      >
-                        <span>View &amp; Apply</span>
-                        <ArrowRight size={12} />
-                      </button>
-                    </div>
+                  {/* Card Bottom: Openings & Apply Button */}
+                  <div className="pt-4 border-t border-white/5 flex items-center justify-between">
+                    <span className="text-[11px] font-mono text-slate-400">
+                      {job.openings} {job.openings === 1 ? 'opening' : 'openings'}
+                    </span>
+
+                    <button
+                      onClick={() => handleOpenJobApply(job)}
+                      className="btn-pill-primary text-xs py-2 px-4 font-bold cursor-pointer shadow-md shadow-cyan-500/15 flex items-center gap-1.5 group/btn"
+                    >
+                      <span>View &amp; Apply</span>
+                      <ArrowRight size={13} className="group-hover/btn:translate-x-0.5 transition-transform" />
+                    </button>
                   </div>
                 </motion.div>
               );
             })}
-
           </div>
+
+        </div>
 
         {/* ========================================================
             03. CONNECT WITH US SECTION (Bottom Banner)
