@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronRight, LogIn, LogOut } from 'lucide-react';
+import { Menu, X, ChevronRight, LogIn, LogOut, Mail } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { useEnquiry } from '../context/EnquiryContext';
 
 interface NavItem {
   label: string;
@@ -19,6 +20,7 @@ export function Navbar() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const { user, logout } = useAuth();
+  const { openEnquiry } = useEnquiry();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -132,6 +134,14 @@ export function Navbar() {
 
             {/* Action Buttons */}
             <div className="hidden lg:flex items-center gap-3">
+              <button
+                onClick={() => openEnquiry('CONTACT')}
+                className="btn-pill-secondary px-4 py-2 text-xs font-semibold cursor-pointer flex items-center gap-1.5 hover:text-white"
+              >
+                <Mail size={13} className="text-[#00B4D8]" />
+                <span>Contact Us</span>
+              </button>
+
               {user ? (
                 <div className="flex items-center gap-2.5 bg-[#14141C] pl-2 pr-3 py-1.5 rounded-full border border-white/10 shadow-sm">
                   <div
@@ -237,6 +247,17 @@ export function Navbar() {
               </div>
 
               <div className="pt-6 border-t border-white/10 flex flex-col gap-3">
+                <button
+                  onClick={() => {
+                    setIsMobileOpen(false);
+                    openEnquiry('CONTACT');
+                  }}
+                  className="btn-pill-secondary w-full justify-center text-xs py-2.5 flex items-center gap-2"
+                >
+                  <Mail size={14} className="text-[#00B4D8]" />
+                  <span>Contact Us</span>
+                </button>
+
                 {user ? (
                   <div className="flex items-center justify-between p-3 rounded-2xl bg-[#09090D] border border-white/10">
                     <div
@@ -272,7 +293,7 @@ export function Navbar() {
                       setIsMobileOpen(false);
                       window.location.hash = '#login';
                     }}
-                    className="btn-pill-secondary w-full justify-center text-xs py-3 flex items-center gap-2"
+                    className="btn-pill-primary w-full justify-center text-xs py-3 flex items-center gap-2 shadow-md shadow-orange-500/20"
                   >
                     <LogIn size={14} className="text-white" />
                     <span>Login / Sign Up</span>
