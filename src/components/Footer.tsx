@@ -30,10 +30,10 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-[#F1F4F9] text-slate-600 pt-12 pb-8 relative overflow-hidden border-t border-slate-200/80 selection:bg-[#2563EB] selection:text-white">
-      {/* Giant "GROW 360" Background Watermark Typography - Perfectly Centered */}
-      <div className="absolute inset-x-0 bottom-6 sm:bottom-8 w-full flex items-center justify-center select-none pointer-events-none z-0 overflow-hidden">
-        <span className="text-6xl sm:text-7xl md:text-[8rem] lg:text-[10rem] font-extrabold text-slate-900/[0.03] tracking-tight whitespace-nowrap text-center leading-none">
+    <footer className="bg-[#F1F4F9] text-slate-600 pt-8 pb-5 relative overflow-hidden border-t border-slate-200/80 selection:bg-[#2563EB] selection:text-white">
+      {/* Giant "GROW 360" Background Watermark Typography - Positioned Directly Behind Text */}
+      <div className="absolute inset-0 flex items-center justify-center select-none pointer-events-none z-0 overflow-hidden">
+        <span className="text-7xl sm:text-8xl md:text-[10rem] lg:text-[13rem] font-extrabold text-slate-900/[0.035] tracking-tight whitespace-nowrap text-center leading-none select-none">
           GROW 360°
         </span>
       </div>
@@ -41,7 +41,7 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Main Grid: 4 Columns */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-8 mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 lg:gap-8 mb-6">
           
           {/* Column 1: Brand, Newsletter & Backed By (4 cols) */}
           <div className="lg:col-span-4 flex flex-col justify-between">
@@ -285,7 +285,7 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar: Copyright & Socials */}
-        <div className="pt-5 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-slate-500">
+        <div className="pt-3.5 border-t border-slate-200/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-slate-500">
           <div>
             <p>© {new Date().getFullYear()} Grow360 — Decoding the corporate world. All rights reserved.</p>
           </div>
