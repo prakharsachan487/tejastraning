@@ -230,7 +230,7 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
 
                   {/* Subtitle */}
                   <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-xl mb-8">
-                    Guide ambitious engineering students across 50+ tier-2/3 campuses. Conduct high-impact 1-on-1 mock interviews, review architecture capstones, and get compensated on your own 100% flexible schedule.
+                    Collaborate with Grow360 to mentor ambitious college graduates across 50+ campuses nationwide. Conduct 1-on-1 mock interviews, lead live industry masterclasses in tech, analytics, and business, and earn competitive honorariums on your own 100% flexible schedule.
                   </p>
 
                   {/* Action Buttons */}
