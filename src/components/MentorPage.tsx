@@ -174,7 +174,7 @@ const fellowMentors = [
     role: 'Founder Advisory · Equity & Debt Fundraising',
     rating: '4.98',
     sessions: '90+ Sessions',
-    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
+    image: '/mentors/sakshi_havelia.png',
     color: '#D97706',
   },
   {

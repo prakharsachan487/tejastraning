@@ -85,7 +85,7 @@ const mentors = [
     ),
     role: 'Founder Advisory · Equity & Debt Fundraising',
     quote: 'Helping ambitious founders prepare and raise capital with confidence across equity & debt fundraising, M&A advisory, and Pre-IPO stages.',
-    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80',
+    image: '/mentors/sakshi_havelia.png',
     tilt: '0.8deg',
   },
   {
