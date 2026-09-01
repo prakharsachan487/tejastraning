@@ -23,7 +23,10 @@ interface AuthContextValue {
   logout: () => Promise<void>;
   sendEmailOtp: (email: string) => Promise<{ success: boolean; error?: string }>;
   verifyEmailOtp: (email: string, token: string, role?: string, name?: string) => Promise<{ success: boolean; error?: string }>;
+  signInWithPassword: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
+  signUpWithPassword: (email: string, password: string, name: string, role?: string) => Promise<{ success: boolean; error?: string }>;
   signInWithGoogle: () => Promise<{ success: boolean; error?: string }>;
+  demoLogin: (role?: 'Student' | 'Mentor' | 'Placement Officer') => void;
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null);
@@ -37,9 +40,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return saved ? JSON.parse(saved) : null;
   });
 
-  // ─── Listen for Supabase Auth State Changes (Google OAuth Redirects & Sessions) ──
+  // ─── Listen for Supabase Auth State Changes ─────────────────────────────
   useEffect(() => {
-    // 1. Check initial Supabase session
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session?.user) {
         const u = session.user;
@@ -55,7 +57,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
     });
 
-    // 2. Subscribe to auth state changes (OAuth redirects, tokens, signouts)
     const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
       if (session?.user) {
         const u = session.user;
@@ -108,7 +109,87 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     window.location.hash = '';
   }, []);
 
-  // ─── 1. Send Email OTP (Magic 6-Digit Code) ────────────────
+  // ─── 1. Password Sign In ────────────────────────────────────
+  const signInWithPassword = async (email: string, pass: string) => {
+    setIsLoading(true);
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: email.trim().toLowerCase(),
+        password: pass,
+      });
+
+      if (error) {
+        setIsLoading(false);
+        return { success: false, error: error.message };
+      }
+
+      if (data?.user) {
+        const u = data.user;
+        const profile: UserProfile = {
+          id: u.id,
+          name: u.user_metadata?.full_name || u.user_metadata?.name || email.split('@')[0],
+          email: u.email || email,
+          role: (u.user_metadata?.role as any) || 'Student',
+          avatar: u.user_metadata?.avatar_url || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+        };
+        setUser(profile);
+        localStorage.setItem('tejas_user', JSON.stringify(profile));
+        closeAuth();
+        window.location.hash = '#dashboard';
+      }
+
+      setIsLoading(false);
+      return { success: true };
+    } catch (err: any) {
+      setIsLoading(false);
+      return { success: false, error: err?.message || 'Login failed.' };
+    }
+  };
+
+  // ─── 2. Password Sign Up ────────────────────────────────────
+  const signUpWithPassword = async (email: string, pass: string, name: string, role = 'Student') => {
+    setIsLoading(true);
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email: email.trim().toLowerCase(),
+        password: pass,
+        options: {
+          data: {
+            full_name: name.trim(),
+            role,
+          },
+        },
+      });
+
+      if (error) {
+        setIsLoading(false);
+        return { success: false, error: error.message };
+      }
+
+      if (data?.user) {
+        const u = data.user;
+        const profile: UserProfile = {
+          id: u.id,
+          name: name.trim(),
+          email: u.email || email,
+          role: role as any,
+          avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+        };
+        setUser(profile);
+        localStorage.setItem('tejas_user', JSON.stringify(profile));
+        closeAuth();
+        window.location.hash = '#dashboard';
+      }
+
+      setIsLoading(false);
+      return { success: true };
+    } catch (err: any) {
+      setIsLoading(false);
+      return { success: false, error: err?.message || 'Sign up failed.' };
+    }
+  };
+
+  // ─── 3. Send Email OTP ──────────────────────────────────────
   const sendEmailOtp = async (email: string) => {
     setIsLoading(true);
     try {
@@ -130,7 +211,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  // ─── 2. Verify Email OTP ───────────────────────────────────
+  // ─── 4. Verify Email OTP ────────────────────────────────────
   const verifyEmailOtp = async (email: string, token: string, role = 'Student', name?: string) => {
     setIsLoading(true);
     try {
@@ -149,7 +230,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         const u = data.user;
         const displayName = name || u.user_metadata?.full_name || u.user_metadata?.name || u.email?.split('@')[0] || 'Student User';
         
-        // Update user metadata if new name/role
         if (name || role) {
           await supabase.auth.updateUser({
             data: { full_name: displayName, role },
@@ -178,7 +258,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  // ─── 3. Google OAuth Sign-In ──────────────────────────────
+  // ─── 5. Google OAuth ────────────────────────────────────────
   const signInWithGoogle = async () => {
     setIsLoading(true);
     try {
@@ -209,6 +289,39 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  // ─── 6. Instant Demo Login (For Dev & Instant Testing) ──────
+  const demoLogin = (selectedRole: 'Student' | 'Mentor' | 'Placement Officer' = 'Student') => {
+    const demoProfiles: Record<string, UserProfile> = {
+      Student: {
+        id: 'demo-student-1',
+        name: 'Aryan Sharma',
+        email: 'aryan.sharma@parul.edu.in',
+        role: 'Student',
+        avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+      },
+      Mentor: {
+        id: 'demo-mentor-1',
+        name: 'Dr. Vivek Menon',
+        email: 'v.menon@grow360.in',
+        role: 'Mentor',
+        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80',
+      },
+      'Placement Officer': {
+        id: 'demo-tpo-1',
+        name: 'Prof. R. K. Saxena',
+        email: 'tpo.director@institution.ac.in',
+        role: 'Placement Officer',
+        avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=200&q=80',
+      },
+    };
+
+    const profile = demoProfiles[selectedRole] || demoProfiles.Student;
+    setUser(profile);
+    localStorage.setItem('tejas_user', JSON.stringify(profile));
+    closeAuth();
+    window.location.hash = '#dashboard';
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -223,7 +336,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         logout,
         sendEmailOtp,
         verifyEmailOtp,
+        signInWithPassword,
+        signUpWithPassword,
         signInWithGoogle,
+        demoLogin,
       }}
     >
       {children}

@@ -5,26 +5,42 @@ import {
   Mail,
   User,
   KeyRound,
+  Lock,
+  Eye,
+  EyeOff,
   CheckCircle2,
   AlertCircle,
   Loader2,
   Sparkles,
   ArrowRight,
   ShieldCheck,
-  RotateCcw
+  RotateCcw,
+  Zap
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 export function AuthPage() {
-  const { sendEmailOtp, verifyEmailOtp, signInWithGoogle, isLoading } = useAuth();
+  const {
+    signInWithPassword,
+    signUpWithPassword,
+    sendEmailOtp,
+    verifyEmailOtp,
+    signInWithGoogle,
+    demoLogin,
+    isLoading
+  } = useAuth();
+
   const [tab, setTab] = useState<'login' | 'signup'>('login');
+  const [method, setMethod] = useState<'password' | 'otp'>('password');
 
   // Form State
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [role, setRole] = useState<'Student' | 'Mentor' | 'Placement Officer'>('Student');
   const [otpCode, setOtpCode] = useState('');
-  const [step, setStep] = useState<'email' | 'otp'>('email');
+  const [otpSent, setOtpSent] = useState(false);
 
   const [errorMsg, setErrorMsg] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
@@ -32,7 +48,36 @@ export function AuthPage() {
 
   const isSignUp = tab === 'signup';
 
-  // ─── Step 1: Send OTP to Email ─────────────────────────────
+  // ─── Password Submit (Zero Rate Limit) ─────────────────────
+  const handlePasswordSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.trim() || !password) {
+      setErrorMsg('Please enter both email and password.');
+      return;
+    }
+
+    if (isSignUp && !name.trim()) {
+      setErrorMsg('Please enter your full name.');
+      return;
+    }
+
+    setErrorMsg('');
+    setSuccessMsg('');
+
+    if (isSignUp) {
+      const res = await signUpWithPassword(email.trim(), password, name.trim(), role);
+      if (!res.success) {
+        setErrorMsg(res.error || 'Failed to create account.');
+      }
+    } else {
+      const res = await signInWithPassword(email.trim(), password);
+      if (!res.success) {
+        setErrorMsg(res.error || 'Invalid email or password.');
+      }
+    }
+  };
+
+  // ─── OTP Send Submit ───────────────────────────────────────
   const handleSendOtp = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email.trim() || !email.includes('@')) {
@@ -50,9 +95,13 @@ export function AuthPage() {
 
     const res = await sendEmailOtp(email.trim());
     if (!res.success) {
-      setErrorMsg(res.error || 'Failed to send OTP. Please check your Supabase Email provider settings.');
+      setErrorMsg(
+        res.error?.includes('rate')
+          ? 'Supabase shared email limit reached. Use "Password Login" or "Instant Demo Login" below, or connect custom SMTP.'
+          : res.error || 'Failed to send OTP code.'
+      );
     } else {
-      setStep('otp');
+      setOtpSent(true);
       setSuccessMsg(`A 6-digit verification code has been dispatched to ${email}.`);
       setResendCooldown(45);
       const timer = setInterval(() => {
@@ -67,7 +116,7 @@ export function AuthPage() {
     }
   };
 
-  // ─── Step 2: Verify OTP Token ──────────────────────────────
+  // ─── OTP Verify Submit ─────────────────────────────────────
   const handleVerifyOtp = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!otpCode.trim() || otpCode.trim().length < 6) {
@@ -78,11 +127,11 @@ export function AuthPage() {
     setErrorMsg('');
     const res = await verifyEmailOtp(email.trim(), otpCode.trim(), role, name.trim());
     if (!res.success) {
-      setErrorMsg(res.error || 'Invalid or expired OTP code. Please try again.');
+      setErrorMsg(res.error || 'Invalid or expired OTP code.');
     }
   };
 
-  // ─── Google OAuth Login ────────────────────────────────────
+  // ─── Google OAuth ──────────────────────────────────────────
   const handleGoogleSignIn = async () => {
     setErrorMsg('');
     const res = await signInWithGoogle();
@@ -97,7 +146,7 @@ export function AuthPage() {
           LEFT HALF: AUTHENTICATION CONTAINER
       ======================================================== */}
       <div className="w-full lg:w-1/2 min-h-screen flex flex-col justify-between p-6 sm:p-10 lg:p-14 bg-gradient-to-b from-[#FAF8F3] via-[#F4F0E6] to-[#ECE5D8] relative z-10">
-        {/* Top Header Row with Back Button & Brand Badge */}
+        {/* Top Header Row */}
         <div className="flex items-center justify-between w-full">
           <button
             onClick={() => {
@@ -122,16 +171,16 @@ export function AuthPage() {
         </div>
 
         {/* Center Form Box */}
-        <div className="max-w-md w-full mx-auto my-auto py-8">
+        <div className="max-w-md w-full mx-auto my-auto py-6">
           {/* Form Title */}
-          <div className="text-center mb-8">
+          <div className="text-center mb-6">
             <h1 className="text-3xl sm:text-4xl font-extrabold text-[#1A1A1F] tracking-tight font-[family-name:var(--font-display)]">
               {isSignUp ? 'Create an account' : 'Welcome back'}
             </h1>
-            <p className="text-xs sm:text-sm text-slate-600 mt-2 font-normal">
+            <p className="text-xs sm:text-sm text-slate-600 mt-1.5 font-normal">
               {isSignUp
                 ? 'Join thousands of students and mentors accelerating their careers.'
-                : 'Sign in to access your interview reports, capstone rubrics & dashboard.'}
+                : 'Sign in to access your interview reports, rubrics & dashboard.'}
             </p>
           </div>
 
@@ -140,7 +189,7 @@ export function AuthPage() {
             type="button"
             onClick={handleGoogleSignIn}
             disabled={isLoading}
-            className="w-full flex items-center justify-center gap-3 py-3.5 px-4 rounded-2xl bg-white hover:bg-slate-50 border border-black/12 text-xs sm:text-sm font-bold text-slate-800 shadow-xs transition-all hover:shadow-md cursor-pointer disabled:opacity-50"
+            className="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-2xl bg-white hover:bg-slate-50 border border-black/12 text-xs sm:text-sm font-bold text-slate-800 shadow-xs transition-all hover:shadow-md cursor-pointer disabled:opacity-50"
           >
             <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
               <path
@@ -164,26 +213,26 @@ export function AuthPage() {
           </button>
 
           {/* Divider */}
-          <div className="relative my-6 text-center">
+          <div className="relative my-5 text-center">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-black/10"></div>
             </div>
-            <span className="relative px-4 bg-[#F5F2E9] text-[11px] font-mono text-slate-500 uppercase tracking-widest">
-              or sign in with email OTP
+            <span className="relative px-3 bg-[#F5F2E9] text-[10px] font-mono text-slate-500 uppercase tracking-widest">
+              or use email
             </span>
           </div>
 
           {/* Toggle Login / Signup Pills */}
-          <div className="flex p-1 bg-black/5 rounded-2xl mb-6 border border-black/5">
+          <div className="flex p-1 bg-black/5 rounded-2xl mb-4 border border-black/5">
             <button
               type="button"
               onClick={() => {
                 setTab('login');
-                setStep('email');
+                setOtpSent(false);
                 setErrorMsg('');
                 setSuccessMsg('');
               }}
-              className={`flex-1 py-2 text-xs font-bold rounded-xl transition-all cursor-pointer ${
+              className={`flex-1 py-1.5 text-xs font-bold rounded-xl transition-all cursor-pointer ${
                 tab === 'login'
                   ? 'bg-white text-slate-900 shadow-sm'
                   : 'text-slate-600 hover:text-black'
@@ -195,17 +244,50 @@ export function AuthPage() {
               type="button"
               onClick={() => {
                 setTab('signup');
-                setStep('email');
+                setOtpSent(false);
                 setErrorMsg('');
                 setSuccessMsg('');
               }}
-              className={`flex-1 py-2 text-xs font-bold rounded-xl transition-all cursor-pointer ${
+              className={`flex-1 py-1.5 text-xs font-bold rounded-xl transition-all cursor-pointer ${
                 tab === 'signup'
                   ? 'bg-white text-slate-900 shadow-sm'
                   : 'text-slate-600 hover:text-black'
               }`}
             >
               Create Account
+            </button>
+          </div>
+
+          {/* Auth Method Switcher (Password vs OTP) */}
+          <div className="flex items-center justify-center gap-4 mb-4 text-xs font-semibold">
+            <button
+              type="button"
+              onClick={() => {
+                setMethod('password');
+                setErrorMsg('');
+              }}
+              className={`pb-1 border-b-2 transition-all cursor-pointer ${
+                method === 'password'
+                  ? 'border-[#2563EB] text-[#2563EB] font-bold'
+                  : 'border-transparent text-slate-500 hover:text-slate-800'
+              }`}
+            >
+              Password Login (Instant)
+            </button>
+            <span className="text-slate-300">|</span>
+            <button
+              type="button"
+              onClick={() => {
+                setMethod('otp');
+                setErrorMsg('');
+              }}
+              className={`pb-1 border-b-2 transition-all cursor-pointer ${
+                method === 'otp'
+                  ? 'border-[#2563EB] text-[#2563EB] font-bold'
+                  : 'border-transparent text-slate-500 hover:text-slate-800'
+              }`}
+            >
+              Email OTP Code
             </button>
           </div>
 
@@ -233,54 +315,78 @@ export function AuthPage() {
             </motion.div>
           )}
 
-          {/* ── STEP 1: EMAIL ENTRY FORM ── */}
-          {step === 'email' ? (
-            <form onSubmit={handleSendOtp} className="space-y-4">
+          {/* ── METHOD 1: PASSWORD FORM (NO EMAIL RATE LIMIT) ── */}
+          {method === 'password' ? (
+            <form onSubmit={handlePasswordSubmit} className="space-y-3.5">
               {isSignUp && (
                 <div>
-                  <label className="block text-xs font-bold text-slate-800 mb-1.5">
+                  <label className="block text-xs font-bold text-slate-800 mb-1">
                     Full Name *
                   </label>
                   <div className="relative">
-                    <User size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                    <User size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
                     <input
                       type="text"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder="e.g. Aryan Sharma"
                       required={isSignUp}
-                      className="w-full bg-white border border-black/10 focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] rounded-2xl py-3 pl-10 pr-4 text-xs sm:text-sm text-slate-900 placeholder-slate-400 outline-hidden transition-all shadow-inner"
+                      className="w-full bg-white border border-black/10 focus:border-[#2563EB] rounded-2xl py-2.5 pl-10 pr-4 text-xs sm:text-sm text-slate-900 outline-hidden transition-all shadow-inner"
                     />
                   </div>
                 </div>
               )}
 
               <div>
-                <label className="block text-xs font-bold text-slate-800 mb-1.5">
+                <label className="block text-xs font-bold text-slate-800 mb-1">
                   Email Address *
                 </label>
                 <div className="relative">
-                  <Mail size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                  <Mail size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="student@university.edu.in"
                     required
-                    className="w-full bg-white border border-black/10 focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] rounded-2xl py-3 pl-10 pr-4 text-xs sm:text-sm text-slate-900 placeholder-slate-400 outline-hidden transition-all shadow-inner font-mono"
+                    className="w-full bg-white border border-black/10 focus:border-[#2563EB] rounded-2xl py-2.5 pl-10 pr-4 text-xs sm:text-sm text-slate-900 outline-hidden transition-all shadow-inner font-mono"
                   />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-slate-800 mb-1">
+                  Password *
+                </label>
+                <div className="relative">
+                  <Lock size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="••••••••"
+                    required
+                    className="w-full bg-white border border-black/10 focus:border-[#2563EB] rounded-2xl py-2.5 pl-10 pr-10 text-xs sm:text-sm text-slate-900 outline-hidden transition-all shadow-inner font-mono"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 cursor-pointer"
+                  >
+                    {showPassword ? <EyeOff size={15} /> : <Eye size={15} />}
+                  </button>
                 </div>
               </div>
 
               {isSignUp && (
                 <div>
-                  <label className="block text-xs font-bold text-slate-800 mb-1.5">
+                  <label className="block text-xs font-bold text-slate-800 mb-1">
                     Primary Role
                   </label>
                   <select
                     value={role}
                     onChange={(e) => setRole(e.target.value as any)}
-                    className="w-full bg-white border border-black/10 focus:border-[#2563EB] rounded-2xl py-3 px-4 text-xs sm:text-sm text-slate-800 outline-hidden cursor-pointer"
+                    className="w-full bg-white border border-black/10 focus:border-[#2563EB] rounded-2xl py-2.5 px-4 text-xs text-slate-800 outline-hidden cursor-pointer"
                   >
                     <option value="Student">Student (Interview Preparation &amp; Capstone)</option>
                     <option value="Mentor">Mentor / Industry Instructor</option>
@@ -292,106 +398,181 @@ export function AuthPage() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full btn-pill-primary py-3.5 text-xs sm:text-sm font-bold cursor-pointer justify-center flex items-center gap-2 shadow-lg shadow-blue-500/20 disabled:opacity-50 mt-2"
+                className="w-full btn-pill-primary py-3 text-xs sm:text-sm font-bold cursor-pointer justify-center flex items-center gap-2 shadow-lg shadow-blue-500/20 disabled:opacity-50 mt-2"
               >
                 {isLoading ? (
                   <>
                     <Loader2 size={16} className="animate-spin" />
-                    <span>Dispatching OTP...</span>
+                    <span>Processing...</span>
                   </>
                 ) : (
                   <>
-                    <span>Send 6-Digit OTP Code</span>
+                    <span>{isSignUp ? 'Create Account' : 'Sign In Now'}</span>
                     <ArrowRight size={16} />
                   </>
                 )}
               </button>
             </form>
           ) : (
-            /* ── STEP 2: 6-DIGIT OTP VERIFICATION FORM ── */
-            <form onSubmit={handleVerifyOtp} className="space-y-4">
-              <div>
-                <div className="flex items-center justify-between mb-1.5">
-                  <label className="block text-xs font-bold text-slate-800">
-                    Enter 6-Digit Verification Code
+            /* ── METHOD 2: OTP FLOW ── */
+            !otpSent ? (
+              <form onSubmit={handleSendOtp} className="space-y-3.5">
+                {isSignUp && (
+                  <div>
+                    <label className="block text-xs font-bold text-slate-800 mb-1">
+                      Full Name *
+                    </label>
+                    <div className="relative">
+                      <User size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                      <input
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        placeholder="e.g. Aryan Sharma"
+                        required={isSignUp}
+                        className="w-full bg-white border border-black/10 focus:border-[#2563EB] rounded-2xl py-2.5 pl-10 pr-4 text-xs sm:text-sm text-slate-900 outline-hidden"
+                      />
+                    </div>
+                  </div>
+                )}
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-800 mb-1">
+                    Email Address *
                   </label>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setStep('email');
-                      setErrorMsg('');
-                    }}
-                    className="text-[11px] text-[#2563EB] hover:underline font-semibold cursor-pointer"
-                  >
-                    Change Email
-                  </button>
+                  <div className="relative">
+                    <Mail size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="student@university.edu.in"
+                      required
+                      className="w-full bg-white border border-black/10 focus:border-[#2563EB] rounded-2xl py-2.5 pl-10 pr-4 text-xs sm:text-sm text-slate-900 outline-hidden font-mono"
+                    />
+                  </div>
                 </div>
-                <div className="relative">
-                  <KeyRound size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
-                  <input
-                    type="text"
-                    maxLength={6}
-                    value={otpCode}
-                    onChange={(e) => setOtpCode(e.target.value.replace(/\D/g, ''))}
-                    placeholder="123456"
-                    autoFocus
-                    required
-                    className="w-full bg-white border border-black/10 focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] rounded-2xl py-3 pl-10 pr-4 text-sm tracking-widest text-slate-900 placeholder-slate-400 outline-hidden transition-all shadow-inner font-mono font-bold text-center"
-                  />
+
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="w-full btn-pill-primary py-3 text-xs sm:text-sm font-bold cursor-pointer justify-center flex items-center gap-2 shadow-lg shadow-blue-500/20 disabled:opacity-50"
+                >
+                  {isLoading ? (
+                    <>
+                      <Loader2 size={16} className="animate-spin" />
+                      <span>Sending OTP...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>Send 6-Digit OTP Code</span>
+                      <ArrowRight size={16} />
+                    </>
+                  )}
+                </button>
+              </form>
+            ) : (
+              <form onSubmit={handleVerifyOtp} className="space-y-3.5">
+                <div>
+                  <div className="flex items-center justify-between mb-1">
+                    <label className="block text-xs font-bold text-slate-800">
+                      Enter 6-Digit Code
+                    </label>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setOtpSent(false);
+                        setErrorMsg('');
+                      }}
+                      className="text-[11px] text-[#2563EB] hover:underline font-semibold cursor-pointer"
+                    >
+                      Change Email
+                    </button>
+                  </div>
+                  <div className="relative">
+                    <KeyRound size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                    <input
+                      type="text"
+                      maxLength={6}
+                      value={otpCode}
+                      onChange={(e) => setOtpCode(e.target.value.replace(/\D/g, ''))}
+                      placeholder="123456"
+                      autoFocus
+                      required
+                      className="w-full bg-white border border-black/10 focus:border-[#2563EB] rounded-2xl py-2.5 pl-10 pr-4 text-sm tracking-widest text-slate-900 outline-hidden font-mono font-bold text-center"
+                    />
+                  </div>
                 </div>
-              </div>
 
-              <button
-                type="submit"
-                disabled={isLoading || otpCode.length < 6}
-                className="w-full btn-pill-primary py-3.5 text-xs sm:text-sm font-bold cursor-pointer justify-center flex items-center gap-2 shadow-lg shadow-blue-500/20 disabled:opacity-50"
-              >
-                {isLoading ? (
-                  <>
-                    <Loader2 size={16} className="animate-spin" />
-                    <span>Verifying Code...</span>
-                  </>
-                ) : (
-                  <>
-                    <span>Verify &amp; Enter Dashboard</span>
-                    <CheckCircle2 size={16} />
-                  </>
-                )}
-              </button>
+                <button
+                  type="submit"
+                  disabled={isLoading || otpCode.length < 6}
+                  className="w-full btn-pill-primary py-3 text-xs sm:text-sm font-bold cursor-pointer justify-center flex items-center gap-2 shadow-lg shadow-blue-500/20 disabled:opacity-50"
+                >
+                  {isLoading ? (
+                    <>
+                      <Loader2 size={16} className="animate-spin" />
+                      <span>Verifying...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>Verify &amp; Enter Dashboard</span>
+                      <CheckCircle2 size={16} />
+                    </>
+                  )}
+                </button>
 
-              {/* Resend OTP option */}
-              <div className="text-center pt-2">
-                {resendCooldown > 0 ? (
-                  <span className="text-xs text-slate-500 font-mono">
-                    Resend code in {resendCooldown}s
-                  </span>
-                ) : (
-                  <button
-                    type="button"
-                    onClick={handleSendOtp}
-                    className="text-xs text-[#2563EB] hover:underline font-bold flex items-center justify-center gap-1 mx-auto cursor-pointer"
-                  >
-                    <RotateCcw size={12} />
-                    <span>Resend OTP Code</span>
-                  </button>
-                )}
-              </div>
-            </form>
+                <div className="text-center pt-1">
+                  {resendCooldown > 0 ? (
+                    <span className="text-xs text-slate-500 font-mono">
+                      Resend in {resendCooldown}s
+                    </span>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={handleSendOtp}
+                      className="text-xs text-[#2563EB] hover:underline font-bold flex items-center justify-center gap-1 mx-auto cursor-pointer"
+                    >
+                      <RotateCcw size={12} />
+                      <span>Resend OTP Code</span>
+                    </button>
+                  )}
+                </div>
+              </form>
+            )
           )}
 
-          {/* Privacy Note */}
-          <div className="mt-8 text-center">
-            <p className="text-[11px] text-slate-500">
-              By proceeding, you agree to Grow360&apos;s{' '}
-              <a href="#terms" className="underline hover:text-black">
-                Terms of Service
-              </a>{' '}
-              and{' '}
-              <a href="#privacy" className="underline hover:text-black">
-                Privacy Policy
-              </a>
-              .
-            </p>
+          {/* ── 1-CLICK INSTANT TEST LOGIN ── */}
+          <div className="mt-6 pt-5 border-t border-black/10">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-[11px] font-bold text-slate-700 flex items-center gap-1.5">
+                <Zap size={13} className="text-amber-500" />
+                <span>Instant 1-Click Demo Login:</span>
+              </span>
+            </div>
+            <div className="grid grid-cols-3 gap-2">
+              <button
+                type="button"
+                onClick={() => demoLogin('Student')}
+                className="py-1.5 px-2 rounded-xl bg-white/80 hover:bg-white text-[11px] font-semibold text-slate-800 border border-black/10 shadow-2xs hover:border-[#2563EB] transition-all cursor-pointer text-center"
+              >
+                🎓 Student
+              </button>
+              <button
+                type="button"
+                onClick={() => demoLogin('Mentor')}
+                className="py-1.5 px-2 rounded-xl bg-white/80 hover:bg-white text-[11px] font-semibold text-slate-800 border border-black/10 shadow-2xs hover:border-[#2563EB] transition-all cursor-pointer text-center"
+              >
+                👨‍🏫 Mentor
+              </button>
+              <button
+                type="button"
+                onClick={() => demoLogin('Placement Officer')}
+                className="py-1.5 px-2 rounded-xl bg-white/80 hover:bg-white text-[11px] font-semibold text-slate-800 border border-black/10 shadow-2xs hover:border-[#2563EB] transition-all cursor-pointer text-center"
+              >
+                🏢 TPO Officer
+              </button>
+            </div>
           </div>
         </div>
 
@@ -406,11 +587,9 @@ export function AuthPage() {
           RIGHT HALF: EDITORIAL BRAND SHOWCASE
       ======================================================== */}
       <div className="hidden lg:flex w-1/2 bg-[#0E131F] text-white flex-col justify-between p-14 relative overflow-hidden">
-        {/* Background Ambient Glows */}
         <div className="absolute top-1/4 right-10 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-10 left-10 w-80 h-80 bg-indigo-600/20 rounded-full blur-3xl pointer-events-none" />
 
-        {/* Top Feature Pill */}
         <div className="relative z-10">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-400/20 text-blue-300 text-xs font-mono font-semibold">
             <Sparkles size={13} className="text-blue-400" />
@@ -418,7 +597,6 @@ export function AuthPage() {
           </div>
         </div>
 
-        {/* Center Editorial Quote & Feature Highlights */}
         <div className="relative z-10 max-w-lg space-y-6">
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight font-[family-name:var(--font-display)] leading-tight">
             Accelerate your engineering journey with real industry mentors.
@@ -444,7 +622,6 @@ export function AuthPage() {
           </div>
         </div>
 
-        {/* Bottom Testimonial Snippet */}
         <div className="relative z-10 p-5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
           <p className="text-xs text-slate-300 italic mb-3">
             &ldquo;Grow360 mock drives helped our batch master live system design questions and clear top software engineering campus drives with ease.&rdquo;
