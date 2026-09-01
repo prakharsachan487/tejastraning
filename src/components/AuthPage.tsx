@@ -2,70 +2,101 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import {
   ArrowLeft,
-  Eye,
-  EyeOff,
+  Mail,
+  User,
+  KeyRound,
   CheckCircle2,
+  AlertCircle,
+  Loader2,
+  Sparkles,
+  ArrowRight,
+  ShieldCheck,
+  RotateCcw
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 export function AuthPage() {
-  const { login } = useAuth();
+  const { sendEmailOtp, verifyEmailOtp, signInWithGoogle, isLoading } = useAuth();
   const [tab, setTab] = useState<'login' | 'signup'>('login');
 
   // Form State
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
+  const [role, setRole] = useState<'Student' | 'Mentor' | 'Placement Officer'>('Student');
+  const [otpCode, setOtpCode] = useState('');
+  const [step, setStep] = useState<'email' | 'otp'>('email');
+
+  const [errorMsg, setErrorMsg] = useState('');
+  const [successMsg, setSuccessMsg] = useState('');
+  const [resendCooldown, setResendCooldown] = useState(0);
 
   const isSignUp = tab === 'signup';
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // ─── Step 1: Send OTP to Email ─────────────────────────────
+  const handleSendOtp = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
+    if (!email.trim() || !email.includes('@')) {
+      setErrorMsg('Please enter a valid email address.');
+      return;
+    }
 
-    setTimeout(() => {
-      setIsLoading(false);
-      setIsSuccess(true);
+    if (isSignUp && !name.trim()) {
+      setErrorMsg('Please enter your full name.');
+      return;
+    }
 
-      setTimeout(() => {
-        const enteredName = name.trim() || (email ? email.split('@')[0] : 'Student User');
-        login({
-          name: enteredName,
-          email: email.trim(),
-          role: 'Student',
-          avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+    setErrorMsg('');
+    setSuccessMsg('');
+
+    const res = await sendEmailOtp(email.trim());
+    if (!res.success) {
+      setErrorMsg(res.error || 'Failed to send OTP. Please check your Supabase Email provider settings.');
+    } else {
+      setStep('otp');
+      setSuccessMsg(`A 6-digit verification code has been dispatched to ${email}.`);
+      setResendCooldown(45);
+      const timer = setInterval(() => {
+        setResendCooldown((prev) => {
+          if (prev <= 1) {
+            clearInterval(timer);
+            return 0;
+          }
+          return prev - 1;
         });
-        setIsSuccess(false);
-        window.location.hash = '#dashboard';
-      }, 600);
-    }, 500);
+      }, 1000);
+    }
   };
 
-  const handleSocialLogin = () => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      login({
-        name: `Google User`,
-        email: email || `user@google.com`,
-        role: 'Student',
-        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80',
-      });
-      window.location.hash = '#dashboard';
-    }, 500);
+  // ─── Step 2: Verify OTP Token ──────────────────────────────
+  const handleVerifyOtp = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!otpCode.trim() || otpCode.trim().length < 6) {
+      setErrorMsg('Please enter the complete 6-digit OTP code.');
+      return;
+    }
+
+    setErrorMsg('');
+    const res = await verifyEmailOtp(email.trim(), otpCode.trim(), role, name.trim());
+    if (!res.success) {
+      setErrorMsg(res.error || 'Invalid or expired OTP code. Please try again.');
+    }
+  };
+
+  // ─── Google OAuth Login ────────────────────────────────────
+  const handleGoogleSignIn = async () => {
+    setErrorMsg('');
+    const res = await signInWithGoogle();
+    if (!res.success) {
+      setErrorMsg(res.error || 'Google Sign-In initialization failed.');
+    }
   };
 
   return (
-    <div className="min-h-screen w-full bg-[#F7F4EC] text-[#1E1E24] flex flex-col lg:flex-row relative">
-      
+    <div className="min-h-screen w-full bg-[#F7F4EC] text-[#1E1E24] flex flex-col lg:flex-row relative font-sans selection:bg-[#2563EB] selection:text-white">
       {/* ========================================================
-          LEFT HALF: FULL SCREEN AUTH FORM
+          LEFT HALF: AUTHENTICATION CONTAINER
       ======================================================== */}
       <div className="w-full lg:w-1/2 min-h-screen flex flex-col justify-between p-6 sm:p-10 lg:p-14 bg-gradient-to-b from-[#FAF8F3] via-[#F4F0E6] to-[#ECE5D8] relative z-10">
-        
         {/* Top Header Row with Back Button & Brand Badge */}
         <div className="flex items-center justify-between w-full">
           <button
@@ -84,351 +115,351 @@ export function AuthPage() {
               alt="Grow360 Logo"
               className="h-4 w-auto object-contain rounded"
             />
-            <span className="text-xs font-extrabold text-[#1E1E24] tracking-tight">GROW<span className="text-[#00B4D8]">360°</span></span>
+            <span className="text-xs font-extrabold text-[#1E1E24] tracking-tight">
+              GROW<span className="text-[#2563EB]">360°</span>
+            </span>
           </div>
         </div>
 
-        {/* Center Form Content */}
+        {/* Center Form Box */}
         <div className="max-w-md w-full mx-auto my-auto py-8">
-          
-          {/* Form Title & Subtitle */}
+          {/* Form Title */}
           <div className="text-center mb-8">
             <h1 className="text-3xl sm:text-4xl font-extrabold text-[#1A1A1F] tracking-tight font-[family-name:var(--font-display)]">
               {isSignUp ? 'Create an account' : 'Welcome back'}
             </h1>
             <p className="text-xs sm:text-sm text-slate-600 mt-2 font-normal">
               {isSignUp
-                ? 'Grow360 — Decoding the corporate world. Sign up to get started.'
-                : 'Log in to access your placement roadmap, diagnostics & mentor sessions.'}
+                ? 'Join thousands of students and mentors accelerating their careers.'
+                : 'Sign in to access your interview reports, capstone rubrics & dashboard.'}
             </p>
           </div>
 
-          {/* Success Animation Notification */}
-          {isSuccess ? (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="py-12 text-center"
+          {/* Social Sign-In (Google OAuth) */}
+          <button
+            type="button"
+            onClick={handleGoogleSignIn}
+            disabled={isLoading}
+            className="w-full flex items-center justify-center gap-3 py-3.5 px-4 rounded-2xl bg-white hover:bg-slate-50 border border-black/12 text-xs sm:text-sm font-bold text-slate-800 shadow-xs transition-all hover:shadow-md cursor-pointer disabled:opacity-50"
+          >
+            <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
+              <path
+                fill="#4285F4"
+                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+              />
+              <path
+                fill="#34A853"
+                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+              />
+              <path
+                fill="#FBBC05"
+                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"
+              />
+              <path
+                fill="#EA4335"
+                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
+              />
+            </svg>
+            <span>Continue with Google</span>
+          </button>
+
+          {/* Divider */}
+          <div className="relative my-6 text-center">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-black/10"></div>
+            </div>
+            <span className="relative px-4 bg-[#F5F2E9] text-[11px] font-mono text-slate-500 uppercase tracking-widest">
+              or sign in with email OTP
+            </span>
+          </div>
+
+          {/* Toggle Login / Signup Pills */}
+          <div className="flex p-1 bg-black/5 rounded-2xl mb-6 border border-black/5">
+            <button
+              type="button"
+              onClick={() => {
+                setTab('login');
+                setStep('email');
+                setErrorMsg('');
+                setSuccessMsg('');
+              }}
+              className={`flex-1 py-2 text-xs font-bold rounded-xl transition-all cursor-pointer ${
+                tab === 'login'
+                  ? 'bg-white text-slate-900 shadow-sm'
+                  : 'text-slate-600 hover:text-black'
+              }`}
             >
-              <div className="w-16 h-16 rounded-full bg-emerald-500/15 text-emerald-600 border border-emerald-500/30 flex items-center justify-center mx-auto mb-4">
-                <CheckCircle2 size={36} />
-              </div>
-              <h3 className="text-2xl font-bold text-slate-900">
-                {isSignUp ? 'Account Created Successfully!' : 'Welcome Back!'}
-              </h3>
-              <p className="text-xs text-slate-600 mt-1">
-                Redirecting to your dashboard...
-              </p>
+              Sign In
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setTab('signup');
+                setStep('email');
+                setErrorMsg('');
+                setSuccessMsg('');
+              }}
+              className={`flex-1 py-2 text-xs font-bold rounded-xl transition-all cursor-pointer ${
+                tab === 'signup'
+                  ? 'bg-white text-slate-900 shadow-sm'
+                  : 'text-slate-600 hover:text-black'
+              }`}
+            >
+              Create Account
+            </button>
+          </div>
+
+          {/* Error Message */}
+          {errorMsg && (
+            <motion.div
+              initial={{ opacity: 0, y: -5 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mb-4 p-3 rounded-2xl bg-rose-50 border border-rose-200 text-rose-800 text-xs flex items-start gap-2"
+            >
+              <AlertCircle size={15} className="shrink-0 mt-0.5 text-rose-600" />
+              <span>{errorMsg}</span>
             </motion.div>
-          ) : (
-            /* Main Form */
-            <form onSubmit={handleSubmit} autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck={false} className="space-y-4">
-              
-              {/* Full Name Field (Sign Up Only) */}
+          )}
+
+          {/* Success Message */}
+          {successMsg && (
+            <motion.div
+              initial={{ opacity: 0, y: -5 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mb-4 p-3 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs flex items-start gap-2"
+            >
+              <CheckCircle2 size={15} className="shrink-0 mt-0.5 text-emerald-600" />
+              <span>{successMsg}</span>
+            </motion.div>
+          )}
+
+          {/* ── STEP 1: EMAIL ENTRY FORM ── */}
+          {step === 'email' ? (
+            <form onSubmit={handleSendOtp} className="space-y-4">
               {isSignUp && (
                 <div>
-                  <label className="block text-xs font-medium text-slate-700 mb-1.5 ml-3.5">
-                    Full name
+                  <label className="block text-xs font-bold text-slate-800 mb-1.5">
+                    Full Name *
                   </label>
-                  <input
-                    type="text"
-                    required
-                    autoComplete="new-password"
-                    autoCorrect="off"
-                    autoCapitalize="off"
-                    spellCheck={false}
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder="Amélie Laurent"
-                    className="w-full px-5 py-3.5 rounded-full bg-white border border-black/10 text-sm text-[#1E1E24] placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#A5C4BE] focus:border-transparent shadow-xs transition-all"
-                  />
+                  <div className="relative">
+                    <User size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                    <input
+                      type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder="e.g. Aryan Sharma"
+                      required={isSignUp}
+                      className="w-full bg-white border border-black/10 focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] rounded-2xl py-3 pl-10 pr-4 text-xs sm:text-sm text-slate-900 placeholder-slate-400 outline-hidden transition-all shadow-inner"
+                    />
+                  </div>
                 </div>
               )}
 
-              {/* Email Field */}
               <div>
-                <label className="block text-xs font-medium text-slate-700 mb-1.5 ml-3.5">
-                  Email address
+                <label className="block text-xs font-bold text-slate-800 mb-1.5">
+                  Email Address *
                 </label>
-                <input
-                  type="email"
-                  required
-                  autoComplete="new-password"
-                  autoCorrect="off"
-                  autoCapitalize="off"
-                  spellCheck={false}
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="amelielaurent7622@gmail.com"
-                  className="w-full px-5 py-3.5 rounded-full bg-white border border-black/10 text-sm text-[#1E1E24] placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#A5C4BE] focus:border-transparent shadow-xs transition-all"
-                />
+                <div className="relative">
+                  <Mail size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="student@university.edu.in"
+                    required
+                    className="w-full bg-white border border-black/10 focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] rounded-2xl py-3 pl-10 pr-4 text-xs sm:text-sm text-slate-900 placeholder-slate-400 outline-hidden transition-all shadow-inner font-mono"
+                  />
+                </div>
               </div>
 
-              {/* Password Field */}
-              <div>
-                <div className="flex items-center justify-between ml-3.5 mb-1.5">
-                  <label className="block text-xs font-medium text-slate-700">
-                    Password
+              {isSignUp && (
+                <div>
+                  <label className="block text-xs font-bold text-slate-800 mb-1.5">
+                    Primary Role
                   </label>
-                  {!isSignUp && (
-                    <button
-                      type="button"
-                      onClick={() => alert('Password reset link sent to your email!')}
-                      className="text-xs text-[#2563EB] hover:underline font-medium cursor-pointer"
-                    >
-                      Forgot?
-                    </button>
-                  )}
+                  <select
+                    value={role}
+                    onChange={(e) => setRole(e.target.value as any)}
+                    className="w-full bg-white border border-black/10 focus:border-[#2563EB] rounded-2xl py-3 px-4 text-xs sm:text-sm text-slate-800 outline-hidden cursor-pointer"
+                  >
+                    <option value="Student">Student (Interview Preparation &amp; Capstone)</option>
+                    <option value="Mentor">Mentor / Industry Instructor</option>
+                    <option value="Placement Officer">College Placement Officer (TPO)</option>
+                  </select>
                 </div>
-                <div className="relative">
-                  <input
-                    type={showPassword ? 'text' : 'password'}
-                    required
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="••••••••••••••••"
-                    className="w-full pl-5 pr-12 py-3.5 rounded-full bg-white border border-black/10 text-sm text-[#1E1E24] placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#A5C4BE] focus:border-transparent shadow-xs transition-all"
-                  />
+              )}
+
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="w-full btn-pill-primary py-3.5 text-xs sm:text-sm font-bold cursor-pointer justify-center flex items-center gap-2 shadow-lg shadow-blue-500/20 disabled:opacity-50 mt-2"
+              >
+                {isLoading ? (
+                  <>
+                    <Loader2 size={16} className="animate-spin" />
+                    <span>Dispatching OTP...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>Send 6-Digit OTP Code</span>
+                    <ArrowRight size={16} />
+                  </>
+                )}
+              </button>
+            </form>
+          ) : (
+            /* ── STEP 2: 6-DIGIT OTP VERIFICATION FORM ── */
+            <form onSubmit={handleVerifyOtp} className="space-y-4">
+              <div>
+                <div className="flex items-center justify-between mb-1.5">
+                  <label className="block text-xs font-bold text-slate-800">
+                    Enter 6-Digit Verification Code
+                  </label>
                   <button
                     type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-black transition-colors cursor-pointer"
+                    onClick={() => {
+                      setStep('email');
+                      setErrorMsg('');
+                    }}
+                    className="text-[11px] text-[#2563EB] hover:underline font-semibold cursor-pointer"
                   >
-                    {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                    Change Email
                   </button>
+                </div>
+                <div className="relative">
+                  <KeyRound size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                  <input
+                    type="text"
+                    maxLength={6}
+                    value={otpCode}
+                    onChange={(e) => setOtpCode(e.target.value.replace(/\D/g, ''))}
+                    placeholder="123456"
+                    autoFocus
+                    required
+                    className="w-full bg-white border border-black/10 focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] rounded-2xl py-3 pl-10 pr-4 text-sm tracking-widest text-slate-900 placeholder-slate-400 outline-hidden transition-all shadow-inner font-mono font-bold text-center"
+                  />
                 </div>
               </div>
 
-              {/* Primary Golden Submit Button */}
-              <div className="pt-2">
-                <button
-                  type="submit"
-                  disabled={isLoading}
-                  className="w-full py-4 px-6 rounded-full bg-gradient-to-r from-[#B8D5CF] via-[#A5C4BE] to-[#3B82F6] hover:from-[#CBE3DE] hover:to-[#2563EB] text-[#1E1E24] font-bold text-sm shadow-md shadow-[#2563EB]/ active:scale-[0.99] transition-all duration-200 cursor-pointer flex items-center justify-center gap-2"
-                >
-                  {isLoading ? (
-                    <span className="inline-block w-4 h-4 border-2 border-black/20 border-t-black rounded-full animate-spin" />
-                  ) : (
-                    <span>{isSignUp ? 'Create Account' : 'Sign In to Dashboard'}</span>
-                  )}
-                </button>
-              </div>
+              <button
+                type="submit"
+                disabled={isLoading || otpCode.length < 6}
+                className="w-full btn-pill-primary py-3.5 text-xs sm:text-sm font-bold cursor-pointer justify-center flex items-center gap-2 shadow-lg shadow-blue-500/20 disabled:opacity-50"
+              >
+                {isLoading ? (
+                  <>
+                    <Loader2 size={16} className="animate-spin" />
+                    <span>Verifying Code...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>Verify &amp; Enter Dashboard</span>
+                    <CheckCircle2 size={16} />
+                  </>
+                )}
+              </button>
 
-              {/* Divider */}
-              <div className="flex items-center gap-3 my-4">
-                <div className="flex-1 h-px bg-black/10" />
-                <span className="text-[11px] font-mono uppercase text-slate-400 tracking-wider">
-                  or
-                </span>
-                <div className="flex-1 h-px bg-black/10" />
-              </div>
-
-              {/* Social Login Button (Google) */}
-              <div>
-                <button
-                  type="button"
-                  onClick={() => handleSocialLogin()}
-                  className="w-full flex items-center justify-center gap-3 py-3.5 px-4 rounded-full bg-white hover:bg-slate-50 border border-black/10 text-xs font-semibold text-[#1E1E24] shadow-xs hover:shadow transition-all cursor-pointer"
-                >
-                  <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
-                    <path
-                      fill="#EA4335"
-                      d="M12 5c1.56 0 2.97.55 4.08 1.45l3.06-3.06C17.29 1.7 14.8 1 12 1 7.4 1 3.47 3.6 1.56 7.42l3.71 2.88C6.18 7.35 8.84 5 12 5z"
-                    />
-                    <path
-                      fill="#4285F4"
-                      d="M23.49 12.27c0-.79-.07-1.54-.19-2.27H12v4.51h6.47c-.29 1.48-1.14 2.73-2.4 3.58l3.71 2.88c2.16-2 3.71-4.94 3.71-8.7z"
-                    />
-                    <path
-                      fill="#FBBC05"
-                      d="M5.27 14.3c-.24-.72-.38-1.49-.38-2.3s.14-1.58.38-2.3L1.56 6.82C.56 8.8 0 11.02 0 13.4s.56 4.6 1.56 6.58l3.71-2.88z"
-                    />
-                    <path
-                      fill="#34A853"
-                      d="M12 23c3.24 0 5.95-1.08 7.93-2.91l-3.71-2.88c-1.08.72-2.45 1.16-4.22 1.16-3.16 0-5.82-2.35-6.73-5.3L1.56 16.95C3.47 20.77 7.4 23 12 23z"
-                    />
-                  </svg>
-                  <span>Continue with Google</span>
-                </button>
+              {/* Resend OTP option */}
+              <div className="text-center pt-2">
+                {resendCooldown > 0 ? (
+                  <span className="text-xs text-slate-500 font-mono">
+                    Resend code in {resendCooldown}s
+                  </span>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={handleSendOtp}
+                    className="text-xs text-[#2563EB] hover:underline font-bold flex items-center justify-center gap-1 mx-auto cursor-pointer"
+                  >
+                    <RotateCcw size={12} />
+                    <span>Resend OTP Code</span>
+                  </button>
+                )}
               </div>
             </form>
           )}
 
-          {/* Bottom Switcher */}
-          <div className="mt-8 text-center text-xs text-slate-600">
-            {isSignUp ? (
-              <span>
-                Already have an account?{' '}
-                <button
-                  onClick={() => setTab('login')}
-                  className="font-bold text-[#1E1E24] hover:underline cursor-pointer ml-1"
-                >
-                  Sign in
-                </button>
-              </span>
-            ) : (
-              <span>
-                Don't have an account?{' '}
-                <button
-                  onClick={() => setTab('signup')}
-                  className="font-bold text-[#1E1E24] hover:underline cursor-pointer ml-1"
-                >
-                  Sign up
-                </button>
-              </span>
-            )}
+          {/* Privacy Note */}
+          <div className="mt-8 text-center">
+            <p className="text-[11px] text-slate-500">
+              By proceeding, you agree to Grow360&apos;s{' '}
+              <a href="#terms" className="underline hover:text-black">
+                Terms of Service
+              </a>{' '}
+              and{' '}
+              <a href="#privacy" className="underline hover:text-black">
+                Privacy Policy
+              </a>
+              .
+            </p>
           </div>
         </div>
 
-        {/* Bottom Footer Row */}
-        <div className="flex flex-wrap items-center justify-between text-xs text-slate-500 pt-6 border-t border-black/10">
-          <span>© {new Date().getFullYear()} Grow360 — Decoding the corporate world. All rights reserved.</span>
-          <div className="flex items-center gap-4">
-            <a
-              href="#terms"
-              onClick={(e) => {
-                e.preventDefault();
-                window.location.hash = '#terms';
-              }}
-              className="hover:underline hover:text-black transition-colors"
-            >
-              Terms
-            </a>
-            <a
-              href="#privacy"
-              onClick={(e) => {
-                e.preventDefault();
-                window.location.hash = '#privacy';
-              }}
-              className="hover:underline hover:text-black transition-colors"
-            >
-              Privacy Policy
-            </a>
-          </div>
+        {/* Bottom Security Badge */}
+        <div className="w-full flex items-center justify-center gap-2 text-slate-500 text-[11px] font-mono">
+          <ShieldCheck size={14} className="text-[#2563EB]" />
+          <span>Protected by Supabase 256-bit Cloud Security</span>
         </div>
-
       </div>
 
       {/* ========================================================
-          RIGHT HALF: FULL SCREEN VISUAL & INTERACTIVE SHOWCASE
+          RIGHT HALF: EDITORIAL BRAND SHOWCASE
       ======================================================== */}
-      <div className="hidden lg:flex lg:w-1/2 min-h-screen relative overflow-hidden bg-[#F8F9FB]">
-        
-        {/* Full Screen Background Image */}
-        <img
-          src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=85"
-          alt="Team collaboration"
-          className="w-full h-full object-cover select-none"
-        />
+      <div className="hidden lg:flex w-1/2 bg-[#0E131F] text-white flex-col justify-between p-14 relative overflow-hidden">
+        {/* Background Ambient Glows */}
+        <div className="absolute top-1/4 right-10 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-10 left-10 w-80 h-80 bg-indigo-600/20 rounded-full blur-3xl pointer-events-none" />
 
-        {/* Gradient vignette for contrast */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/40 pointer-events-none" />
+        {/* Top Feature Pill */}
+        <div className="relative z-10">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-400/20 text-blue-300 text-xs font-mono font-semibold">
+            <Sparkles size={13} className="text-blue-400" />
+            <span>Grow360 Student &amp; Placement Suite</span>
+          </div>
+        </div>
 
-        {/* 1. TOP FLOATING BADGE: "Task Review With Team · 09:30am-10:00am" */}
-        <motion.div
-          initial={{ y: -20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          className="absolute top-10 left-10 flex flex-col gap-2 z-20"
-        >
-          <div className="px-5 py-3 rounded-2xl bg-[#B8D5CF] text-[#1E1E24] shadow-xl shadow-black/40 flex items-center justify-between gap-6 font-semibold text-xs border border-amber-300">
+        {/* Center Editorial Quote & Feature Highlights */}
+        <div className="relative z-10 max-w-lg space-y-6">
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight font-[family-name:var(--font-display)] leading-tight">
+            Accelerate your engineering journey with real industry mentors.
+          </h2>
+
+          <p className="text-sm text-slate-300 leading-relaxed font-normal">
+            Access 1-on-1 mock technical interviews, production system design rubrics, and automated coding performance analytics designed by engineers from Meta, Google, and Deloitte.
+          </p>
+
+          <div className="grid grid-cols-2 gap-4 pt-4 border-t border-white/10">
             <div>
-              <div className="font-bold text-sm">Task Review With Team</div>
-              <div className="text-xs opacity-80 mt-0.5">09:30am-10:00am</div>
+              <span className="text-2xl font-extrabold text-white font-[family-name:var(--font-display)]">
+                90%+
+              </span>
+              <p className="text-xs text-slate-400 mt-0.5">Tier-1 Placement Rate</p>
             </div>
-            <span className="w-2.5 h-2.5 rounded-full bg-black shrink-0" />
-          </div>
-
-          <div className="px-4 py-2 rounded-xl bg-slate-900/30 backdrop-blur-md text-white text-xs font-mono shadow-md w-fit flex items-center gap-2 border border-white/15">
-            <span>09:30am-10:00am</span>
-            <span className="w-2 h-2 rounded-full bg-amber-400" />
-          </div>
-        </motion.div>
-
-        {/* 2. FLOATING AVATAR CLUSTER (Right side) */}
-        <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          className="absolute top-36 right-12 flex flex-col items-center gap-1.5 z-20"
-        >
-          <div className="relative">
-            <img
-              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80"
-              alt="Mentor 1"
-              className="w-14 h-14 rounded-full object-cover border-2 border-white shadow-xl"
-            />
-            <span className="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-white" />
-          </div>
-          
-          <div className="flex -space-x-2.5">
-            <img
-              src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&q=80"
-              alt="Mentor 2"
-              className="w-10 h-10 rounded-full object-cover border-2 border-white shadow-md"
-            />
-            <img
-              src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80"
-              alt="Mentor 3"
-              className="w-10 h-10 rounded-full object-cover border-2 border-white shadow-md"
-            />
-          </div>
-        </motion.div>
-
-        {/* 3. FROSTED GLASS CALENDAR STRIP */}
-        <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.4 }}
-          className="absolute bottom-32 left-10 right-10 z-20"
-        >
-          <div className="p-4 rounded-3xl bg-white/20 backdrop-blur-xl border border-white/30 text-white shadow-2xl overflow-hidden relative">
-            <div className="grid grid-cols-7 gap-2 text-center font-mono">
-              {[
-                { day: 'Sun', date: '22' },
-                { day: 'Mon', date: '23' },
-                { day: 'Tue', date: '24' },
-                { day: 'Wed', date: '25', active: true },
-                { day: 'Thu', date: '26' },
-                { day: 'Fri', date: '27' },
-                { day: 'Sat', date: '28' },
-              ].map((item, idx) => (
-                <div
-                  key={idx}
-                  className={`py-2 px-1.5 rounded-2xl transition-all ${
-                    item.active
-                      ? 'bg-white text-black font-bold shadow-lg scale-105'
-                      : 'hover:bg-white/10'
-                  }`}
-                >
-                  <div className={`text-xs ${item.active ? 'text-slate-700' : 'text-slate-300'}`}>
-                    {item.day}
-                  </div>
-                  <div className="text-sm font-bold mt-0.5">{item.date}</div>
-                </div>
-              ))}
+            <div>
+              <span className="text-2xl font-extrabold text-blue-400 font-[family-name:var(--font-display)]">
+                120+
+              </span>
+              <p className="text-xs text-slate-400 mt-0.5">Corporate Mentors</p>
             </div>
           </div>
-        </motion.div>
+        </div>
 
-        {/* 4. BOTTOM FLOATING PILL */}
-        <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          className="absolute bottom-10 left-10 z-20 flex items-center gap-3 px-5 py-3 rounded-2xl bg-slate-900/30 backdrop-blur-md border border-white/15 text-white shadow-2xl"
-        >
-          <div className="w-8 h-8 rounded-xl bg-amber-400 flex items-center justify-center text-black font-bold text-sm">
-            ★
+        {/* Bottom Testimonial Snippet */}
+        <div className="relative z-10 p-5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
+          <p className="text-xs text-slate-300 italic mb-3">
+            &ldquo;Grow360 mock drives helped our batch master live system design questions and clear top software engineering campus drives with ease.&rdquo;
+          </p>
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-500 to-indigo-500 flex items-center justify-center font-bold text-xs text-white">
+              V
+            </div>
+            <div>
+              <p className="text-xs font-bold text-white">Parul University Cohort</p>
+              <p className="text-[10px] font-mono text-slate-400">Placed at Tier-1 MNC</p>
+            </div>
           </div>
-          <div className="text-left">
-            <div className="text-xs sm:text-sm font-bold">Placement readiness test ready</div>
-            <div className="text-[11px] text-slate-300 font-mono">35 mock tests waiting</div>
-          </div>
-        </motion.div>
-
+        </div>
       </div>
-
     </div>
   );
 }

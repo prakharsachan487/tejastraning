@@ -1,8 +1,10 @@
-import { createContext, useContext, useState, useCallback, type ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from 'react';
+import { supabase } from '../lib/supabase';
 
 export type AuthMode = 'login' | 'signup';
 
 export interface UserProfile {
+  id?: string;
   name: string;
   email: string;
   role: 'Student' | 'Mentor' | 'Placement Officer';
@@ -13,11 +15,15 @@ interface AuthContextValue {
   isAuthOpen: boolean;
   authMode: AuthMode;
   user: UserProfile | null;
+  isLoading: boolean;
   openAuth: (mode?: AuthMode) => void;
   closeAuth: () => void;
   setAuthMode: (mode: AuthMode) => void;
   login: (profile: UserProfile) => void;
-  logout: () => void;
+  logout: () => Promise<void>;
+  sendEmailOtp: (email: string) => Promise<{ success: boolean; error?: string }>;
+  verifyEmailOtp: (email: string, token: string, role?: string, name?: string) => Promise<{ success: boolean; error?: string }>;
+  signInWithGoogle: () => Promise<{ success: boolean; error?: string }>;
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null);
@@ -25,10 +31,53 @@ const AuthContext = createContext<AuthContextValue | null>(null);
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [authMode, setAuthMode] = useState<AuthMode>('signup');
+  const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState<UserProfile | null>(() => {
     const saved = localStorage.getItem('tejas_user');
     return saved ? JSON.parse(saved) : null;
   });
+
+  // ─── Listen for Supabase Auth State Changes (Google OAuth Redirects & Sessions) ──
+  useEffect(() => {
+    // 1. Check initial Supabase session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session?.user) {
+        const u = session.user;
+        const profile: UserProfile = {
+          id: u.id,
+          name: u.user_metadata?.full_name || u.user_metadata?.name || u.email?.split('@')[0] || 'User',
+          email: u.email || '',
+          role: (u.user_metadata?.role as any) || 'Student',
+          avatar: u.user_metadata?.avatar_url || u.user_metadata?.picture || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+        };
+        setUser(profile);
+        localStorage.setItem('tejas_user', JSON.stringify(profile));
+      }
+    });
+
+    // 2. Subscribe to auth state changes (OAuth redirects, tokens, signouts)
+    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+      if (session?.user) {
+        const u = session.user;
+        const profile: UserProfile = {
+          id: u.id,
+          name: u.user_metadata?.full_name || u.user_metadata?.name || u.email?.split('@')[0] || 'User',
+          email: u.email || '',
+          role: (u.user_metadata?.role as any) || 'Student',
+          avatar: u.user_metadata?.avatar_url || u.user_metadata?.picture || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+        };
+        setUser(profile);
+        localStorage.setItem('tejas_user', JSON.stringify(profile));
+      } else if (event === 'SIGNED_OUT') {
+        setUser(null);
+        localStorage.removeItem('tejas_user');
+      }
+    });
+
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
+  }, []);
 
   const openAuth = useCallback((mode: AuthMode = 'signup') => {
     setAuthMode(mode);
@@ -48,11 +97,117 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     window.location.hash = '#dashboard';
   }, [closeAuth]);
 
-  const logout = useCallback(() => {
+  const logout = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      await supabase.auth.signOut();
+    } catch {}
     setUser(null);
     localStorage.removeItem('tejas_user');
+    setIsLoading(false);
     window.location.hash = '';
   }, []);
+
+  // ─── 1. Send Email OTP (Magic 6-Digit Code) ────────────────
+  const sendEmailOtp = async (email: string) => {
+    setIsLoading(true);
+    try {
+      const { error } = await supabase.auth.signInWithOtp({
+        email: email.trim().toLowerCase(),
+        options: {
+          shouldCreateUser: true,
+        },
+      });
+
+      setIsLoading(false);
+      if (error) {
+        return { success: false, error: error.message };
+      }
+      return { success: true };
+    } catch (err: any) {
+      setIsLoading(false);
+      return { success: false, error: err?.message || 'Failed to send OTP code.' };
+    }
+  };
+
+  // ─── 2. Verify Email OTP ───────────────────────────────────
+  const verifyEmailOtp = async (email: string, token: string, role = 'Student', name?: string) => {
+    setIsLoading(true);
+    try {
+      const { data, error } = await supabase.auth.verifyOtp({
+        email: email.trim().toLowerCase(),
+        token: token.trim(),
+        type: 'email',
+      });
+
+      if (error) {
+        setIsLoading(false);
+        return { success: false, error: error.message };
+      }
+
+      if (data?.user) {
+        const u = data.user;
+        const displayName = name || u.user_metadata?.full_name || u.user_metadata?.name || u.email?.split('@')[0] || 'Student User';
+        
+        // Update user metadata if new name/role
+        if (name || role) {
+          await supabase.auth.updateUser({
+            data: { full_name: displayName, role },
+          });
+        }
+
+        const profile: UserProfile = {
+          id: u.id,
+          name: displayName,
+          email: u.email || email,
+          role: role as any,
+          avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+        };
+
+        setUser(profile);
+        localStorage.setItem('tejas_user', JSON.stringify(profile));
+        closeAuth();
+        window.location.hash = '#dashboard';
+      }
+
+      setIsLoading(false);
+      return { success: true };
+    } catch (err: any) {
+      setIsLoading(false);
+      return { success: false, error: err?.message || 'OTP verification failed.' };
+    }
+  };
+
+  // ─── 3. Google OAuth Sign-In ──────────────────────────────
+  const signInWithGoogle = async () => {
+    setIsLoading(true);
+    try {
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}${window.location.pathname}`,
+          queryParams: {
+            access_type: 'offline',
+            prompt: 'consent',
+          },
+        },
+      });
+
+      if (error) {
+        setIsLoading(false);
+        return { success: false, error: error.message };
+      }
+
+      if (data?.url) {
+        window.location.href = data.url;
+      }
+
+      return { success: true };
+    } catch (err: any) {
+      setIsLoading(false);
+      return { success: false, error: err?.message || 'Google Sign-In failed.' };
+    }
+  };
 
   return (
     <AuthContext.Provider
@@ -60,11 +215,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         isAuthOpen,
         authMode,
         user,
+        isLoading,
         openAuth,
         closeAuth,
         setAuthMode,
         login,
         logout,
+        sendEmailOtp,
+        verifyEmailOtp,
+        signInWithGoogle,
       }}
     >
       {children}
