@@ -1,74 +1,11 @@
 import { motion } from 'framer-motion';
 import { Sparkles, MapPin, Users, Calendar } from 'lucide-react';
-
-interface MomentCard {
-  title: string;
-  category: string;
-  categoryColor: string;
-  description: string;
-  stats: string;
-  location: string;
-  image: string;
-}
-
-const mentoringMoments: MomentCard[] = [
-  {
-    title: 'Pharmaceutical Analytics & BI Dashboard Capstone',
-    category: 'Capstone Presentation',
-    categoryColor: '#2563EB',
-    description: 'Student cohort presenting real-time corporate sales & operational dashboards built with Power BI and data analytics.',
-    stats: 'Live Capstone Evaluation',
-    location: 'Campus Analytics Lab',
-    image: '/moments/moment_bi_dashboard_presentation.jpg',
-  },
-  {
-    title: 'On-Campus Placement & Resume Masterclass',
-    category: 'Resume & Strategy',
-    categoryColor: '#0668E1',
-    description: 'Interactive whiteboard breakdown of high-impact recruiter-ready resumes, projects, and domain technical skills.',
-    stats: '100% Placement Aligned',
-    location: 'Parul University Campus',
-    image: '/moments/campus_moment_1.jpg',
-  },
-  {
-    title: 'Full-Batch Technical Training & Interview Prep',
-    category: 'Batch Cohort',
-    categoryColor: '#10B981',
-    description: 'Comprehensive classroom training session equipping entire engineering cohorts with real-world corporate readiness.',
-    stats: '40+ Candidates in Batch',
-    location: 'Academic Training Hall',
-    image: '/moments/moment_large_batch_workshop.jpg',
-  },
-  {
-    title: 'Milestone Achievement & Cohort Celebration',
-    category: 'Cohort Milestone',
-    categoryColor: '#EC4899',
-    description: 'Celebrating successful completion of rigorous training sprints, assessments, and real-world project submissions.',
-    stats: '100% Sprint Completion',
-    location: 'Smart Classroom Hub',
-    image: '/moments/moment_classroom_celebration.jpg',
-  },
-  {
-    title: 'Women in Tech & Leadership Mentorship Circle',
-    category: 'Mentorship Circle',
-    categoryColor: '#8B5CF6',
-    description: 'Targeted career strategy, technical problem-solving, and confidence building for aspiring women technologists.',
-    stats: 'Empowerment & Placements',
-    location: 'Interactive Seminar Room',
-    image: '/moments/moment_girls_cohort_celebration.jpg',
-  },
-  {
-    title: 'Engineering Collaboration & Hackathon Sprint',
-    category: 'Team Collaboration',
-    categoryColor: '#D97706',
-    description: 'Peer programming and collaborative product builds preparing students for corporate team dynamics.',
-    stats: 'Collaborative Product Builds',
-    location: 'Project Innovation Studio',
-    image: '/moments/moment_boys_cohort_celebration.jpg',
-  },
-];
+import { useAdminData } from '../context/AdminDataContext';
 
 export function RollingGallerySection() {
+  const { galleryItems } = useAdminData();
+  const displayItems = galleryItems.length > 0 ? galleryItems : [];
+
   return (
     <section className="py-16 lg:py-20 bg-[#F1F4F9] border-b border-black/5 overflow-hidden relative">
       {/* Background Ambient Glow */}
@@ -96,7 +33,7 @@ export function RollingGallerySection() {
       {/* ── CONTINUOUS INFINITE ROLLING ACTIVITY GALLERY ── */}
       <div className="relative w-full overflow-hidden mask-fade-horizontal py-2">
         <div className="flex items-stretch gap-6 w-max animate-marquee hover:[animation-play-state:paused]">
-          {[...mentoringMoments, ...mentoringMoments, ...mentoringMoments].map((moment, index) => (
+          {[...displayItems, ...displayItems, ...displayItems].map((moment, index) => (
             <div
               key={`moment-${moment.title}-${index}`}
               className="w-[340px] sm:w-[380px] shrink-0 rounded-3xl bg-white border border-black/8 overflow-hidden shadow-[0_4px_20px_-2px_rgba(0,0,0,0.06)] hover:border-[#2563EB]/40 hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between select-none group"

@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { MentorJobPortal } from './MentorJobPortal';
 import { supabase } from '../lib/supabase';
+import { useAdminData } from '../context/AdminDataContext';
 
 interface MentorPageProps {
   onBackToHome?: () => void;
@@ -92,6 +93,7 @@ const fellowMentors = [
 ];
 
 export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
+  const { addApplication } = useAdminData();
   // Form State
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
@@ -161,7 +163,20 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
     setSubmitting(true);
 
     try {
-      // 1. Try submitting to Supabase if configured
+      // 1. Record in AdminDataContext
+      addApplication({
+        jobTitle: 'Become a Mentor & Technical Instructor',
+        fullName: fullName.trim(),
+        email: email.trim(),
+        phone: phone.trim(),
+        resumeFileName: resumeFile ? resumeFile.name : 'LinkedIn / Portfolio Profile',
+        resumeUrl: portfolioLink.trim() || undefined,
+        portfolioLink: portfolioLink.trim() || undefined,
+        experience: 'Applied via Become a Mentor Form',
+        notes: 'Submitted via Mentor Page hero application form',
+      });
+
+      // 2. Try submitting to Supabase if configured
       if (supabase) {
         await supabase.from('mentor_applications').insert([
           {
@@ -174,17 +189,6 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
           }
         ]);
       }
-
-      // 2. LocalStorage backup
-      const existing = JSON.parse(localStorage.getItem('grow360_mentor_applications') || '[]');
-      existing.push({
-        fullName: fullName.trim(),
-        email: email.trim(),
-        phone: phone.trim(),
-        resume: resumeFile ? resumeFile.name : portfolioLink.trim(),
-        date: new Date().toISOString()
-      });
-      localStorage.setItem('grow360_mentor_applications', JSON.stringify(existing));
 
       setSubmitted(true);
     } catch {

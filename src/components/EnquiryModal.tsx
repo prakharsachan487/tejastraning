@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, type FormEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Send, CheckCircle2, AlertCircle, Loader2, Sparkles } from 'lucide-react';
 import { useEnquiry } from '../context/EnquiryContext';
+import { useAdminData } from '../context/AdminDataContext';
 import { supabase } from '../lib/supabase';
 
 interface FormData {
@@ -26,17 +27,24 @@ type SubmitState = 'idle' | 'submitting' | 'success' | 'error';
 
 export function EnquiryModal() {
   const { isOpen, source, closeEnquiry } = useEnquiry();
+  const { addEnquiry } = useAdminData();
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [submitState, setSubmitState] = useState<SubmitState>('idle');
   const [errorMsg, setErrorMsg] = useState('');
 
-  // Reset form when modal opens
+  // Lock scroll when open
   useEffect(() => {
     if (isOpen) {
+      document.body.style.overflow = 'hidden';
       setFormData(initialFormData);
       setSubmitState('idle');
       setErrorMsg('');
+    } else {
+      document.body.style.overflow = 'unset';
     }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
   }, [isOpen]);
 
   // Close on Escape key
@@ -65,7 +73,18 @@ export function EnquiryModal() {
     setErrorMsg('');
 
     try {
-      // 1. Insert into Supabase
+      // 1. Record in AdminDataContext
+      addEnquiry({
+        fullName: formData.fullName.trim(),
+        collegeName: formData.collegeName.trim() || 'N/A',
+        email: formData.email.trim().toLowerCase(),
+        phone: formData.phone.trim(),
+        profession: formData.profession.trim() || 'N/A',
+        message: formData.requestDetails.trim() || undefined,
+        source: 'MODAL_ENQUIRY',
+      });
+
+      // 2. Insert into Supabase
       if (supabase) {
         try {
           await supabase.from('enquiries').insert([
@@ -88,7 +107,7 @@ export function EnquiryModal() {
         }
       }
 
-      // 2. API fallback
+      // 3. API fallback
       try {
         await fetch('https://tejastraning-api.onrender.com/api/enquiries', {
           method: 'POST',

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, CheckCircle2, Send, Loader2, Sparkles } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { useEnquiry } from '../context/EnquiryContext';
+import { useAdminData } from '../context/AdminDataContext';
 
 interface ShatterWordProps {
   word: string;
@@ -72,6 +73,7 @@ function ShatterWord({
 
 export function Hero() {
   const { openEnquiry } = useEnquiry();
+  const { addEnquiry } = useAdminData();
   // Form State
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
@@ -91,17 +93,19 @@ export function Hero() {
 
     try {
       const payload = {
-        source: 'HERO_REFERENCE_FORM',
-        full_name: fullName.trim(),
+        source: 'HERO_REFERENCE_FORM' as const,
+        fullName: fullName.trim(),
         email: email.trim(),
         phone: phoneNumber.trim(),
-        college_name: collegeName.trim(),
+        collegeName: collegeName.trim(),
         profession: profession.trim() || 'General Inquiry',
-        message: requestDetails.trim() || null,
-        created_at: new Date().toISOString(),
+        message: requestDetails.trim() || undefined,
       };
 
-      // 1. Send to Supabase enquiries table
+      // 1. Record in AdminDataContext immediately
+      addEnquiry(payload);
+
+      // 2. Send to Supabase enquiries table
       try {
         await supabase.from('enquiries').insert([
           {
@@ -117,7 +121,7 @@ export function Hero() {
         console.warn('[Supabase] Hero enquiry fallback:', sbErr);
       }
 
-      // 2. Fallback to API if active
+      // 3. Fallback to API if active
       try {
         await fetch('/api/enquiry', {
           method: 'POST',

@@ -2,75 +2,19 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, BookOpen, Clock, Tag, Search, ArrowUpRight, CheckCircle2, Sparkles, Send } from 'lucide-react';
 import { useEnquiry } from '../context/EnquiryContext';
-
-interface BlogPost {
-  id: string;
-  title: string;
-  category: string;
-  readTime: string;
-  date: string;
-  author: string;
-  summary: string;
-  image: string;
-  content: string[];
-}
-
-const blogPosts: BlogPost[] = [
-  {
-    id: 'placement-transformation-2026',
-    title: 'How Forward-Thinking Colleges Are Transforming Campus Placements in 2026',
-    category: 'Placement Strategy',
-    readTime: '5 min read',
-    date: 'August 28, 2026',
-    author: 'Grow360 Academic Council',
-    summary: 'Why traditional rote training is failing campus drives and how live industry rubrics, AI evaluations, and practical project reviews create 90%+ placement outcomes.',
-    image: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=800&q=80',
-    content: [
-      'Campus hiring dynamics have permanently shifted. Tech giants and emerging product startups no longer test for textbook memorization — they evaluate production problem-solving, clean code hygiene, and distributed systems understanding.',
-      'Colleges adopting continuous 1:1 expert evaluations, simulated mock hiring drives, and live industry-led sprints report an average 3.2x surge in high-tier placement conversions.',
-      'By bridging the classroom curriculum with real-world corporate expectations, institutions give their students an unshakeable competitive edge.'
-    ],
-  },
-  {
-    id: 'system-design-ai-readiness',
-    title: 'Deconstructing Technical Mock Drives: What Industry Evaluators Actually Look For',
-    category: 'Technical Roadmaps',
-    readTime: '6 min read',
-    date: 'August 24, 2026',
-    author: 'Vishal Motlani & Nandwana Abhishek',
-    summary: 'A detailed breakdown of live mock round rubrics — from algorithmic optimization to microservice architecture and behavioral articulation.',
-    image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80',
-    content: [
-      'During technical rounds, senior engineers look beyond just getting code to run. They assess edge-case handling, computational complexity (Big-O), API modularity, and trade-off justification.',
-      'In system design rounds, candidates who can articulate cache invalidation, asynchronous queuing, and SQL vs NoSQL sharding stand out in the top 5% of candidate pools.',
-      'Regular feedback loops from practitioners at Meta, Deloitte, and Accenture prepare students to speak the exact language of technical hiring panels.'
-    ],
-  },
-  {
-    id: 'powerbi-sql-business-analytics',
-    title: 'The Rise of Analytics & FP&A Roles in Campus Hiring',
-    category: 'Analytics & Finance',
-    readTime: '4 min read',
-    date: 'August 20, 2026',
-    author: 'Nidhi Singh (Accenture FP&A Lead)',
-    summary: 'Why commercial analytics, Power BI dashboards, and financial modeling are leading the next wave of high-package corporate campus offers.',
-    image: '/moments/moment_bi_dashboard_presentation.jpg',
-    content: [
-      'Modern enterprise decision-making relies on actionable data intelligence. Top consulting, FMCG, and technology firms actively scout candidates proficient in interactive BI dashboards and automated forecasting pipelines.',
-      'Hands-on capstone projects where students build live sales, inventory, and operations trackers prove candidate readiness instantly to recruiters.',
-      'Our dedicated analytics curriculum bridges statistical modeling with direct corporate case studies.'
-    ],
-  },
-];
+import { useAdminData, type BlogPost } from '../context/AdminDataContext';
 
 export function BlogPage({ onBackToHome }: { onBackToHome: () => void }) {
   const { openEnquiry } = useEnquiry();
+  const { blogPosts } = useAdminData();
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [newsletterSubscribed, setNewsletterSubscribed] = useState(false);
 
-  const filteredPosts = blogPosts.filter(
+  const displayPosts = blogPosts.length > 0 ? blogPosts : [];
+
+  const filteredPosts = displayPosts.filter(
     (p) =>
       p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       p.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
