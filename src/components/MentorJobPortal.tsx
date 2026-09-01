@@ -426,9 +426,12 @@ export function MentorJobPortal() {
             setSubmitError('');
             window.scrollTo({ top: 0, behavior: 'instant' });
             document.documentElement.scrollTop = 0;
+            return;
           }
         }
       }
+      // If hash does NOT have jobId, reset selectedJob to null so all openings are shown
+      setSelectedJob(null);
     };
 
     checkHashJob();
@@ -451,6 +454,7 @@ export function MentorJobPortal() {
     setResumeFileName('');
     setResumeFileObject(null);
     setResumeLink('');
+    window.location.hash = '#become-a-mentor';
     window.scrollTo({ top: 0, behavior: 'instant' });
     document.documentElement.scrollTop = 0;
   };

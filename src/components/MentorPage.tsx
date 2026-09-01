@@ -107,13 +107,13 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
 
   // Track if this is a direct job application view (opened in a new tab)
   const [isDirectJobView, setIsDirectJobView] = useState(() => {
-    return typeof window !== 'undefined' && (window.location.hash.includes('jobId=') || window.location.hash.includes('job-'));
+    return typeof window !== 'undefined' && window.location.hash.includes('jobId=');
   });
 
   // Instantly scroll to top or target hash when page opens
   useEffect(() => {
     const handleHashChange = () => {
-      const isJob = window.location.hash.includes('jobId=') || window.location.hash.includes('job-');
+      const isJob = window.location.hash.includes('jobId=');
       setIsDirectJobView(isJob);
     };
 

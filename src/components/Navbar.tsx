@@ -54,15 +54,29 @@ export function Navbar() {
 
   const handleNavClick = useCallback((href: string) => {
     setIsMobileOpen(false);
+
+    if (href === '#become-a-mentor' || href === '#mentor') {
+      const prevHash = window.location.hash;
+      window.location.hash = '#become-a-mentor';
+      if (prevHash === '#become-a-mentor') {
+        window.dispatchEvent(new HashChangeEvent('hashchange'));
+      }
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      return;
+    }
+
     if (
       href === '#training-programs' ||
-      href === '#become-a-mentor' ||
-      href === '#mentor' ||
       href === '#careers' ||
       href === '#career' ||
       href === '#login'
     ) {
       window.location.hash = href;
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
       return;
     }
 
