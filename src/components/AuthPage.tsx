@@ -38,7 +38,7 @@ export function AuthPage() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [role, setRole] = useState<'Student' | 'Mentor' | 'Placement Officer'>('Student');
+  const role = 'Student';
   
   // OTP Verification States
   const [otpStep, setOtpStep] = useState(false);
@@ -478,21 +478,6 @@ export function AuthPage() {
                     {showPassword ? <EyeOff size={15} /> : <Eye size={15} />}
                   </button>
                 </div>
-              </div>
-
-              <div>
-                <label className="block text-xs font-bold text-slate-800 mb-1">
-                  Primary Role
-                </label>
-                <select
-                  value={role}
-                  onChange={(e) => setRole(e.target.value as any)}
-                  className="w-full bg-white border border-black/10 focus:border-[#2563EB] rounded-2xl py-2.5 px-4 text-xs text-slate-800 outline-hidden cursor-pointer"
-                >
-                  <option value="Student">Student (Interview Preparation &amp; Capstone)</option>
-                  <option value="Mentor">Mentor / Industry Instructor</option>
-                  <option value="Placement Officer">College Placement Officer (TPO)</option>
-                </select>
               </div>
 
               <button

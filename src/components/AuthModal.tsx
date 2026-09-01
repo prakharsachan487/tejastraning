@@ -39,7 +39,7 @@ export function AuthModal() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [role, setRole] = useState<'Student' | 'Mentor' | 'Placement Officer'>('Student');
+  const role = 'Student';
   
   // OTP Verification States
   const [otpStep, setOtpStep] = useState(false);
@@ -446,21 +446,6 @@ export function AuthModal() {
                           {showPassword ? <EyeOff size={14} /> : <Eye size={14} />}
                         </button>
                       </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-bold text-slate-800 mb-1">
-                        Role
-                      </label>
-                      <select
-                        value={role}
-                        onChange={(e) => setRole(e.target.value as any)}
-                        className="w-full bg-white border border-black/10 focus:border-[#2563EB] rounded-xl py-1.5 px-3 text-xs text-slate-800 outline-hidden cursor-pointer"
-                      >
-                        <option value="Student">Student (Interview Prep &amp; Capstone)</option>
-                        <option value="Mentor">Mentor / Industry Instructor</option>
-                        <option value="Placement Officer">College Placement Officer</option>
-                      </select>
                     </div>
 
                     <button
