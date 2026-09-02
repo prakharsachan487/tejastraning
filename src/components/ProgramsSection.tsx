@@ -1,405 +1,449 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Code2, 
-  Cpu, 
-  Sparkles, 
-  Briefcase, 
-  ArrowRight, 
-  CheckCircle2, 
-  Clock, 
+import {
+  Code2,
+  Briefcase,
+  Sparkles,
+  ArrowRight,
+  CheckCircle2,
+  Clock,
+  Layers,
+  GraduationCap,
+  Users,
+  Target,
+  Building2,
+  TrendingUp,
+  Cpu,
+  BookOpen,
   Award,
   Zap,
-  Terminal,
-  FileCode
+  ShieldCheck,
+  Compass
 } from 'lucide-react';
 import { useEnquiry } from '../context/EnquiryContext';
 
-interface Track {
+interface ModulePillar {
+  number: string;
   title: string;
-  duration: string;
-  level: string;
-  tags: string[];
-  outcome: string;
-  highlights: string[];
-}
-
-interface Category {
-  id: string;
-  name: string;
-  shortName: string;
   badge: string;
   icon: typeof Code2;
-  tagline: string;
-  stat: string;
-  tracks: Track[];
+  color: string;
+  items: string[];
 }
 
-const categories: Category[] = [
+interface CourseData {
+  id: 'tech' | 'non-tech';
+  title: string;
+  shortTitle: string;
+  tagline: string;
+  badge: string;
+  icon: typeof Code2;
+  targetGroups: string[];
+  outcome: string;
+  pillars: ModulePillar[];
+}
+
+const COURSES: CourseData[] = [
   {
-    id: 'core',
-    name: 'Technology & Core CS',
-    shortName: 'Core CS & DSA',
-    badge: 'Tier-1 Mapped',
+    id: 'tech',
+    title: 'Technical Career & Corporate Readiness Program',
+    shortTitle: 'Course 1: Technical & Engineering',
+    tagline: 'Comprehensive technical domain upskilling integrated with Tier-1 campus placement training and professional corporate readiness.',
+    badge: 'Flagship Tech Track',
     icon: Code2,
-    tagline: 'Algorithmic problem solving, scalable architecture, and computer science fundamentals.',
-    stat: '700+ LeetCode Patterns Solved',
-    tracks: [
+    targetGroups: ['B.E / B.Tech', 'M.Tech', 'Ph.D', 'Engineering & CS Graduates', 'Post-Graduate Tech Aspirants'],
+    outcome: 'Technical students ko technical upskilling ke saath placement aur corporate environment ke liye end-to-end prepare karna.',
+    pillars: [
       {
-        title: 'DSA & Algorithmic Mastery',
-        duration: '4 Months',
-        level: 'Interview Ready',
-        tags: ['Dynamic Programming', 'Graph Theory', 'LeetCode Hard', 'Pattern Drills'],
-        outcome: 'Cracks Top Product Firm Technical Coding Rounds',
-        highlights: ['50+ Mock Technical Interviews', 'Optimal Time & Space Complexity Drills'],
+        number: '01',
+        title: 'Technical & Domain Upskilling',
+        badge: 'Core Competency',
+        icon: Cpu,
+        color: '#2563EB',
+        items: [
+          'Artificial Intelligence & GenAI Workflows',
+          'Data Analytics & Business Intelligence',
+          'Core Engineering Workflows & Architecture',
+          'Power BI Dashboards & Enterprise Reporting',
+          'Advanced SQL Queries & Database Modeling',
+          'Advanced Excel & Data Analytics',
+          'SAP & Enterprise ERP Tools',
+          'Full-Stack Web Development (Modern Stacks)',
+          'Data Analysis & Statistical Techniques',
+          'Financial Modelling & Corporate Insights',
+        ],
       },
       {
-        title: 'System Design & Scalable Architectures',
-        duration: '3 Months',
-        level: 'Advanced',
-        tags: ['Microservices', 'Kafka Streams', 'Redis Caching', 'Database Sharding'],
-        outcome: 'Designs systems handling millions of concurrent users',
-        highlights: ['Real Architecture Case Studies', 'High-Availability Distributed Systems'],
+        number: '02',
+        title: 'Technical Programs & Practice',
+        badge: 'Hands-On Applied',
+        icon: Layers,
+        color: '#0668E1',
+        items: [
+          'Engineering Leadership Program',
+          'Group Internship Program & Team Capstones',
+          'Technical Brush-up in Live Production Environments',
+          'Industrial Visits & Corporate Campus Immersions (Optional)',
+        ],
       },
       {
-        title: 'Core CS Fundamentals (OS, DBMS & Networks)',
-        duration: '2 Months',
-        level: 'Foundation to Pro',
-        tags: ['Linux Concurrency', 'SQL Query Tuning', 'TCP/IP Stack', 'LLD & OOP'],
-        outcome: 'Clears core university syllabus & foundational interviews',
-        highlights: ['ACID & Transactions Deep Dive', 'SOLID Design Patterns'],
-      },
-    ],
-  },
-  {
-    id: 'fullstack',
-    name: 'Full Stack & Cloud',
-    shortName: 'Full Stack & Cloud',
-    badge: 'Production Systems',
-    icon: Cpu,
-    tagline: 'Modern enterprise web development with production deployments on AWS & Vercel.',
-    stat: '15+ Live Production Capstones',
-    tracks: [
-      {
-        title: 'Full Stack MERN & Next.js 15',
-        duration: '4 Months',
-        level: 'Full Lifecycle',
-        tags: ['TypeScript', 'Next.js App Router', 'Node.js', 'MongoDB', 'Tailwind'],
-        outcome: 'Builds & deploys secure, high-speed web apps',
-        highlights: ['JWT & OAuth2 Security', 'Dockerized Deployment to AWS'],
+        number: '03',
+        title: 'Placement & Career Preparation',
+        badge: 'Hiring Sprints',
+        icon: Target,
+        color: '#10B981',
+        items: [
+          'Getting Ready for Campus Placement Drives',
+          'Handling Online Assessments – Tips & Tricks',
+          'Aptitude Tests (Quantitative, Logical & Verbal)',
+          'Group Discussions (GD) Strategies & Round Table Drills',
+          'ATS-Compliant Resume & Portfolio Building',
+          '1-on-1 Mock Technical Interviews with Meta/Deloitte Mentors',
+          'Personalized Career Guidance & Profile Diagnostics',
+          'Final Interview Success Frameworks',
+        ],
       },
       {
-        title: 'Enterprise Java & Spring Boot',
-        duration: '4 Months',
-        level: 'Enterprise',
-        tags: ['Spring Boot 3', 'Hibernate JPA', 'Kafka', 'Microservices'],
-        outcome: 'Engineers fault-tolerant backend services',
-        highlights: ['Spring Cloud & Security', 'JUnit 5 & Mockito Unit Testing'],
-      },
-      {
-        title: 'Cloud DevOps & Infrastructure',
-        duration: '3 Months',
-        level: 'Industry Grade',
-        tags: ['AWS Architecture', 'Terraform', 'Docker', 'Kubernetes', 'CI/CD'],
-        outcome: 'Automates production cloud infrastructure',
-        highlights: ['GitHub Actions Automation', 'Prometheus & Grafana Monitoring'],
-      },
-    ],
-  },
-  {
-    id: 'emerging',
-    name: 'AI & Emerging Tech',
-    shortName: 'Generative AI & Data',
-    badge: 'High Demand',
-    icon: Sparkles,
-    tagline: 'Generative AI, Large Language Models, Neural Networks, and modern Data BI.',
-    stat: '20+ Applied AI Models Built',
-    tracks: [
-      {
-        title: 'Generative AI & LLM Systems',
-        duration: '4 Months',
-        level: 'Cutting-Edge',
-        tags: ['LangChain', 'RAG Pipelines', 'Vector DBs', 'OpenAI & Claude API'],
-        outcome: 'Builds autonomous AI agents and enterprise chatbots',
-        highlights: ['Pinecone & ChromaDB Integration', 'Prompt Optimization & Fine-Tuning'],
-      },
-      {
-        title: 'Machine Learning & Data Science',
-        duration: '4 Months',
-        level: 'Applied AI',
-        tags: ['Python', 'PyTorch', 'Scikit-Learn', 'FastAPI Deployment'],
-        outcome: 'Solves complex business problems using deep learning',
-        highlights: ['Real-World Kaggle Case Studies', 'Model Deployment via REST APIs'],
-      },
-      {
-        title: 'Data Analytics & Power BI',
-        duration: '3 Months',
-        level: 'Analytical',
-        tags: ['Advanced SQL', 'PowerBI', 'Tableau', 'Data Warehousing'],
-        outcome: 'Transforms raw numbers into executive business dashboards',
-        highlights: ['Complex SQL Window Functions', 'Business KPI Storytelling'],
+        number: '04',
+        title: 'Corporate Readiness & Workplace Skills',
+        badge: 'Executive Presence',
+        icon: Building2,
+        color: '#8B5CF6',
+        items: [
+          'Executive Business Communication',
+          'Workplace Emails & Asynchronous Messaging',
+          'Active Listening & Corporate Empathy',
+          'Formal Presentations & Deck Storytelling',
+          'Cross-Functional Teamwork & Collaboration',
+          'Time Management & High-Velocity Execution',
+          'Professional Etiquette & Corporate Grooming',
+        ],
       },
     ],
   },
   {
-    id: 'business',
-    name: 'Placement & Aptitude Prep',
-    shortName: 'Placement & Soft Skills',
-    badge: 'Campus Ready',
+    id: 'non-tech',
+    title: 'Non-Technical & Management Corporate Program',
+    shortTitle: 'Course 2: Management & Non-Technical',
+    tagline: 'Executive management capabilities, corporate communication, business ethics, and placement mastery designed for non-technical cohorts.',
+    badge: 'Management & Corporate Track',
     icon: Briefcase,
-    tagline: 'Company-specific test packs, quantitative reasoning, and interview communication.',
-    stat: '1,500+ Exam Questions Simulated',
-    tracks: [
+    targetGroups: ['Graduates (BBA, B.Com, BA, B.Sc)', 'Post-Graduates (MBA, PGDM, M.Com)', 'Management Students', 'Non-Technical Career Aspirants'],
+    outcome: 'Non-technical/management students ko corporate communication, management, leadership, professional etiquette aur placement readiness ke liye prepare karna.',
+    pillars: [
       {
-        title: 'Company-Specific Campus Test Packs',
-        duration: '2 Months',
-        level: 'Top Hirers',
-        tags: ['TCS NQT', 'Infosys DSE', 'Wipro Turbo', 'Top Tier Startups'],
-        outcome: 'Directly simulates exact test patterns of major recruiters',
-        highlights: ['Timed Speed Drills', 'Previous Year Question Analysis'],
+        number: '01',
+        title: 'Management & Productivity',
+        badge: 'Operational Excellence',
+        icon: TrendingUp,
+        color: '#D97706',
+        items: [
+          'Strategic Project Planning & Milestones',
+          'Time Management & Priority Matrix',
+          '80/20 Pareto Rule for High Business Impact',
+          'Agile Frameworks & Scrum Methodologies',
+          'People Management & Delegation Principles',
+          'Team Management & Conflict Navigation',
+          'Result & KPI-Driven Business Orientation',
+        ],
       },
       {
-        title: 'Quantitative & Logical Aptitude',
-        duration: '2 Months',
-        level: 'Speed & Accuracy',
-        tags: ['Speed Math', 'Pattern Recognition', 'Verbal Ability', 'DI'],
-        outcome: 'Maximizes clearing rates in preliminary campus screening rounds',
-        highlights: ['Mental Math Shortcut Techniques', 'Adaptive Test Simulators'],
+        number: '02',
+        title: 'Management & Business Courses',
+        badge: 'Domain Specialization',
+        icon: Award,
+        color: '#2563EB',
+        items: [
+          'Finance Leadership Program & Corporate FP&A',
+          'Human Resource Management & Talent Strategy',
+          'Marketing Strategy & Brand Growth',
+          'International Business & Cross-Border Trade',
+          'Professional Ethics on International Standards',
+        ],
       },
       {
-        title: 'Corporate Soft Skills & Mock GD/HR',
-        duration: '1 Month',
-        level: 'Interview Mastery',
-        tags: ['STAR Technique', 'Group Discussions', 'ATS Resumes', 'Mock Panels'],
-        outcome: 'Empowers students to convert final stage HR & leadership interviews',
-        highlights: ['Video Recorded GD Simulations', '1-on-1 Behavioral Coaching'],
+        number: '03',
+        title: 'Business Communication',
+        badge: 'Executive Voice',
+        icon: BookOpen,
+        color: '#8B5CF6',
+        items: [
+          'Workplace Emails & Executive Briefs',
+          'Active Listening & Client Empathy',
+          'Formal Business Presentations & Pitches',
+          'Effective & Impactful Communication',
+          'Corporate Storytelling & Stakeholder Influence',
+        ],
+      },
+      {
+        number: '04',
+        title: 'Professional Etiquette & Compliance',
+        badge: 'Workplace Standards',
+        icon: ShieldCheck,
+        color: '#10B981',
+        items: [
+          'Corporate Grooming & Professional Presence',
+          'Emotional Intelligence (EQ) & Self-Regulation',
+          'POSH Compliance & Sensitization Standards',
+          'International Business Etiquettes & Protocol',
+          'Professional Work Ethics & Corporate Integrity',
+        ],
+      },
+      {
+        number: '05',
+        title: 'Workplace & Leadership Skills',
+        badge: 'Leadership Mastery',
+        icon: Compass,
+        color: '#EC4899',
+        items: [
+          'Diversity & Inclusion in Modern Workplaces',
+          'Impact of Core Corporate Values',
+          'Decisive Decision Making Under Uncertainty',
+          'Assertiveness & Executive Confidence',
+          'Customer & Client-Centric Orientation',
+          'Conflict Resolution & Interpersonal Dynamics',
+          'Win-Win Negotiation Frameworks',
+          'Creative Problem Solving & Case Methodologies',
+          'High-Impact Presentation Skills',
+          'Stress Management & Workplace Resilience',
+        ],
+      },
+      {
+        number: '06',
+        title: 'Career & Placement Preparation',
+        badge: 'Placement Sprint',
+        icon: Target,
+        color: '#0668E1',
+        items: [
+          'Personalized Career Guidance & Track Mapping',
+          'Corporate Resume & LinkedIn Profile Writing',
+          '1-on-1 Mock HR & Case Study Interviews',
+          'Group Discussions (GD) Leadership & Body Language',
+          'Final Interview Success Frameworks',
+          'Campus Placement Drive Simulation Rounds',
+        ],
       },
     ],
   },
 ];
 
 export function ProgramsSection() {
-  const [activeId, setActiveId] = useState('core');
+  const [activeCourseId, setActiveCourseId] = useState<'tech' | 'non-tech'>('tech');
   const { openEnquiry } = useEnquiry();
-  const currentCategory = categories.find((c) => c.id === activeId) || categories[0];
+
+  const currentCourse = COURSES.find((c) => c.id === activeCourseId) || COURSES[0];
+  const IconComponent = currentCourse.icon;
 
   return (
-    <section id="programs" className="pt-6 sm:pt-8 pb-20 lg:pb-28 bg-[#F8F9FB] relative obsidian-grid overflow-hidden">
-      {/* Background Subtle Gradient Glows */}
+    <section id="programs" className="pt-4 pb-20 lg:pb-28 bg-[#F8F9FB] relative overflow-hidden">
+      {/* Background Glow */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-gradient-to-br from-[#2563EB]/10 via-[#3B82F6]/5 to-transparent blur-[120px] pointer-events-none rounded-full" />
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-10">
         
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center max-w-3xl mx-auto mb-12"
-        >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2563EB]/10 border border-[#2563EB]/25 text-[#3B82F6] text-xs font-semibold tracking-wide mb-4 shadow-sm shadow-[#2563EB]/">
+        {/* ── Section Header ── */}
+        <div className="text-center max-w-3xl mx-auto space-y-3">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2563EB]/10 border border-[#2563EB]/25 text-[#2563EB] text-xs font-bold font-mono tracking-wide">
             <Sparkles size={14} className="text-[#2563EB]" />
-            <span>Comprehensive Curriculum</span>
+            <span>COMPREHENSIVE CURRICULUM</span>
           </div>
           
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight font-[family-name:var(--font-display)]">
-            Industry-Ready Programs.{' '}
-            <span className="bg-gradient-to-r from-[#2563EB] via-[#3B82F6] to-[#3B82F6] bg-clip-text text-transparent">
-              Built for Your Campus.
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 font-[family-name:var(--font-display)] leading-tight">
+            Specialized Programs for{' '}
+            <span className="text-[#2563EB]">
+              Tech &amp; Non-Tech
             </span>
           </h2>
           
-          <p className="mt-4 text-sm sm:text-base text-slate-600 max-w-2xl mx-auto">
-            Practical, credit-mapped engineering & employability tracks tailored to your semester schedules and top hiring standards.
+          <p className="text-xs sm:text-sm text-slate-600 max-w-2xl mx-auto leading-relaxed">
+            Institutional learning paths structured with domain upskilling, live industry mentorship, corporate readiness, and placement drive preparation.
           </p>
+        </div>
 
-          {/* Quick Value Badges */}
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-4 text-xs font-medium text-slate-700">
-            <div className="flex items-center gap-1.5 bg-white shadow-sm px-3 py-1.5 rounded-full border border-black/8">
-              <Award size={14} className="text-[#3B82F6]" />
-              <span>University Credit Aligned</span>
-            </div>
-            <div className="flex items-center gap-1.5 bg-white shadow-sm px-3 py-1.5 rounded-full border border-black/8">
-              <Terminal size={14} className="text-[#38BDF8]" />
-              <span>Live Engineer Mentorship</span>
-            </div>
-            <div className="flex items-center gap-1.5 bg-white shadow-sm px-3 py-1.5 rounded-full border border-black/8">
-              <Zap size={14} className="text-[#22C55E]" />
-              <span>Placement-Guaranteed Sprints</span>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Interactive Category Navigation Tabs */}
-        <div className="flex justify-center mb-10">
-          <div className="inline-flex p-1.5 bg-slate-50 border border-black/8 rounded-2xl max-w-full overflow-x-auto no-scrollbar gap-1.5">
-            {categories.map((cat) => {
-              const Icon = cat.icon;
-              const isActive = activeId === cat.id;
+        {/* ── 2 Main Course Selector Tabs ── */}
+        <div className="flex justify-center">
+          <div className="inline-flex p-1.5 bg-slate-200/80 rounded-2xl border border-black/10 gap-2 max-w-full overflow-x-auto shadow-inner">
+            {COURSES.map((course) => {
+              const Icon = course.icon;
+              const isActive = activeCourseId === course.id;
               return (
                 <button
-                  key={cat.id}
-                  onClick={() => setActiveId(cat.id)}
-                  className={`relative px-4 sm:px-6 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 flex items-center gap-2 cursor-pointer shrink-0 ${
-                    isActive ? 'text-slate-900 font-bold' : 'text-slate-600 hover:text-slate-200 hover:bg-white/5'
+                  key={course.id}
+                  onClick={() => setActiveCourseId(course.id)}
+                  className={`flex items-center gap-2.5 px-5 sm:px-7 py-3 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer whitespace-nowrap ${
+                    isActive
+                      ? 'bg-white text-[#2563EB] shadow-md border border-black/5 font-extrabold'
+                      : 'text-slate-700 hover:text-slate-900 hover:bg-white/50'
                   }`}
                 >
-                  {isActive && (
-                    <motion.div
-                      layoutId="activeProgramTab"
-                      className="absolute inset-0 bg-gradient-to-r from-[#2563EB] to-[#3B82F6] rounded-xl shadow-lg shadow-[#2563EB]/ -z-10"
-                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                    />
-                  )}
-                  <Icon size={16} className={isActive ? 'text-slate-900' : 'text-slate-600'} />
-                  <span>{cat.shortName}</span>
+                  <Icon size={17} className={isActive ? 'text-[#2563EB]' : 'text-slate-500'} />
+                  <span>{course.shortTitle}</span>
                 </button>
               );
             })}
           </div>
         </div>
 
-        {/* Category Description Banner */}
-        <motion.div
-          key={currentCategory.id + '-banner'}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-          className="mb-8 flex flex-col sm:flex-row items-center justify-between gap-4 p-4 sm:p-5 rounded-2xl bg-white shadow-sm border border-black/8"
-        >
-          <div className="flex items-center gap-3.5 text-left">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#2563EB]/20 to-[#3B82F6]/10 border border-[#2563EB]/30 flex items-center justify-center text-[#3B82F6] shrink-0">
-              <currentCategory.icon size={20} />
+        {/* ── Active Course Content ── */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentCourse.id}
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -15 }}
+            transition={{ duration: 0.35 }}
+            className="space-y-8"
+          >
+            {/* Header Card: Course Title + Target Group + Outcome */}
+            <div className="p-6 sm:p-8 rounded-3xl bg-white border border-black/8 shadow-sm space-y-6">
+              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-100 pb-6">
+                <div className="space-y-2">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-[#2563EB] text-xs font-mono font-bold border border-blue-200">
+                    <IconComponent size={13} />
+                    <span>{currentCourse.badge}</span>
+                  </div>
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-[family-name:var(--font-display)] tracking-tight">
+                    {currentCourse.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-600 max-w-3xl leading-relaxed">
+                    {currentCourse.tagline}
+                  </p>
+                </div>
+
+                <button
+                  onClick={() => openEnquiry('PARTNERSHIP')}
+                  className="btn-pill-primary py-3 px-6 text-xs font-bold shrink-0 flex items-center gap-2 shadow-md cursor-pointer self-start lg:self-center"
+                >
+                  <span>Request Full Syllabus</span>
+                  <ArrowRight size={14} />
+                </button>
+              </div>
+
+              {/* Target Group Badges */}
+              <div className="space-y-2">
+                <span className="text-[11px] font-mono uppercase tracking-wider font-bold text-slate-500">
+                  Target Group &amp; Eligibility:
+                </span>
+                <div className="flex flex-wrap gap-2">
+                  {currentCourse.targetGroups.map((group, idx) => (
+                    <span
+                      key={idx}
+                      className="px-3 py-1.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-semibold text-slate-800 flex items-center gap-1.5"
+                    >
+                      <GraduationCap size={13} className="text-[#2563EB]" />
+                      <span>{group}</span>
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Outcome Highlight Box */}
+              <div className="p-4 rounded-2xl bg-gradient-to-r from-blue-50/80 via-indigo-50/50 to-blue-50/80 border border-blue-200/80 flex items-start gap-3">
+                <CheckCircle2 size={18} className="text-[#2563EB] shrink-0 mt-0.5" />
+                <div>
+                  <span className="text-xs font-mono font-bold text-[#2563EB] uppercase tracking-wide">
+                    Program Core Outcome:
+                  </span>
+                  <p className="text-xs sm:text-sm font-semibold text-slate-800 mt-0.5 leading-relaxed">
+                    {currentCourse.outcome}
+                  </p>
+                </div>
+              </div>
             </div>
+
+            {/* ── Course Pillars Grid ── */}
             <div>
-              <div className="flex items-center gap-2">
-                <h3 className="text-base font-bold text-slate-900">
-                  {currentCategory.name}
-                </h3>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/10 text-slate-700 font-medium">
-                  {currentCategory.badge}
+              <div className="flex items-center justify-between mb-4">
+                <h4 className="text-lg font-bold text-slate-900 font-[family-name:var(--font-display)] flex items-center gap-2">
+                  <Layers size={17} className="text-[#2563EB]" />
+                  <span>Curriculum Modules &amp; Coverage ({currentCourse.pillars.length} Core Pillars)</span>
+                </h4>
+                <span className="text-xs text-slate-500 font-mono hidden sm:inline-block">
+                  Institutional Delivery Mapped
                 </span>
               </div>
-              <p className="text-xs text-slate-600 mt-0.5">
-                {currentCategory.tagline}
-              </p>
-            </div>
-          </div>
 
-          <div className="shrink-0 px-3.5 py-1.5 rounded-xl bg-white/5 border border-black/8 text-xs font-mono text-[#3B82F6] flex items-center gap-2">
-            <Sparkles size={13} className="text-[#2563EB]" />
-            <span>{currentCategory.stat}</span>
-          </div>
-        </motion.div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+                {currentCourse.pillars.map((pillar) => {
+                  const PillarIcon = pillar.icon;
+                  return (
+                    <div
+                      key={pillar.number}
+                      className="p-6 sm:p-7 rounded-3xl bg-white border border-black/8 shadow-2xs hover:shadow-md hover:border-blue-300/60 transition-all flex flex-col justify-between space-y-5 group"
+                    >
+                      <div className="space-y-4">
+                        {/* Header: Number + Icon + Title + Badge */}
+                        <div className="flex items-start justify-between gap-3">
+                          <div className="flex items-center gap-3">
+                            <div
+                              className="w-10 h-10 rounded-2xl flex items-center justify-center font-mono font-bold text-sm text-white shadow-xs"
+                              style={{ backgroundColor: pillar.color }}
+                            >
+                              {pillar.number}
+                            </div>
+                            <div>
+                              <h5 className="text-base sm:text-lg font-bold text-slate-900 font-[family-name:var(--font-display)] group-hover:text-[#2563EB] transition-colors leading-snug">
+                                {pillar.title}
+                              </h5>
+                              <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 mt-0.5 inline-block">
+                                {pillar.badge}
+                              </span>
+                            </div>
+                          </div>
 
-        {/* Animated 3-Card Grid for Tracks */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <AnimatePresence mode="wait">
-            {currentCategory.tracks.map((track, i) => (
-              <motion.div
-                key={`${currentCategory.id}-${track.title}`}
-                initial={{ opacity: 0, y: 20, scale: 0.98 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -15, scale: 0.98 }}
-                transition={{ duration: 0.35, delay: i * 0.08 }}
-                className="group relative rounded-2xl bg-white shadow-sm border border-black/8 p-6 flex flex-col justify-between hover:border-[#2563EB]/50 transition-all duration-300 hover:shadow-xl hover:shadow-teal-950/20"
-              >
-                <div>
-                  {/* Top Bar with Duration & Level */}
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-[#3B82F6] bg-[#2563EB]/10 px-2.5 py-1 rounded-md border border-[#2563EB]/25">
-                      <Clock size={12} />
-                      <span>{track.duration}</span>
-                    </div>
-                    <span className="text-[11px] font-mono text-slate-600 bg-white/5 px-2 py-0.5 rounded border border-black/5">
-                      {track.level}
-                    </span>
-                  </div>
+                          <PillarIcon size={18} className="text-slate-400 group-hover:text-[#2563EB] transition-colors shrink-0" />
+                        </div>
 
-                  {/* Track Title */}
-                  <h3 className="text-lg font-bold text-slate-900 group-hover:text-[#3B82F6] transition-colors leading-snug mb-3 font-[family-name:var(--font-display)]">
-                    {track.title}
-                  </h3>
-
-                  {/* Tech Stack Pills */}
-                  <div className="flex flex-wrap gap-1.5 mb-5">
-                    {track.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 border border-black/8 group-hover:border-white/20 transition-colors"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Highlights with Icons */}
-                  <div className="space-y-2 mb-5">
-                    {track.highlights.map((item) => (
-                      <div key={item} className="flex items-start gap-2 text-xs text-slate-700">
-                        <CheckCircle2 size={13} className="text-[#22C55E] shrink-0 mt-0.5" />
-                        <span>{item}</span>
+                        {/* Bullet Items List */}
+                        <ul className="space-y-2 text-xs text-slate-700 pt-2 border-t border-slate-100">
+                          {pillar.items.map((item, i) => (
+                            <li key={i} className="flex items-start gap-2">
+                              <CheckCircle2 size={13} className="text-[#2563EB] shrink-0 mt-0.5" />
+                              <span className="leading-relaxed">{item}</span>
+                            </li>
+                          ))}
+                        </ul>
                       </div>
-                    ))}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* ── Delivery Framework Banner (Dono Courses ke liye) ── */}
+            <div className="rounded-3xl bg-white border border-black/8 p-6 sm:p-8 shadow-sm space-y-4">
+              <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#2563EB] uppercase tracking-wider">
+                <Clock size={14} />
+                <span>Flexible Institutional Delivery Models</span>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 pt-1">
+                {/* Delivery 1 */}
+                <div className="p-5 rounded-2xl bg-blue-50/60 border border-blue-100 space-y-2">
+                  <div className="flex items-center gap-2 text-sm font-bold text-slate-900 font-[family-name:var(--font-display)]">
+                    <Zap size={16} className="text-[#2563EB]" />
+                    <span>Intensive Placement Workshops</span>
                   </div>
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    <strong className="text-slate-900">Format:</strong> 16 hours / 2-day bootcamps to 4-week structured sprint modules designed right before campus recruitment drives.
+                  </p>
                 </div>
 
-                {/* Bottom Outcome & CTA */}
-                <div className="pt-4 border-t border-black/8">
-                  <div className="mb-3.5 p-2.5 rounded-lg bg-white/[0.03] border border-black/5">
-                    <div className="text-[10px] uppercase font-mono tracking-wider text-slate-600 mb-0.5">
-                      Target Outcome
-                    </div>
-                    <div className="text-xs font-medium text-slate-200 leading-snug">
-                      {track.outcome}
-                    </div>
+                {/* Delivery 2 */}
+                <div className="p-5 rounded-2xl bg-indigo-50/60 border border-indigo-100 space-y-2">
+                  <div className="flex items-center gap-2 text-sm font-bold text-slate-900 font-[family-name:var(--font-display)]">
+                    <Users size={16} className="text-[#2563EB]" />
+                    <span>Blended Learning Architecture</span>
                   </div>
-
-                  <button
-                    onClick={() => openEnquiry('PROPOSAL')}
-                    className="w-full py-2.5 px-4 rounded-xl bg-white/5 hover:bg-[#2563EB] text-slate-200 hover:text-slate-900 text-xs font-bold transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer group/btn"
-                  >
-                    <span>Request Syllabus</span>
-                    <ArrowRight size={13} className="transition-transform group-hover/btn:translate-x-1" />
-                  </button>
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    <strong className="text-slate-900">Format:</strong> Self-paced digital curriculum modules + live interactive role-playing + real-time 1-on-1 industry mentor feedback.
+                  </p>
                 </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </div>
-
-        {/* Bottom Custom Syllabus Banner */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mt-12 p-6 sm:p-8 rounded-3xl bg-white shadow-sm border border-black/8 border border-black/8 flex flex-col md:flex-row items-center justify-between gap-6"
-        >
-          <div className="flex items-center gap-4 text-left">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#2563EB] to-[#3B82F6] flex items-center justify-center text-slate-900 shrink-0 shadow-lg shadow-[#2563EB]/">
-              <FileCode size={24} />
+              </div>
             </div>
-            <div>
-              <h3 className="text-lg font-bold text-slate-900 font-[family-name:var(--font-display)]">
-                Need a Custom Syllabus Aligned to Your University?
-              </h3>
-              <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-xl">
-                We customize modules, practical lab exercises, and assessments according to your college branch, academic timetable, and semester exam dates.
-              </p>
-            </div>
-          </div>
 
-          <button
-            onClick={() => openEnquiry('CONSULTATION')}
-            className="btn-pill-primary shrink-0 py-3 px-6 text-xs sm:text-sm cursor-pointer whitespace-nowrap"
-          >
-            <Sparkles size={15} className="text-slate-900" />
-            <span>Request Custom Syllabus</span>
-            <ArrowRight size={15} />
-          </button>
-        </motion.div>
+          </motion.div>
+        </AnimatePresence>
 
       </div>
     </section>
