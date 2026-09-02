@@ -123,6 +123,24 @@ export interface TeamMember {
   order: number;
 }
 
+export interface TrainingPoint {
+  label: string;
+  value: string;
+}
+
+export interface TrainingModel {
+  id: string;
+  title: string;
+  badge: string;
+  iconType?: string;
+  points: TrainingPoint[];
+  description: string;
+  tagsLabel: string;
+  tags: string[];
+  order?: number;
+  active?: boolean;
+}
+
 export interface MetricItem {
   id: string;
   value: number;
@@ -164,6 +182,13 @@ export interface JobApplication {
 }
 
 interface AdminDataContextType {
+  // Campus Training Delivery Models
+  trainingModels: TrainingModel[];
+  addTrainingModel: (model: Omit<TrainingModel, 'id'>) => void;
+  updateTrainingModel: (id: string, updated: Partial<TrainingModel>) => void;
+  deleteTrainingModel: (id: string) => void;
+  toggleTrainingModelActive: (id: string) => void;
+
   // Institutional Testimonials
   testimonials: TestimonialItem[];
   addTestimonial: (item: Omit<TestimonialItem, 'id'>) => void;
@@ -921,6 +946,43 @@ const INITIAL_CURRICULUM: CurriculumCourse[] = [
   },
 ];
 
+const INITIAL_TRAINING_MODELS: TrainingModel[] = [
+  {
+    id: 'model-1',
+    title: 'Impact Training',
+    badge: 'Placement-Focused Intensive',
+    iconType: 'rocket',
+    points: [
+      { label: 'Audience', value: 'Final-year batches' },
+      { label: 'Duration', value: '40-60 Days' },
+      { label: 'Focus', value: 'Company-specific drive prep' },
+      { label: 'Coverage', value: 'All degrees and branches' },
+    ],
+    description: 'A high-intensity program built to lift selection rates in upcoming campus drives. Aptitude, coding, and interview readiness, delivered as one package.',
+    tagsLabel: 'Mapped to recruiters like',
+    tags: ['TCS', 'Infosys', 'Wipro', '+ more'],
+    order: 1,
+    active: true,
+  },
+  {
+    id: 'model-2',
+    title: 'Semester-Integrated',
+    badge: 'Continuous Capability Building',
+    iconType: 'graduation',
+    points: [
+      { label: 'Audience', value: '2nd and 3rd year students' },
+      { label: 'Duration', value: 'Full academic year' },
+      { label: 'Focus', value: 'Industry technologies & engineering depth' },
+      { label: 'Integration', value: 'Built into university timetable' },
+    ],
+    description: 'Long-term skill development woven directly into your academic calendar. From fundamental data structures to hands-on projects, readying students before placement season starts.',
+    tagsLabel: 'Prepares students for',
+    tags: ['SDE-1 Roles', 'Tier-1 Hiring', 'Product Companies'],
+    order: 2,
+    active: true,
+  },
+];
+
 const INITIAL_METRICS: MetricItem[] = [
   { id: 'm-1', value: 25, suffix: '+', label: 'Partner Campuses', sub: 'Institutional Pilots', order: 1 },
   { id: 'm-2', value: 5, suffix: 'K+', label: 'Students Trained', sub: 'Assessed & Upskilled', order: 2 },
@@ -1148,6 +1210,57 @@ const INITIAL_TEAM_MEMBERS: TeamMember[] = [
 const AdminDataContext = createContext<AdminDataContextType | null>(null);
 
 export function AdminDataProvider({ children }: { children: ReactNode }) {
+  // 0000. Campus Training Delivery Models State
+  const [trainingModels, setTrainingModels] = useState<TrainingModel[]>(() => {
+    const saved = localStorage.getItem('grow360_admin_training_models');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch {}
+    }
+    return INITIAL_TRAINING_MODELS;
+  });
+
+  const updateTrainingModel = (id: string, updated: Partial<TrainingModel>) => {
+    setTrainingModels((prev) => {
+      const next = prev.map((m) => (m.id === id ? { ...m, ...updated } : m));
+      localStorage.setItem('grow360_admin_training_models', JSON.stringify(next));
+      return next;
+    });
+  };
+
+  const addTrainingModel = (item: Omit<TrainingModel, 'id'>) => {
+    const newModel: TrainingModel = {
+      ...item,
+      id: 'model-' + Date.now(),
+      order: trainingModels.length + 1,
+      active: true,
+    };
+    setTrainingModels((prev) => {
+      const next = [...prev, newModel];
+      localStorage.setItem('grow360_admin_training_models', JSON.stringify(next));
+      return next;
+    });
+  };
+
+  const deleteTrainingModel = (id: string) => {
+    setTrainingModels((prev) => {
+      const next = prev.filter((m) => m.id !== id);
+      localStorage.setItem('grow360_admin_training_models', JSON.stringify(next));
+      return next;
+    });
+  };
+
+  const toggleTrainingModelActive = (id: string) => {
+    setTrainingModels((prev) => {
+      const next = prev.map((m) =>
+        m.id === id ? { ...m, active: m.active === false ? true : false } : m
+      );
+      localStorage.setItem('grow360_admin_training_models', JSON.stringify(next));
+      return next;
+    });
+  };
+
   // 000a. Institutional Testimonials State
   const [testimonials, setTestimonials] = useState<TestimonialItem[]>(() => {
     const saved = localStorage.getItem('grow360_admin_testimonials');
@@ -1843,6 +1956,11 @@ export function AdminDataProvider({ children }: { children: ReactNode }) {
   return (
     <AdminDataContext.Provider
       value={{
+        trainingModels,
+        addTrainingModel,
+        updateTrainingModel,
+        deleteTrainingModel,
+        toggleTrainingModelActive,
         testimonials,
         addTestimonial,
         updateTestimonial,

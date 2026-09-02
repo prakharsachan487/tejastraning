@@ -10,12 +10,28 @@ import {
   Layers,
   GraduationCap,
   Briefcase,
-  Code2
+  Code2,
+  Rocket,
+  ArrowUp,
+  ArrowDown,
+  Eye,
+  EyeOff,
+  BookOpen
 } from 'lucide-react';
-import { useAdminData, type CurriculumCourse, type ModulePillar } from '../../../context/AdminDataContext';
+import {
+  useAdminData,
+  type CurriculumCourse,
+  type ModulePillar,
+  type TrainingModel
+} from '../../../context/AdminDataContext';
 
 export function CurriculumTab() {
   const {
+    trainingModels,
+    addTrainingModel,
+    updateTrainingModel,
+    deleteTrainingModel,
+    toggleTrainingModelActive,
     curriculumCourses,
     updateCurriculumCourse,
     addRollingTrackToCourse,
@@ -25,6 +41,24 @@ export function CurriculumTab() {
     deleteCoursePillar
   } = useAdminData();
 
+  // Top sub-tab: 'models' (Campus Training Delivery Models) vs 'curriculum' (Tracks & Modules)
+  const [subTab, setSubTab] = useState<'models' | 'curriculum'>('models');
+
+  // ─── Training Model State ───
+  const sortedModels = [...trainingModels].sort((a, b) => (a.order || 0) - (b.order || 0));
+  const [isModelModalOpen, setIsModelModalOpen] = useState(false);
+  const [editingModel, setEditingModel] = useState<TrainingModel | null>(null);
+
+  const [modelTitle, setModelTitle] = useState('');
+  const [modelBadge, setModelBadge] = useState('');
+  const [modelIconType, setModelIconType] = useState('rocket');
+  const [modelPoints, setModelPoints] = useState<string>('');
+  const [modelDescription, setModelDescription] = useState('');
+  const [modelTagsLabel, setModelTagsLabel] = useState('Mapped to recruiters like');
+  const [modelTags, setModelTags] = useState('');
+  const [modelActive, setModelActive] = useState(true);
+
+  // ─── Curriculum Courses State ───
   const sortedCourses = [...curriculumCourses].sort((a, b) => (a.order || 0) - (b.order || 0));
   const [selectedCourseId, setSelectedCourseId] = useState<string>(sortedCourses[0]?.id || 'non-tech');
   const [newTrackInput, setNewTrackInput] = useState('');
@@ -51,6 +85,94 @@ export function CurriculumTab() {
   const currentCourse =
     sortedCourses.find((c) => c.id === selectedCourseId) || sortedCourses[0];
 
+  // ── Model Handlers ──
+  const handleOpenAddModel = () => {
+    setEditingModel(null);
+    setModelTitle('New Delivery Model');
+    setModelBadge('Campus Specialization');
+    setModelIconType('rocket');
+    setModelPoints('Audience: Final-year batches\nDuration: 40-60 Days\nFocus: Placement Preparation\nCoverage: All Degrees');
+    setModelDescription('High-impact structured training modules tailored for institutional placement velocity.');
+    setModelTagsLabel('Mapped to recruiters like');
+    setModelTags('TCS, Infosys, Wipro, Accenture');
+    setModelActive(true);
+    setIsModelModalOpen(true);
+  };
+
+  const handleOpenEditModel = (model: TrainingModel) => {
+    setEditingModel(model);
+    setModelTitle(model.title);
+    setModelBadge(model.badge);
+    setModelIconType(model.iconType || 'rocket');
+    setModelPoints(model.points.map((p) => `${p.label}: ${p.value}`).join('\n'));
+    setModelDescription(model.description);
+    setModelTagsLabel(model.tagsLabel || 'Mapped to recruiters like');
+    setModelTags(model.tags.join(', '));
+    setModelActive(model.active !== false);
+    setIsModelModalOpen(true);
+  };
+
+  const handleSaveModel = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!modelTitle.trim()) return;
+
+    const parsedPoints = modelPoints
+      .split('\n')
+      .map((line) => {
+        const parts = line.split(':');
+        if (parts.length >= 2) {
+          return { label: parts[0].trim(), value: parts.slice(1).join(':').trim() };
+        }
+        return { label: 'Key Highlight', value: line.trim() };
+      })
+      .filter((p) => p.value.length > 0);
+
+    const parsedTags = modelTags
+      .split(',')
+      .map((t) => t.trim())
+      .filter(Boolean);
+
+    if (editingModel) {
+      updateTrainingModel(editingModel.id, {
+        title: modelTitle.trim(),
+        badge: modelBadge.trim(),
+        iconType: modelIconType,
+        points: parsedPoints,
+        description: modelDescription.trim(),
+        tagsLabel: modelTagsLabel.trim(),
+        tags: parsedTags,
+        active: modelActive,
+      });
+    } else {
+      addTrainingModel({
+        title: modelTitle.trim(),
+        badge: modelBadge.trim(),
+        iconType: modelIconType,
+        points: parsedPoints,
+        description: modelDescription.trim(),
+        tagsLabel: modelTagsLabel.trim(),
+        tags: parsedTags,
+        active: modelActive,
+        order: sortedModels.length + 1,
+      });
+    }
+
+    setIsModelModalOpen(false);
+    setEditingModel(null);
+  };
+
+  const moveModelOrder = (index: number, direction: 'up' | 'down') => {
+    const targetIndex = direction === 'up' ? index - 1 : index + 1;
+    if (targetIndex < 0 || targetIndex >= sortedModels.length) return;
+
+    const currentItem = sortedModels[index];
+    const targetItem = sortedModels[targetIndex];
+
+    updateTrainingModel(currentItem.id, { order: targetItem.order || targetIndex + 1 });
+    updateTrainingModel(targetItem.id, { order: currentItem.order || index + 1 });
+  };
+
+  // ── Course Handlers ──
   const handleOpenEditCourse = (course: CurriculumCourse) => {
     setEditTitle(course.title);
     setEditShortTitle(course.shortTitle);
@@ -107,7 +229,7 @@ export function CurriculumTab() {
 
   const handleSavePillar = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!currentCourse) return;
+    if (!currentCourse || !pillarTitle.trim()) return;
 
     const itemsArray = pillarItems
       .split('\n')
@@ -119,7 +241,7 @@ export function CurriculumTab() {
         number: pillarNumber.trim(),
         title: pillarTitle.trim(),
         badge: pillarBadge.trim(),
-        color: pillarColor,
+        color: pillarColor.trim(),
         items: itemsArray,
       });
     } else {
@@ -127,7 +249,7 @@ export function CurriculumTab() {
         number: pillarNumber.trim(),
         title: pillarTitle.trim(),
         badge: pillarBadge.trim(),
-        color: pillarColor,
+        color: pillarColor.trim(),
         items: itemsArray,
       });
     }
@@ -136,379 +258,590 @@ export function CurriculumTab() {
     setEditingPillar(null);
   };
 
-  if (!currentCourse) return null;
-
   return (
     <div className="space-y-6">
-      {/* ── Top Header ── */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-3xl border border-black/8 shadow-2xs">
+      {/* ── Top Header Card ── */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-3xl border border-slate-200/80 shadow-2xs">
         <div>
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-[#2563EB] text-xs font-mono font-bold mb-2">
-            <Sparkles size={12} />
-            <span>INSTITUTIONAL SYLLABUS &amp; TRACKS</span>
+            <GraduationCap size={12} />
+            <span>CAMPUS TRAINING &amp; CURRICULUM CONSOLE</span>
           </div>
-          <h2 className="text-2xl font-extrabold text-slate-900 font-[family-name:var(--font-display)] tracking-tight">
-            Comprehensive Curriculum Manager
+          <h2 className="text-2xl font-bold text-slate-900 font-[family-name:var(--font-display)] tracking-tight">
+            Campus Training &amp; Industry Curriculum
           </h2>
           <p className="text-xs text-slate-500 mt-0.5">
-            Edit Course titles, target eligibility, outcomes, module pillars, and bullet points in real-time.
+            Manage Campus Delivery Models (Impact / Semester Boxes), Specialized Tracks, and Syllabus Modules.
           </p>
         </div>
-      </div>
 
-      {/* ── Course Switcher Tabs (Non-Tech #1, Tech #2) ── */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-1">
-        {sortedCourses.map((course) => {
-          const Icon = course.id === 'tech' ? Code2 : Briefcase;
-          const isActive = selectedCourseId === course.id;
-          return (
-            <button
-              key={course.id}
-              onClick={() => setSelectedCourseId(course.id)}
-              className={`flex items-center gap-2.5 px-5 py-3 rounded-2xl text-xs sm:text-sm font-bold transition-all cursor-pointer whitespace-nowrap border ${
-                isActive
-                  ? 'bg-slate-900 text-white border-slate-900 shadow-sm'
-                  : 'bg-white text-slate-700 border-black/10 hover:border-black/25'
-              }`}
-            >
-              <Icon size={16} className={isActive ? 'text-white' : 'text-slate-500'} />
-              <span>{course.shortTitle}</span>
-              <span className={`text-[10px] px-2 py-0.5 rounded-full font-mono font-normal ${isActive ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-600'}`}>
-                {course.pillars.length} Pillars
-              </span>
-            </button>
-          );
-        })}
-      </div>
-
-      {/* ── Current Selected Course Details Card ── */}
-      <div className="bg-white rounded-3xl border border-black/8 p-6 sm:p-8 shadow-sm space-y-5">
-        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 border-b border-slate-100 pb-5">
-          <div className="space-y-1.5 max-w-3xl">
-            <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-50 text-[#2563EB] border border-blue-200 inline-block">
-              {currentCourse.badge}
-            </span>
-            <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 font-[family-name:var(--font-display)]">
-              {currentCourse.title}
-            </h3>
-            <p className="text-xs text-slate-600 leading-relaxed">
-              {currentCourse.tagline}
-            </p>
-          </div>
-
+        {subTab === 'models' ? (
           <button
-            onClick={() => handleOpenEditCourse(currentCourse)}
-            className="btn-pill-primary px-4 py-2 text-xs font-bold flex items-center gap-1.5 cursor-pointer shrink-0 shadow-xs"
-          >
-            <Edit2 size={13} />
-            <span>Edit Course Details</span>
-          </button>
-        </div>
-
-        {/* Target Groups & Outcome preview */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
-            <span className="text-[11px] font-mono font-bold text-slate-600 uppercase tracking-wide flex items-center gap-1.5">
-              <GraduationCap size={13} className="text-[#2563EB]" />
-              <span>Target Group &amp; Eligibility:</span>
-            </span>
-            <div className="flex flex-wrap gap-1.5">
-              {currentCourse.targetGroups.map((g, i) => (
-                <span key={i} className="px-2.5 py-1 rounded-lg bg-white border border-slate-200 text-xs font-semibold text-slate-800">
-                  {g}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <div className="p-4 rounded-2xl bg-blue-50/60 border border-blue-200 space-y-1">
-            <span className="text-[11px] font-mono font-bold text-[#2563EB] uppercase tracking-wide flex items-center gap-1.5">
-              <Sparkles size={13} />
-              <span>Rolling Ticker Live Status:</span>
-            </span>
-            <p className="text-xs text-slate-800 font-medium leading-relaxed">
-              {(currentCourse.rollingTracks || []).length} active specialization course pills rolling horizontally on the student page.
-            </p>
-          </div>
-        </div>
-
-        {/* ── Dedicated Rolling Tracks Manager Card ── */}
-        <div className="pt-4 border-t border-slate-100 space-y-3">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-            <div className="flex items-center gap-2">
-              <Sparkles size={15} className="text-[#2563EB]" />
-              <span className="text-xs font-mono font-bold text-slate-800 uppercase tracking-wide">
-                Featured Specialization &amp; Rolling Tracks ({(currentCourse.rollingTracks || []).length}):
-              </span>
-            </div>
-            <span className="text-[11px] text-slate-500 font-mono">
-              Real-time marquee ticker
-            </span>
-          </div>
-
-          {/* Existing Rolling Track Pills with Delete Option */}
-          <div className="flex flex-wrap gap-2 pt-1">
-            {(currentCourse.rollingTracks || []).map((track, idx) => (
-              <div
-                key={idx}
-                className="group pl-3 pr-2 py-1.5 rounded-xl bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 text-xs font-semibold text-slate-800 flex items-center gap-2 transition-all shadow-2xs"
-              >
-                <Sparkles size={12} className="text-[#2563EB] shrink-0" />
-                <span>{track}</span>
-                <button
-                  onClick={() => deleteRollingTrackFromCourse(currentCourse.id, idx)}
-                  className="p-1 rounded-md text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors cursor-pointer"
-                  title="Remove this track from rolling marquee"
-                >
-                  <X size={12} />
-                </button>
-              </div>
-            ))}
-            {(currentCourse.rollingTracks || []).length === 0 && (
-              <div className="text-xs text-slate-500 italic py-1">
-                No custom tracks added yet. Add below to display in the rolling strip.
-              </div>
-            )}
-          </div>
-
-          {/* Inline Add Track Form */}
-          <div className="flex gap-2 pt-2">
-            <input
-              type="text"
-              placeholder="e.g. MERN Stack & Next.js or Corporate Financial Modelling"
-              value={newTrackInput}
-              onChange={(e) => setNewTrackInput(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  e.preventDefault();
-                  if (newTrackInput.trim()) {
-                    addRollingTrackToCourse(currentCourse.id, newTrackInput.trim());
-                    setNewTrackInput('');
-                  }
-                }
-              }}
-              className="flex-1 px-3.5 py-2 rounded-xl border border-black/10 text-xs focus:border-[#2563EB] focus:outline-hidden bg-slate-50 focus:bg-white"
-            />
-            <button
-              type="button"
-              onClick={() => {
-                if (newTrackInput.trim()) {
-                  addRollingTrackToCourse(currentCourse.id, newTrackInput.trim());
-                  setNewTrackInput('');
-                }
-              }}
-              className="btn-pill-primary px-4 py-2 text-xs font-bold flex items-center gap-1.5 cursor-pointer shrink-0"
-            >
-              <Plus size={13} />
-              <span>Add to Rolling Strip</span>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* ── Pillars / Modules Management ── */}
-      <div className="space-y-4">
-        <div className="flex items-center justify-between">
-          <div>
-            <h4 className="text-lg font-extrabold text-slate-900 font-[family-name:var(--font-display)] flex items-center gap-2">
-              <Layers size={17} className="text-[#2563EB]" />
-              <span>Course Modules &amp; Pillars ({currentCourse.pillars.length})</span>
-            </h4>
-            <p className="text-xs text-slate-500">
-              Manage syllabus topics, bullet points, and domain chapters.
-            </p>
-          </div>
-
-          <button
-            onClick={handleOpenAddPillar}
-            className="btn-pill-primary px-4 py-2 text-xs font-bold flex items-center gap-1.5 cursor-pointer shadow-xs"
+            onClick={handleOpenAddModel}
+            className="btn-pill-primary px-5 py-2.5 text-xs font-bold flex items-center gap-2 cursor-pointer self-start sm:self-center shadow-xs"
           >
             <Plus size={14} />
-            <span>Add Pillar</span>
+            <span>Add Delivery Model</span>
           </button>
-        </div>
+        ) : (
+          <button
+            onClick={() => currentCourse && handleOpenEditCourse(currentCourse)}
+            className="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold flex items-center gap-2 cursor-pointer self-start sm:self-center shadow-xs transition-colors"
+          >
+            <Edit2 size={13} />
+            <span>Edit Course Track</span>
+          </button>
+        )}
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {currentCourse.pillars.map((pillar) => (
-            <div
-              key={pillar.id || pillar.number}
-              className="bg-white rounded-3xl border border-black/8 p-6 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between space-y-4"
-            >
-              <div className="space-y-3">
-                <div className="flex items-start justify-between gap-3">
-                  <div className="flex items-center gap-3">
-                    <div
-                      className="w-9 h-9 rounded-xl flex items-center justify-center font-mono font-bold text-xs text-white shadow-xs"
-                      style={{ backgroundColor: pillar.color || '#2563EB' }}
-                    >
-                      {pillar.number}
+      {/* ── Sub-Navigation Switcher ── */}
+      <div className="flex items-center gap-2 p-1.5 rounded-2xl bg-slate-200/60 border border-slate-300/60 max-w-fit">
+        <button
+          onClick={() => setSubTab('models')}
+          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+            subTab === 'models'
+              ? 'bg-white text-[#2563EB] shadow-xs'
+              : 'text-slate-600 hover:text-slate-900'
+          }`}
+        >
+          <Rocket size={14} />
+          <span>Campus Training Delivery Models ({trainingModels.length})</span>
+        </button>
+
+        <button
+          onClick={() => setSubTab('curriculum')}
+          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+            subTab === 'curriculum'
+              ? 'bg-white text-[#2563EB] shadow-xs'
+              : 'text-slate-600 hover:text-slate-900'
+          }`}
+        >
+          <BookOpen size={14} />
+          <span>Industry Curriculum Tracks (2 Tracks)</span>
+        </button>
+      </div>
+
+      {/* ═════════════════════════════════════════════════════════════════════ */}
+      {/* 1. CAMPUS TRAINING DELIVERY MODELS SUB-TAB                           */}
+      {/* ═════════════════════════════════════════════════════════════════════ */}
+      {subTab === 'models' && (
+        <div className="space-y-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <AnimatePresence mode="popLayout">
+              {sortedModels.map((model, index) => {
+                const isInactive = model.active === false;
+                return (
+                  <motion.div
+                    key={model.id}
+                    layout
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    className={`bg-white rounded-3xl border border-black/8 p-6 sm:p-7 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between ${
+                      isInactive ? 'opacity-60 bg-slate-50/80 border-dashed' : ''
+                    }`}
+                  >
+                    <div className="space-y-4">
+                      {/* Card Top Header */}
+                      <div className="flex items-start justify-between gap-3">
+                        <div>
+                          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-blue-50 text-[#2563EB] text-[11px] font-mono font-bold mb-1.5">
+                            <span>Delivery Model #{index + 1}</span>
+                          </div>
+                          <h3 className="text-xl font-bold text-slate-900 font-[family-name:var(--font-display)]">
+                            {model.title}
+                          </h3>
+                          {model.badge && (
+                            <p className="text-xs font-semibold text-[#2563EB]">
+                              {model.badge}
+                            </p>
+                          )}
+                        </div>
+
+                        <div className="flex items-center gap-1">
+                          <button
+                            onClick={() => toggleTrainingModelActive(model.id)}
+                            className={`p-1.5 rounded-lg transition-colors cursor-pointer ${
+                              isInactive
+                                ? 'text-slate-400 hover:text-slate-700 bg-slate-100'
+                                : 'text-emerald-600 hover:bg-emerald-50'
+                            }`}
+                            title={isInactive ? 'Hidden from website' : 'Visible on website'}
+                          >
+                            {isInactive ? <EyeOff size={14} /> : <Eye size={14} />}
+                          </button>
+
+                          <button
+                            disabled={index === 0}
+                            onClick={() => moveModelOrder(index, 'up')}
+                            className="p-1.5 text-slate-400 hover:text-slate-900 disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
+                            title="Move Left / Up"
+                          >
+                            <ArrowUp size={14} />
+                          </button>
+                          <button
+                            disabled={index === sortedModels.length - 1}
+                            onClick={() => moveModelOrder(index, 'down')}
+                            className="p-1.5 text-slate-400 hover:text-slate-900 disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
+                            title="Move Right / Down"
+                          >
+                            <ArrowDown size={14} />
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Bullet Highlights */}
+                      <div className="space-y-2 p-3.5 rounded-2xl bg-slate-50 border border-slate-100 text-xs text-slate-700">
+                        {model.points.map((pt, pIdx) => (
+                          <div key={pIdx} className="flex items-center gap-2">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#2563EB]" />
+                            <strong className="text-slate-900">{pt.label}:</strong>
+                            <span>{pt.value}</span>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Description */}
+                      <p className="text-xs text-slate-600 leading-relaxed">
+                        {model.description}
+                      </p>
+
+                      {/* Footer Tags */}
+                      {model.tags && model.tags.length > 0 && (
+                        <div className="pt-3 border-t border-slate-100">
+                          <div className="text-[11px] font-medium text-slate-500 mb-2">
+                            {model.tagsLabel || 'Target recruiters / profiles'}
+                          </div>
+                          <div className="flex flex-wrap gap-1.5">
+                            {model.tags.map((t, tIdx) => (
+                              <span
+                                key={tIdx}
+                                className="px-2 py-0.5 rounded-md bg-blue-50 text-[#2563EB] text-[11px] font-mono font-bold"
+                              >
+                                {t}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
-                    <div>
-                      <h5 className="text-base font-bold text-slate-900 font-[family-name:var(--font-display)]">
-                        {pillar.title}
-                      </h5>
-                      <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-slate-100 text-slate-600">
-                        {pillar.badge}
-                      </span>
+
+                    {/* Action Bar */}
+                    <div className="pt-4 mt-4 border-t border-slate-100 flex items-center justify-end gap-2">
+                      <button
+                        onClick={() => handleOpenEditModel(model)}
+                        className="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-blue-50 text-slate-700 hover:text-[#2563EB] text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+                      >
+                        <Edit2 size={12} />
+                        <span>Edit Model Box</span>
+                      </button>
+
+                      {sortedModels.length > 1 && (
+                        <button
+                          onClick={() => {
+                            if (confirm(`Delete delivery model "${model.title}"?`)) {
+                              deleteTrainingModel(model.id);
+                            }
+                          }}
+                          className="p-1.5 rounded-xl hover:bg-red-50 text-slate-400 hover:text-red-600 transition-colors cursor-pointer"
+                          title="Delete Model Box"
+                        >
+                          <Trash2 size={14} />
+                        </button>
+                      )}
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </AnimatePresence>
+          </div>
+        </div>
+      )}
+
+      {/* ═════════════════════════════════════════════════════════════════════ */}
+      {/* 2. INDUSTRY CURRICULUM TRACKS SUB-TAB                                */}
+      {/* ═════════════════════════════════════════════════════════════════════ */}
+      {subTab === 'curriculum' && (
+        <div className="space-y-6">
+          {/* Course Selector Tabs */}
+          <div className="flex items-center gap-3">
+            {sortedCourses.map((course) => {
+              const TabIcon = course.id === 'tech' ? Code2 : Briefcase;
+              const isActive = selectedCourseId === course.id;
+              return (
+                <button
+                  key={course.id}
+                  onClick={() => setSelectedCourseId(course.id)}
+                  className={`flex items-center gap-2.5 px-5 py-3 rounded-2xl text-xs font-bold transition-all cursor-pointer ${
+                    isActive
+                      ? 'bg-slate-900 text-white shadow-md'
+                      : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50'
+                  }`}
+                >
+                  <TabIcon size={16} className={isActive ? 'text-blue-400' : 'text-slate-500'} />
+                  <span>{course.shortTitle}</span>
+                  <span
+                    className={`text-[10px] font-mono px-2 py-0.5 rounded-full ${
+                      isActive ? 'bg-slate-800 text-blue-300' : 'bg-slate-100 text-slate-500'
+                    }`}
+                  >
+                    {course.pillars.length} Pillars
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+          {currentCourse && (
+            <div className="space-y-6">
+              {/* Course Meta Banner Card */}
+              <div className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/80 shadow-2xs space-y-4">
+                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+                  <div>
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-blue-50 text-[#2563EB] text-xs font-mono font-bold mb-2">
+                      <span>{currentCourse.badge}</span>
+                    </div>
+                    <h3 className="text-xl font-bold text-slate-900 font-[family-name:var(--font-display)]">
+                      {currentCourse.title}
+                    </h3>
+                    <p className="text-xs text-slate-600 mt-1 max-w-3xl leading-relaxed">
+                      {currentCourse.tagline}
+                    </p>
+                  </div>
+
+                  <button
+                    onClick={() => handleOpenEditCourse(currentCourse)}
+                    className="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-blue-50 text-slate-700 hover:text-[#2563EB] text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer shrink-0"
+                  >
+                    <Edit2 size={13} />
+                    <span>Edit Track Info</span>
+                  </button>
+                </div>
+
+                {/* Target Audience & Outcome Pills */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-3 border-t border-slate-100 text-xs">
+                  <div className="p-3 rounded-2xl bg-slate-50 border border-slate-100">
+                    <span className="text-[10px] font-mono font-bold uppercase text-slate-400 block mb-1">
+                      Target Audience Cohorts
+                    </span>
+                    <div className="flex flex-wrap gap-1.5">
+                      {currentCourse.targetGroups.map((g, idx) => (
+                        <span key={idx} className="px-2 py-0.5 rounded-md bg-white border border-slate-200 text-slate-800 text-[11px] font-semibold">
+                          {g}
+                        </span>
+                      ))}
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-1">
-                    <button
-                      onClick={() => handleOpenEditPillar(pillar)}
-                      className="p-1.5 rounded-lg hover:bg-blue-50 text-slate-400 hover:text-[#2563EB] transition-colors cursor-pointer"
-                      title="Edit Pillar"
-                    >
-                      <Edit2 size={13} />
-                    </button>
-                    <button
-                      onClick={() => deleteCoursePillar(currentCourse.id, pillar.id)}
-                      className="p-1.5 rounded-lg hover:bg-red-50 text-slate-400 hover:text-red-600 transition-colors cursor-pointer"
-                      title="Delete Pillar"
-                    >
-                      <Trash2 size={13} />
-                    </button>
+                  <div className="p-3 rounded-2xl bg-slate-50 border border-slate-100">
+                    <span className="text-[10px] font-mono font-bold uppercase text-slate-400 block mb-1">
+                      Placement Target Outcome
+                    </span>
+                    <p className="text-slate-800 font-medium text-xs">
+                      {currentCourse.outcome}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Rolling Specializations Strip Manager */}
+              <div className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-2xs space-y-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h4 className="text-sm font-bold text-slate-900 font-[family-name:var(--font-display)] flex items-center gap-2">
+                      <Sparkles size={14} className="text-[#2563EB]" />
+                      <span>Rolling Specialized Programs ({currentCourse.rollingTracks?.length || 0})</span>
+                    </h4>
+                    <p className="text-xs text-slate-500">
+                      These dynamic badges roll infinitely across the course card on the public website.
+                    </p>
                   </div>
                 </div>
 
-                <ul className="space-y-1.5 text-xs text-slate-700 pt-2 border-t border-slate-100">
-                  {pillar.items.map((item, idx) => (
-                    <li key={idx} className="flex items-start gap-2">
-                      <CheckCircle2 size={12} className="text-[#2563EB] shrink-0 mt-0.5" />
-                      <span>{item}</span>
-                    </li>
+                {/* Add new track item inline */}
+                <div className="flex items-center gap-2">
+                  <input
+                    type="text"
+                    placeholder="Enter new specialization track title..."
+                    value={newTrackInput}
+                    onChange={(e) => setNewTrackInput(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' && newTrackInput.trim()) {
+                        e.preventDefault();
+                        addRollingTrackToCourse(currentCourse.id, newTrackInput.trim());
+                        setNewTrackInput('');
+                      }
+                    }}
+                    className="flex-1 px-3.5 py-2 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#2563EB]"
+                  />
+                  <button
+                    onClick={() => {
+                      if (newTrackInput.trim()) {
+                        addRollingTrackToCourse(currentCourse.id, newTrackInput.trim());
+                        setNewTrackInput('');
+                      }
+                    }}
+                    className="btn-pill-primary px-4 py-2 text-xs font-bold cursor-pointer"
+                  >
+                    Add
+                  </button>
+                </div>
+
+                {/* Track Badges Grid */}
+                <div className="flex flex-wrap gap-2">
+                  {(currentCourse.rollingTracks || []).map((track, tIdx) => (
+                    <span
+                      key={tIdx}
+                      className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200/70 text-slate-800 text-xs font-medium border border-slate-200/80 group transition-colors"
+                    >
+                      <span>{track}</span>
+                      <button
+                        onClick={() => deleteRollingTrackFromCourse(currentCourse.id, tIdx)}
+                        className="text-slate-400 hover:text-red-600 cursor-pointer"
+                        title="Delete Track"
+                      >
+                        <X size={12} />
+                      </button>
+                    </span>
                   ))}
-                </ul>
+                </div>
+              </div>
+
+              {/* Pillars (Modules) List */}
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h4 className="text-sm font-bold text-slate-900 font-[family-name:var(--font-display)] flex items-center gap-2">
+                      <Layers size={15} className="text-[#2563EB]" />
+                      <span>Curriculum Pillars ({currentCourse.pillars.length})</span>
+                    </h4>
+                    <p className="text-xs text-slate-500">
+                      Detailed syllabus breakdown with sub-items and competencies.
+                    </p>
+                  </div>
+
+                  <button
+                    onClick={handleOpenAddPillar}
+                    className="btn-pill-primary px-4 py-2 text-xs font-bold flex items-center gap-1.5 cursor-pointer shadow-xs"
+                  >
+                    <Plus size={13} />
+                    <span>Add Pillar</span>
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {currentCourse.pillars.map((pillar) => (
+                    <div
+                      key={pillar.id}
+                      className="bg-white rounded-3xl border border-slate-200/80 p-5 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between"
+                    >
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs font-mono font-bold text-[#2563EB] bg-blue-50 px-2 py-0.5 rounded-md">
+                            Pillar {pillar.number}
+                          </span>
+                          <span className="text-[10px] font-mono text-slate-500 px-2 py-0.5 rounded-md bg-slate-100">
+                            {pillar.badge}
+                          </span>
+                        </div>
+
+                        <h5 className="text-sm font-bold text-slate-900 font-[family-name:var(--font-display)]">
+                          {pillar.title}
+                        </h5>
+
+                        <ul className="space-y-1.5 text-xs text-slate-600">
+                          {pillar.items.map((item, idx) => (
+                            <li key={idx} className="flex items-start gap-1.5">
+                              <span className="text-blue-500 mt-0.5">•</span>
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div className="pt-4 mt-4 border-t border-slate-100 flex items-center justify-end gap-2">
+                        <button
+                          onClick={() => handleOpenEditPillar(pillar)}
+                          className="px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-blue-50 text-slate-700 hover:text-[#2563EB] text-xs font-semibold flex items-center gap-1 transition-colors cursor-pointer"
+                        >
+                          <Edit2 size={11} />
+                          <span>Edit</span>
+                        </button>
+                        <button
+                          onClick={() => {
+                            if (confirm(`Delete pillar "${pillar.title}"?`)) {
+                              deleteCoursePillar(currentCourse.id, pillar.id);
+                            }
+                          }}
+                          className="p-1.5 rounded-xl hover:bg-red-50 text-slate-400 hover:text-red-600 transition-colors cursor-pointer"
+                          title="Delete Pillar"
+                        >
+                          <Trash2 size={13} />
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-          ))}
+          )}
         </div>
-      </div>
+      )}
 
-      {/* ── Edit Course Metadata Modal ── */}
+      {/* ═════════════════════════════════════════════════════════════════════ */}
+      {/* MODAL: ADD / EDIT DELIVERY MODEL                                     */}
+      {/* ═════════════════════════════════════════════════════════════════════ */}
       <AnimatePresence>
-        {isEditCourseModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsEditCourseModalOpen(false)}
-              className="fixed inset-0 bg-slate-900/50 backdrop-blur-xs"
-            />
-
+        {isModelModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="relative w-full max-w-xl bg-white rounded-3xl shadow-2xl border border-black/10 p-6 sm:p-8 z-10 my-8 space-y-4 max-h-[90vh] overflow-y-auto"
+              className="bg-white rounded-3xl p-6 sm:p-8 max-w-xl w-full border border-black/10 shadow-2xl space-y-5 max-h-[90vh] overflow-y-auto no-scrollbar"
             >
-              <div className="flex items-center justify-between border-b border-black/6 pb-3">
-                <h3 className="text-lg font-extrabold text-slate-900 font-[family-name:var(--font-display)]">
-                  Edit Course Metadata
-                </h3>
+              <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-xl bg-blue-50 text-[#2563EB] flex items-center justify-center font-bold">
+                    <Rocket size={16} />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-slate-900">
+                      {editingModel ? 'Edit Delivery Model Box' : 'Add New Delivery Model Box'}
+                    </h3>
+                    <p className="text-xs text-slate-500">
+                      Configure title, audience highlights, paragraph description, and recruiter tags.
+                    </p>
+                  </div>
+                </div>
+
                 <button
-                  onClick={() => setIsEditCourseModalOpen(false)}
-                  className="p-1.5 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-700 cursor-pointer"
+                  onClick={() => setIsModelModalOpen(false)}
+                  className="p-1 rounded-lg text-slate-400 hover:text-slate-700 cursor-pointer"
                 >
-                  <X size={16} />
+                  <X size={18} />
                 </button>
               </div>
 
-              <form onSubmit={handleSaveCourse} className="space-y-3.5">
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Full Course Title</label>
-                  <input
-                    type="text"
-                    required
-                    value={editTitle}
-                    onChange={(e) => setEditTitle(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-xl border border-black/10 text-xs focus:border-[#2563EB] focus:outline-hidden"
-                  />
-                </div>
-
+              <form onSubmit={handleSaveModel} className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">Short Tab Title</label>
+                  <div className="space-y-1">
+                    <label className="text-xs font-bold text-slate-700 font-mono">
+                      Box Title *
+                    </label>
                     <input
                       type="text"
                       required
-                      value={editShortTitle}
-                      onChange={(e) => setEditShortTitle(e.target.value)}
-                      className="w-full px-3.5 py-2 rounded-xl border border-black/10 text-xs focus:border-[#2563EB] focus:outline-hidden"
+                      placeholder="e.g. Impact Training, Semester-Integrated"
+                      value={modelTitle}
+                      onChange={(e) => setModelTitle(e.target.value)}
+                      className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#2563EB]"
                     />
                   </div>
 
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">Badge Tag</label>
+                  <div className="space-y-1">
+                    <label className="text-xs font-bold text-slate-700 font-mono">
+                      Badge / Tagline *
+                    </label>
                     <input
                       type="text"
                       required
-                      value={editBadge}
-                      onChange={(e) => setEditBadge(e.target.value)}
-                      className="w-full px-3.5 py-2 rounded-xl border border-black/10 text-xs focus:border-[#2563EB] focus:outline-hidden"
+                      placeholder="e.g. Placement-Focused Intensive"
+                      value={modelBadge}
+                      onChange={(e) => setModelBadge(e.target.value)}
+                      className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#2563EB]"
                     />
                   </div>
                 </div>
 
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Course Tagline / Subtitle</label>
-                  <textarea
-                    rows={2}
-                    value={editTagline}
-                    onChange={(e) => setEditTagline(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-xl border border-black/10 text-xs focus:border-[#2563EB] focus:outline-hidden"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
-                    Target Groups &amp; Eligibility (1 per line)
+                {/* Bullet Points */}
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-slate-700 font-mono">
+                    Bullet Points (One per line in "Label: Value" format) *
                   </label>
                   <textarea
-                    rows={3}
-                    value={editTargetGroups}
-                    onChange={(e) => setEditTargetGroups(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-xl border border-black/10 text-xs focus:border-[#2563EB] focus:outline-hidden font-mono"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
-                    Featured Rolling Tracks &amp; Certifications (1 per line)
-                  </label>
-                  <textarea
+                    required
                     rows={4}
-                    placeholder="Software and AI Engineering Program&#10;Modern Data Science and ML with specialisation in AI&#10;AI Forward Deployed Engineer Program"
-                    value={editRollingTracks}
-                    onChange={(e) => setEditRollingTracks(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-xl border border-black/10 text-xs focus:border-[#2563EB] focus:outline-hidden font-mono"
+                    placeholder="Audience: Final-year batches&#10;Duration: 40-60 Days&#10;Focus: Company-specific drive prep&#10;Coverage: All degrees and branches"
+                    value={modelPoints}
+                    onChange={(e) => setModelPoints(e.target.value)}
+                    className="w-full px-3.5 py-2.5 text-xs font-mono rounded-xl border border-slate-200 focus:outline-none focus:border-[#2563EB]"
                   />
                 </div>
 
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Program Core Outcome</label>
+                {/* Paragraph Description */}
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-slate-700 font-mono">
+                    Card Paragraph Description *
+                  </label>
                   <textarea
-                    rows={2}
-                    value={editOutcome}
-                    onChange={(e) => setEditOutcome(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-xl border border-black/10 text-xs focus:border-[#2563EB] focus:outline-hidden"
+                    required
+                    rows={3}
+                    placeholder="Enter short description explaining this delivery solution..."
+                    value={modelDescription}
+                    onChange={(e) => setModelDescription(e.target.value)}
+                    className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#2563EB]"
                   />
                 </div>
 
-                <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-black/6">
+                {/* Recruiter / Profile Tags */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="space-y-1">
+                    <label className="text-xs font-bold text-slate-700 font-mono">
+                      Footer Label
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Mapped to recruiters like"
+                      value={modelTagsLabel}
+                      onChange={(e) => setModelTagsLabel(e.target.value)}
+                      className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#2563EB]"
+                    />
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-xs font-bold text-slate-700 font-mono">
+                      Tags (Comma separated)
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="TCS, Infosys, Wipro, + more"
+                      value={modelTags}
+                      onChange={(e) => setModelTags(e.target.value)}
+                      className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#2563EB]"
+                    />
+                  </div>
+                </div>
+
+                {/* Active Checkbox */}
+                <div className="flex items-center gap-2 pt-1">
+                  <input
+                    type="checkbox"
+                    id="modelActiveCheck"
+                    checked={modelActive}
+                    onChange={(e) => setModelActive(e.target.checked)}
+                    className="rounded text-[#2563EB] focus:ring-[#2563EB] cursor-pointer"
+                  />
+                  <label htmlFor="modelActiveCheck" className="text-xs font-semibold text-slate-700 cursor-pointer">
+                    Display actively on public website
+                  </label>
+                </div>
+
+                {/* Buttons */}
+                <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100">
                   <button
                     type="button"
-                    onClick={() => setIsEditCourseModalOpen(false)}
-                    className="px-4 py-2 rounded-xl border border-black/10 text-xs font-semibold text-slate-700 hover:bg-slate-50 cursor-pointer"
+                    onClick={() => setIsModelModalOpen(false)}
+                    className="px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-900 cursor-pointer"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="btn-pill-primary px-5 py-2 text-xs font-bold cursor-pointer"
+                    className="btn-pill-primary px-6 py-2 text-xs font-bold flex items-center gap-1.5 cursor-pointer shadow-md"
                   >
-                    Save Course Details
+                    <CheckCircle2 size={14} />
+                    <span>{editingModel ? 'Save Changes' : 'Add Model'}</span>
                   </button>
                 </div>
               </form>
@@ -517,118 +850,208 @@ export function CurriculumTab() {
         )}
       </AnimatePresence>
 
-      {/* ── Add / Edit Pillar Modal ── */}
+      {/* ═════════════════════════════════════════════════════════════════════ */}
+      {/* MODAL: EDIT COURSE META                                              */}
+      {/* ═════════════════════════════════════════════════════════════════════ */}
       <AnimatePresence>
-        {isPillarModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsPillarModalOpen(false)}
-              className="fixed inset-0 bg-slate-900/50 backdrop-blur-xs"
-            />
-
+        {isEditCourseModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl border border-black/10 p-6 sm:p-8 z-10 my-8 space-y-4 max-h-[90vh] overflow-y-auto"
+              className="bg-white rounded-3xl p-6 sm:p-8 max-w-xl w-full border border-black/10 shadow-2xl space-y-5 max-h-[90vh] overflow-y-auto no-scrollbar"
             >
-              <div className="flex items-center justify-between border-b border-black/6 pb-3">
-                <h3 className="text-lg font-extrabold text-slate-900 font-[family-name:var(--font-display)]">
-                  {editingPillar ? 'Edit Module Pillar' : 'Add New Module Pillar'}
+              <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+                <h3 className="text-lg font-bold text-slate-900">
+                  Edit Track: {currentCourse?.shortTitle}
                 </h3>
                 <button
-                  onClick={() => setIsPillarModalOpen(false)}
-                  className="p-1.5 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-700 cursor-pointer"
+                  onClick={() => setIsEditCourseModalOpen(false)}
+                  className="p-1 rounded-lg text-slate-400 hover:text-slate-700 cursor-pointer"
                 >
-                  <X size={16} />
+                  <X size={18} />
                 </button>
               </div>
 
-              <form onSubmit={handleSavePillar} className="space-y-3.5">
-                <div className="grid grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">Pillar Number (e.g. 01)</label>
-                    <input
-                      type="text"
-                      required
-                      value={pillarNumber}
-                      onChange={(e) => setPillarNumber(e.target.value)}
-                      className="w-full px-3.5 py-2 rounded-xl border border-black/10 text-xs font-mono font-bold focus:border-[#2563EB] focus:outline-hidden"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">Badge</label>
-                    <input
-                      type="text"
-                      required
-                      value={pillarBadge}
-                      onChange={(e) => setPillarBadge(e.target.value)}
-                      className="w-full px-3.5 py-2 rounded-xl border border-black/10 text-xs focus:border-[#2563EB] focus:outline-hidden"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Pillar Title *</label>
+              <form onSubmit={handleSaveCourse} className="space-y-4">
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-slate-700 font-mono">Full Course Title *</label>
                   <input
                     type="text"
                     required
-                    placeholder="e.g. Technical & Domain Upskilling"
-                    value={pillarTitle}
-                    onChange={(e) => setPillarTitle(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-xl border border-black/10 text-xs focus:border-[#2563EB] focus:outline-hidden"
+                    value={editTitle}
+                    onChange={(e) => setEditTitle(e.target.value)}
+                    className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#2563EB]"
                   />
                 </div>
 
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Theme Color</label>
-                  <div className="flex items-center gap-2">
-                    <input
-                      type="color"
-                      value={pillarColor}
-                      onChange={(e) => setPillarColor(e.target.value)}
-                      className="w-8 h-8 rounded-lg border border-black/10 cursor-pointer p-0.5"
-                    />
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="space-y-1">
+                    <label className="text-xs font-bold text-slate-700 font-mono">Short Tab Title *</label>
                     <input
                       type="text"
-                      value={pillarColor}
-                      onChange={(e) => setPillarColor(e.target.value)}
-                      className="w-full px-3 py-1.5 rounded-xl border border-black/10 text-xs font-mono"
+                      required
+                      value={editShortTitle}
+                      onChange={(e) => setEditShortTitle(e.target.value)}
+                      className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#2563EB]"
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-xs font-bold text-slate-700 font-mono">Badge Label</label>
+                    <input
+                      type="text"
+                      value={editBadge}
+                      onChange={(e) => setEditBadge(e.target.value)}
+                      className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#2563EB]"
                     />
                   </div>
                 </div>
 
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
-                    Modules &amp; Bullet Points (1 per line) *
-                  </label>
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-slate-700 font-mono">Tagline / Overview *</label>
                   <textarea
-                    rows={6}
                     required
-                    placeholder="AI & GenAI Workflows&#10;Data Analytics&#10;Power BI Dashboards"
-                    value={pillarItems}
-                    onChange={(e) => setPillarItems(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-xl border border-black/10 text-xs focus:border-[#2563EB] focus:outline-hidden font-mono leading-relaxed"
+                    rows={2}
+                    value={editTagline}
+                    onChange={(e) => setEditTagline(e.target.value)}
+                    className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#2563EB]"
                   />
                 </div>
 
-                <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-black/6">
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-slate-700 font-mono">
+                    Target Groups (One per line)
+                  </label>
+                  <textarea
+                    rows={3}
+                    value={editTargetGroups}
+                    onChange={(e) => setEditTargetGroups(e.target.value)}
+                    className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#2563EB]"
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-slate-700 font-mono">Placement Outcome</label>
+                  <input
+                    type="text"
+                    value={editOutcome}
+                    onChange={(e) => setEditOutcome(e.target.value)}
+                    className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#2563EB]"
+                  />
+                </div>
+
+                <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100">
                   <button
                     type="button"
-                    onClick={() => setIsPillarModalOpen(false)}
-                    className="px-4 py-2 rounded-xl border border-black/10 text-xs font-semibold text-slate-700 hover:bg-slate-50 cursor-pointer"
+                    onClick={() => setIsEditCourseModalOpen(false)}
+                    className="px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-900 cursor-pointer"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="btn-pill-primary px-5 py-2 text-xs font-bold cursor-pointer"
+                    className="btn-pill-primary px-6 py-2 text-xs font-bold flex items-center gap-1.5 cursor-pointer"
                   >
-                    {editingPillar ? 'Save Changes' : 'Add Pillar'}
+                    <CheckCircle2 size={14} />
+                    <span>Save Track Info</span>
+                  </button>
+                </div>
+              </form>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* ═════════════════════════════════════════════════════════════════════ */}
+      {/* MODAL: ADD / EDIT PILLAR                                             */}
+      {/* ═════════════════════════════════════════════════════════════════════ */}
+      <AnimatePresence>
+        {isPillarModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="bg-white rounded-3xl p-6 sm:p-8 max-w-lg w-full border border-black/10 shadow-2xl space-y-5 max-h-[90vh] overflow-y-auto no-scrollbar"
+            >
+              <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+                <h3 className="text-lg font-bold text-slate-900">
+                  {editingPillar ? `Edit Pillar ${editingPillar.number}` : 'Add New Curriculum Pillar'}
+                </h3>
+                <button
+                  onClick={() => setIsPillarModalOpen(false)}
+                  className="p-1 rounded-lg text-slate-400 hover:text-slate-700 cursor-pointer"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+
+              <form onSubmit={handleSavePillar} className="space-y-4">
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="space-y-1">
+                    <label className="text-xs font-bold text-slate-700 font-mono">Pillar Number *</label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="01"
+                      value={pillarNumber}
+                      onChange={(e) => setPillarNumber(e.target.value)}
+                      className="w-full px-3.5 py-2.5 text-xs font-mono font-bold rounded-xl border border-slate-200 focus:outline-none focus:border-[#2563EB]"
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-xs font-bold text-slate-700 font-mono">Pillar Badge</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Core Module"
+                      value={pillarBadge}
+                      onChange={(e) => setPillarBadge(e.target.value)}
+                      className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#2563EB]"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-slate-700 font-mono">Pillar Title *</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. Data Structures & System Architecture"
+                    value={pillarTitle}
+                    onChange={(e) => setPillarTitle(e.target.value)}
+                    className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#2563EB]"
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-slate-700 font-mono">
+                    Syllabus Topics (One per line) *
+                  </label>
+                  <textarea
+                    required
+                    rows={5}
+                    placeholder="Trees, Graphs & Dynamic Programming&#10;Microservices & API Architecture&#10;Distributed Systems Design"
+                    value={pillarItems}
+                    onChange={(e) => setPillarItems(e.target.value)}
+                    className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#2563EB]"
+                  />
+                </div>
+
+                <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100">
+                  <button
+                    type="button"
+                    onClick={() => setIsPillarModalOpen(false)}
+                    className="px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-900 cursor-pointer"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="btn-pill-primary px-6 py-2 text-xs font-bold flex items-center gap-1.5 cursor-pointer shadow-md"
+                  >
+                    <CheckCircle2 size={14} />
+                    <span>{editingPillar ? 'Save Pillar' : 'Add Pillar'}</span>
                   </button>
                 </div>
               </form>
