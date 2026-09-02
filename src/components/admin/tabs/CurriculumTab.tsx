@@ -19,6 +19,8 @@ export function CurriculumTab() {
   const {
     curriculumCourses,
     updateCurriculumCourse,
+    addRollingTrackToCourse,
+    deleteRollingTrackFromCourse,
     addPillarToCourse,
     updateCoursePillar,
     deleteCoursePillar,
@@ -27,6 +29,7 @@ export function CurriculumTab() {
 
   const sortedCourses = [...curriculumCourses].sort((a, b) => (a.order || 0) - (b.order || 0));
   const [selectedCourseId, setSelectedCourseId] = useState<string>(sortedCourses[0]?.id || 'non-tech');
+  const [newTrackInput, setNewTrackInput] = useState('');
 
   // Edit Course Meta Modal
   const [isEditCourseModalOpen, setIsEditCourseModalOpen] = useState(false);
@@ -231,12 +234,85 @@ export function CurriculumTab() {
 
           <div className="p-4 rounded-2xl bg-blue-50/60 border border-blue-200 space-y-1">
             <span className="text-[11px] font-mono font-bold text-[#2563EB] uppercase tracking-wide flex items-center gap-1.5">
-              <CheckCircle2 size={13} />
-              <span>Core Program Outcome:</span>
+              <Sparkles size={13} />
+              <span>Rolling Ticker Live Status:</span>
             </span>
             <p className="text-xs text-slate-800 font-medium leading-relaxed">
-              {currentCourse.outcome}
+              {(currentCourse.rollingTracks || []).length} active specialization course pills rolling horizontally on the student page.
             </p>
+          </div>
+        </div>
+
+        {/* ── Dedicated Rolling Tracks Manager Card ── */}
+        <div className="pt-4 border-t border-slate-100 space-y-3">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <Sparkles size={15} className="text-[#2563EB]" />
+              <span className="text-xs font-mono font-bold text-slate-800 uppercase tracking-wide">
+                Featured Specialization &amp; Rolling Tracks ({(currentCourse.rollingTracks || []).length}):
+              </span>
+            </div>
+            <span className="text-[11px] text-slate-500 font-mono">
+              Real-time marquee ticker
+            </span>
+          </div>
+
+          {/* Existing Rolling Track Pills with Delete Option */}
+          <div className="flex flex-wrap gap-2 pt-1">
+            {(currentCourse.rollingTracks || []).map((track, idx) => (
+              <div
+                key={idx}
+                className="group pl-3 pr-2 py-1.5 rounded-xl bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 text-xs font-semibold text-slate-800 flex items-center gap-2 transition-all shadow-2xs"
+              >
+                <Sparkles size={12} className="text-[#2563EB] shrink-0" />
+                <span>{track}</span>
+                <button
+                  onClick={() => deleteRollingTrackFromCourse(currentCourse.id, idx)}
+                  className="p-1 rounded-md text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors cursor-pointer"
+                  title="Remove this track from rolling marquee"
+                >
+                  <X size={12} />
+                </button>
+              </div>
+            ))}
+            {(currentCourse.rollingTracks || []).length === 0 && (
+              <div className="text-xs text-slate-500 italic py-1">
+                No custom tracks added yet. Add below to display in the rolling strip.
+              </div>
+            )}
+          </div>
+
+          {/* Inline Add Track Form */}
+          <div className="flex gap-2 pt-2">
+            <input
+              type="text"
+              placeholder="e.g. MERN Stack & Next.js or Corporate Financial Modelling"
+              value={newTrackInput}
+              onChange={(e) => setNewTrackInput(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  if (newTrackInput.trim()) {
+                    addRollingTrackToCourse(currentCourse.id, newTrackInput.trim());
+                    setNewTrackInput('');
+                  }
+                }
+              }}
+              className="flex-1 px-3.5 py-2 rounded-xl border border-black/10 text-xs focus:border-[#2563EB] focus:outline-hidden bg-slate-50 focus:bg-white"
+            />
+            <button
+              type="button"
+              onClick={() => {
+                if (newTrackInput.trim()) {
+                  addRollingTrackToCourse(currentCourse.id, newTrackInput.trim());
+                  setNewTrackInput('');
+                }
+              }}
+              className="btn-pill-primary px-4 py-2 text-xs font-bold flex items-center gap-1.5 cursor-pointer shrink-0"
+            >
+              <Plus size={13} />
+              <span>Add to Rolling Strip</span>
+            </button>
           </div>
         </div>
       </div>

@@ -125,6 +125,9 @@ interface AdminDataContextType {
   // Curriculum Courses (Tech & Non-Tech)
   curriculumCourses: CurriculumCourse[];
   updateCurriculumCourse: (id: string, updated: Partial<CurriculumCourse>) => void;
+  addRollingTrackToCourse: (courseId: string, track: string) => void;
+  deleteRollingTrackFromCourse: (courseId: string, trackIndex: number) => void;
+  updateRollingTracks: (courseId: string, tracks: string[]) => void;
   addPillarToCourse: (courseId: string, pillar: Omit<ModulePillar, 'id'>) => void;
   updateCoursePillar: (courseId: string, pillarId: string, updated: Partial<ModulePillar>) => void;
   deleteCoursePillar: (courseId: string, pillarId: string) => void;
@@ -959,6 +962,45 @@ export function AdminDataProvider({ children }: { children: ReactNode }) {
     );
   };
 
+  const addRollingTrackToCourse = (courseId: string, track: string) => {
+    if (!track.trim()) return;
+    setCurriculumCourses((prev) =>
+      prev.map((c) => {
+        if (c.id !== courseId) return c;
+        const currentTracks = c.rollingTracks || [];
+        return {
+          ...c,
+          rollingTracks: [...currentTracks, track.trim()],
+        };
+      })
+    );
+  };
+
+  const deleteRollingTrackFromCourse = (courseId: string, trackIndex: number) => {
+    setCurriculumCourses((prev) =>
+      prev.map((c) => {
+        if (c.id !== courseId) return c;
+        const currentTracks = c.rollingTracks || [];
+        return {
+          ...c,
+          rollingTracks: currentTracks.filter((_, i) => i !== trackIndex),
+        };
+      })
+    );
+  };
+
+  const updateRollingTracks = (courseId: string, tracks: string[]) => {
+    setCurriculumCourses((prev) =>
+      prev.map((c) => {
+        if (c.id !== courseId) return c;
+        return {
+          ...c,
+          rollingTracks: tracks.map((t) => t.trim()).filter(Boolean),
+        };
+      })
+    );
+  };
+
   const addPillarToCourse = (courseId: string, pillarData: Omit<ModulePillar, 'id'>) => {
     const newPillar: ModulePillar = {
       ...pillarData,
@@ -1316,6 +1358,9 @@ export function AdminDataProvider({ children }: { children: ReactNode }) {
       value={{
         curriculumCourses,
         updateCurriculumCourse,
+        addRollingTrackToCourse,
+        deleteRollingTrackFromCourse,
+        updateRollingTracks,
         addPillarToCourse,
         updateCoursePillar,
         deleteCoursePillar,
