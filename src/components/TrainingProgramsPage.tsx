@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { GraduationCap, CheckCircle2, ArrowRight } from 'lucide-react';
+import { TrainingSolutionsSection } from './TrainingSolutionsSection';
 import { ProgramsSection } from './ProgramsSection';
 import { useEnquiry } from '../context/EnquiryContext';
 
@@ -59,7 +60,12 @@ export function TrainingProgramsPage({ onBackToHome: _ }: TrainingProgramsPagePr
         </div>
       </section>
 
-      {/* ── 03. Section: Interactive Industry-Ready Programs ── */}
+      {/* ── 03. Section 1: Impact & Semester Training Delivery Models ── */}
+      <div id="training">
+        <TrainingSolutionsSection />
+      </div>
+
+      {/* ── 04. Section 2: Interactive Industry-Ready Programs ── */}
       <div id="programs">
         <ProgramsSection />
       </div>
