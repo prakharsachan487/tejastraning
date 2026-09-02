@@ -20,13 +20,14 @@ import {
 import { useAdminAuth } from '../../context/AdminAuthContext';
 import { useAdminData } from '../../context/AdminDataContext';
 import { OverviewTab } from './tabs/OverviewTab';
+import { MentorsTab } from './tabs/MentorsTab';
 import { JobsTab } from './tabs/JobsTab';
 import { GalleryTab } from './tabs/GalleryTab';
 import { BlogsTab } from './tabs/BlogsTab';
 import { EnquiriesTab } from './tabs/EnquiriesTab';
 import { ApplicationsTab } from './tabs/ApplicationsTab';
 
-type ActiveTab = 'overview' | 'jobs' | 'gallery' | 'blogs' | 'enquiries' | 'applications';
+type ActiveTab = 'overview' | 'mentors' | 'jobs' | 'gallery' | 'blogs' | 'enquiries' | 'applications';
 
 interface AdminDashboardProps {
   onBackToHome: () => void;
@@ -34,7 +35,7 @@ interface AdminDashboardProps {
 
 export function AdminDashboard({ onBackToHome }: AdminDashboardProps) {
   const { adminUser, logoutAdmin, updateAdminPassword } = useAdminAuth();
-  const { enquiries, applications, jobs, galleryItems, blogPosts, resetAllToDefault } = useAdminData();
+  const { enquiries, applications, mentors, jobs, galleryItems, blogPosts, resetAllToDefault } = useAdminData();
 
   const [activeTab, setActiveTab] = useState<ActiveTab>('overview');
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
@@ -83,8 +84,14 @@ export function AdminDashboard({ onBackToHome }: AdminDashboardProps) {
       badge: null,
     },
     {
+      id: 'mentors' as const,
+      label: 'Faculty & Mentors',
+      icon: Users,
+      badge: mentors.length > 0 ? String(mentors.length) : null,
+    },
+    {
       id: 'jobs' as const,
-      label: 'Jobs & Mentors',
+      label: 'Jobs & Openings',
       icon: Briefcase,
       badge: jobs.length > 0 ? String(jobs.length) : null,
     },
@@ -344,6 +351,8 @@ export function AdminDashboard({ onBackToHome }: AdminDashboardProps) {
               onOpenAddBlog={() => setActiveTab('blogs')}
             />
           )}
+
+          {activeTab === 'mentors' && <MentorsTab />}
 
           {activeTab === 'jobs' && <JobsTab />}
 

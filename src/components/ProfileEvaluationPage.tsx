@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Phone, Sparkles, ArrowRight, TrendingUp, Calendar, ShieldCheck, UserCheck, LogOut } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { useAdminData } from '../context/AdminDataContext';
 import { CareerCallModal } from './CareerCallModal';
 
 interface ProfileEvaluationPageProps {
@@ -9,39 +10,13 @@ interface ProfileEvaluationPageProps {
 
 export function ProfileEvaluationPage({ onBackToHome }: ProfileEvaluationPageProps) {
   const { user, logout } = useAuth();
+  const { mentors } = useAdminData();
   const [isCareerCallOpen, setIsCareerCallOpen] = useState(false);
   const [selectedProgram, setSelectedProgram] = useState('AI-Powered Software Engineering (10x)');
 
   // Dynamic user name
   const userName = user?.name ? user.name.split(' ')[0] : 'Engineer';
   const fullName = user?.name || 'Aspiring Tech Lead';
-
-  const matchedMentors = [
-    {
-      name: 'Nandwana Abhishek',
-      company: 'Meta (London)',
-      role: 'Software Engineer',
-      exp: '95+ Sessions',
-      image: '/mentors/nandwana_abhishek.jpg',
-      tag: 'System Design & Distributed Tech',
-    },
-    {
-      name: 'Nidhi Singh',
-      company: 'Accenture',
-      role: 'Lead Analyst · Advisory',
-      exp: '85+ Sessions',
-      image: '/mentors/nidhi_singh.jpg',
-      tag: 'Corporate Readiness & Strategy',
-    },
-    {
-      name: 'Vishal Motlani',
-      company: 'J&J MedTech (Ex-Deloitte)',
-      role: 'Senior Consultant',
-      exp: '60+ Sessions',
-      image: '/mentors/vishal_motlani.jpg',
-      tag: 'Problem Solving & Mock Drives',
-    },
-  ];
 
   return (
     <div className="min-h-screen bg-[#F8F9FB] text-[#0F172A] font-sans selection:bg-[#2563EB] selection:text-white pb-20">
@@ -264,11 +239,11 @@ export function ProfileEvaluationPage({ onBackToHome }: ProfileEvaluationPagePro
             </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {matchedMentors.map((mentor, idx) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+            {mentors.map((mentor) => (
               <div
-                key={idx}
-                className="rounded-2xl bg-slate-50/80 border border-black/6 p-5 flex flex-col justify-between space-y-4 hover:bg-white hover:border-blue-400/40 hover:shadow-md transition-all"
+                key={mentor.id}
+                className="rounded-2xl bg-slate-50/80 border border-black/6 p-5 flex flex-col justify-between space-y-4 hover:bg-white hover:border-blue-400/40 hover:shadow-md transition-all group"
               >
                 <div className="space-y-3">
                   <div className="flex items-center gap-3">
@@ -276,21 +251,30 @@ export function ProfileEvaluationPage({ onBackToHome }: ProfileEvaluationPagePro
                       src={mentor.image}
                       alt={mentor.name}
                       className="w-12 h-12 rounded-full object-cover border-2 border-white shadow-xs"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src =
+                          'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80';
+                      }}
                     />
                     <div>
-                      <h4 className="text-sm font-bold text-slate-900 font-[family-name:var(--font-display)]">
+                      <h4 className="text-sm font-bold text-slate-900 font-[family-name:var(--font-display)] group-hover:text-[#2563EB] transition-colors">
                         {mentor.name}
                       </h4>
-                      <p className="text-xs text-[#2563EB] font-semibold">{mentor.company}</p>
+                      <span
+                        className="text-[11px] font-bold px-2 py-0.5 rounded-md inline-block mt-0.5 text-white"
+                        style={{ backgroundColor: mentor.companyColor || '#2563EB' }}
+                      >
+                        {mentor.company}
+                      </span>
                     </div>
                   </div>
 
-                  <p className="text-xs text-slate-600 font-normal">
-                    {mentor.role} • <span className="font-mono text-slate-500">{mentor.exp}</span>
+                  <p className="text-xs text-slate-600 font-normal line-clamp-2 leading-relaxed">
+                    {mentor.role} • <span className="font-mono text-slate-500">{mentor.exp || '80+ Sessions'}</span>
                   </p>
 
-                  <div className="p-2 rounded-xl bg-blue-50/80 border border-blue-100 text-[11px] font-mono text-[#2563EB] font-medium">
-                    Focus: {mentor.tag}
+                  <div className="p-2 rounded-xl bg-blue-50/80 border border-blue-100 text-[11px] font-mono text-[#2563EB] font-medium line-clamp-1">
+                    Focus: {mentor.tag || 'Placement Sprint'}
                   </div>
                 </div>
 
@@ -299,7 +283,7 @@ export function ProfileEvaluationPage({ onBackToHome }: ProfileEvaluationPagePro
                     setSelectedProgram(`1:1 Mentorship with ${mentor.name} (${mentor.company})`);
                     setIsCareerCallOpen(true);
                   }}
-                  className="w-full py-2 px-3 rounded-xl bg-white hover:bg-[#2563EB] hover:text-white border border-black/10 text-xs font-bold text-slate-800 transition-all cursor-pointer flex items-center justify-center gap-1.5 shadow-2xs"
+                  className="w-full py-2.5 px-3 rounded-xl bg-white hover:bg-[#2563EB] hover:text-white border border-black/10 text-xs font-bold text-slate-800 transition-all cursor-pointer flex items-center justify-center gap-1.5 shadow-2xs group-hover:border-[#2563EB]"
                 >
                   <span>Connect with {mentor.name.split(' ')[0]}</span>
                   <ArrowRight size={13} />

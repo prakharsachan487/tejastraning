@@ -61,6 +61,20 @@ export interface FormSubmission {
   createdAt: string;
 }
 
+export interface MentorItem {
+  id: string;
+  name: string;
+  company: string;
+  companyColor?: string;
+  role: string;
+  quote?: string;
+  image: string;
+  exp?: string;
+  tag?: string;
+  tilt?: string;
+  createdAt?: string;
+}
+
 export interface JobApplication {
   id: string;
   jobId?: string | number;
@@ -78,6 +92,12 @@ export interface JobApplication {
 }
 
 interface AdminDataContextType {
+  // Mentors
+  mentors: MentorItem[];
+  addMentor: (mentor: Omit<MentorItem, 'id'>) => void;
+  updateMentor: (id: string, updated: Partial<MentorItem>) => void;
+  deleteMentor: (id: string) => void;
+
   // Jobs
   jobs: JobOpening[];
   addJob: (job: Omit<JobOpening, 'id' | 'postedDate' | 'postedDaysAgo'>) => void;
@@ -470,9 +490,119 @@ const INITIAL_APPLICATIONS: JobApplication[] = [
   }
 ];
 
+const INITIAL_MENTORS: MentorItem[] = [
+  {
+    id: 'mentor-1',
+    name: 'Nidhi Singh',
+    company: 'Accenture',
+    companyColor: '#A100FF',
+    role: 'Lead Analyst – FP&A · Accenture',
+    quote: 'Power BI dashboards, financial modelling, budgeting & forecasting, SOX controls, and corporate FP&A with a focus on data-driven insights.',
+    image: '/mentors/nidhi_singh.jpg',
+    exp: '85+ Sessions',
+    tag: 'Corporate Strategy & FP&A',
+    tilt: '-0.8deg',
+  },
+  {
+    id: 'mentor-2',
+    name: 'Vishal Motlani',
+    company: 'J&J MedTech (Ex-Deloitte)',
+    companyColor: '#D51900',
+    role: "SIBM P'27 · Ex-Deloitte USI · Ex-Urban Company",
+    quote: 'National Winner of J&J Imagivators 2025 and CISI Level 1 certified with deep experience in business strategy, financial advisory, and risk consulting.',
+    image: '/mentors/vishal_motlani.jpg',
+    exp: '60+ Sessions',
+    tag: 'Problem Solving & Mock Drives',
+    tilt: '0.6deg',
+  },
+  {
+    id: 'mentor-3',
+    name: 'Nandwana Abhishek',
+    company: 'Meta (London)',
+    companyColor: '#0668E1',
+    role: 'Software Engineer · Meta (London, UK)',
+    quote: 'Software Engineer at Meta working on scalable software systems and production-grade engineering solutions based in London.',
+    image: '/mentors/nandwana_abhishek.jpg',
+    exp: '95+ Sessions',
+    tag: 'System Design & Distributed Tech',
+    tilt: '-1.2deg',
+  },
+  {
+    id: 'mentor-4',
+    name: 'Ashish Sachan',
+    company: 'Product Leadership',
+    companyColor: '#2563EB',
+    role: 'Product & Program Management · 10+ Yrs Exp',
+    quote: '10+ years of experience across web technologies, AI systems, project execution, and cross-functional leadership for high-impact tech products.',
+    image: '/mentors/ashish_sachan.jpg',
+    exp: '110+ Sessions',
+    tag: 'Tech Leadership & Product Vision',
+    tilt: '0.9deg',
+  },
+  {
+    id: 'mentor-5',
+    name: 'Mohit Khandelwal',
+    company: 'ZS Associates',
+    companyColor: '#005A9C',
+    role: 'Analytics Consultant · Commercial Analytics',
+    quote: 'Analytics Consultant specialized in commercial analytics, incentive compensation modeling, Power BI, SQL, and US pharma healthcare analytics.',
+    image: '/mentors/mohit_khandelwal.png',
+    exp: '75+ Sessions',
+    tag: 'Commercial Analytics & BI',
+    tilt: '-0.6deg',
+  },
+  {
+    id: 'mentor-6',
+    name: 'Sakshi Havelia',
+    company: 'Koridge Capital',
+    companyColor: '#D97706',
+    role: 'Founder Advisory · Equity & Debt Fundraising',
+    quote: 'Helping ambitious founders prepare and raise capital with confidence across equity & debt fundraising, M&A advisory, and Pre-IPO stages.',
+    image: '/mentors/sakshi_havelia.png',
+    exp: '50+ Sessions',
+    tag: 'Fundraising & Strategic Advisory',
+    tilt: '0.8deg',
+  },
+  {
+    id: 'mentor-7',
+    name: 'Gagandeep Singh',
+    company: 'VALUETE',
+    companyColor: '#10B981',
+    role: 'Founder & Full-Stack Developer · VALUETE',
+    quote: 'Founder and Full-Stack Developer turning ideas into scalable technology architectures, robust cloud backends, and high-velocity builds.',
+    image: '/mentors/gagandeep_singh.jpg',
+    exp: '80+ Sessions',
+    tag: 'Full-Stack & Cloud Architecture',
+    tilt: '-1.0deg',
+  },
+  {
+    id: 'mentor-8',
+    name: 'Siddhartha Kumar',
+    company: 'Brainstack',
+    companyColor: '#8B5CF6',
+    role: 'Senior Full-Stack Engineer · Agentic AI & RAG',
+    quote: 'Senior Full-Stack Engineer building intelligent web platforms with deep expertise in React, Node.js, MongoDB, Agentic AI, and RAG architectures.',
+    image: '/mentors/siddhartha_kumar.jpg',
+    exp: '90+ Sessions',
+    tag: 'Agentic AI, LLMs & Full-Stack',
+    tilt: '0.7deg',
+  },
+];
+
 const AdminDataContext = createContext<AdminDataContextType | null>(null);
 
 export function AdminDataProvider({ children }: { children: ReactNode }) {
+  // 0. Mentors State
+  const [mentors, setMentors] = useState<MentorItem[]>(() => {
+    const saved = localStorage.getItem('grow360_admin_mentors');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch {}
+    }
+    return INITIAL_MENTORS;
+  });
+
   // 1. Jobs State
   const [jobs, setJobs] = useState<JobOpening[]>(() => {
     const saved = localStorage.getItem('grow360_admin_jobs');
@@ -529,6 +659,10 @@ export function AdminDataProvider({ children }: { children: ReactNode }) {
   });
 
   // ─── Persistence to LocalStorage ──────────────────────────
+
+  useEffect(() => {
+    localStorage.setItem('grow360_admin_mentors', JSON.stringify(mentors));
+  }, [mentors]);
 
   useEffect(() => {
     localStorage.setItem('grow360_admin_jobs', JSON.stringify(jobs));
@@ -817,13 +951,37 @@ export function AdminDataProvider({ children }: { children: ReactNode }) {
     document.body.removeChild(link);
   };
 
+  // ─── Mentor Handlers ───────────────────────────────────────
+
+  const addMentor = (newMentorData: Omit<MentorItem, 'id'>) => {
+    const newId = `mentor-${Date.now()}`;
+    const newMentor: MentorItem = {
+      ...newMentorData,
+      id: newId,
+      createdAt: new Date().toISOString(),
+    };
+    setMentors((prev) => [newMentor, ...prev]);
+  };
+
+  const updateMentor = (id: string, updated: Partial<MentorItem>) => {
+    setMentors((prev) =>
+      prev.map((m) => (m.id === id ? { ...m, ...updated } : m))
+    );
+  };
+
+  const deleteMentor = (id: string) => {
+    setMentors((prev) => prev.filter((m) => m.id !== id));
+  };
+
   // Reset to default seed
   const resetAllToDefault = () => {
+    setMentors(INITIAL_MENTORS);
     setJobs(INITIAL_JOBS);
     setGalleryItems(INITIAL_GALLERY);
     setBlogPosts(INITIAL_BLOGS);
     setEnquiries(INITIAL_ENQUIRIES);
     setApplications(INITIAL_APPLICATIONS);
+    localStorage.removeItem('grow360_admin_mentors');
     localStorage.removeItem('grow360_admin_jobs');
     localStorage.removeItem('grow360_admin_gallery');
     localStorage.removeItem('grow360_admin_blogs');
@@ -834,6 +992,10 @@ export function AdminDataProvider({ children }: { children: ReactNode }) {
   return (
     <AdminDataContext.Provider
       value={{
+        mentors,
+        addMentor,
+        updateMentor,
+        deleteMentor,
         jobs,
         addJob,
         updateJob,
