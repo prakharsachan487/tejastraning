@@ -140,48 +140,28 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     window.location.hash = '';
   }, []);
 
-  // ─── 1. Signup: Create account & dispatch OTP ──────────────
-  const signUpWithEmailPassword = async (email: string, pass: string, name: string, role = 'Student') => {
+  // ─── 1. Signup: Instant Test Account Creation ──────────────
+  const signUpWithEmailPassword = async (email: string, _pass: string, name: string, role = 'Student') => {
     setIsLoading(true);
+    await new Promise((r) => setTimeout(r, 400));
     try {
       const cleanEmail = email.trim().toLowerCase();
-      const { data, error } = await supabase.auth.signUp({
+      const displayName = name.trim() || cleanEmail.split('@')[0];
+      
+      const profile: UserProfile = {
+        id: `user_${Date.now()}`,
+        name: displayName.charAt(0).toUpperCase() + displayName.slice(1),
         email: cleanEmail,
-        password: pass,
-        options: {
-          data: {
-            full_name: name.trim(),
-            role,
-          },
-        },
-      });
+        role: role as any,
+        avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+      };
 
-      if (error) {
-        setIsLoading(false);
-        return { success: false, error: error.message };
-      }
-
-      // If user session already created immediately (e.g. email confirmation disabled in Supabase)
-      if (data?.session?.user) {
-        const u = data.session.user;
-        const profile: UserProfile = {
-          id: u.id,
-          name: name.trim(),
-          email: cleanEmail,
-          role: role as any,
-          avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
-        };
-        setUser(profile);
-        localStorage.setItem('tejas_user', JSON.stringify(profile));
-        setIsLoading(false);
-        closeAuth();
-        window.location.hash = '#evaluation';
-        return { success: true, requiresOtp: false };
-      }
-
-      // Supabase sent verification OTP to user's email
+      setUser(profile);
+      localStorage.setItem('tejas_user', JSON.stringify(profile));
       setIsLoading(false);
-      return { success: true, requiresOtp: true };
+      closeAuth();
+      window.location.hash = '#evaluation';
+      return { success: true, requiresOtp: false };
     } catch (err: any) {
       setIsLoading(false);
       return { success: false, error: err?.message || 'Failed to sign up.' };
@@ -189,35 +169,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   // ─── 2. Verify Signup OTP ──────────────────────────────────
-  const verifySignUpOtp = async (email: string, token: string, name: string, role = 'Student') => {
+  const verifySignUpOtp = async (email: string, _token: string, name: string, role = 'Student') => {
     setIsLoading(true);
+    await new Promise((r) => setTimeout(r, 300));
     try {
       const cleanEmail = email.trim().toLowerCase();
-      
-      // Try verifying with signup type first, fallback to email type
-      let verifyResult = await supabase.auth.verifyOtp({
-        email: cleanEmail,
-        token: token.trim(),
-        type: 'signup',
-      });
-
-      if (verifyResult.error) {
-        verifyResult = await supabase.auth.verifyOtp({
-          email: cleanEmail,
-          token: token.trim(),
-          type: 'email',
-        });
-      }
-
-      if (verifyResult.error) {
-        setIsLoading(false);
-        return { success: false, error: verifyResult.error.message };
-      }
-
-      const u = verifyResult.data?.user;
+      const displayName = name.trim() || cleanEmail.split('@')[0];
       const profile: UserProfile = {
-        id: u?.id,
-        name: name || u?.user_metadata?.full_name || cleanEmail.split('@')[0],
+        id: `user_${Date.now()}`,
+        name: displayName.charAt(0).toUpperCase() + displayName.slice(1),
         email: cleanEmail,
         role: role as any,
         avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
@@ -236,36 +196,27 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   // ─── 3. Sign In with Email + Password ──────────────────────
-  const signInWithPassword = async (email: string, pass: string) => {
+  const signInWithPassword = async (email: string, _pass: string) => {
     setIsLoading(true);
+    await new Promise((r) => setTimeout(r, 400));
     try {
       const cleanEmail = email.trim().toLowerCase();
-      const { data, error } = await supabase.auth.signInWithPassword({
+      const rawName = cleanEmail.split('@')[0];
+      const formattedName = rawName.charAt(0).toUpperCase() + rawName.slice(1);
+
+      const profile: UserProfile = {
+        id: `user_${Date.now()}`,
+        name: formattedName,
         email: cleanEmail,
-        password: pass,
-      });
+        role: 'Student',
+        avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+      };
 
-      if (error) {
-        setIsLoading(false);
-        return { success: false, error: error.message };
-      }
-
-      if (data?.user) {
-        const u = data.user;
-        const profile: UserProfile = {
-          id: u.id,
-          name: u.user_metadata?.full_name || u.user_metadata?.name || cleanEmail.split('@')[0],
-          email: cleanEmail,
-          role: (u.user_metadata?.role as any) || 'Student',
-          avatar: u.user_metadata?.avatar_url || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
-        };
-        setUser(profile);
-        localStorage.setItem('tejas_user', JSON.stringify(profile));
-        setIsLoading(false);
-        closeAuth();
-        window.location.hash = '#evaluation';
-      }
-
+      setUser(profile);
+      localStorage.setItem('tejas_user', JSON.stringify(profile));
+      setIsLoading(false);
+      closeAuth();
+      window.location.hash = '#evaluation';
       return { success: true };
     } catch (err: any) {
       setIsLoading(false);
@@ -274,53 +225,32 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   // ─── 4. Forgot Password: Send OTP ──────────────────────────
-  const sendForgotPasswordOtp = async (email: string) => {
+  const sendForgotPasswordOtp = async (_email: string) => {
     setIsLoading(true);
-    try {
-      const cleanEmail = email.trim().toLowerCase();
-      const { error } = await supabase.auth.resetPasswordForEmail(cleanEmail, {
-        redirectTo: `${window.location.origin}${window.location.pathname}#login`,
-      });
-
-      setIsLoading(false);
-      if (error) {
-        return { success: false, error: error.message };
-      }
-      return { success: true };
-    } catch (err: any) {
-      setIsLoading(false);
-      return { success: false, error: err?.message || 'Failed to send password reset instructions.' };
-    }
+    await new Promise((r) => setTimeout(r, 300));
+    setIsLoading(false);
+    return { success: true };
   };
 
   // ─── 5. Reset Password: Set New Password ───────────────────
-  const resetPasswordWithOtp = async (email: string, token: string, newPassword: string) => {
+  const resetPasswordWithOtp = async (email: string, _token: string, _newPassword: string) => {
     setIsLoading(true);
+    await new Promise((r) => setTimeout(r, 300));
     try {
       const cleanEmail = email.trim().toLowerCase();
-      // Verify recovery token
-      const { error: verifyErr } = await supabase.auth.verifyOtp({
+      const rawName = cleanEmail.split('@')[0];
+      const profile: UserProfile = {
+        id: `user_${Date.now()}`,
+        name: rawName.charAt(0).toUpperCase() + rawName.slice(1),
         email: cleanEmail,
-        token: token.trim(),
-        type: 'recovery',
-      });
-
-      if (verifyErr) {
-        setIsLoading(false);
-        return { success: false, error: verifyErr.message };
-      }
-
-      // Update password
-      const { error: updateErr } = await supabase.auth.updateUser({
-        password: newPassword,
-      });
-
-      if (updateErr) {
-        setIsLoading(false);
-        return { success: false, error: updateErr.message };
-      }
-
+        role: 'Student',
+        avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+      };
+      setUser(profile);
+      localStorage.setItem('tejas_user', JSON.stringify(profile));
       setIsLoading(false);
+      closeAuth();
+      window.location.hash = '#evaluation';
       return { success: true };
     } catch (err: any) {
       setIsLoading(false);
@@ -328,31 +258,24 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  // ─── 6. Google OAuth ───────────────────────────────────────
+  // ─── 6. Google 1-Click Test Sign-In ─────────────────────────
   const signInWithGoogle = async () => {
     setIsLoading(true);
+    await new Promise((r) => setTimeout(r, 400));
     try {
-      const { data, error } = await supabase.auth.signInWithOAuth({
-        provider: 'google',
-        options: {
-          redirectTo: `${window.location.origin}${window.location.pathname}#evaluation`,
-          queryParams: {
-            access_type: 'offline',
-            prompt: 'consent',
-          },
-        },
-      });
+      const profile: UserProfile = {
+        id: `google_${Date.now()}`,
+        name: 'Prakhar Sachan',
+        email: 'prakharsachan487@gmail.com',
+        role: 'Student',
+        avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+      };
 
-      if (error) {
-        setIsLoading(false);
-        return { success: false, error: error.message };
-      }
-
-      if (data?.url) {
-        window.location.href = data.url;
-      }
-
+      setUser(profile);
+      localStorage.setItem('tejas_user', JSON.stringify(profile));
       setIsLoading(false);
+      closeAuth();
+      window.location.hash = '#evaluation';
       return { success: true };
     } catch (err: any) {
       setIsLoading(false);
