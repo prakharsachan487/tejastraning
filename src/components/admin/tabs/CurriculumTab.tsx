@@ -9,7 +9,6 @@ import {
   X,
   Layers,
   GraduationCap,
-  RotateCcw,
   Briefcase,
   Code2
 } from 'lucide-react';
@@ -23,8 +22,7 @@ export function CurriculumTab() {
     deleteRollingTrackFromCourse,
     addPillarToCourse,
     updateCoursePillar,
-    deleteCoursePillar,
-    resetCurriculumToDefault
+    deleteCoursePillar
   } = useAdminData();
 
   const sortedCourses = [...curriculumCourses].sort((a, b) => (a.order || 0) - (b.order || 0));
@@ -156,15 +154,6 @@ export function CurriculumTab() {
             Edit Course titles, target eligibility, outcomes, module pillars, and bullet points in real-time.
           </p>
         </div>
-
-        <button
-          onClick={resetCurriculumToDefault}
-          className="btn-pill-secondary px-4 py-2 text-xs font-semibold flex items-center gap-1.5 cursor-pointer self-start sm:self-center"
-          title="Reset curriculum back to default seed data"
-        >
-          <RotateCcw size={13} />
-          <span>Reset Curriculum</span>
-        </button>
       </div>
 
       {/* ── Course Switcher Tabs (Non-Tech #1, Tech #2) ── */}

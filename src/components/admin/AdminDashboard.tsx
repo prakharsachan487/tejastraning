@@ -13,7 +13,6 @@ import {
   Menu,
   X,
   KeyRound,
-  RotateCcw,
   Check,
   AlertCircle
 } from 'lucide-react';
@@ -36,12 +35,11 @@ interface AdminDashboardProps {
 
 export function AdminDashboard({ onBackToHome }: AdminDashboardProps) {
   const { adminUser, logoutAdmin, updateAdminPassword } = useAdminAuth();
-  const { enquiries, applications, mentors, jobs, galleryItems, blogPosts, resetAllToDefault } = useAdminData();
+  const { enquiries, applications, mentors, jobs, galleryItems, blogPosts } = useAdminData();
 
   const [activeTab, setActiveTab] = useState<ActiveTab>('overview');
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
-  const [isResetConfirmOpen, setIsResetConfirmOpen] = useState(false);
 
   // Change Password state
   const [currentPassword, setCurrentPassword] = useState('');
@@ -254,17 +252,6 @@ export function AdminDashboard({ onBackToHome }: AdminDashboardProps) {
                     {adminUser?.email || 'admin@grow360.in'}
                   </p>
                 </div>
-              </div>
-
-              <div className="mt-3 flex items-center gap-1.5">
-                <button
-                  type="button"
-                  onClick={() => setIsResetConfirmOpen(true)}
-                  className="w-full text-[10px] text-slate-500 hover:text-slate-800 bg-slate-50 hover:bg-slate-100 border border-slate-200 py-1.5 px-2 rounded-lg flex items-center justify-center gap-1 transition-colors cursor-pointer"
-                >
-                  <RotateCcw size={11} />
-                  <span>Reset Demo Data</span>
-                </button>
               </div>
             </div>
           </div>
@@ -483,54 +470,6 @@ export function AdminDashboard({ onBackToHome }: AdminDashboardProps) {
                   </button>
                 </div>
               </form>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
-
-      {/* ─── Reset Data Confirmation Modal ──────────────────────────────────── */}
-      <AnimatePresence>
-        {isResetConfirmOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsResetConfirmOpen(false)}
-              className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs"
-            />
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              className="relative w-full max-w-md bg-white rounded-3xl p-6 shadow-2xl z-10 text-slate-900"
-            >
-              <div className="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center mb-4">
-                <RotateCcw size={24} />
-              </div>
-              <h3 className="text-lg font-bold mb-1">Reset all data to default seeds?</h3>
-              <p className="text-xs text-slate-500 mb-6 leading-relaxed">
-                This will reset jobs, gallery moments, blogs, form inquiries, and job applications back to initial factory demo seed state.
-              </p>
-              <div className="flex items-center justify-end gap-2">
-                <button
-                  type="button"
-                  onClick={() => setIsResetConfirmOpen(false)}
-                  className="px-4 py-2 text-xs font-bold text-slate-600 hover:bg-slate-100 rounded-xl cursor-pointer"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    resetAllToDefault();
-                    setIsResetConfirmOpen(false);
-                  }}
-                  className="px-5 py-2 text-xs font-bold bg-amber-600 hover:bg-amber-700 text-white rounded-xl shadow-md shadow-amber-600/30 cursor-pointer"
-                >
-                  Reset Everything
-                </button>
-              </div>
             </motion.div>
           </div>
         )}
