@@ -136,14 +136,14 @@ export function ProfileEvaluationPage({ onBackToHome }: ProfileEvaluationPagePro
 
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#111827] tracking-tight font-[family-name:var(--font-display)] leading-[1.15]">
                 Hey {userName},<br />
-                Become an AI-Powered{' '}
+                Transform into an{' '}
                 <span className="text-[#2563EB]">
-                  10× Software Engineer.
+                  Industry-Ready Corporate Leader.
                 </span>
               </h1>
 
               <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-xl font-normal">
-                Your diagnostic rubric is ready. We analysed your engineering depth against Tier-1 hiring benchmarks to give you an actionable roadmap to top placements.
+                Your diagnostic evaluation is complete. Discover where you stand against real-world corporate hiring benchmarks and unlock your customized 1-on-1 mentorship roadmap to top placements.
               </p>
 
               {/* High-Impact Book 1:1 Call Option */}
