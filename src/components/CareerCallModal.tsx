@@ -24,9 +24,6 @@ export function CareerCallModal({ isOpen, onClose, defaultProgram }: CareerCallM
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [jobTitle, setJobTitle] = useState('');
-  const [program, setProgram] = useState('');
-  const [gradYear, setGradYear] = useState('');
-  const [companyCollege, setCompanyCollege] = useState('');
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
@@ -41,9 +38,6 @@ export function CareerCallModal({ isOpen, onClose, defaultProgram }: CareerCallM
       setEmail(user?.email || '');
       setPhone('');
       setJobTitle('');
-      setProgram(defaultProgram || 'AI-Powered Software Engineering (10x)');
-      setGradYear('2026');
-      setCompanyCollege('');
       setErrorMsg('');
       setIsSubmitting(false);
     } else {
@@ -52,7 +46,7 @@ export function CareerCallModal({ isOpen, onClose, defaultProgram }: CareerCallM
     return () => {
       document.body.style.overflow = 'unset';
     };
-  }, [isOpen, user, defaultProgram]);
+  }, [isOpen, user]);
 
   // Handle escape key
   useEffect(() => {
@@ -97,9 +91,9 @@ export function CareerCallModal({ isOpen, onClose, defaultProgram }: CareerCallM
         fullName: name.trim(),
         email: email.trim().toLowerCase(),
         phone: phone.trim(),
-        collegeName: companyCollege.trim() || 'N/A',
-        profession: `${jobTitle} (${backgroundType === 'non-tech' ? 'Non-Tech Transition' : 'Tech Pro'}) · Grad: ${gradYear}`,
-        message: `Program Interest: ${program} | Background: ${backgroundType}`,
+        collegeName: 'N/A',
+        profession: `${jobTitle} (${backgroundType === 'non-tech' ? 'Non-Tech Transition' : 'Tech Pro'})`,
+        message: `Program Interest: ${defaultProgram || 'AI-Powered Software Engineering (10x)'} | Background: ${backgroundType}`,
         source: 'CONSULTATION' as const,
       };
 
@@ -115,11 +109,11 @@ export function CareerCallModal({ isOpen, onClose, defaultProgram }: CareerCallM
               contact_name: payload.fullName,
               email: payload.email,
               phone: payload.phone,
-              college_name: payload.collegeName,
+              college_name: 'N/A',
               profession: payload.profession,
               designation: jobTitle || 'Candidate',
               message: payload.message,
-              request_details: `1:1 Career Consultation Booking | Grad: ${gradYear} | Org: ${companyCollege}`,
+              request_details: `1:1 Career Consultation Booking | Background: ${backgroundType}`,
               source: 'CAREER_1ON1_CALL',
             },
           ]);
@@ -322,24 +316,6 @@ export function CareerCallModal({ isOpen, onClose, defaultProgram }: CareerCallM
                     </select>
                   </div>
 
-                  {/* Graduation Year */}
-                  <div>
-                    <select
-                      required
-                      value={gradYear}
-                      onChange={(e) => setGradYear(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/10 transition-all bg-white"
-                    >
-                      <option value="" disabled>Graduation year *</option>
-                      <option value="2027">2027</option>
-                      <option value="2026">2026</option>
-                      <option value="2025">2025</option>
-                      <option value="2024">2024</option>
-                      <option value="2023 or earlier">2023 or earlier</option>
-                      <option value="Working Professional">Working Professional</option>
-                    </select>
-                  </div>
-
                   {/* CTA Button */}
                   <div className="pt-2">
                     <button
@@ -407,10 +383,6 @@ export function CareerCallModal({ isOpen, onClose, defaultProgram }: CareerCallM
                   <div className="flex justify-between text-slate-600">
                     <span>Session:</span>
                     <span className="font-bold text-emerald-600">1:1 Diagnostic (30 Mins Free)</span>
-                  </div>
-                  <div className="flex justify-between text-slate-600">
-                    <span>Graduation:</span>
-                    <span className="font-bold text-slate-900">{gradYear}</span>
                   </div>
                 </div>
 
