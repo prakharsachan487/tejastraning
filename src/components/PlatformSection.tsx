@@ -358,7 +358,7 @@ export function PlatformSection() {
             </div>
           </motion.div>
 
-          {/* Card 4: Verified Certificates (NEW) */}
+          {/* Card 4: Industry-Approved Certification */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -368,7 +368,7 @@ export function PlatformSection() {
           >
             <div>
               <h3 className="text-lg font-bold text-slate-900 mb-1.5">
-                Verified Certificates
+                Industry-Approved Certification
               </h3>
               <p className="text-xs text-slate-600 leading-relaxed mb-5">
                 Tamper-proof, QR-verifiable industry credentials recognized by corporate recruiters.
