@@ -1,72 +1,43 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Quote, Sparkles, Building, UserCheck, Briefcase } from 'lucide-react';
+import { useState, useMemo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Quote, Sparkles, Building, UserCheck, Briefcase, GraduationCap } from 'lucide-react';
+import { useAdminData } from '../context/AdminDataContext';
 
-const testimonials = [
-  {
-    category: 'College Leadership',
-    icon: Building,
-    quotes: [
-      {
-        quote: 'Grow360 transformed our campus placements. We saw a 3x surge in product company offers within two consecutive semesters. The AI assessment diagnostics gave our placement cell clarity on exact student readiness.',
-        author: 'Dr. Ramesh Kumar',
-        designation: 'Training & Placement Officer',
-        institution: 'SRM Institute of Science & Technology',
-        stats: '3x Surge in Tier-1 Offers',
-      },
-      {
-        quote: 'The batch readiness dashboard gave us live visibility we never had before. For the first time, our faculty could pinpoint which students needed intervention well before campus recruitment season started.',
-        author: 'Prof. Sunita Patel',
-        designation: 'Dean of Academic Affairs',
-        institution: 'VIT University',
-        stats: '89.4% Batch Conversion Rate',
-      },
-    ],
-  },
-  {
-    category: 'Placed Students',
-    icon: UserCheck,
-    quotes: [
-      {
-        quote: 'The AI mock interview simulations were a game-changer. I practiced over 40 technical rounds with real-time speech and code optimality diagnostics. When my Google interview happened, I felt totally prepared.',
-        author: 'Aditya Rajan',
-        designation: 'Software Development Engineer',
-        institution: 'Placed at Google • 2025 Batch',
-        stats: 'Offer Package: ₹28 LPA',
-      },
-      {
-        quote: 'I used to struggle with algorithmic system design questions. Grow360 mentors walked us through real microservice architectures. That directly helped me crack my dream company in just 60 days.',
-        author: 'Kavitha Menon',
-        designation: 'Backend Cloud Engineer',
-        institution: 'Placed at Adobe • 2025 Batch',
-        stats: 'Offer Package: ₹18.5 LPA',
-      },
-    ],
-  },
-  {
-    category: 'Campus Recruiters',
-    icon: Briefcase,
-    quotes: [
-      {
-        quote: 'Candidates coming through Grow360 partner colleges are noticeably superior. Their system design fundamentals and live coding poise save our engineering interviewers dozens of wasted panel hours.',
-        author: 'Sanjay Gupta',
-        designation: 'Head of University Talent Acquisition',
-        institution: 'Leading Global FinTech',
-        stats: '60% Faster Drive Execution',
-      },
-      {
-        quote: 'The standardized readiness scorecard provided by Grow360 is the only metric we trust for pre-filtering campus talent before setting foot on university grounds.',
-        author: 'Megha Srinivasan',
-        designation: 'Director of Early Talent Hiring',
-        institution: 'Top Enterprise SaaS Cloud',
-        stats: '95% Interview-to-Offer Ratio',
-      },
-    ],
-  },
-];
+const CATEGORY_ICONS: Record<string, typeof Building> = {
+  'College Leadership': Building,
+  'Placed Students': UserCheck,
+  'Campus Recruiters': Briefcase,
+};
 
 export function TestimonialsSection() {
-  const [activeCategory, setActiveCategory] = useState(0);
+  const { testimonials } = useAdminData();
+  const [selectedCategory, setSelectedCategory] = useState<string>('College Leadership');
+
+  // Filter active and sort
+  const activeTestimonials = useMemo(() => {
+    return testimonials
+      .filter((t) => t.active !== false)
+      .sort((a, b) => (a.order || 0) - (b.order || 0));
+  }, [testimonials]);
+
+  // Extract unique categories in order
+  const categories = useMemo(() => {
+    const list: string[] = [];
+    activeTestimonials.forEach((t) => {
+      if (!list.includes(t.category)) {
+        list.push(t.category);
+      }
+    });
+    return list.length > 0 ? list : ['College Leadership', 'Placed Students', 'Campus Recruiters'];
+  }, [activeTestimonials]);
+
+  const currentCategory = categories.includes(selectedCategory)
+    ? selectedCategory
+    : categories[0] || 'College Leadership';
+
+  const categoryQuotes = useMemo(() => {
+    return activeTestimonials.filter((t) => t.category === currentCategory);
+  }, [activeTestimonials, currentCategory]);
 
   return (
     <section className="py-20 lg:py-28 bg-[#F8F9FB] relative obsidian-grid border-b border-black/5">
@@ -96,66 +67,90 @@ export function TestimonialsSection() {
         </motion.div>
 
         {/* Category Tabs */}
-        <div className="flex justify-center mb-12">
-          <div className="flex items-center gap-2 p-1.5 rounded-full bg-slate-100/90 border border-black/5 shadow-inner backdrop-blur-md">
-            {testimonials.map((item, index) => {
-              const Icon = item.icon;
-              const isActive = activeCategory === index;
-              return (
-                <button
-                  key={item.category}
-                  onClick={() => setActiveCategory(index)}
-                  className={`flex items-center gap-2 px-4 sm:px-5 py-2 rounded-full text-xs font-semibold tracking-wide transition-all cursor-pointer ${
-                    isActive
-                      ? 'bg-white text-[#2563EB] font-bold shadow-sm border border-black/5'
-                      : 'text-slate-600 hover:text-black'
-                  }`}
-                >
-                  <Icon size={14} />
-                  <span>{item.category}</span>
-                </button>
-              );
-            })}
+        {categories.length > 1 && (
+          <div className="flex justify-center mb-12">
+            <div className="flex items-center gap-2 p-1.5 rounded-full bg-slate-100/90 border border-black/5 shadow-inner backdrop-blur-md overflow-x-auto no-scrollbar max-w-full">
+              {categories.map((cat) => {
+                const Icon = CATEGORY_ICONS[cat] || GraduationCap;
+                const isActive = currentCategory === cat;
+                return (
+                  <button
+                    key={cat}
+                    onClick={() => setSelectedCategory(cat)}
+                    className={`flex items-center gap-2 px-4 sm:px-5 py-2 rounded-full text-xs font-semibold tracking-wide transition-all cursor-pointer whitespace-nowrap ${
+                      isActive
+                        ? 'bg-white text-[#2563EB] font-bold shadow-sm border border-black/5'
+                        : 'text-slate-600 hover:text-black'
+                    }`}
+                  >
+                    <Icon size={14} />
+                    <span>{cat}</span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Editorial Quote Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          {testimonials[activeCategory].quotes.map((q, i) => (
-            <motion.div
-              key={q.author}
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35, delay: i * 0.1 }}
-              className="bento-card p-8 sm:p-9 flex flex-col justify-between relative group hover:border-[#2563EB]/40 bg-white shadow-[0_4px_25px_-2px_rgba(0,0,0,0.04)] border border-black/8"
-            >
-              <div>
-                <Quote className="text-[#2563EB]/20 w-12 h-12 mb-4" />
-                <p className="text-sm sm:text-base text-slate-700 leading-relaxed italic mb-8 font-serif">
-                  "{q.quote}"
-                </p>
-              </div>
-
-              <div className="pt-5 border-t border-black/5 flex items-center justify-between">
+          <AnimatePresence mode="wait">
+            {categoryQuotes.map((q, i) => (
+              <motion.div
+                key={q.id || q.author}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.35, delay: i * 0.08 }}
+                className="bento-card p-8 sm:p-9 flex flex-col justify-between relative group hover:border-[#2563EB]/40 bg-white shadow-[0_4px_25px_-2px_rgba(0,0,0,0.04)] border border-black/8"
+              >
                 <div>
-                  <div className="text-sm font-bold text-slate-900 font-[family-name:var(--font-display)]">
-                    {q.author}
-                  </div>
-                  <div className="text-xs text-slate-500 font-mono">
-                    {q.designation}
-                  </div>
-                  <div className="text-[11px] font-mono text-[#2563EB] mt-0.5 font-semibold">
-                    {q.institution}
-                  </div>
+                  <Quote className="text-[#2563EB]/20 w-12 h-12 mb-4" />
+                  <p className="text-sm sm:text-base text-slate-700 leading-relaxed italic mb-8 font-serif">
+                    &ldquo;{q.quote}&rdquo;
+                  </p>
                 </div>
 
-                <span className="px-2.5 py-1 rounded-lg bg-[#2563EB]/10 text-[#2563EB] border border-[#2563EB]/20 text-[10px] font-mono font-bold">
-                  {q.stats}
-                </span>
-              </div>
-            </motion.div>
-          ))}
+                <div className="pt-5 border-t border-black/5 flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-3">
+                    {q.avatar && (
+                      <img
+                        src={q.avatar}
+                        alt={q.author}
+                        className="w-10 h-10 rounded-full object-cover border border-slate-200 shrink-0"
+                      />
+                    )}
+                    <div>
+                      <div className="text-sm font-bold text-slate-900 font-[family-name:var(--font-display)]">
+                        {q.author}
+                      </div>
+                      <div className="text-xs text-slate-500 font-mono">
+                        {q.designation}
+                      </div>
+                      <div className="text-[11px] font-mono text-[#2563EB] mt-0.5 font-semibold">
+                        {q.institution}
+                      </div>
+                    </div>
+                  </div>
+
+                  {q.stats && (
+                    <span className="px-2.5 py-1 rounded-lg bg-[#2563EB]/10 text-[#2563EB] border border-[#2563EB]/20 text-[10px] font-mono font-bold shrink-0">
+                      {q.stats}
+                    </span>
+                  )}
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </div>
+
+        {categoryQuotes.length === 0 && (
+          <div className="text-center py-16 bg-white rounded-3xl border border-black/8 p-8 max-w-xl mx-auto">
+            <Quote size={32} className="mx-auto text-slate-400 mb-2" />
+            <h4 className="text-base font-bold text-slate-900">No testimonials in this category</h4>
+            <p className="text-xs text-slate-500 mt-1">Add or activate testimonials in the Admin Panel.</p>
+          </div>
+        )}
 
       </div>
     </section>

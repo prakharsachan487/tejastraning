@@ -16,13 +16,15 @@ import {
   Check,
   AlertCircle,
   Sparkles,
-  TrendingUp
+  TrendingUp,
+  MessageSquareQuote
 } from 'lucide-react';
 import { useAdminAuth } from '../../context/AdminAuthContext';
 import { useAdminData } from '../../context/AdminDataContext';
 import { OverviewTab } from './tabs/OverviewTab';
 import { AnnouncementsTab } from './tabs/AnnouncementsTab';
 import { MetricsTab } from './tabs/MetricsTab';
+import { TestimonialsTab } from './tabs/TestimonialsTab';
 import { TeamTab } from './tabs/TeamTab';
 import { CurriculumTab } from './tabs/CurriculumTab';
 import { MentorsTab } from './tabs/MentorsTab';
@@ -32,7 +34,7 @@ import { BlogsTab } from './tabs/BlogsTab';
 import { EnquiriesTab } from './tabs/EnquiriesTab';
 import { ApplicationsTab } from './tabs/ApplicationsTab';
 
-type ActiveTab = 'overview' | 'metrics' | 'announcements' | 'team' | 'curriculum' | 'mentors' | 'jobs' | 'gallery' | 'blogs' | 'enquiries' | 'applications';
+type ActiveTab = 'overview' | 'metrics' | 'testimonials' | 'announcements' | 'team' | 'curriculum' | 'mentors' | 'jobs' | 'gallery' | 'blogs' | 'enquiries' | 'applications';
 
 interface AdminDashboardProps {
   onBackToHome: () => void;
@@ -40,7 +42,7 @@ interface AdminDashboardProps {
 
 export function AdminDashboard({ onBackToHome }: AdminDashboardProps) {
   const { adminUser, logoutAdmin, updateAdminPassword } = useAdminAuth();
-  const { enquiries, applications, mentors, jobs, galleryItems, blogPosts, announcements, teamMembers, metricsData } = useAdminData();
+  const { enquiries, applications, mentors, jobs, galleryItems, blogPosts, announcements, teamMembers, metricsData, testimonials } = useAdminData();
 
   const [activeTab, setActiveTab] = useState<ActiveTab>('overview');
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
@@ -92,6 +94,12 @@ export function AdminDashboard({ onBackToHome }: AdminDashboardProps) {
       label: 'Verified Track Record',
       icon: TrendingUp,
       badge: metricsData.length > 0 ? `${metricsData.length} Stats` : null,
+    },
+    {
+      id: 'testimonials' as const,
+      label: 'Institutional Testimonials',
+      icon: MessageSquareQuote,
+      badge: testimonials.length > 0 ? `${testimonials.length} Quotes` : null,
     },
     {
       id: 'announcements' as const,
@@ -370,6 +378,8 @@ export function AdminDashboard({ onBackToHome }: AdminDashboardProps) {
           )}
 
           {activeTab === 'metrics' && <MetricsTab />}
+
+          {activeTab === 'testimonials' && <TestimonialsTab />}
 
           {activeTab === 'announcements' && <AnnouncementsTab />}
 

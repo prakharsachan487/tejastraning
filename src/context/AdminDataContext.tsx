@@ -133,6 +133,20 @@ export interface MetricItem {
   order?: number;
 }
 
+export interface TestimonialItem {
+  id: string;
+  category: 'College Leadership' | 'Placed Students' | 'Campus Recruiters' | string;
+  author: string;
+  designation: string;
+  institution: string;
+  quote: string;
+  stats?: string;
+  avatar?: string;
+  active?: boolean;
+  order?: number;
+  createdAt?: string;
+}
+
 export interface JobApplication {
   id: string;
   jobId?: string | number;
@@ -150,6 +164,13 @@ export interface JobApplication {
 }
 
 interface AdminDataContextType {
+  // Institutional Testimonials
+  testimonials: TestimonialItem[];
+  addTestimonial: (item: Omit<TestimonialItem, 'id'>) => void;
+  updateTestimonial: (id: string, updated: Partial<TestimonialItem>) => void;
+  deleteTestimonial: (id: string) => void;
+  toggleTestimonialActive: (id: string) => void;
+
   // Verified Track Record Metrics
   metricsData: MetricItem[];
   addMetric: (item: Omit<MetricItem, 'id'>) => void;
@@ -909,6 +930,81 @@ const INITIAL_METRICS: MetricItem[] = [
   { id: 'm-6', value: 7, prefix: '₹', suffix: '.2 LPA', label: 'Avg Package', sub: 'Campus Hires', order: 6 },
 ];
 
+const INITIAL_TESTIMONIALS: TestimonialItem[] = [
+  {
+    id: 'test-1',
+    category: 'College Leadership',
+    quote: 'Grow360 transformed our campus placements. We saw a 3x surge in product company offers within two consecutive semesters. The AI assessment diagnostics gave our placement cell clarity on exact student readiness.',
+    author: 'Dr. Ramesh Kumar',
+    designation: 'Training & Placement Officer',
+    institution: 'SRM Institute of Science & Technology',
+    stats: '3x Surge in Tier-1 Offers',
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80',
+    active: true,
+    order: 1,
+  },
+  {
+    id: 'test-2',
+    category: 'College Leadership',
+    quote: 'The batch readiness dashboard gave us live visibility we never had before. For the first time, our faculty could pinpoint which students needed intervention well before campus recruitment season started.',
+    author: 'Prof. Sunita Patel',
+    designation: 'Dean of Academic Affairs',
+    institution: 'VIT University',
+    stats: '89.4% Batch Conversion Rate',
+    avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80',
+    active: true,
+    order: 2,
+  },
+  {
+    id: 'test-3',
+    category: 'Placed Students',
+    quote: 'The AI mock interview simulations were a game-changer. I practiced over 40 technical rounds with real-time speech and code optimality diagnostics. When my Google interview happened, I felt totally prepared.',
+    author: 'Aditya Rajan',
+    designation: 'Software Development Engineer',
+    institution: 'Placed at Google • 2025 Batch',
+    stats: 'Offer Package: ₹28 LPA',
+    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80',
+    active: true,
+    order: 3,
+  },
+  {
+    id: 'test-4',
+    category: 'Placed Students',
+    quote: 'I used to struggle with algorithmic system design questions. Grow360 mentors walked us through real microservice architectures. That directly helped me crack my dream company in just 60 days.',
+    author: 'Kavitha Menon',
+    designation: 'Backend Cloud Engineer',
+    institution: 'Placed at Adobe • 2025 Batch',
+    stats: 'Offer Package: ₹18.5 LPA',
+    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+    active: true,
+    order: 4,
+  },
+  {
+    id: 'test-5',
+    category: 'Campus Recruiters',
+    quote: 'Candidates coming through Grow360 partner colleges are noticeably superior. Their system design fundamentals and live coding poise save our engineering interviewers dozens of wasted panel hours.',
+    author: 'Sanjay Gupta',
+    designation: 'Head of University Talent Acquisition',
+    institution: 'Leading Global FinTech',
+    stats: '60% Faster Drive Execution',
+    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=200&q=80',
+    active: true,
+    order: 5,
+  },
+  {
+    id: 'test-6',
+    category: 'Campus Recruiters',
+    quote: 'The standardized readiness scorecard provided by Grow360 is the only metric we trust for pre-filtering campus talent before setting foot on university grounds.',
+    author: 'Megha Srinivasan',
+    designation: 'Director of Early Talent Hiring',
+    institution: 'Top Enterprise SaaS Cloud',
+    stats: '95% Interview-to-Offer Ratio',
+    avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=200&q=80',
+    active: true,
+    order: 6,
+  },
+];
+
 const INITIAL_ANNOUNCEMENTS: AnnouncementItem[] = [
   {
     id: 'ann-1',
@@ -1052,6 +1148,57 @@ const INITIAL_TEAM_MEMBERS: TeamMember[] = [
 const AdminDataContext = createContext<AdminDataContextType | null>(null);
 
 export function AdminDataProvider({ children }: { children: ReactNode }) {
+  // 000a. Institutional Testimonials State
+  const [testimonials, setTestimonials] = useState<TestimonialItem[]>(() => {
+    const saved = localStorage.getItem('grow360_admin_testimonials');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch {}
+    }
+    return INITIAL_TESTIMONIALS;
+  });
+
+  const updateTestimonial = (id: string, updated: Partial<TestimonialItem>) => {
+    setTestimonials((prev) => {
+      const next = prev.map((t) => (t.id === id ? { ...t, ...updated } : t));
+      localStorage.setItem('grow360_admin_testimonials', JSON.stringify(next));
+      return next;
+    });
+  };
+
+  const addTestimonial = (item: Omit<TestimonialItem, 'id'>) => {
+    const newTestimonial: TestimonialItem = {
+      ...item,
+      id: 'test-' + Date.now(),
+      order: testimonials.length + 1,
+      createdAt: new Date().toISOString(),
+    };
+    setTestimonials((prev) => {
+      const next = [...prev, newTestimonial];
+      localStorage.setItem('grow360_admin_testimonials', JSON.stringify(next));
+      return next;
+    });
+  };
+
+  const deleteTestimonial = (id: string) => {
+    setTestimonials((prev) => {
+      const next = prev.filter((t) => t.id !== id);
+      localStorage.setItem('grow360_admin_testimonials', JSON.stringify(next));
+      return next;
+    });
+  };
+
+  const toggleTestimonialActive = (id: string) => {
+    setTestimonials((prev) => {
+      const next = prev.map((t) =>
+        t.id === id ? { ...t, active: t.active === false ? true : false } : t
+      );
+      localStorage.setItem('grow360_admin_testimonials', JSON.stringify(next));
+      return next;
+    });
+  };
+
   // 000. Verified Track Record Metrics State
   const [metricsData, setMetricsData] = useState<MetricItem[]>(() => {
     const saved = localStorage.getItem('grow360_admin_metrics');
@@ -1696,6 +1843,11 @@ export function AdminDataProvider({ children }: { children: ReactNode }) {
   return (
     <AdminDataContext.Provider
       value={{
+        testimonials,
+        addTestimonial,
+        updateTestimonial,
+        deleteTestimonial,
+        toggleTestimonialActive,
         metricsData,
         addMetric,
         updateMetric,
