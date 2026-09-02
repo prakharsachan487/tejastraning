@@ -503,13 +503,17 @@ export function AdminDashboard({ onBackToHome }: AdminDashboardProps) {
                 </div>
               )}
 
-              <form onSubmit={handlePasswordSubmit} className="space-y-3.5">
+              <form onSubmit={handlePasswordSubmit} autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck={false} className="space-y-3.5">
                 <div>
                   <label className="block text-xs font-bold text-slate-700 mb-1">
                     Current Password
                   </label>
                   <input
                     type="password"
+                    autoComplete="new-password"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    spellCheck={false}
                     value={currentPassword}
                     onChange={(e) => setCurrentPassword(e.target.value)}
                     placeholder="Enter existing password"
@@ -524,9 +528,13 @@ export function AdminDashboard({ onBackToHome }: AdminDashboardProps) {
                   </label>
                   <input
                     type="password"
+                    autoComplete="new-password"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    spellCheck={false}
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
-                    placeholder="At least 6 characters"
+                    placeholder="Enter new password"
                     required
                     className="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 focus:bg-white rounded-xl py-2 px-3 text-xs outline-hidden font-mono"
                   />
@@ -538,9 +546,13 @@ export function AdminDashboard({ onBackToHome }: AdminDashboardProps) {
                   </label>
                   <input
                     type="password"
+                    autoComplete="new-password"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    spellCheck={false}
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
-                    placeholder="Repeat new password"
+                    placeholder="Confirm new password"
                     required
                     className="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 focus:bg-white rounded-xl py-2 px-3 text-xs outline-hidden font-mono"
                   />

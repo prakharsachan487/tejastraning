@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, BookOpen, Clock, Tag, Search, ArrowUpRight, CheckCircle2, Sparkles, Send } from 'lucide-react';
+import { ArrowLeft, BookOpen, Clock, Tag, Search, ArrowUpRight, Sparkles, Send } from 'lucide-react';
 import { useEnquiry } from '../context/EnquiryContext';
 import { useAdminData, type BlogPost } from '../context/AdminDataContext';
 
@@ -9,8 +9,6 @@ export function BlogPage({ onBackToHome }: { onBackToHome: () => void }) {
   const { blogPosts } = useAdminData();
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
-  const [newsletterEmail, setNewsletterEmail] = useState('');
-  const [newsletterSubscribed, setNewsletterSubscribed] = useState(false);
 
   const displayPosts = blogPosts.length > 0 ? blogPosts : [];
 
@@ -133,36 +131,18 @@ export function BlogPage({ onBackToHome }: { onBackToHome: () => void }) {
               Receive curated rubrics, interview questions, and placement strategies directly in your inbox.
             </p>
 
-            {newsletterSubscribed ? (
-              <div className="inline-flex items-center gap-2 bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 px-5 py-3 rounded-full text-xs font-bold">
-                <CheckCircle2 size={16} />
-                <span>Thank you for subscribing! Next issue drops Monday.</span>
-              </div>
-            ) : (
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  if (newsletterEmail.trim()) setNewsletterSubscribed(true);
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <button
+                onClick={() => {
+                  window.location.hash = '#contact';
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className="flex flex-col sm:flex-row items-center justify-center gap-2 max-w-md mx-auto"
+                className="btn-pill-primary text-xs sm:text-sm font-bold px-7 py-3 flex items-center justify-center gap-2 cursor-pointer"
               >
-                <input
-                  type="email"
-                  required
-                  value={newsletterEmail}
-                  onChange={(e) => setNewsletterEmail(e.target.value)}
-                  placeholder="Enter institutional email"
-                  className="w-full sm:w-auto flex-1 bg-white/10 border border-white/20 rounded-full px-4 py-2.5 text-xs sm:text-sm text-white placeholder-slate-400 focus:outline-none focus:bg-white/15 focus:border-[#38BDF8]"
-                />
-                <button
-                  type="submit"
-                  className="w-full sm:w-auto btn-pill-primary text-xs sm:text-sm font-bold px-6 py-2.5 flex items-center justify-center gap-2 cursor-pointer shrink-0"
-                >
-                  <span>Subscribe</span>
-                  <Send size={14} />
-                </button>
-              </form>
-            )}
+                <span>Request Campus Advisory Report</span>
+                <Send size={14} />
+              </button>
+            </div>
           </div>
         </div>
 

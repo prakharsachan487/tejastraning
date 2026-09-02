@@ -357,7 +357,7 @@ export function AnnouncementsTab() {
                 </button>
               </div>
 
-              <form onSubmit={handleSave} className="space-y-3.5">
+              <form onSubmit={handleSave} autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck={false} className="space-y-3.5">
                 <div>
                   <label className="block text-xs font-bold text-slate-700 mb-1">
                     Announcement Headline / Text *
@@ -365,7 +365,11 @@ export function AnnouncementsTab() {
                   <input
                     type="text"
                     required
-                    placeholder="e.g. ✨ Free 1:1 Career Diagnostic & Senior Mentorship Session"
+                    autoComplete="new-password"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    spellCheck={false}
+                    placeholder="Enter announcement text"
                     value={text}
                     onChange={(e) => setText(e.target.value)}
                     className="w-full px-3.5 py-2.5 rounded-xl border border-black/10 text-xs focus:border-[#2563EB] focus:outline-hidden font-medium"
@@ -379,7 +383,11 @@ export function AnnouncementsTab() {
                     </label>
                     <input
                       type="text"
-                      placeholder="e.g. Book Free Call or Explore Tracks"
+                      autoComplete="new-password"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
+                      placeholder="Enter CTA highlight tag"
                       value={highlight}
                       onChange={(e) => setHighlight(e.target.value)}
                       className="w-full px-3.5 py-2 rounded-xl border border-black/10 text-xs focus:border-[#2563EB] focus:outline-hidden"
@@ -410,7 +418,11 @@ export function AnnouncementsTab() {
                   </label>
                   <input
                     type="text"
-                    placeholder="e.g. https://... or leave empty"
+                    autoComplete="new-password"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    spellCheck={false}
+                    placeholder="https://..."
                     value={linkUrl}
                     onChange={(e) => setLinkUrl(e.target.value)}
                     className="w-full px-3.5 py-2 rounded-xl border border-black/10 text-xs focus:border-[#2563EB] focus:outline-hidden font-mono"

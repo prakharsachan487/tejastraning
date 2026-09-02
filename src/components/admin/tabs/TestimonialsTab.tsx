@@ -350,7 +350,7 @@ export function TestimonialsTab() {
                 </button>
               </div>
 
-              <form onSubmit={handleSave} className="space-y-4">
+              <form onSubmit={handleSave} autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck={false} className="space-y-4">
                 {/* Category & Status */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div className="space-y-1">
@@ -376,7 +376,11 @@ export function TestimonialsTab() {
                     </label>
                     <input
                       type="text"
-                      placeholder="e.g. 3x Surge in Offers, ₹28 LPA"
+                      autoComplete="new-password"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
+                      placeholder=""
                       value={stats}
                       onChange={(e) => setStats(e.target.value)}
                       className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#2563EB]"
@@ -393,7 +397,11 @@ export function TestimonialsTab() {
                     <input
                       type="text"
                       required
-                      placeholder="e.g. Dr. Ramesh Kumar, Aditya Rajan"
+                      autoComplete="new-password"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
+                      placeholder="Enter author name"
                       value={author}
                       onChange={(e) => setAuthor(e.target.value)}
                       className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#2563EB]"
@@ -407,7 +415,11 @@ export function TestimonialsTab() {
                     <input
                       type="text"
                       required
-                      placeholder="e.g. Training & Placement Officer, SDE at Google"
+                      autoComplete="new-password"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
+                      placeholder="Enter designation / role"
                       value={designation}
                       onChange={(e) => setDesignation(e.target.value)}
                       className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#2563EB]"
@@ -423,7 +435,11 @@ export function TestimonialsTab() {
                   <input
                     type="text"
                     required
-                    placeholder="e.g. SRM Institute of Science & Technology, Placed at Google • 2025 Batch"
+                    autoComplete="new-password"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    spellCheck={false}
+                    placeholder="Enter institution / organization"
                     value={institution}
                     onChange={(e) => setInstitution(e.target.value)}
                     className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#2563EB]"
@@ -438,7 +454,11 @@ export function TestimonialsTab() {
                   <textarea
                     required
                     rows={4}
-                    placeholder="Enter the full testimonial quote here..."
+                    autoComplete="off"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    spellCheck={false}
+                    placeholder="Enter testimonial quote"
                     value={quote}
                     onChange={(e) => setQuote(e.target.value)}
                     className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#2563EB] leading-relaxed font-serif"

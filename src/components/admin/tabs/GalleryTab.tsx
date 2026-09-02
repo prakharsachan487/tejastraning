@@ -286,7 +286,7 @@ export function GalleryTab() {
                 </button>
               </div>
 
-              <form onSubmit={editingItem ? handleSaveEdit : handleSaveAdd} className="space-y-4">
+              <form onSubmit={editingItem ? handleSaveEdit : handleSaveAdd} autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck={false} className="space-y-4">
                 {/* Image Selection & Preview */}
                 <div>
                   <label className="block text-xs font-bold text-slate-700 mb-1.5">
@@ -297,7 +297,11 @@ export function GalleryTab() {
                       type="text"
                       value={formImage}
                       onChange={(e) => setFormImage(e.target.value)}
-                      placeholder="e.g. /moments/campus_moment_1.jpg or https://..."
+                      autoComplete="new-password"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
+                      placeholder="Paste image URL..."
                       className="w-full bg-slate-50 border border-slate-200 focus:border-purple-500 focus:bg-white rounded-xl py-2 px-3 text-xs outline-hidden font-mono"
                       required
                     />
@@ -344,7 +348,11 @@ export function GalleryTab() {
                     type="text"
                     value={formTitle}
                     onChange={(e) => setFormTitle(e.target.value)}
-                    placeholder="e.g. Pharmaceutical Analytics & BI Dashboard Capstone"
+                    autoComplete="new-password"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    spellCheck={false}
+                    placeholder="Enter headline title"
                     required
                     className="w-full bg-slate-50 border border-slate-200 focus:border-purple-500 focus:bg-white rounded-xl py-2 px-3 text-xs outline-hidden"
                   />
@@ -359,7 +367,11 @@ export function GalleryTab() {
                       type="text"
                       value={formCategory}
                       onChange={(e) => setFormCategory(e.target.value)}
-                      placeholder="e.g. Capstone Presentation"
+                      autoComplete="new-password"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
+                      placeholder="Enter category tag"
                       className="w-full bg-slate-50 border border-slate-200 focus:border-purple-500 focus:bg-white rounded-xl py-2 px-3 text-xs outline-hidden"
                     />
                   </div>
@@ -401,7 +413,11 @@ export function GalleryTab() {
                       type="text"
                       value={formLocation}
                       onChange={(e) => setFormLocation(e.target.value)}
-                      placeholder="e.g. Parul University Campus"
+                      autoComplete="new-password"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
+                      placeholder="Enter location / campus"
                       className="w-full bg-slate-50 border border-slate-200 focus:border-purple-500 focus:bg-white rounded-xl py-2 px-3 text-xs outline-hidden"
                     />
                   </div>
@@ -414,7 +430,11 @@ export function GalleryTab() {
                       type="text"
                       value={formStats}
                       onChange={(e) => setFormStats(e.target.value)}
-                      placeholder="e.g. 100% Placement Aligned"
+                      autoComplete="new-password"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
+                      placeholder="Enter outcome / stat highlight"
                       className="w-full bg-slate-50 border border-slate-200 focus:border-purple-500 focus:bg-white rounded-xl py-2 px-3 text-xs outline-hidden"
                     />
                   </div>
@@ -428,7 +448,11 @@ export function GalleryTab() {
                     rows={3}
                     value={formDescription}
                     onChange={(e) => setFormDescription(e.target.value)}
-                    placeholder="Provide context regarding the workshop, cohort achievements, and deliverables..."
+                    autoComplete="off"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    spellCheck={false}
+                    placeholder="Provide description..."
                     className="w-full bg-slate-50 border border-slate-200 focus:border-purple-500 focus:bg-white rounded-xl py-2 px-3 text-xs outline-hidden"
                   />
                 </div>

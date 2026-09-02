@@ -334,7 +334,7 @@ export function TeamTab() {
                 </button>
               </div>
 
-              <form onSubmit={handleSave} className="space-y-4">
+              <form onSubmit={handleSave} autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck={false} className="space-y-4">
                 {/* Photo Upload & Preview */}
                 <div>
                   <label className="block text-xs font-bold text-slate-700 mb-1">
@@ -390,7 +390,11 @@ export function TeamTab() {
                     <input
                       type="text"
                       required
-                      placeholder="e.g. Prakhar Sachan"
+                      autoComplete="new-password"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
+                      placeholder="Enter full name"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       className="w-full px-3.5 py-2 rounded-xl border border-black/10 text-xs focus:border-[#2563EB] focus:outline-hidden font-medium"
@@ -404,7 +408,11 @@ export function TeamTab() {
                     <input
                       type="text"
                       required
-                      placeholder="e.g. Founder & CEO"
+                      autoComplete="new-password"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
+                      placeholder="Enter designation / role"
                       value={role}
                       onChange={(e) => setRole(e.target.value)}
                       className="w-full px-3.5 py-2 rounded-xl border border-black/10 text-xs focus:border-[#2563EB] focus:outline-hidden"
@@ -436,7 +444,11 @@ export function TeamTab() {
                     </label>
                     <input
                       type="text"
-                      placeholder="e.g. Ex-Google · IIT Delhi"
+                      autoComplete="new-password"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
+                      placeholder=""
                       value={badge}
                       onChange={(e) => setBadge(e.target.value)}
                       className="w-full px-3.5 py-2 rounded-xl border border-black/10 text-xs focus:border-[#2563EB] focus:outline-hidden"
@@ -451,7 +463,11 @@ export function TeamTab() {
                   <textarea
                     rows={3}
                     required
-                    placeholder="Brief description of experience, accomplishments, and focus areas..."
+                    autoComplete="off"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    spellCheck={false}
+                    placeholder="Enter bio / profile summary..."
                     value={bio}
                     onChange={(e) => setBio(e.target.value)}
                     className="w-full px-3.5 py-2 rounded-xl border border-black/10 text-xs focus:border-[#2563EB] focus:outline-hidden leading-relaxed"
@@ -465,6 +481,10 @@ export function TeamTab() {
                     </label>
                     <input
                       type="text"
+                      autoComplete="new-password"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
                       placeholder="https://linkedin.com/in/..."
                       value={linkedinUrl}
                       onChange={(e) => setLinkedinUrl(e.target.value)}
@@ -478,7 +498,11 @@ export function TeamTab() {
                     </label>
                     <input
                       type="email"
-                      placeholder="name@grow360.in"
+                      autoComplete="new-password"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
+                      placeholder="email@domain.com"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       className="w-full px-3.5 py-2 rounded-xl border border-black/10 text-xs focus:border-[#2563EB] focus:outline-hidden font-mono"

@@ -464,7 +464,11 @@ export function EnquiriesTab() {
                     rows={3}
                     value={activeNotes}
                     onChange={(e) => setActiveNotes(e.target.value)}
-                    placeholder="Add notes about calls, client preferences, or scheduled campus demo dates..."
+                    autoComplete="off"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    spellCheck={false}
+                    placeholder="Enter notes..."
                     className="w-full bg-slate-50 border border-slate-200 focus:border-amber-500 focus:bg-white rounded-xl py-2 px-3 text-xs outline-hidden"
                   />
                   <div className="flex justify-end mt-1.5">

@@ -137,7 +137,7 @@ export function AdminLogin({ onBackToHome }: AdminLoginProps) {
           )}
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck={false} className="space-y-4">
             <div>
               <label className="block text-xs font-semibold text-slate-300 mb-1.5">
                 Admin Email / Username
@@ -146,9 +146,13 @@ export function AdminLogin({ onBackToHome }: AdminLoginProps) {
                 <Mail size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
                 <input
                   type="text"
+                  autoComplete="new-password"
+                  autoCorrect="off"
+                  autoCapitalize="off"
+                  spellCheck={false}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="admin@grow360.in"
+                  placeholder="Enter email / username"
                   className="w-full bg-slate-950/70 border border-slate-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 rounded-xl py-2.5 pl-10 pr-4 text-xs sm:text-sm text-white placeholder-slate-600 outline-hidden transition-colors"
                   required
                 />
@@ -165,9 +169,13 @@ export function AdminLogin({ onBackToHome }: AdminLoginProps) {
                 <Lock size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
                 <input
                   type={showPassword ? 'text' : 'password'}
+                  autoComplete="new-password"
+                  autoCorrect="off"
+                  autoCapitalize="off"
+                  spellCheck={false}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••••••"
+                  placeholder="Enter password"
                   className="w-full bg-slate-950/70 border border-slate-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 rounded-xl py-2.5 pl-10 pr-10 text-xs sm:text-sm text-white placeholder-slate-600 outline-hidden transition-colors font-mono"
                   required
                 />

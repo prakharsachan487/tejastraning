@@ -405,7 +405,7 @@ export function JobsTab() {
                 </button>
               </div>
 
-              <form onSubmit={editingJob ? handleSaveEdit : handleSaveAdd} className="space-y-4">
+              <form onSubmit={editingJob ? handleSaveEdit : handleSaveAdd} autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck={false} className="space-y-4">
                 <div>
                   <label className="block text-xs font-bold text-slate-700 mb-1">
                     Job Title *
@@ -414,7 +414,11 @@ export function JobsTab() {
                     type="text"
                     value={formTitle}
                     onChange={(e) => setFormTitle(e.target.value)}
-                    placeholder="e.g. Backend Engineer & Technical Mentor"
+                    autoComplete="new-password"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    spellCheck={false}
+                    placeholder="Enter job title"
                     required
                     className="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 focus:bg-white rounded-xl py-2 px-3 text-xs sm:text-sm outline-hidden transition-colors"
                   />
@@ -460,6 +464,10 @@ export function JobsTab() {
                     <input
                       type="number"
                       min="1"
+                      autoComplete="new-password"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
                       value={formOpenings}
                       onChange={(e) => setFormOpenings(Number(e.target.value))}
                       className="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 focus:bg-white rounded-xl py-2 px-3 text-xs outline-hidden"
@@ -476,7 +484,11 @@ export function JobsTab() {
                       type="text"
                       value={formLocation}
                       onChange={(e) => setFormLocation(e.target.value)}
-                      placeholder="e.g. Remote or Noida / Hybrid"
+                      autoComplete="new-password"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
+                      placeholder="Enter location"
                       className="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 focus:bg-white rounded-xl py-2 px-3 text-xs outline-hidden"
                     />
                   </div>
@@ -489,7 +501,11 @@ export function JobsTab() {
                       type="text"
                       value={formSalary}
                       onChange={(e) => setFormSalary(e.target.value)}
-                      placeholder="e.g. ₹6,00,000 - ₹10,00,000 / year"
+                      autoComplete="new-password"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
+                      placeholder="Enter salary / honorarium"
                       className="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 focus:bg-white rounded-xl py-2 px-3 text-xs outline-hidden"
                     />
                   </div>
@@ -503,7 +519,11 @@ export function JobsTab() {
                     rows={2}
                     value={formSummary}
                     onChange={(e) => setFormSummary(e.target.value)}
-                    placeholder="Brief overview of role objectives..."
+                    autoComplete="off"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    spellCheck={false}
+                    placeholder="Enter job summary..."
                     className="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 focus:bg-white rounded-xl py-2 px-3 text-xs outline-hidden"
                   />
                 </div>
@@ -516,7 +536,11 @@ export function JobsTab() {
                     type="text"
                     value={formSkills}
                     onChange={(e) => setFormSkills(e.target.value)}
-                    placeholder="e.g. Next.js, Node.js, AWS, Redis, Docker"
+                    autoComplete="new-password"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    spellCheck={false}
+                    placeholder="Enter key skills"
                     className="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 focus:bg-white rounded-xl py-2 px-3 text-xs outline-hidden font-mono"
                   />
                 </div>
@@ -530,7 +554,11 @@ export function JobsTab() {
                       rows={3}
                       value={formResponsibilities}
                       onChange={(e) => setFormResponsibilities(e.target.value)}
-                      placeholder="Deliver interactive live coding sessions&#10;Conduct mock technical interviews"
+                      autoComplete="off"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
+                      placeholder="Enter responsibilities (one per line)"
                       className="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 focus:bg-white rounded-xl py-2 px-3 text-xs outline-hidden"
                     />
                   </div>
@@ -543,7 +571,11 @@ export function JobsTab() {
                       rows={3}
                       value={formRequirements}
                       onChange={(e) => setFormRequirements(e.target.value)}
-                      placeholder="2+ years production experience&#10;Solid grasp over system design"
+                      autoComplete="off"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
+                      placeholder="Enter requirements (one per line)"
                       className="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 focus:bg-white rounded-xl py-2 px-3 text-xs outline-hidden"
                     />
                   </div>

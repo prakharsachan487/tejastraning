@@ -121,7 +121,7 @@ export function MentorApplyModal({ isOpen, onClose }: MentorApplyModalProps) {
                         spellCheck={false}
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
-                        placeholder="e.g. Rahul Sharma"
+                        placeholder="Enter full name"
                         className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-xs text-slate-900 placeholder:text-slate-500 focus:outline-none focus:border-[#2563EB] transition-colors"
                       />
                     </div>
@@ -141,7 +141,7 @@ export function MentorApplyModal({ isOpen, onClose }: MentorApplyModalProps) {
                         spellCheck={false}
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        placeholder="rahul@company.com"
+                        placeholder="Enter email address"
                         className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-xs text-slate-900 placeholder:text-slate-500 focus:outline-none focus:border-[#2563EB] transition-colors"
                       />
                     </div>
@@ -163,7 +163,7 @@ export function MentorApplyModal({ isOpen, onClose }: MentorApplyModalProps) {
                         spellCheck={false}
                         value={company}
                         onChange={(e) => setCompany(e.target.value)}
-                        placeholder="e.g. Google, Microsoft, Startup"
+                        placeholder="Enter organization"
                         className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-xs text-slate-900 placeholder:text-slate-500 focus:outline-none focus:border-[#2563EB] transition-colors"
                       />
                     </div>
@@ -183,7 +183,7 @@ export function MentorApplyModal({ isOpen, onClose }: MentorApplyModalProps) {
                         spellCheck={false}
                         value={role}
                         onChange={(e) => setRole(e.target.value)}
-                        placeholder="e.g. SDE II, Senior Engineer"
+                        placeholder="Enter role / designation"
                         className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-xs text-slate-900 placeholder:text-slate-500 focus:outline-none focus:border-[#2563EB] transition-colors"
                       />
                     </div>
@@ -206,7 +206,7 @@ export function MentorApplyModal({ isOpen, onClose }: MentorApplyModalProps) {
                       spellCheck={false}
                       value={linkedin}
                       onChange={(e) => setLinkedin(e.target.value)}
-                      placeholder="https://linkedin.com/in/yourprofile"
+                      placeholder="https://linkedin.com/in/..."
                       className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-xs text-slate-900 placeholder:text-slate-500 focus:outline-none focus:border-[#2563EB] transition-colors"
                     />
                   </div>

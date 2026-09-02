@@ -723,7 +723,7 @@ export function CurriculumTab() {
                 </button>
               </div>
 
-              <form onSubmit={handleSaveModel} className="space-y-4">
+              <form onSubmit={handleSaveModel} autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck={false} className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div className="space-y-1">
                     <label className="text-xs font-bold text-slate-700 font-mono">
@@ -732,7 +732,11 @@ export function CurriculumTab() {
                     <input
                       type="text"
                       required
-                      placeholder="e.g. Impact Training, Semester-Integrated"
+                      autoComplete="new-password"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
+                      placeholder="Enter box title"
                       value={modelTitle}
                       onChange={(e) => setModelTitle(e.target.value)}
                       className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#2563EB]"
@@ -746,7 +750,11 @@ export function CurriculumTab() {
                     <input
                       type="text"
                       required
-                      placeholder="e.g. Placement-Focused Intensive"
+                      autoComplete="new-password"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
+                      placeholder="Enter badge / tagline"
                       value={modelBadge}
                       onChange={(e) => setModelBadge(e.target.value)}
                       className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#2563EB]"
@@ -762,7 +770,11 @@ export function CurriculumTab() {
                   <textarea
                     required
                     rows={4}
-                    placeholder="Audience: Final-year batches&#10;Duration: 40-60 Days&#10;Focus: Company-specific drive prep&#10;Coverage: All degrees and branches"
+                    autoComplete="off"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    spellCheck={false}
+                    placeholder="Enter bullet points (Label: Value)"
                     value={modelPoints}
                     onChange={(e) => setModelPoints(e.target.value)}
                     className="w-full px-3.5 py-2.5 text-xs font-mono rounded-xl border border-slate-200 focus:outline-none focus:border-[#2563EB]"
@@ -777,7 +789,11 @@ export function CurriculumTab() {
                   <textarea
                     required
                     rows={3}
-                    placeholder="Enter short description explaining this delivery solution..."
+                    autoComplete="off"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    spellCheck={false}
+                    placeholder="Enter description"
                     value={modelDescription}
                     onChange={(e) => setModelDescription(e.target.value)}
                     className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#2563EB]"
@@ -792,6 +808,10 @@ export function CurriculumTab() {
                     </label>
                     <input
                       type="text"
+                      autoComplete="new-password"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
                       placeholder="Mapped to recruiters like"
                       value={modelTagsLabel}
                       onChange={(e) => setModelTagsLabel(e.target.value)}
@@ -805,7 +825,11 @@ export function CurriculumTab() {
                     </label>
                     <input
                       type="text"
-                      placeholder="TCS, Infosys, Wipro, + more"
+                      autoComplete="new-password"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
+                      placeholder="Comma separated tags"
                       value={modelTags}
                       onChange={(e) => setModelTags(e.target.value)}
                       className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#2563EB]"
@@ -874,12 +898,17 @@ export function CurriculumTab() {
                 </button>
               </div>
 
-              <form onSubmit={handleSaveCourse} className="space-y-4">
+              <form onSubmit={handleSaveCourse} autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck={false} className="space-y-4">
                 <div className="space-y-1">
                   <label className="text-xs font-bold text-slate-700 font-mono">Full Course Title *</label>
                   <input
                     type="text"
                     required
+                    autoComplete="new-password"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    spellCheck={false}
+                    placeholder="Enter course title"
                     value={editTitle}
                     onChange={(e) => setEditTitle(e.target.value)}
                     className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#2563EB]"
@@ -892,6 +921,11 @@ export function CurriculumTab() {
                     <input
                       type="text"
                       required
+                      autoComplete="new-password"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
+                      placeholder="Enter short title"
                       value={editShortTitle}
                       onChange={(e) => setEditShortTitle(e.target.value)}
                       className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#2563EB]"
@@ -901,6 +935,11 @@ export function CurriculumTab() {
                     <label className="text-xs font-bold text-slate-700 font-mono">Badge Label</label>
                     <input
                       type="text"
+                      autoComplete="new-password"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
+                      placeholder=""
                       value={editBadge}
                       onChange={(e) => setEditBadge(e.target.value)}
                       className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#2563EB]"
@@ -913,6 +952,11 @@ export function CurriculumTab() {
                   <textarea
                     required
                     rows={2}
+                    autoComplete="off"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    spellCheck={false}
+                    placeholder="Enter tagline"
                     value={editTagline}
                     onChange={(e) => setEditTagline(e.target.value)}
                     className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#2563EB]"
@@ -925,6 +969,11 @@ export function CurriculumTab() {
                   </label>
                   <textarea
                     rows={3}
+                    autoComplete="off"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    spellCheck={false}
+                    placeholder="Enter target cohorts (one per line)"
                     value={editTargetGroups}
                     onChange={(e) => setEditTargetGroups(e.target.value)}
                     className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#2563EB]"
@@ -935,6 +984,11 @@ export function CurriculumTab() {
                   <label className="text-xs font-bold text-slate-700 font-mono">Placement Outcome</label>
                   <input
                     type="text"
+                    autoComplete="new-password"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    spellCheck={false}
+                    placeholder="Enter placement outcome"
                     value={editOutcome}
                     onChange={(e) => setEditOutcome(e.target.value)}
                     className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#2563EB]"
@@ -987,13 +1041,17 @@ export function CurriculumTab() {
                 </button>
               </div>
 
-              <form onSubmit={handleSavePillar} className="space-y-4">
+              <form onSubmit={handleSavePillar} autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck={false} className="space-y-4">
                 <div className="grid grid-cols-2 gap-3">
                   <div className="space-y-1">
                     <label className="text-xs font-bold text-slate-700 font-mono">Pillar Number *</label>
                     <input
                       type="text"
                       required
+                      autoComplete="new-password"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
                       placeholder="01"
                       value={pillarNumber}
                       onChange={(e) => setPillarNumber(e.target.value)}
@@ -1004,7 +1062,11 @@ export function CurriculumTab() {
                     <label className="text-xs font-bold text-slate-700 font-mono">Pillar Badge</label>
                     <input
                       type="text"
-                      placeholder="e.g. Core Module"
+                      autoComplete="new-password"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
+                      placeholder=""
                       value={pillarBadge}
                       onChange={(e) => setPillarBadge(e.target.value)}
                       className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#2563EB]"
@@ -1017,7 +1079,11 @@ export function CurriculumTab() {
                   <input
                     type="text"
                     required
-                    placeholder="e.g. Data Structures & System Architecture"
+                    autoComplete="new-password"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    spellCheck={false}
+                    placeholder="Enter pillar title"
                     value={pillarTitle}
                     onChange={(e) => setPillarTitle(e.target.value)}
                     className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#2563EB]"
@@ -1031,7 +1097,11 @@ export function CurriculumTab() {
                   <textarea
                     required
                     rows={5}
-                    placeholder="Trees, Graphs & Dynamic Programming&#10;Microservices & API Architecture&#10;Distributed Systems Design"
+                    autoComplete="off"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    spellCheck={false}
+                    placeholder="Enter syllabus topics (one per line)"
                     value={pillarItems}
                     onChange={(e) => setPillarItems(e.target.value)}
                     className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#2563EB]"

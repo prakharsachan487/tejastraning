@@ -263,7 +263,7 @@ export function MetricsTab() {
                 </button>
               </div>
 
-              <form onSubmit={handleSave} className="space-y-4">
+              <form onSubmit={handleSave} autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck={false} className="space-y-4">
                 <div className="grid grid-cols-3 gap-3">
                   {/* Prefix */}
                   <div className="space-y-1">
@@ -272,7 +272,11 @@ export function MetricsTab() {
                     </label>
                     <input
                       type="text"
-                      placeholder="e.g. ₹ or $"
+                      autoComplete="new-password"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
+                      placeholder=""
                       value={prefix}
                       onChange={(e) => setPrefix(e.target.value)}
                       className="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#2563EB]"
@@ -287,7 +291,11 @@ export function MetricsTab() {
                     <input
                       type="number"
                       required
-                      placeholder="25"
+                      autoComplete="new-password"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
+                      placeholder="0"
                       value={value}
                       onChange={(e) => setValue(Number(e.target.value))}
                       className="w-full px-3 py-2 text-xs font-mono font-bold rounded-xl border border-slate-200 focus:outline-none focus:border-[#2563EB]"
@@ -301,7 +309,11 @@ export function MetricsTab() {
                     </label>
                     <input
                       type="text"
-                      placeholder="e.g. +, K+, .2 LPA"
+                      autoComplete="new-password"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
+                      placeholder=""
                       value={suffix}
                       onChange={(e) => setSuffix(e.target.value)}
                       className="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#2563EB]"
@@ -317,7 +329,11 @@ export function MetricsTab() {
                   <input
                     type="text"
                     required
-                    placeholder="e.g. Partner Campuses, Students Trained, Avg Package"
+                    autoComplete="new-password"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    spellCheck={false}
+                    placeholder="Enter metric label"
                     value={label}
                     onChange={(e) => setLabel(e.target.value)}
                     className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#2563EB]"
@@ -331,7 +347,11 @@ export function MetricsTab() {
                   </label>
                   <input
                     type="text"
-                    placeholder="e.g. Institutional Pilots, Assessed & Upskilled, Campus Hires"
+                    autoComplete="new-password"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    spellCheck={false}
+                    placeholder="Enter sub-label"
                     value={sub}
                     onChange={(e) => setSub(e.target.value)}
                     className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#2563EB]"

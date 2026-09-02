@@ -1,11 +1,8 @@
-import { useState } from 'react';
 import { useEnquiry } from '../context/EnquiryContext';
-import { MapPin, Phone, Mail, Send, CheckCircle2, BookOpen, Users, GraduationCap, UserCheck, Sparkles } from 'lucide-react';
+import { MapPin, Phone, Mail, Send, BookOpen, Users, GraduationCap, UserCheck, Sparkles } from 'lucide-react';
 
 export function Footer() {
   const { openEnquiry } = useEnquiry();
-  const [newsletterEmail, setNewsletterEmail] = useState('');
-  const [isSubscribed, setIsSubscribed] = useState(false);
 
   const nav = (href: string) => {
     if (!href || href === '#') {
@@ -76,44 +73,22 @@ export function Footer() {
                 </div>
               </div>
 
-              {/* Newsletter Subscription Box */}
-              <div className="mt-2 mb-4 max-w-sm">
+              {/* Institutional Connect CTA */}
+              <div className="mt-3 mb-4 max-w-sm">
                 <p className="text-xs font-bold text-slate-900 mb-1 flex items-center gap-1.5 font-[family-name:var(--font-display)]">
                   <Send size={12} className="text-[#2563EB]" />
-                  <span>Placement &amp; Industry Newsletter</span>
+                  <span>Institutional Partnership &amp; Inquiries</span>
                 </p>
                 <p className="text-[11px] text-slate-500 mb-2 leading-relaxed">
-                  Weekly hiring rubrics, curriculum guides, and placement trends.
+                  Connect with our academic council for custom syllabi, live sandboxes, and campus drive scheduling.
                 </p>
-                {isSubscribed ? (
-                  <div className="p-2 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold flex items-center gap-2">
-                    <CheckCircle2 size={14} className="text-emerald-600 shrink-0" />
-                    <span>Subscribed! Welcome to Grow360 insights.</span>
-                  </div>
-                ) : (
-                  <form
-                    onSubmit={(e) => {
-                      e.preventDefault();
-                      if (newsletterEmail.trim()) setIsSubscribed(true);
-                    }}
-                    className="flex items-center gap-1.5"
-                  >
-                    <input
-                      type="email"
-                      required
-                      value={newsletterEmail}
-                      onChange={(e) => setNewsletterEmail(e.target.value)}
-                      placeholder="Enter college or work email"
-                      className="bg-white border border-slate-300 rounded-xl px-3 py-1.5 text-xs text-slate-900 focus:outline-none focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] w-full shadow-2xs"
-                    />
-                    <button
-                      type="submit"
-                      className="btn-pill-primary text-xs px-3 py-1.5 font-bold shrink-0 cursor-pointer"
-                    >
-                      Subscribe
-                    </button>
-                  </form>
-                )}
+                <button
+                  onClick={() => openEnquiry('PARTNERSHIP')}
+                  className="btn-pill-primary text-xs px-4 py-2 font-bold cursor-pointer inline-flex items-center gap-1.5"
+                >
+                  <Sparkles size={12} />
+                  <span>Connect with Placement Team</span>
+                </button>
               </div>
 
               {/* Backed By Developers From */}

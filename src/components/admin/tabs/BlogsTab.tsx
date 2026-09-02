@@ -348,7 +348,7 @@ export function BlogsTab() {
                 </button>
               </div>
 
-              <form onSubmit={editingPost ? handleSaveEdit : handleSaveAdd} className="space-y-4">
+              <form onSubmit={editingPost ? handleSaveEdit : handleSaveAdd} autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck={false} className="space-y-4">
                 <div>
                   <label className="block text-xs font-bold text-slate-700 mb-1">
                     Article Title *
@@ -357,7 +357,11 @@ export function BlogsTab() {
                     type="text"
                     value={formTitle}
                     onChange={(e) => setFormTitle(e.target.value)}
-                    placeholder="e.g. How Forward-Thinking Colleges Are Transforming Campus Placements in 2026"
+                    autoComplete="new-password"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    spellCheck={false}
+                    placeholder="Enter article title"
                     required
                     className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:bg-white rounded-xl py-2 px-3 text-xs sm:text-sm outline-hidden"
                   />
@@ -372,7 +376,11 @@ export function BlogsTab() {
                       type="text"
                       value={formCategory}
                       onChange={(e) => setFormCategory(e.target.value)}
-                      placeholder="e.g. Placement Strategy"
+                      autoComplete="new-password"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
+                      placeholder="Enter category"
                       className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:bg-white rounded-xl py-2 px-3 text-xs outline-hidden"
                     />
                   </div>
@@ -385,7 +393,11 @@ export function BlogsTab() {
                       type="text"
                       value={formReadTime}
                       onChange={(e) => setFormReadTime(e.target.value)}
-                      placeholder="e.g. 5 min read"
+                      autoComplete="new-password"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
+                      placeholder="Enter read time"
                       className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:bg-white rounded-xl py-2 px-3 text-xs outline-hidden"
                     />
                   </div>
@@ -398,7 +410,11 @@ export function BlogsTab() {
                       type="text"
                       value={formAuthor}
                       onChange={(e) => setFormAuthor(e.target.value)}
-                      placeholder="e.g. Grow360 Academic Council"
+                      autoComplete="new-password"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
+                      placeholder="Enter author name"
                       className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:bg-white rounded-xl py-2 px-3 text-xs outline-hidden"
                     />
                   </div>
@@ -414,7 +430,11 @@ export function BlogsTab() {
                       type="text"
                       value={formImage}
                       onChange={(e) => setFormImage(e.target.value)}
-                      placeholder="https://images.unsplash.com/photo-..."
+                      autoComplete="new-password"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
+                      placeholder="Paste image URL..."
                       className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:bg-white rounded-xl py-2 px-3 text-xs outline-hidden font-mono"
                     />
                     <div className="flex items-center gap-2">
@@ -445,7 +465,11 @@ export function BlogsTab() {
                     rows={2}
                     value={formSummary}
                     onChange={(e) => setFormSummary(e.target.value)}
-                    placeholder="Short 2-3 sentence overview that appears on preview cards..."
+                    autoComplete="off"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    spellCheck={false}
+                    placeholder="Enter summary..."
                     required
                     className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:bg-white rounded-xl py-2 px-3 text-xs outline-hidden"
                   />
@@ -459,7 +483,11 @@ export function BlogsTab() {
                     rows={6}
                     value={formContent}
                     onChange={(e) => setFormContent(e.target.value)}
-                    placeholder="First paragraph...&#10;&#10;Second paragraph with analysis and observations...&#10;&#10;Conclusion and key actionable takeaways..."
+                    autoComplete="off"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    spellCheck={false}
+                    placeholder="Enter article content..."
                     className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:bg-white rounded-xl py-2 px-3 text-xs outline-hidden leading-relaxed"
                   />
                 </div>
@@ -472,7 +500,11 @@ export function BlogsTab() {
                     type="text"
                     value={formTags}
                     onChange={(e) => setFormTags(e.target.value)}
-                    placeholder="e.g. Higher Ed, Campus Placement, TPO Strategy, System Design"
+                    autoComplete="new-password"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    spellCheck={false}
+                    placeholder="Enter comma separated tags"
                     className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:bg-white rounded-xl py-2 px-3 text-xs outline-hidden font-mono"
                   />
                 </div>

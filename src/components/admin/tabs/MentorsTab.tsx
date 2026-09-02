@@ -463,7 +463,7 @@ export function MentorsTab() {
                 </button>
               </div>
 
-              <form onSubmit={handleFormSubmit} className="space-y-4">
+              <form onSubmit={handleFormSubmit} autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck={false} className="space-y-4">
                 {/* 1. Image Upload Section */}
                 <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
                   <label className="block text-xs font-bold text-slate-800">
@@ -530,7 +530,11 @@ export function MentorsTab() {
                   <div>
                     <input
                       type="text"
-                      placeholder="Or paste external image URL (e.g. https://...)"
+                      autoComplete="new-password"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
+                      placeholder="Paste image URL..."
                       value={image.startsWith('data:') ? 'Image uploaded from device (base64)' : image}
                       onChange={(e) => {
                         if (!e.target.value.startsWith('Image uploaded')) {
@@ -549,79 +553,87 @@ export function MentorsTab() {
                   </label>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     <label
-                      className={`p-3 rounded-xl border cursor-pointer flex items-center gap-2 text-xs transition-all ${
+                      className={`flex items-center gap-2.5 p-2.5 rounded-xl border cursor-pointer transition-all ${
                         displayLocation === 'all'
-                          ? 'bg-blue-600 text-white border-blue-600 font-bold shadow-xs'
-                          : 'bg-white text-slate-700 border-black/10 hover:border-black/25'
+                          ? 'bg-white border-[#2563EB] shadow-xs'
+                          : 'bg-white/60 border-black/5 hover:border-black/15'
                       }`}
                     >
                       <input
                         type="radio"
-                        name="displayLocation"
+                        name="mentorDisplayLocation"
                         value="all"
                         checked={displayLocation === 'all'}
                         onChange={() => setDisplayLocation('all')}
-                        className="hidden"
+                        className="text-[#2563EB]"
                       />
-                      <Globe size={15} />
-                      <span>🌐 Both Landing &amp; Evaluation</span>
+                      <div>
+                        <span className="text-xs font-bold text-slate-800 block">Both Pages</span>
+                        <span className="text-[10px] text-slate-500">Landing Page & Evaluation Page</span>
+                      </div>
                     </label>
 
                     <label
-                      className={`p-3 rounded-xl border cursor-pointer flex items-center gap-2 text-xs transition-all ${
+                      className={`flex items-center gap-2.5 p-2.5 rounded-xl border cursor-pointer transition-all ${
                         displayLocation === 'landing'
-                          ? 'bg-emerald-600 text-white border-emerald-600 font-bold shadow-xs'
-                          : 'bg-white text-slate-700 border-black/10 hover:border-black/25'
+                          ? 'bg-white border-[#2563EB] shadow-xs'
+                          : 'bg-white/60 border-black/5 hover:border-black/15'
                       }`}
                     >
                       <input
                         type="radio"
-                        name="displayLocation"
+                        name="mentorDisplayLocation"
                         value="landing"
                         checked={displayLocation === 'landing'}
                         onChange={() => setDisplayLocation('landing')}
-                        className="hidden"
+                        className="text-[#2563EB]"
                       />
-                      <Layout size={15} />
-                      <span>🏠 Only Landing Page</span>
+                      <div>
+                        <span className="text-xs font-bold text-slate-800 block">Landing Page Only</span>
+                        <span className="text-[10px] text-slate-500">Faculty/Mentors section</span>
+                      </div>
                     </label>
 
                     <label
-                      className={`p-3 rounded-xl border cursor-pointer flex items-center gap-2 text-xs transition-all ${
+                      className={`flex items-center gap-2.5 p-2.5 rounded-xl border cursor-pointer transition-all ${
                         displayLocation === 'evaluation'
-                          ? 'bg-purple-600 text-white border-purple-600 font-bold shadow-xs'
-                          : 'bg-white text-slate-700 border-black/10 hover:border-black/25'
+                          ? 'bg-white border-[#2563EB] shadow-xs'
+                          : 'bg-white/60 border-black/5 hover:border-black/15'
                       }`}
                     >
                       <input
                         type="radio"
-                        name="displayLocation"
+                        name="mentorDisplayLocation"
                         value="evaluation"
                         checked={displayLocation === 'evaluation'}
                         onChange={() => setDisplayLocation('evaluation')}
-                        className="hidden"
+                        className="text-[#2563EB]"
                       />
-                      <FileText size={15} />
-                      <span>📊 Only Evaluation Report</span>
+                      <div>
+                        <span className="text-xs font-bold text-slate-800 block">Evaluation Page Only</span>
+                        <span className="text-[10px] text-slate-500">Industry panel grid</span>
+                      </div>
                     </label>
 
                     <label
-                      className={`p-3 rounded-xl border cursor-pointer flex items-center gap-2 text-xs transition-all ${
+                      className={`flex items-center gap-2.5 p-2.5 rounded-xl border cursor-pointer transition-all ${
                         displayLocation === 'hidden'
-                          ? 'bg-slate-700 text-white border-slate-700 font-bold shadow-xs'
-                          : 'bg-white text-slate-700 border-black/10 hover:border-black/25'
+                          ? 'bg-white border-amber-500 shadow-xs'
+                          : 'bg-white/60 border-black/5 hover:border-black/15'
                       }`}
                     >
                       <input
                         type="radio"
-                        name="displayLocation"
+                        name="mentorDisplayLocation"
                         value="hidden"
                         checked={displayLocation === 'hidden'}
                         onChange={() => setDisplayLocation('hidden')}
-                        className="hidden"
+                        className="text-amber-600"
                       />
-                      <EyeOff size={15} />
-                      <span>🔒 Hidden / Draft</span>
+                      <div>
+                        <span className="text-xs font-bold text-slate-800 block">Hidden / Draft</span>
+                        <span className="text-[10px] text-slate-500">Not visible on website</span>
+                      </div>
                     </label>
                   </div>
                 </div>
@@ -633,7 +645,11 @@ export function MentorsTab() {
                     <input
                       type="text"
                       required
-                      placeholder="e.g. Nandwana Abhishek"
+                      autoComplete="new-password"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
+                      placeholder="Enter mentor full name"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       className="w-full px-3.5 py-2.5 rounded-xl border border-black/10 text-xs focus:border-[#2563EB] focus:outline-hidden"
@@ -645,7 +661,11 @@ export function MentorsTab() {
                     <input
                       type="text"
                       required
-                      placeholder="e.g. Meta, Accenture, Deloitte"
+                      autoComplete="new-password"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
+                      placeholder="Enter company / organization"
                       value={company}
                       onChange={(e) => setCompany(e.target.value)}
                       className="w-full px-3.5 py-2.5 rounded-xl border border-black/10 text-xs focus:border-[#2563EB] focus:outline-hidden"
@@ -666,6 +686,10 @@ export function MentorsTab() {
                       />
                       <input
                         type="text"
+                        autoComplete="new-password"
+                        autoCorrect="off"
+                        autoCapitalize="off"
+                        spellCheck={false}
                         value={companyColor}
                         onChange={(e) => setCompanyColor(e.target.value)}
                         className="w-full px-3.5 py-2 rounded-xl border border-black/10 text-xs font-mono"
@@ -678,6 +702,10 @@ export function MentorsTab() {
                     <input
                       type="number"
                       min={1}
+                      autoComplete="new-password"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
                       value={order}
                       onChange={(e) => setOrder(Number(e.target.value))}
                       className="w-full px-3.5 py-2.5 rounded-xl border border-black/10 text-xs focus:border-[#2563EB] focus:outline-hidden font-mono font-bold"
@@ -691,7 +719,11 @@ export function MentorsTab() {
                   <input
                     type="text"
                     required
-                    placeholder="e.g. Software Engineer · Meta (London, UK)"
+                    autoComplete="new-password"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    spellCheck={false}
+                    placeholder="Enter role / designation"
                     value={role}
                     onChange={(e) => setRole(e.target.value)}
                     className="w-full px-3.5 py-2.5 rounded-xl border border-black/10 text-xs focus:border-[#2563EB] focus:outline-hidden"
@@ -704,7 +736,11 @@ export function MentorsTab() {
                     <label className="block text-xs font-bold text-slate-700 mb-1">Focus Tag</label>
                     <input
                       type="text"
-                      placeholder="e.g. System Design & Distributed Tech"
+                      autoComplete="new-password"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
+                      placeholder="Enter focus tag"
                       value={tag}
                       onChange={(e) => setTag(e.target.value)}
                       className="w-full px-3.5 py-2.5 rounded-xl border border-black/10 text-xs focus:border-[#2563EB] focus:outline-hidden"
@@ -715,7 +751,11 @@ export function MentorsTab() {
                     <label className="block text-xs font-bold text-slate-700 mb-1">Experience / Sessions</label>
                     <input
                       type="text"
-                      placeholder="e.g. 95+ Sessions or 10+ Yrs Exp"
+                      autoComplete="new-password"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
+                      placeholder="Enter sessions / exp"
                       value={exp}
                       onChange={(e) => setExp(e.target.value)}
                       className="w-full px-3.5 py-2.5 rounded-xl border border-black/10 text-xs focus:border-[#2563EB] focus:outline-hidden"
@@ -728,7 +768,11 @@ export function MentorsTab() {
                   <label className="block text-xs font-bold text-slate-700 mb-1">Mentor Bio / Quote</label>
                   <textarea
                     rows={2}
-                    placeholder="Brief description or background..."
+                    autoComplete="off"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    spellCheck={false}
+                    placeholder="Enter bio or quote"
                     value={quote}
                     onChange={(e) => setQuote(e.target.value)}
                     className="w-full px-3.5 py-2.5 rounded-xl border border-black/10 text-xs focus:border-[#2563EB] focus:outline-hidden"
