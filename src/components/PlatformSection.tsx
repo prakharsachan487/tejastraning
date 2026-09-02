@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mic, ArrowRight, Sparkles, Check, ChevronRight, Award, Share2, Gauge, Briefcase, Code } from 'lucide-react';
+import { Mic, Sparkles, Check, ChevronRight, Award, Share2, Gauge, Briefcase, Code } from 'lucide-react';
 import { useEnquiry } from '../context/EnquiryContext';
 
 export function PlatformSection() {
@@ -8,7 +8,7 @@ export function PlatformSection() {
   const [diagnosticTrack, setDiagnosticTrack] = useState<'NON_TECH' | 'TECH'>('NON_TECH');
 
   return (
-    <section id="solutions" className="py-20 lg:py-28 bg-[#F8F9FB] relative obsidian-grid border-b border-black/5">
+    <section id="solutions" className="py-12 sm:py-16 bg-[#F8F9FB] relative obsidian-grid border-b border-black/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -17,7 +17,7 @@ export function PlatformSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="max-w-3xl mb-14 text-left"
+          className="max-w-3xl mb-8 sm:mb-10 text-left"
         >
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2563EB]/10 border border-[#2563EB]/25 text-[#3B82F6] text-xs font-semibold tracking-wide mb-4">
             <Sparkles size={14} className="text-[#2563EB]" />
@@ -545,18 +545,6 @@ export function PlatformSection() {
           </motion.div>
 
         </div>
-
-        {/* CTA Bar */}
-        <div className="mt-14 text-center">
-          <button
-            onClick={() => openEnquiry('PROPOSAL')}
-            className="btn-pill-primary cursor-pointer active:scale-95 text-xs py-3 px-6"
-          >
-            <span>Request Full Platform Breakdown</span>
-            <ArrowRight size={16} />
-          </button>
-        </div>
-
       </div>
     </section>
   );
