@@ -56,6 +56,13 @@
   100% { transform: translateX(0); }
 }
 
+/* ── Top Announcement Marquee Hover Pause ── */
+.announcement-bar-container:hover .announcement-ticker-track,
+.announcement-ticker-track:hover,
+.announcement-ticker-track:hover * {
+  animation-play-state: paused !important;
+}
+
 /* ═══════════════════════════════════════
    GLOBAL LIGHT SYSTEM (ZERO BLACK BACKGROUNDS)
    ═══════════════════════════════════════ */

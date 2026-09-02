@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { useAdminData } from '../context/AdminDataContext';
 
 interface TopAnnouncementBarProps {
@@ -8,6 +8,7 @@ interface TopAnnouncementBarProps {
 
 export function TopAnnouncementBar({ onOpenCareerCall, onNavigateToPrograms }: TopAnnouncementBarProps) {
   const { announcements, tickerSpeed } = useAdminData();
+  const [isPaused, setIsPaused] = useState(false);
 
   // Filter active and sort
   const activeAnnouncements = useMemo(() => {
@@ -74,19 +75,24 @@ export function TopAnnouncementBar({ onOpenCareerCall, onNavigateToPrograms }: T
   };
 
   return (
-    <div className="group bg-[#0B1120] text-white border-b border-white/10 text-[11px] sm:text-xs font-medium py-1.5 sm:py-2 overflow-hidden relative select-none z-50 w-full cursor-pointer">
+    <div
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      className="announcement-bar-container group bg-[#0B1120] text-white border-b border-white/10 text-[11px] sm:text-xs font-medium py-1.5 sm:py-2 overflow-hidden relative select-none z-50 w-full cursor-pointer"
+    >
       {/* Side gradient overlays for seamless fade */}
       <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-20 bg-gradient-to-r from-[#0B1120] via-[#0B1120]/90 to-transparent z-10 pointer-events-none" />
       <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-20 bg-gradient-to-l from-[#0B1120] via-[#0B1120]/90 to-transparent z-10 pointer-events-none" />
 
-      {/* Infinite Seamless Dynamic Full-Width Marquee with Native Pause on Hover */}
+      {/* Infinite Seamless Dynamic Full-Width Marquee with 100% Guaranteed Pause on Cursor Hover */}
       <div
         key={`full-marquee-${halfItems.length}-${tickerSpeed}-${dynamicDuration}`}
         style={{
           animation: `marquee ${dynamicDuration}s linear infinite`,
+          animationPlayState: isPaused ? 'paused' : 'running',
           willChange: 'transform',
         }}
-        className="flex items-center gap-6 sm:gap-10 w-max group-hover:[animation-play-state:paused] hover:[animation-play-state:paused]"
+        className="announcement-ticker-track flex items-center gap-6 sm:gap-10 w-max group-hover:[animation-play-state:paused]"
       >
         {fullLoopItems.map((item, idx) => (
           <div
