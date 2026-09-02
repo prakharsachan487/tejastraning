@@ -163,7 +163,7 @@ export function ProgramsSection() {
                   onClick={() => openEnquiry('PARTNERSHIP')}
                   className="btn-pill-primary py-3 px-6 text-xs font-bold shrink-0 flex items-center gap-2 shadow-md cursor-pointer self-start lg:self-center"
                 >
-                  <span>Request Full Syllabus</span>
+                  <span>Customise Courses</span>
                   <ArrowRight size={14} />
                 </button>
               </div>
