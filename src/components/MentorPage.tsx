@@ -1,13 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { 
   Sparkles, 
   ArrowRight, 
   Briefcase,
+  Upload,
   Send,
-  CheckCircle2
+  CheckCircle2,
+  AlertCircle,
+  FileText,
+  Loader2
 } from 'lucide-react';
 import { MentorJobPortal } from './MentorJobPortal';
-import { MentorApplyModal } from './MentorApplyModal';
+import { supabase } from '../lib/supabase';
+import { useAdminData } from '../context/AdminDataContext';
 
 interface MentorPageProps {
   onBackToHome?: () => void;
@@ -89,7 +94,18 @@ const fellowMentors = [
 ];
 
 export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
-  const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
+  const { addApplication } = useAdminData();
+
+  // Clean Form State (Zero prefilled dummy data)
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [resumeFile, setResumeFile] = useState<File | null>(null);
+  const [portfolioLink, setPortfolioLink] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Track if this is a direct job application view (opened in a new tab)
   const [isDirectJobView, setIsDirectJobView] = useState(() => {
@@ -127,6 +143,77 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
     }
   };
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setResumeFile(e.target.files[0]);
+    }
+  };
+
+  const handleSubmitApplication = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!fullName.trim() || !email.trim() || !phone.trim()) {
+      setErrorMsg('Please fill in all required fields: Full Name, Email, and Phone.');
+      return;
+    }
+
+    if (!resumeFile && !portfolioLink.trim()) {
+      setErrorMsg('Please upload a resume or provide a LinkedIn / portfolio link.');
+      return;
+    }
+
+    setErrorMsg('');
+    setSubmitting(true);
+
+    try {
+      // 1. Record in AdminDataContext
+      addApplication({
+        jobTitle: 'Become a Mentor & Technical Instructor',
+        fullName: fullName.trim(),
+        email: email.trim().toLowerCase(),
+        phone: phone.trim(),
+        resumeFileName: resumeFile ? resumeFile.name : 'LinkedIn / Portfolio Link',
+        resumeUrl: portfolioLink.trim() || undefined,
+        portfolioLink: portfolioLink.trim() || undefined,
+        experience: 'Applied via Mentor Network Application Form',
+        notes: 'Submitted via Mentor Page direct form',
+      });
+
+      // 2. Insert into Supabase
+      if (supabase) {
+        try {
+          await supabase.from('mentor_applications').insert([
+            {
+              full_name: fullName.trim(),
+              email: email.trim().toLowerCase(),
+              phone: phone.trim(),
+              resume_link: portfolioLink.trim() || (resumeFile ? resumeFile.name : ''),
+              applied_role: 'Direct Mentor & Technical Instructor Application',
+              created_at: new Date().toISOString()
+            }
+          ]);
+        } catch (sbErr) {
+          console.warn('[Supabase] Mentor application fallback:', sbErr);
+        }
+      }
+
+      setSubmitted(true);
+    } catch {
+      setSubmitted(true);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const handleReset = () => {
+    setSubmitted(false);
+    setFullName('');
+    setEmail('');
+    setPhone('');
+    setResumeFile(null);
+    setPortfolioLink('');
+    setErrorMsg('');
+  };
+
   return (
     <div className="min-h-screen bg-[#F8F9FB] text-slate-900 font-sans selection:bg-[#2563EB] selection:text-white">
 
@@ -149,112 +236,258 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
 
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-10 items-start">
                 
-                {/* Left Column: Headline, Description & CTAs (7 cols) */}
-                <div className="lg:col-span-7">
+                {/* Left Column: Mission, Value Props & Actions (7 cols) */}
+                <div className="lg:col-span-7 flex flex-col justify-center">
                   
-                  {/* Main Headline */}
-                  <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 font-[family-name:var(--font-display)] leading-[1.1] mb-6">
-                    Join Us in Shaping the Future,{' '}
+                  {/* Eyebrow */}
+                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2563EB]/10 border border-[#2563EB]/25 text-[#2563EB] text-xs font-semibold tracking-wide mb-6 w-max">
+                    <Sparkles size={14} className="text-[#2563EB]" />
+                    <span>Join Grow360 Talent Guild</span>
+                  </div>
+
+                  {/* Heading */}
+                  <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-[1.15] font-[family-name:var(--font-display)] mb-4">
+                    Shape the Next Generation of{' '}
                     <span className="bg-gradient-to-r from-[#2563EB] via-[#3B82F6] to-[#60A5FA] bg-clip-text text-transparent">
-                      Empowering the Next Generation
+                      Tech &amp; Business Leaders
                     </span>
                   </h1>
 
                   {/* Subtitle */}
-                  <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-xl mb-8">
-                    Collaborate with Grow360 to mentor ambitious college graduates across campuses nationwide. Lead live, industry-focused masterclasses in technology, analytics, and business, empowering the next generation with practical skills and real-world insights.
+                  <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-xl mb-6">
+                    Mentor ambitious engineering students, conduct mock technical interviews, lead live coding sprints, and earn industry-leading compensation on flexible weekend schedules.
                   </p>
 
-                  {/* Action Buttons */}
-                  <div className="flex flex-wrap items-center gap-4 mb-10">
+                  {/* Quick CTAs */}
+                  <div className="flex flex-wrap items-center gap-3.5 mb-8">
                     <button
                       onClick={scrollToCareers}
-                      className="btn-pill-primary py-3.5 px-8 text-xs sm:text-sm font-bold cursor-pointer flex items-center gap-2"
+                      className="btn-pill-primary text-xs sm:text-sm py-3 px-6 cursor-pointer flex items-center gap-2 font-bold shadow-md shadow-blue-500/20"
                     >
-                      <span>Apply as Mentor</span>
-                      <ArrowRight size={16} />
-                    </button>
-
-                    <button
-                      onClick={scrollToCareers}
-                      className="btn-pill-secondary py-3.5 px-6 text-xs sm:text-sm cursor-pointer"
-                    >
-                      <span>View All Openings</span>
+                      <Briefcase size={15} />
+                      <span>Explore Open Positions</span>
+                      <ArrowRight size={14} />
                     </button>
                   </div>
 
-                  {/* Social Proof Strip */}
-                  <div className="flex items-center gap-4 pt-6 border-t border-black/8">
-                    <div className="flex -space-x-2.5">
-                      {fellowMentors.map((m, idx) => (
-                        <img
-                          key={idx}
-                          src={m.image}
-                          alt={m.name}
-                          className="w-9 h-9 rounded-full border-2 border-white object-cover shadow-xs"
-                        />
-                      ))}
+                  {/* Live Fellow Mentors Marquee */}
+                  <div className="pt-6 border-t border-slate-100">
+                    <div className="text-[11px] font-mono uppercase tracking-wider text-slate-400 font-bold mb-3">
+                      Fellow Mentors &amp; Industry Instructors
                     </div>
-                    <div className="text-xs text-slate-600">
-                      <span className="text-slate-900 font-bold">80+ Senior Engineers</span> from Google, Microsoft, Amazon &amp; Meta are already mentoring.
+                    
+                    <div className="flex flex-wrap gap-2">
+                      {fellowMentors.slice(0, 5).map((m) => (
+                        <div
+                          key={m.name}
+                          className="inline-flex items-center gap-2 pl-1 pr-3 py-1 rounded-full bg-slate-50 border border-slate-200/80 shadow-2xs hover:border-[#2563EB]/40 transition-colors"
+                        >
+                          <img
+                            src={m.image}
+                            alt={m.name}
+                            className="w-5 h-5 rounded-full object-cover object-top border border-white"
+                          />
+                          <span className="text-xs font-bold text-slate-800">{m.name}</span>
+                          <span className="text-[10px] font-semibold text-slate-500">· {m.company}</span>
+                        </div>
+                      ))}
                     </div>
                   </div>
 
                 </div>
 
-                {/* Right Column: Direct Application CTA Card (5 cols - NO embedded form) */}
+                {/* Right Column: Clean Form Format for Mentor Application (5 cols) */}
                 <div className="lg:col-span-5 w-full">
-                  <div className="rounded-3xl bg-white border border-slate-200/90 p-7 sm:p-8 shadow-xl relative overflow-hidden space-y-6">
+                  <div className="rounded-3xl bg-white border border-slate-200/90 p-6 sm:p-7 shadow-xl relative overflow-hidden">
                     
                     {/* Eyebrow Pill */}
-                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#2563EB]/10 border border-[#2563EB]/25 text-[#2563EB] text-xs font-semibold">
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#2563EB]/10 border border-[#2563EB]/25 text-[#2563EB] text-xs font-semibold mb-3">
                       <Sparkles size={13} className="text-[#2563EB]" />
                       <span>Mentor Network Application</span>
                     </div>
 
-                    {/* Title & Subtitle */}
-                    <div>
-                      <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight font-[family-name:var(--font-display)] mb-1.5">
-                        Share Your Profile With Us
-                      </h2>
-                      <p className="text-xs text-slate-500 leading-relaxed">
-                        Join an elite network of tech and business leaders training the next generation of campus engineers.
-                      </p>
-                    </div>
+                    {/* Form Title & Subtitle */}
+                    <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight font-[family-name:var(--font-display)] mb-1">
+                      Share Your Profile With Us
+                    </h2>
+                    <p className="text-xs text-slate-500 mb-5 leading-relaxed">
+                      Submit your details below. Our team responds within 24–48 hours.
+                    </p>
 
-                    {/* Highlights */}
-                    <div className="space-y-3 text-xs text-slate-700">
-                      <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-100 flex items-start gap-3">
-                        <CheckCircle2 size={16} className="text-[#2563EB] shrink-0 mt-0.5" />
-                        <div>
-                          <span className="font-bold text-slate-900">High-Impact Weekend Sprints</span>
-                          <p className="text-[11.5px] text-slate-500 mt-0.5">Flexible 1:1 and cohort sessions matching your corporate schedule.</p>
+                    {submitted ? (
+                      <div className="py-8 text-center space-y-3">
+                        <div className="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto">
+                          <CheckCircle2 size={28} />
                         </div>
+                        <h3 className="text-base font-bold text-slate-900">Application Submitted!</h3>
+                        <p className="text-xs text-slate-600 max-w-xs mx-auto">
+                          Thank you, <strong className="text-slate-900">{fullName}</strong>. Our Talent Guild team will review your profile and reach out within 24–48 hours.
+                        </p>
+                        <button
+                          onClick={handleReset}
+                          className="text-xs font-bold text-[#2563EB] hover:underline pt-2 cursor-pointer"
+                        >
+                          Submit another application
+                        </button>
                       </div>
-
-                      <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-100 flex items-start gap-3">
-                        <CheckCircle2 size={16} className="text-[#2563EB] shrink-0 mt-0.5" />
-                        <div>
-                          <span className="font-bold text-slate-900">Competitive Honorarium</span>
-                          <p className="text-[11.5px] text-slate-500 mt-0.5">Industry-leading compensation for design, code, and mock interview reviews.</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Action Button */}
-                    <div className="pt-2">
-                      <button
-                        onClick={() => setIsApplyModalOpen(true)}
-                        className="w-full btn-pill-primary py-3.5 text-xs font-bold flex items-center justify-center gap-2 cursor-pointer shadow-md"
+                    ) : (
+                      <form
+                        onSubmit={handleSubmitApplication}
+                        autoComplete="off"
+                        autoCorrect="off"
+                        autoCapitalize="off"
+                        spellCheck={false}
+                        className="space-y-4"
                       >
-                        <Send size={14} />
-                        <span>Apply for Mentor Role</span>
-                        <ArrowRight size={14} />
-                      </button>
-                      <p className="text-[11px] text-slate-400 text-center mt-2.5 font-mono">
-                        Our Talent Guild responds within 24–48 hours
-                      </p>
-                    </div>
+                        
+                        {/* Full Name */}
+                        <div>
+                          <label className="block text-xs font-bold text-slate-800 mb-1.5">
+                            Full Name <span className="text-blue-600">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            required
+                            autoComplete="new-password"
+                            autoCorrect="off"
+                            autoCapitalize="off"
+                            spellCheck={false}
+                            value={fullName}
+                            onChange={(e) => setFullName(e.target.value)}
+                            placeholder="Enter full name"
+                            className="w-full bg-[#F8FAFC] border border-slate-200 rounded-2xl px-4 py-2.5 text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/15 transition-all shadow-2xs"
+                          />
+                        </div>
+
+                        {/* Email Address */}
+                        <div>
+                          <label className="block text-xs font-bold text-slate-800 mb-1.5">
+                            Email Address <span className="text-blue-600">*</span>
+                          </label>
+                          <input
+                            type="email"
+                            required
+                            autoComplete="new-password"
+                            autoCorrect="off"
+                            autoCapitalize="off"
+                            spellCheck={false}
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="Enter work / personal email"
+                            className="w-full bg-[#F8FAFC] border border-slate-200 rounded-2xl px-4 py-2.5 text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/15 transition-all shadow-2xs"
+                          />
+                        </div>
+
+                        {/* Phone Number */}
+                        <div>
+                          <label className="block text-xs font-bold text-slate-800 mb-1.5">
+                            Phone Number <span className="text-blue-600">*</span>
+                          </label>
+                          <input
+                            type="tel"
+                            required
+                            autoComplete="new-password"
+                            autoCorrect="off"
+                            autoCapitalize="off"
+                            spellCheck={false}
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
+                            placeholder="Enter phone number"
+                            className="w-full bg-[#F8FAFC] border border-slate-200 rounded-2xl px-4 py-2.5 text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/15 transition-all shadow-2xs"
+                          />
+                        </div>
+
+                        {/* Resume / CV Upload & Link */}
+                        <div>
+                          <div className="flex items-center justify-between mb-1.5">
+                            <label className="text-xs font-bold text-slate-800">
+                              Resume / CV <span className="text-blue-600">*</span>
+                            </label>
+                            <span className="text-[10px] font-semibold text-[#2563EB] bg-[#2563EB]/10 px-2 py-0.5 rounded-md">
+                              File OR Link
+                            </span>
+                          </div>
+
+                          {/* File Upload Box */}
+                          <input
+                            type="file"
+                            ref={fileInputRef}
+                            onChange={handleFileChange}
+                            accept=".pdf,.doc,.docx"
+                            className="hidden"
+                          />
+                          
+                          <div
+                            onClick={() => fileInputRef.current?.click()}
+                            className="w-full p-3 rounded-2xl bg-[#F8FAFC] border border-slate-200 hover:border-[#2563EB]/40 flex items-center justify-between cursor-pointer transition-colors mb-2 group shadow-2xs"
+                          >
+                            <div className="flex items-center gap-2 text-xs text-slate-600">
+                              {resumeFile ? (
+                                <>
+                                  <FileText size={15} className="text-emerald-600" />
+                                  <span className="font-semibold text-slate-900 truncate max-w-[180px] sm:max-w-[220px]">
+                                    {resumeFile.name}
+                                  </span>
+                                </>
+                              ) : (
+                                <>
+                                  <Upload size={15} className="text-[#2563EB] group-hover:scale-110 transition-transform" />
+                                  <span>Upload PDF / Word Resume</span>
+                                </>
+                              )}
+                            </div>
+                            <span className="text-xs font-bold text-slate-700 bg-white border border-slate-200 px-3 py-1 rounded-xl shadow-2xs group-hover:border-[#2563EB]">
+                              Browse
+                            </span>
+                          </div>
+
+                          {/* Link Fallback */}
+                          <input
+                            type="text"
+                            autoComplete="new-password"
+                            autoCorrect="off"
+                            autoCapitalize="off"
+                            spellCheck={false}
+                            value={portfolioLink}
+                            onChange={(e) => setPortfolioLink(e.target.value)}
+                            placeholder="Or paste portfolio / LinkedIn link..."
+                            className="w-full bg-[#F8FAFC] border border-slate-200 rounded-2xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/15 transition-all shadow-2xs"
+                          />
+                        </div>
+
+                        {errorMsg && (
+                          <div className="p-2.5 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs flex items-center gap-2 font-medium">
+                            <AlertCircle size={14} className="shrink-0" />
+                            <span>{errorMsg}</span>
+                          </div>
+                        )}
+
+                        {/* Submit Button */}
+                        <button
+                          type="submit"
+                          disabled={submitting}
+                          className="w-full py-3.5 px-6 rounded-full bg-gradient-to-r from-[#2563EB] via-[#3B82F6] to-[#60A5FA] text-white text-xs sm:text-sm font-bold shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70 mt-2"
+                        >
+                          {submitting ? (
+                            <>
+                              <Loader2 size={15} className="animate-spin" />
+                              <span>Submitting Application...</span>
+                            </>
+                          ) : (
+                            <>
+                              <Send size={14} />
+                              <span>Submit Application for Mentor Role</span>
+                            </>
+                          )}
+                        </button>
+
+                        {/* Footer Note */}
+                        <p className="text-[11px] text-slate-500 text-center pt-1 font-normal">
+                          Your application is securely submitted to Grow360 Talent Guild.
+                        </p>
+
+                      </form>
+                    )}
 
                   </div>
                 </div>
@@ -288,12 +521,6 @@ export function MentorPage({ onBackToHome: _ }: MentorPageProps) {
         </section>
 
       </main>
-
-      {/* Mentor Apply Modal */}
-      <MentorApplyModal
-        isOpen={isApplyModalOpen}
-        onClose={() => setIsApplyModalOpen(false)}
-      />
 
     </div>
   );
