@@ -209,11 +209,11 @@ export function MentorsSection() {
 
         {/* Bottom Callout to Become a Mentor */}
         <div className="mt-14 text-center">
-          <div className="inline-flex items-center gap-3 p-2 pr-5 rounded-full bg-white shadow-sm border border-black/8 text-xs text-slate-700">
+          <div className="inline-flex flex-wrap items-center justify-center gap-2 sm:gap-3 p-2 px-4 sm:pr-5 rounded-full bg-white shadow-sm border border-black/8 text-xs text-slate-700">
             <span className="px-3 py-1 rounded-full bg-[#2563EB]/15 text-[#2563EB] font-bold font-mono">
               Join Our Network
             </span>
-            <span>Are you an engineering leader or senior developer?</span>
+            <span>Are you an industry practitioner, corporate leader, or domain expert?</span>
             <button
               onClick={() => {
                 window.location.hash = '#mentor';
