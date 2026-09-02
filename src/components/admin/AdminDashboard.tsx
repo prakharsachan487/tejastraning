@@ -36,6 +36,19 @@ import { ApplicationsTab } from './tabs/ApplicationsTab';
 
 type ActiveTab = 'overview' | 'metrics' | 'testimonials' | 'announcements' | 'team' | 'curriculum' | 'mentors' | 'jobs' | 'gallery' | 'blogs' | 'enquiries' | 'applications';
 
+interface NavItem {
+  id: ActiveTab;
+  label: string;
+  icon: any;
+  badge: string | null;
+  badgeColor?: string;
+}
+
+interface NavSection {
+  group: string;
+  items: NavItem[];
+}
+
 interface AdminDashboardProps {
   onBackToHome: () => void;
 }
@@ -82,107 +95,129 @@ export function AdminDashboard({ onBackToHome }: AdminDashboardProps) {
     }
   };
 
-  const navItems = [
+  const navSections: NavSection[] = [
     {
-      id: 'overview' as const,
-      label: 'Dashboard',
-      icon: LayoutDashboard,
-      badge: null,
+      group: 'Overview',
+      items: [
+        {
+          id: 'overview' as const,
+          label: 'Dashboard Overview',
+          icon: LayoutDashboard,
+          badge: null,
+        },
+      ],
     },
     {
-      id: 'metrics' as const,
-      label: 'Verified Track Record',
-      icon: TrendingUp,
-      badge: metricsData.length > 0 ? `${metricsData.length} Stats` : null,
+      group: 'Landing Page Content',
+      items: [
+        {
+          id: 'metrics' as const,
+          label: 'Verified Track Record',
+          icon: TrendingUp,
+          badge: metricsData.length > 0 ? `${metricsData.length}` : null,
+        },
+        {
+          id: 'testimonials' as const,
+          label: 'Institutional Testimonials',
+          icon: MessageSquareQuote,
+          badge: testimonials.length > 0 ? `${testimonials.length}` : null,
+        },
+        {
+          id: 'announcements' as const,
+          label: 'Top Announcement Marquee',
+          icon: Sparkles,
+          badge: announcements.filter((a) => a.active).length > 0 ? `${announcements.filter((a) => a.active).length} live` : null,
+        },
+        {
+          id: 'team' as const,
+          label: 'Team & Leadership',
+          icon: Users,
+          badge: teamMembers.length > 0 ? `${teamMembers.length}` : null,
+        },
+      ],
     },
     {
-      id: 'testimonials' as const,
-      label: 'Institutional Testimonials',
-      icon: MessageSquareQuote,
-      badge: testimonials.length > 0 ? `${testimonials.length} Quotes` : null,
+      group: 'Academics & Media',
+      items: [
+        {
+          id: 'curriculum' as const,
+          label: 'Curriculum & Courses',
+          icon: BookOpen,
+          badge: '2 Tracks',
+        },
+        {
+          id: 'mentors' as const,
+          label: 'Faculty & Mentors',
+          icon: Users,
+          badge: mentors.length > 0 ? `${mentors.length}` : null,
+        },
+        {
+          id: 'gallery' as const,
+          label: 'Campus Moments Gallery',
+          icon: ImageIcon,
+          badge: galleryItems.length > 0 ? `${galleryItems.length}` : null,
+        },
+        {
+          id: 'blogs' as const,
+          label: 'Blogs & Articles',
+          icon: BookOpen,
+          badge: blogPosts.length > 0 ? `${blogPosts.length}` : null,
+        },
+      ],
     },
     {
-      id: 'announcements' as const,
-      label: 'Top Marquee Ticker',
-      icon: Sparkles,
-      badge: announcements.filter((a) => a.active).length > 0 ? `${announcements.filter((a) => a.active).length} Active` : null,
-    },
-    {
-      id: 'team' as const,
-      label: 'Team & Leadership',
-      icon: Users,
-      badge: teamMembers.length > 0 ? String(teamMembers.length) : null,
-    },
-    {
-      id: 'curriculum' as const,
-      label: 'Curriculum & Courses',
-      icon: BookOpen,
-      badge: '2 Tracks',
-    },
-    {
-      id: 'mentors' as const,
-      label: 'Faculty & Mentors',
-      icon: Users,
-      badge: mentors.length > 0 ? String(mentors.length) : null,
-    },
-    {
-      id: 'jobs' as const,
-      label: 'Jobs & Openings',
-      icon: Briefcase,
-      badge: jobs.length > 0 ? String(jobs.length) : null,
-    },
-    {
-      id: 'gallery' as const,
-      label: 'Campus Gallery',
-      icon: ImageIcon,
-      badge: galleryItems.length > 0 ? String(galleryItems.length) : null,
-    },
-    {
-      id: 'blogs' as const,
-      label: 'Blogs & Articles',
-      icon: BookOpen,
-      badge: blogPosts.length > 0 ? String(blogPosts.length) : null,
-    },
-    {
-      id: 'enquiries' as const,
-      label: 'Connect 360 Forms',
-      icon: Mail,
-      badge: newEnquiriesCount > 0 ? `${newEnquiriesCount} New` : null,
-      badgeColor: 'bg-amber-500 text-white font-bold animate-pulse',
-    },
-    {
-      id: 'applications' as const,
-      label: 'Job Applications',
-      icon: Users,
-      badge: pendingAppsCount > 0 ? `${pendingAppsCount} Pending` : null,
-      badgeColor: 'bg-emerald-500 text-white font-bold',
+      group: 'Leads & Applications',
+      items: [
+        {
+          id: 'enquiries' as const,
+          label: 'Connect 360 Inquiries',
+          icon: Mail,
+          badge: newEnquiriesCount > 0 ? `${newEnquiriesCount} new` : null,
+          badgeColor: 'bg-amber-100 text-amber-800 font-bold',
+        },
+        {
+          id: 'applications' as const,
+          label: 'Job Applications',
+          icon: Users,
+          badge: pendingAppsCount > 0 ? `${pendingAppsCount} pending` : null,
+          badgeColor: 'bg-blue-100 text-blue-800 font-bold',
+        },
+        {
+          id: 'jobs' as const,
+          label: 'Jobs & Openings',
+          icon: Briefcase,
+          badge: jobs.length > 0 ? `${jobs.length}` : null,
+        },
+      ],
     },
   ];
 
   return (
-    <div className="min-h-screen bg-[#F4F6FA] text-slate-800 font-sans flex flex-col selection:bg-[#2563EB] selection:text-white">
-      {/* ─── Top Executive Bar ────────────────────────────────────────────── */}
-      <header className="bg-slate-900 border-b border-slate-800 text-white sticky top-0 z-40 px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between shadow-md">
+    <div className="min-h-screen bg-[#F8FAFC] text-slate-800 font-sans flex flex-col selection:bg-[#2563EB] selection:text-white">
+      {/* ─── Top Executive Bar (Clean, Minimalist) ────────────────────────────── */}
+      <header className="bg-white border-b border-slate-200/90 text-slate-900 sticky top-0 z-40 px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between shadow-2xs">
         {/* Left: Mobile menu toggle + Brand Logo */}
         <div className="flex items-center gap-3">
           <button
             onClick={() => setIsMobileNavOpen(!isMobileNavOpen)}
-            className="lg:hidden p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 cursor-pointer"
+            className="lg:hidden p-2 text-slate-500 hover:text-slate-900 rounded-xl hover:bg-slate-100 cursor-pointer"
           >
-            {isMobileNavOpen ? <X size={20} /> : <Menu size={20} />}
+            {isMobileNavOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
 
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center font-extrabold text-white text-sm shadow-md shadow-blue-500/30">
+            <div className="w-8 h-8 rounded-xl bg-[#2563EB] flex items-center justify-center font-bold text-white text-sm shadow-xs">
               G
             </div>
             <div>
-              <span className="font-extrabold text-sm tracking-tight text-white font-[family-name:var(--font-display)]">
-                Grow360
-              </span>
-              <span className="ml-2 text-[10px] font-mono uppercase bg-blue-500/20 border border-blue-400/30 text-blue-300 px-2 py-0.5 rounded-full font-bold">
-                Admin Suite
-              </span>
+              <div className="flex items-center gap-2">
+                <span className="font-extrabold text-sm tracking-tight text-slate-900 font-[family-name:var(--font-display)]">
+                  Grow360
+                </span>
+                <span className="text-[10px] font-mono font-bold bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full border border-slate-200">
+                  Admin Console
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -193,9 +228,9 @@ export function AdminDashboard({ onBackToHome }: AdminDashboardProps) {
           <button
             type="button"
             onClick={onBackToHome}
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-300 hover:text-white bg-slate-800/80 hover:bg-slate-800 border border-slate-700 px-3 py-1.5 rounded-xl transition-all cursor-pointer shadow-xs"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-700 hover:text-slate-900 bg-slate-50 hover:bg-slate-100 border border-slate-200/90 px-3 py-1.5 rounded-xl transition-all cursor-pointer shadow-2xs"
           >
-            <span>View Public Site</span>
+            <span>Live Site</span>
             <ExternalLink size={13} className="text-slate-400" />
           </button>
 
@@ -204,10 +239,10 @@ export function AdminDashboard({ onBackToHome }: AdminDashboardProps) {
             type="button"
             onClick={() => setIsPasswordModalOpen(true)}
             title="Change Master Password"
-            className="hidden sm:inline-flex items-center gap-1 text-xs text-slate-400 hover:text-white bg-slate-800/50 hover:bg-slate-800 border border-slate-700/60 px-2.5 py-1.5 rounded-xl transition-colors cursor-pointer"
+            className="hidden sm:inline-flex items-center gap-1 text-xs text-slate-600 hover:text-slate-900 bg-slate-50 hover:bg-slate-100 border border-slate-200/90 px-2.5 py-1.5 rounded-xl transition-colors cursor-pointer"
           >
-            <KeyRound size={14} />
-            <span className="text-[11px]">Security</span>
+            <KeyRound size={13} />
+            <span className="text-[11px] font-medium">Security</span>
           </button>
 
           {/* Logout Button */}
@@ -215,73 +250,78 @@ export function AdminDashboard({ onBackToHome }: AdminDashboardProps) {
             type="button"
             onClick={logoutAdmin}
             title="Logout of Admin Portal"
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-rose-400 hover:text-white bg-rose-950/40 hover:bg-rose-600 border border-rose-800/50 hover:border-rose-600 px-3 py-1.5 rounded-xl transition-all cursor-pointer"
+            className="inline-flex items-center gap-1 text-xs font-semibold text-rose-600 hover:text-rose-700 bg-rose-50/80 hover:bg-rose-100 border border-rose-200/80 px-3 py-1.5 rounded-xl transition-all cursor-pointer"
           >
-            <LogOut size={14} />
-            <span className="hidden sm:inline">Logout</span>
+            <LogOut size={13} />
+            <span>Sign Out</span>
           </button>
         </div>
       </header>
 
       {/* ─── Main Admin Body Split: Sidebar & Content ───────────────────────── */}
       <div className="flex-1 flex max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 gap-6">
-        {/* Left Sidebar (Desktop) */}
-        <aside className="hidden lg:block w-64 shrink-0 space-y-6">
-          {/* Navigation Card */}
-          <div className="bg-white rounded-3xl p-4 border border-slate-200/80 shadow-xs sticky top-20">
-            <div className="px-3 py-2 text-[11px] font-mono font-bold uppercase text-slate-400 tracking-wider">
-              Navigation Console
-            </div>
+        {/* Left Sidebar (Desktop - Clean Structured) */}
+        <aside className="hidden lg:block w-64 shrink-0 space-y-4">
+          <div className="bg-white rounded-3xl p-3.5 border border-slate-200/80 shadow-2xs sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto no-scrollbar">
+            <nav className="space-y-4">
+              {navSections.map((sec, secIdx) => (
+                <div key={secIdx}>
+                  <div className="px-3 text-[10px] font-mono font-bold uppercase text-slate-400 tracking-wider mb-1.5">
+                    {sec.group}
+                  </div>
 
-            <nav className="space-y-1 mt-1">
-              {navItems.map((item) => {
-                const Icon = item.icon;
-                const isActive = activeTab === item.id;
-                return (
-                  <button
-                    key={item.id}
-                    onClick={() => setActiveTab(item.id)}
-                    className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-2xl text-xs font-bold transition-all cursor-pointer ${
-                      isActive
-                        ? 'bg-slate-900 text-white shadow-md'
-                        : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
-                    }`}
-                  >
-                    <div className="flex items-center gap-2.5">
-                      <Icon
-                        size={16}
-                        className={isActive ? 'text-blue-400' : 'text-slate-400'}
-                      />
-                      <span>{item.label}</span>
-                    </div>
+                  <div className="space-y-0.5">
+                    {sec.items.map((item) => {
+                      const Icon = item.icon;
+                      const isActive = activeTab === item.id;
+                      return (
+                        <button
+                          key={item.id}
+                          onClick={() => setActiveTab(item.id)}
+                          className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs transition-all cursor-pointer ${
+                            isActive
+                              ? 'bg-slate-900 text-white font-bold shadow-xs'
+                              : 'text-slate-600 hover:bg-slate-100/70 hover:text-slate-900 font-medium'
+                          }`}
+                        >
+                          <div className="flex items-center gap-2.5">
+                            <Icon
+                              size={15}
+                              className={isActive ? 'text-blue-400' : 'text-slate-400'}
+                            />
+                            <span>{item.label}</span>
+                          </div>
 
-                    {item.badge && (
-                      <span
-                        className={`text-[10px] font-mono px-2 py-0.5 rounded-full ${
-                          item.badgeColor || (isActive ? 'bg-slate-800 text-slate-200' : 'bg-slate-100 text-slate-600')
-                        }`}
-                      >
-                        {item.badge}
-                      </span>
-                    )}
-                  </button>
-                );
-              })}
+                          {item.badge && (
+                            <span
+                              className={`text-[9.5px] font-mono px-1.5 py-0.5 rounded-md ${
+                                item.badgeColor || (isActive ? 'bg-slate-800 text-slate-200 font-semibold' : 'bg-slate-100 text-slate-500 font-medium')
+                              }`}
+                            >
+                              {item.badge}
+                            </span>
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
             </nav>
 
             {/* Admin Profile Box in Sidebar */}
-            <div className="mt-6 pt-4 border-t border-slate-100 px-3">
-              <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold text-xs">
+            <div className="mt-4 pt-3 border-t border-slate-100 px-2 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <div className="w-7 h-7 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center font-bold text-xs">
                   A
                 </div>
-                <div className="min-w-0">
-                  <p className="text-xs font-bold text-slate-900 truncate">
-                    {adminUser?.name || 'SuperAdmin'}
-                  </p>
-                  <p className="text-[10px] text-slate-400 font-mono truncate">
-                    {adminUser?.email || 'admin@grow360.in'}
-                  </p>
+                <div className="leading-tight">
+                  <div className="text-[11px] font-bold text-slate-800 truncate max-w-[120px]">
+                    {adminUser?.name || 'Administrator'}
+                  </div>
+                  <div className="text-[9px] font-mono text-emerald-600 font-semibold">
+                    ● Master Session
+                  </div>
                 </div>
               </div>
             </div>
@@ -292,56 +332,69 @@ export function AdminDashboard({ onBackToHome }: AdminDashboardProps) {
         <AnimatePresence>
           {isMobileNavOpen && (
             <motion.div
-              initial={{ opacity: 0, x: -200 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -200 }}
-              className="fixed inset-0 z-50 lg:hidden flex"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-xs lg:hidden"
+              onClick={() => setIsMobileNavOpen(false)}
             >
-              <div
-                className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs"
-                onClick={() => setIsMobileNavOpen(false)}
-              />
-              <div className="relative w-72 max-w-[80vw] bg-white h-full p-6 shadow-2xl z-10 flex flex-col justify-between overflow-y-auto">
+              <motion.div
+                initial={{ x: '-100%' }}
+                animate={{ x: 0 }}
+                exit={{ x: '-100%' }}
+                transition={{ type: 'spring', damping: 25, stiffness: 280 }}
+                className="w-72 max-w-[80vw] h-full bg-white p-5 shadow-2xl overflow-y-auto flex flex-col justify-between"
+                onClick={(e) => e.stopPropagation()}
+              >
                 <div>
                   <div className="flex items-center justify-between pb-4 border-b border-slate-100 mb-4">
                     <span className="font-bold text-sm text-slate-900">Admin Console</span>
                     <button
                       onClick={() => setIsMobileNavOpen(false)}
-                      className="p-1 text-slate-400 hover:text-slate-700"
+                      className="p-1 text-slate-400 hover:text-slate-700 cursor-pointer"
                     >
                       <X size={18} />
                     </button>
                   </div>
 
-                  <nav className="space-y-1.5">
-                    {navItems.map((item) => {
-                      const Icon = item.icon;
-                      const isActive = activeTab === item.id;
-                      return (
-                        <button
-                          key={item.id}
-                          onClick={() => {
-                            setActiveTab(item.id);
-                            setIsMobileNavOpen(false);
-                          }}
-                          className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-2xl text-xs font-bold transition-all cursor-pointer ${
-                            isActive
-                              ? 'bg-slate-900 text-white'
-                              : 'text-slate-600 hover:bg-slate-100'
-                          }`}
-                        >
-                          <div className="flex items-center gap-2.5">
-                            <Icon size={16} />
-                            <span>{item.label}</span>
-                          </div>
-                          {item.badge && (
-                            <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-bold">
-                              {item.badge}
-                            </span>
-                          )}
-                        </button>
-                      );
-                    })}
+                  <nav className="space-y-4">
+                    {navSections.map((sec, secIdx) => (
+                      <div key={secIdx}>
+                        <div className="px-2 text-[10px] font-mono font-bold uppercase text-slate-400 tracking-wider mb-1">
+                          {sec.group}
+                        </div>
+                        <div className="space-y-0.5">
+                          {sec.items.map((item) => {
+                            const Icon = item.icon;
+                            const isActive = activeTab === item.id;
+                            return (
+                              <button
+                                key={item.id}
+                                onClick={() => {
+                                  setActiveTab(item.id);
+                                  setIsMobileNavOpen(false);
+                                }}
+                                className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs transition-all cursor-pointer ${
+                                  isActive
+                                    ? 'bg-slate-900 text-white font-bold'
+                                    : 'text-slate-600 hover:bg-slate-100'
+                                }`}
+                              >
+                                <div className="flex items-center gap-2.5">
+                                  <Icon size={15} />
+                                  <span>{item.label}</span>
+                                </div>
+                                {item.badge && (
+                                  <span className="text-[9.5px] font-mono px-1.5 py-0.5 rounded-md bg-slate-100 text-slate-600 font-bold">
+                                    {item.badge}
+                                  </span>
+                                )}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    ))}
                   </nav>
                 </div>
 
@@ -361,7 +414,7 @@ export function AdminDashboard({ onBackToHome }: AdminDashboardProps) {
                     <span>Sign Out</span>
                   </button>
                 </div>
-              </div>
+              </motion.div>
             </motion.div>
           )}
         </AnimatePresence>

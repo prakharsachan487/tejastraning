@@ -38,48 +38,47 @@ export function OverviewTab({
   const recentApplications = applications.slice(0, 4);
 
   return (
-    <div className="space-y-8">
-      {/* ─── Top Welcome & Quick Actions Bar ───────────────────────────────── */}
-      <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-indigo-950 border border-slate-700/60 rounded-3xl p-6 sm:p-8 text-white relative overflow-hidden shadow-xl">
-        <div className="absolute top-0 right-0 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-300 text-xs font-mono font-bold mb-3">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>Grow360 Live Admin Console</span>
+    <div className="space-y-6">
+      {/* ─── Top Welcome & Quick Actions Bar (Clean Minimalist) ───────────────── */}
+      <div className="bg-white border border-slate-200/80 rounded-3xl p-6 sm:p-7 text-slate-900 shadow-2xs">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-5">
+          <div className="space-y-1">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-[#2563EB] text-xs font-mono font-bold">
+              <span className="w-2 h-2 rounded-full bg-emerald-500" />
+              <span>Admin Console Overview</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight font-[family-name:var(--font-display)]">
+            <h1 className="text-2xl font-bold tracking-tight text-slate-900 font-[family-name:var(--font-display)]">
               Welcome back, Administrator
             </h1>
-            <p className="text-xs sm:text-sm text-slate-300 max-w-xl mt-1 leading-relaxed">
-              Here is your live real-time pulse of jobs, gallery media, editorial publications, student/college consultation forms, and candidate hiring applications.
+            <p className="text-xs text-slate-500 max-w-xl">
+              Quick summary of incoming institutional inquiries, candidate job applications, active courses, and platform content.
             </p>
           </div>
 
           {/* Quick Create Buttons */}
-          <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+          <div className="flex flex-wrap items-center gap-2 shrink-0">
             <button
               onClick={onOpenAddJob}
-              className="bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold px-3.5 py-2.5 rounded-xl shadow-md shadow-blue-600/30 flex items-center gap-1.5 cursor-pointer transition-all hover:scale-[1.02]"
+              className="bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold px-3.5 py-2 rounded-xl flex items-center gap-1.5 cursor-pointer transition-all shadow-xs"
             >
-              <Plus size={15} />
-              <span>Post New Job</span>
+              <Plus size={14} />
+              <span>Post Job</span>
             </button>
 
             <button
               onClick={onOpenAddGallery}
-              className="bg-slate-800 hover:bg-slate-700 text-slate-100 border border-slate-700 text-xs font-bold px-3.5 py-2.5 rounded-xl flex items-center gap-1.5 cursor-pointer transition-all hover:scale-[1.02]"
+              className="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold px-3.5 py-2 rounded-xl flex items-center gap-1.5 cursor-pointer transition-all"
             >
-              <Plus size={15} />
+              <Plus size={14} />
               <span>Add Moment</span>
             </button>
 
             <button
               onClick={onOpenAddBlog}
-              className="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-3.5 py-2.5 rounded-xl shadow-md shadow-indigo-600/30 flex items-center gap-1.5 cursor-pointer transition-all hover:scale-[1.02]"
+              className="bg-blue-50 hover:bg-blue-100 text-[#2563EB] text-xs font-semibold px-3.5 py-2 rounded-xl flex items-center gap-1.5 cursor-pointer transition-all border border-blue-200/60"
             >
-              <Plus size={15} />
-              <span>Write Article</span>
+              <Plus size={14} />
+              <span>New Article</span>
             </button>
           </div>
         </div>
