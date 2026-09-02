@@ -184,7 +184,7 @@ export function ProgramsSection() {
   const currentCategory = categories.find((c) => c.id === activeId) || categories[0];
 
   return (
-    <section id="programs" className="py-20 lg:py-28 bg-[#F8F9FB] relative obsidian-grid overflow-hidden">
+    <section id="programs" className="pt-6 sm:pt-8 pb-20 lg:pb-28 bg-[#F8F9FB] relative obsidian-grid overflow-hidden">
       {/* Background Subtle Gradient Glows */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-gradient-to-br from-[#2563EB]/10 via-[#3B82F6]/5 to-transparent blur-[120px] pointer-events-none rounded-full" />
       
