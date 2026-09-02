@@ -99,6 +99,16 @@ export interface CurriculumCourse {
   pillars: ModulePillar[];
 }
 
+export interface AnnouncementItem {
+  id: string;
+  text: string;
+  highlight: string;
+  action: 'call' | 'programs' | 'roadmap' | 'mentor' | 'none';
+  linkUrl?: string;
+  active: boolean;
+  order: number;
+}
+
 export interface JobApplication {
   id: string;
   jobId?: string | number;
@@ -116,6 +126,13 @@ export interface JobApplication {
 }
 
 interface AdminDataContextType {
+  // Announcements (Top Marquee Ticker)
+  announcements: AnnouncementItem[];
+  addAnnouncement: (item: Omit<AnnouncementItem, 'id'>) => void;
+  updateAnnouncement: (id: string, updated: Partial<AnnouncementItem>) => void;
+  deleteAnnouncement: (id: string) => void;
+  toggleAnnouncementActive: (id: string) => void;
+
   // Mentors
   mentors: MentorItem[];
   addMentor: (mentor: Omit<MentorItem, 'id'>) => void;
@@ -844,9 +861,79 @@ const INITIAL_CURRICULUM: CurriculumCourse[] = [
   },
 ];
 
+const INITIAL_ANNOUNCEMENTS: AnnouncementItem[] = [
+  {
+    id: 'ann-1',
+    text: '✨ Free 1:1 Career Diagnostic & Senior Mentorship Session',
+    highlight: 'Book Free Call',
+    action: 'call',
+    active: true,
+    order: 1,
+  },
+  {
+    id: 'ann-2',
+    text: '✨ Software & AI Engineering Program — 2026 Batch Admissions Open',
+    highlight: 'Explore Tracks',
+    action: 'programs',
+    active: true,
+    order: 2,
+  },
+  {
+    id: 'ann-3',
+    text: '✨ Executive Certification in Business & Technology Management',
+    highlight: 'Management Track',
+    action: 'programs',
+    active: true,
+    order: 3,
+  },
+  {
+    id: 'ann-4',
+    text: '✨ 90%+ Tier-1 Campus Placement Rate Across 50+ Partner Campuses',
+    highlight: 'Placement Rubrics',
+    action: 'programs',
+    active: true,
+    order: 4,
+  },
+  {
+    id: 'ann-5',
+    text: '✨ AI Forward Deployed Engineer & Agentic AI Certification',
+    highlight: 'New Syllabus',
+    action: 'programs',
+    active: true,
+    order: 5,
+  },
+  {
+    id: 'ann-6',
+    text: '✨ Corporate Readiness & Mock Technical Drives by Meta & Google Mentors',
+    highlight: 'Learn More',
+    action: 'call',
+    active: true,
+    order: 6,
+  },
+  {
+    id: 'ann-7',
+    text: '✨ DevOps, Cloud & AI Platform Engineering — Industry Mapped',
+    highlight: 'View Modules',
+    action: 'programs',
+    active: true,
+    order: 7,
+  },
+];
+
 const AdminDataContext = createContext<AdminDataContextType | null>(null);
 
 export function AdminDataProvider({ children }: { children: ReactNode }) {
+  // 00. Announcements (Top Marquee Ticker) State
+  const [announcements, setAnnouncements] = useState<AnnouncementItem[]>(() => {
+    const saved = localStorage.getItem('grow360_admin_announcements');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch {}
+    }
+    return INITIAL_ANNOUNCEMENTS;
+  });
+
   // 0a. Curriculum Courses State
   const [curriculumCourses, setCurriculumCourses] = useState<CurriculumCourse[]>(() => {
     const saved = localStorage.getItem('grow360_admin_curriculum');
@@ -953,6 +1040,36 @@ export function AdminDataProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     localStorage.setItem('grow360_admin_curriculum', JSON.stringify(curriculumCourses));
   }, [curriculumCourses]);
+
+  useEffect(() => {
+    localStorage.setItem('grow360_admin_announcements', JSON.stringify(announcements));
+  }, [announcements]);
+
+  // ─── Announcement Handlers ────────────────────────────────
+
+  const addAnnouncement = (itemData: Omit<AnnouncementItem, 'id'>) => {
+    const newItem: AnnouncementItem = {
+      ...itemData,
+      id: `ann-${Date.now()}`,
+    };
+    setAnnouncements((prev) => [...prev, newItem]);
+  };
+
+  const updateAnnouncement = (id: string, updated: Partial<AnnouncementItem>) => {
+    setAnnouncements((prev) =>
+      prev.map((a) => (a.id === id ? { ...a, ...updated } : a))
+    );
+  };
+
+  const deleteAnnouncement = (id: string) => {
+    setAnnouncements((prev) => prev.filter((a) => a.id !== id));
+  };
+
+  const toggleAnnouncementActive = (id: string) => {
+    setAnnouncements((prev) =>
+      prev.map((a) => (a.id === id ? { ...a, active: !a.active } : a))
+    );
+  };
 
   // ─── Curriculum Handlers ──────────────────────────────────
 
@@ -1356,6 +1473,11 @@ export function AdminDataProvider({ children }: { children: ReactNode }) {
   return (
     <AdminDataContext.Provider
       value={{
+        announcements,
+        addAnnouncement,
+        updateAnnouncement,
+        deleteAnnouncement,
+        toggleAnnouncementActive,
         curriculumCourses,
         updateCurriculumCourse,
         addRollingTrackToCourse,

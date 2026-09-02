@@ -14,11 +14,13 @@ import {
   X,
   KeyRound,
   Check,
-  AlertCircle
+  AlertCircle,
+  Sparkles
 } from 'lucide-react';
 import { useAdminAuth } from '../../context/AdminAuthContext';
 import { useAdminData } from '../../context/AdminDataContext';
 import { OverviewTab } from './tabs/OverviewTab';
+import { AnnouncementsTab } from './tabs/AnnouncementsTab';
 import { CurriculumTab } from './tabs/CurriculumTab';
 import { MentorsTab } from './tabs/MentorsTab';
 import { JobsTab } from './tabs/JobsTab';
@@ -27,7 +29,7 @@ import { BlogsTab } from './tabs/BlogsTab';
 import { EnquiriesTab } from './tabs/EnquiriesTab';
 import { ApplicationsTab } from './tabs/ApplicationsTab';
 
-type ActiveTab = 'overview' | 'curriculum' | 'mentors' | 'jobs' | 'gallery' | 'blogs' | 'enquiries' | 'applications';
+type ActiveTab = 'overview' | 'announcements' | 'curriculum' | 'mentors' | 'jobs' | 'gallery' | 'blogs' | 'enquiries' | 'applications';
 
 interface AdminDashboardProps {
   onBackToHome: () => void;
@@ -35,7 +37,7 @@ interface AdminDashboardProps {
 
 export function AdminDashboard({ onBackToHome }: AdminDashboardProps) {
   const { adminUser, logoutAdmin, updateAdminPassword } = useAdminAuth();
-  const { enquiries, applications, mentors, jobs, galleryItems, blogPosts } = useAdminData();
+  const { enquiries, applications, mentors, jobs, galleryItems, blogPosts, announcements } = useAdminData();
 
   const [activeTab, setActiveTab] = useState<ActiveTab>('overview');
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
@@ -81,6 +83,12 @@ export function AdminDashboard({ onBackToHome }: AdminDashboardProps) {
       label: 'Dashboard',
       icon: LayoutDashboard,
       badge: null,
+    },
+    {
+      id: 'announcements' as const,
+      label: 'Top Marquee Ticker',
+      icon: Sparkles,
+      badge: announcements.filter((a) => a.active).length > 0 ? `${announcements.filter((a) => a.active).length} Active` : null,
     },
     {
       id: 'curriculum' as const,
@@ -345,6 +353,8 @@ export function AdminDashboard({ onBackToHome }: AdminDashboardProps) {
               onOpenAddBlog={() => setActiveTab('blogs')}
             />
           )}
+
+          {activeTab === 'announcements' && <AnnouncementsTab />}
 
           {activeTab === 'curriculum' && <CurriculumTab />}
 
