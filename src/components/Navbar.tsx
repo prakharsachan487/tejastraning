@@ -133,7 +133,7 @@ export function Navbar() {
             {/* Brand Logo - Grow360 */}
             <a
               href="#"
-              className="flex items-center gap-3 group focus:outline-none"
+              className="flex items-center gap-3 group focus:outline-none shrink-0"
               onClick={(e) => {
                 e.preventDefault();
                 if (window.location.hash) {
@@ -146,7 +146,8 @@ export function Navbar() {
               <img
                 src="/grow360-logo.png"
                 alt="Grow360 Logo"
-                className="h-10 w-auto object-contain rounded-lg group-hover:scale-105 transition-transform"
+                style={{ height: '40px', maxHeight: '40px', width: 'auto', maxWidth: '130px', objectFit: 'contain' }}
+                className="h-10 max-h-10 w-auto max-w-[130px] object-contain rounded-lg group-hover:scale-105 transition-transform shrink-0"
               />
               <div className="flex flex-col leading-tight">
                 <span className="text-lg sm:text-xl font-extrabold tracking-tight text-[#1A1D24] font-[family-name:var(--font-display)] flex items-center">
@@ -266,7 +267,8 @@ export function Navbar() {
                     <img
                       src="/grow360-logo.png"
                       alt="Grow360 Logo"
-                      className="h-9 w-auto object-contain rounded-lg"
+                      style={{ height: '36px', maxHeight: '36px', width: 'auto', maxWidth: '110px', objectFit: 'contain' }}
+                      className="h-9 max-h-9 w-auto max-w-[110px] object-contain rounded-lg shrink-0"
                     />
                     <div className="flex flex-col leading-tight">
                       <span className="font-extrabold text-lg text-slate-900 font-[family-name:var(--font-display)] flex items-center">

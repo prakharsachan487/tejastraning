@@ -61,7 +61,8 @@ export function Footer() {
                 <img
                   src="/grow360-logo.png"
                   alt="Grow360 Logo"
-                  className="h-8.5 w-auto object-contain rounded-lg group-hover:scale-105 transition-transform"
+                  style={{ height: '34px', maxHeight: '34px', width: 'auto', maxWidth: '110px', objectFit: 'contain' }}
+                  className="h-8.5 max-h-8.5 w-auto max-w-[110px] object-contain rounded-lg group-hover:scale-105 transition-transform shrink-0"
                 />
                 <div className="flex flex-col leading-tight">
                   <span className="text-xl font-extrabold text-[#0F172A] tracking-tight font-[family-name:var(--font-display)] flex items-center">
