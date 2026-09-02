@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Phone, Sparkles, ArrowRight, TrendingUp, Calendar, ShieldCheck, UserCheck } from 'lucide-react';
+import { Phone, Sparkles, ArrowRight, TrendingUp, Calendar, ShieldCheck, UserCheck, LogOut } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { CareerCallModal } from './CareerCallModal';
 
@@ -8,7 +8,7 @@ interface ProfileEvaluationPageProps {
 }
 
 export function ProfileEvaluationPage({ onBackToHome }: ProfileEvaluationPageProps) {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const [isCareerCallOpen, setIsCareerCallOpen] = useState(false);
   const [selectedProgram, setSelectedProgram] = useState('AI-Powered Software Engineering (10x)');
 
@@ -44,25 +44,80 @@ export function ProfileEvaluationPage({ onBackToHome }: ProfileEvaluationPagePro
   ];
 
   return (
-    <div className="min-h-screen bg-[#F8F9FB] text-[#0F172A] font-sans selection:bg-[#2563EB] selection:text-white pt-24 pb-20">
-      {/* Top Breadcrumb & Status Bar */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
-        <div className="flex items-center justify-between flex-wrap gap-3">
-          <button
-            onClick={onBackToHome}
-            className="inline-flex items-center gap-2 text-xs font-semibold text-slate-600 hover:text-[#2563EB] transition-colors cursor-pointer"
-          >
-            <span>← Back to Home</span>
-          </button>
+    <div className="min-h-screen bg-[#F8F9FB] text-[#0F172A] font-sans selection:bg-[#2563EB] selection:text-white pb-20">
+      {/* Dedicated Evaluation Header (Clean & Minimal) */}
+      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-black/8 shadow-2xs">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-4">
+          {/* Brand Logo & Back */}
+          <div className="flex items-center gap-4 sm:gap-6">
+            <button
+              onClick={onBackToHome}
+              className="flex items-center gap-2 cursor-pointer group"
+              title="Return to Landing Page"
+            >
+              <img
+                src="/grow360_logo.jpg"
+                alt="GROW360"
+                className="h-9 w-auto rounded-lg object-contain"
+              />
+              <div className="flex flex-col text-left">
+                <span className="text-base sm:text-lg font-black text-slate-900 tracking-tight leading-none group-hover:text-[#2563EB] transition-colors">
+                  GROW360°
+                </span>
+                <span className="text-[10px] text-slate-500 font-mono leading-tight">
+                  Decoding the corporate world
+                </span>
+              </div>
+            </button>
 
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-[#2563EB] text-xs font-mono font-bold">
-            <Sparkles size={13} />
-            <span>CAREER PROFILE DIAGNOSTIC • LIVE EVALUATION</span>
+            <span className="hidden md:inline text-slate-300">|</span>
+
+            <span className="hidden md:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-[#2563EB] text-xs font-mono font-bold">
+              <Sparkles size={12} />
+              <span>CAREER PROFILE EVALUATION</span>
+            </span>
+          </div>
+
+          {/* Right Controls: Book Call & User Profile / Logout */}
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => {
+                setSelectedProgram('AI-Powered Software Engineering (10x)');
+                setIsCareerCallOpen(true);
+              }}
+              className="btn-pill-primary px-4 py-2 sm:px-5 sm:py-2.5 text-xs font-bold shadow-sm flex items-center gap-1.5 cursor-pointer"
+            >
+              <Phone size={13} />
+              <span className="hidden sm:inline">BOOK FREE 1:1 CALL</span>
+              <span className="sm:hidden">1:1 Call</span>
+            </button>
+
+            {user && (
+              <div className="flex items-center gap-2 bg-slate-50 pl-2 pr-3 py-1.5 rounded-full border border-black/10 shadow-2xs">
+                <img
+                  src={user.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80'}
+                  alt={user.name}
+                  className="w-7 h-7 rounded-full object-cover border border-[#2563EB]/40"
+                />
+                <div className="hidden sm:flex flex-col text-left">
+                  <span className="text-xs font-bold text-slate-800 leading-none">{user.name}</span>
+                  <span className="text-[10px] text-[#2563EB] font-mono leading-none mt-0.5">{user.role}</span>
+                </div>
+                <button
+                  onClick={logout}
+                  title="Sign Out"
+                  className="ml-1 p-1 hover:text-red-500 text-slate-400 transition-colors cursor-pointer"
+                >
+                  <LogOut size={14} />
+                </button>
+              </div>
+            )}
           </div>
         </div>
-      </div>
+      </header>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+      {/* Main Container */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 space-y-10">
         {/* ========================================================
             HERO SECTION: DIAGNOSTIC SCORE + BOOK 1:1 CALL
         ======================================================== */}

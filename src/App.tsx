@@ -142,8 +142,10 @@ function MainAppContent() {
 
   return (
     <div className="relative min-h-screen bg-[#F8F9FB] text-slate-100 font-sans selection:bg-[#2563EB] selection:text-white flex flex-col">
-      {/* Universal Header across public pages */}
-      <Navbar />
+      {/* Universal Header across public pages (hidden on auth and evaluation pages) */}
+      {currentPage !== 'login' &&
+        currentPage !== 'signup' &&
+        currentPage !== 'evaluation' && <Navbar />}
 
       <div className="flex-1">
         {currentPage === 'evaluation' ? (
