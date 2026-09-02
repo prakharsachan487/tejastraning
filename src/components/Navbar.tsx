@@ -1,8 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronRight, LogIn, LogOut, Mail } from 'lucide-react';
+import { Menu, X, ChevronRight, LogOut, Mail, Phone } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useEnquiry } from '../context/EnquiryContext';
+import { CareerCallModal } from './CareerCallModal';
 
 interface NavItem {
   label: string;
@@ -18,6 +19,7 @@ const navItems: NavItem[] = [
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [isCareerCallOpen, setIsCareerCallOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const { user, logout } = useAuth();
   const { openEnquiry } = useEnquiry();
@@ -204,13 +206,11 @@ export function Navbar() {
                 </div>
               ) : (
                 <button
-                  onClick={() => {
-                    window.location.hash = '#login';
-                  }}
-                  className="btn-pill-primary px-5 py-2.5 text-xs font-bold cursor-pointer flex items-center gap-1.5 shadow-md"
+                  onClick={() => setIsCareerCallOpen(true)}
+                  className="btn-pill-primary px-5 py-2.5 text-xs font-bold uppercase tracking-wide cursor-pointer flex items-center gap-2 shadow-md hover:shadow-lg transition-all"
                 >
-                  <LogIn size={14} className="text-white" />
-                  <span>Login</span>
+                  <Phone size={13} className="text-white fill-white" />
+                  <span>BOOK FREE 1:1 CAREER CALL</span>
                 </button>
               )}
             </div>
@@ -330,12 +330,12 @@ export function Navbar() {
                   <button
                     onClick={() => {
                       setIsMobileOpen(false);
-                      window.location.hash = '#login';
+                      setIsCareerCallOpen(true);
                     }}
-                    className="btn-pill-primary w-full justify-center text-xs py-3 flex items-center gap-2"
+                    className="btn-pill-primary w-full justify-center text-xs py-3 font-bold uppercase tracking-wide flex items-center gap-2 shadow-md"
                   >
-                    <LogIn size={14} className="text-white" />
-                    <span>Login / Sign Up</span>
+                    <Phone size={14} className="text-white fill-white" />
+                    <span>BOOK FREE 1:1 CAREER CALL</span>
                   </button>
                 )}
               </div>
@@ -343,6 +343,13 @@ export function Navbar() {
           </>
         )}
       </AnimatePresence>
+
+      {/* 1:1 Career Consultation Modal */}
+      <CareerCallModal
+        isOpen={isCareerCallOpen}
+        onClose={() => setIsCareerCallOpen(false)}
+        defaultProgram="1:1 Career Consultation & Profile Evaluation"
+      />
     </>
   );
 }
