@@ -56,6 +56,31 @@ export function ProgramsSection() {
 
   const CourseIcon = currentCourse?.id === 'tech' ? Code2 : Briefcase;
 
+  // Fallback rolling tracks if not populated yet
+  const rollingTracks = currentCourse?.rollingTracks && currentCourse.rollingTracks.length > 0
+    ? currentCourse.rollingTracks
+    : currentCourse?.id === 'tech'
+    ? [
+        'Software and AI Engineering Program',
+        'Modern Data Science and ML with specialisation in AI',
+        'AI Forward Deployed Engineer Program',
+        'AI & Machine Learning with Agentic AI',
+        'DevOps, Cloud & AI Platform Engineering',
+        'AI Engineering Advanced Certification',
+        'Full-Stack MERN & Next.js Architecture',
+        'Scalable Distributed Systems & High-Load Architecture',
+      ]
+    : [
+        'Executive Certification in Business & Technology Management',
+        'Corporate Financial Modelling & Valuation',
+        'Strategic Human Resource & Talent Management',
+        'Modern Product Marketing & Brand Strategy',
+        'International Business & Supply Chain Operations',
+        'Agile Project Management & Scrum Leadership',
+        'Executive Business Communication & Storytelling',
+        'POSH Compliance & International Workplace Ethics',
+      ];
+
   if (!currentCourse) return null;
 
   return (
@@ -118,7 +143,7 @@ export function ProgramsSection() {
             transition={{ duration: 0.35 }}
             className="space-y-8"
           >
-            {/* Header Card: Course Title + Target Group + Outcome */}
+            {/* Header Card: Course Title + Target Group + Rolling Marquee + Outcome */}
             <div className="p-6 sm:p-8 rounded-3xl bg-white border border-black/8 shadow-sm space-y-6">
               <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-100 pb-6">
                 <div className="space-y-2">
@@ -152,14 +177,62 @@ export function ProgramsSection() {
                   {currentCourse.targetGroups.map((group, idx) => (
                     <span
                       key={idx}
-                      className="px-3 py-1.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-semibold text-slate-800 flex items-center gap-1.5"
+                      className="px-3.5 py-1.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-semibold text-slate-800 flex items-center gap-2 shadow-2xs hover:border-blue-300 transition-colors"
                     >
-                      <GraduationCap size={13} className="text-[#2563EB]" />
+                      <GraduationCap size={14} className="text-[#2563EB] shrink-0" />
                       <span>{group}</span>
                     </span>
                   ))}
                 </div>
               </div>
+
+              {/* ── Continuous Rolling Specialization Courses Ticker (Reference Image Style) ── */}
+              {rollingTracks.length > 0 && (
+                <div className="space-y-2.5 pt-2 border-t border-slate-100">
+                  <div className="flex items-center gap-2">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-600"></span>
+                    </span>
+                    <span className="text-[11px] font-mono uppercase tracking-wider font-bold text-slate-500">
+                      Featured Specialization &amp; Rolling Tracks:
+                    </span>
+                  </div>
+
+                  {/* Horizontal Rolling Pill Strip */}
+                  <div className="relative overflow-hidden py-1">
+                    {/* Left and Right soft gradient fades */}
+                    <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none" />
+                    <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none" />
+
+                    <motion.div
+                      className="flex gap-3 w-max cursor-grab active:cursor-grabbing"
+                      animate={{
+                        x: ['0%', '-50%'],
+                      }}
+                      transition={{
+                        x: {
+                          repeat: Infinity,
+                          repeatType: 'loop',
+                          duration: 28,
+                          ease: 'linear',
+                        },
+                      }}
+                      whileHover={{ animationPlayState: 'paused' }}
+                    >
+                      {[...rollingTracks, ...rollingTracks].map((track, i) => (
+                        <div
+                          key={i}
+                          className="px-4 py-2 rounded-xl bg-slate-50/90 hover:bg-blue-50/90 border border-slate-200 hover:border-blue-300 text-xs font-semibold text-slate-800 flex items-center gap-2 transition-all shadow-2xs whitespace-nowrap group shrink-0"
+                        >
+                          <Sparkles size={13} className="text-[#2563EB] group-hover:scale-110 transition-transform shrink-0" />
+                          <span className="group-hover:text-[#2563EB] transition-colors">{track}</span>
+                        </div>
+                      ))}
+                    </motion.div>
+                  </div>
+                </div>
+              )}
 
               {/* Outcome Highlight Box */}
               <div className="p-4 rounded-2xl bg-gradient-to-r from-blue-50/80 via-indigo-50/50 to-blue-50/80 border border-blue-200/80 flex items-start gap-3">

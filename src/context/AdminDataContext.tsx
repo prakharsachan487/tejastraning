@@ -94,6 +94,7 @@ export interface CurriculumCourse {
   badge: string;
   order: number;
   targetGroups: string[];
+  rollingTracks?: string[];
   outcome: string;
   pillars: ModulePillar[];
 }
@@ -645,6 +646,16 @@ const INITIAL_CURRICULUM: CurriculumCourse[] = [
     badge: 'Management & Corporate Track',
     order: 1,
     targetGroups: ['Graduates (BBA, B.Com, BA, B.Sc)', 'Post-Graduates (MBA, PGDM, M.Com)', 'Management Students', 'Non-Technical Career Aspirants'],
+    rollingTracks: [
+      'Executive Certification in Business & Technology Management',
+      'Corporate Financial Modelling & Valuation',
+      'Strategic Human Resource & Talent Management',
+      'Modern Product Marketing & Brand Strategy',
+      'International Business & Supply Chain Operations',
+      'Agile Project Management & Scrum Leadership',
+      'Executive Business Communication & Storytelling',
+      'POSH Compliance & International Workplace Ethics',
+    ],
     outcome: 'Non-technical/management students ko corporate communication, management, leadership, professional etiquette aur placement readiness ke liye prepare karna.',
     pillars: [
       {
@@ -749,6 +760,16 @@ const INITIAL_CURRICULUM: CurriculumCourse[] = [
     badge: 'Flagship Tech Track',
     order: 2,
     targetGroups: ['B.E / B.Tech', 'M.Tech', 'Ph.D', 'Engineering & CS Graduates', 'Post-Graduate Tech Aspirants'],
+    rollingTracks: [
+      'Software and AI Engineering Program',
+      'Modern Data Science and ML with Specialisation in AI',
+      'AI Forward Deployed Engineer Program',
+      'AI & Machine Learning with Agentic AI',
+      'DevOps, Cloud & AI Platform Engineering',
+      'AI Engineering Advanced Certification',
+      'Full-Stack MERN & Next.js Architecture',
+      'Scalable Distributed Systems & High-Load Architecture',
+    ],
     outcome: 'Technical students ko technical upskilling ke saath placement aur corporate environment ke liye end-to-end prepare karna.',
     pillars: [
       {

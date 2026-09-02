@@ -35,6 +35,7 @@ export function CurriculumTab() {
   const [editTagline, setEditTagline] = useState('');
   const [editBadge, setEditBadge] = useState('');
   const [editTargetGroups, setEditTargetGroups] = useState('');
+  const [editRollingTracks, setEditRollingTracks] = useState('');
   const [editOutcome, setEditOutcome] = useState('');
 
   // Add / Edit Pillar Modal
@@ -55,6 +56,7 @@ export function CurriculumTab() {
     setEditTagline(course.tagline);
     setEditBadge(course.badge);
     setEditTargetGroups(course.targetGroups.join('\n'));
+    setEditRollingTracks((course.rollingTracks || []).join('\n'));
     setEditOutcome(course.outcome);
     setIsEditCourseModalOpen(true);
   };
@@ -69,6 +71,10 @@ export function CurriculumTab() {
       tagline: editTagline.trim(),
       badge: editBadge.trim(),
       targetGroups: editTargetGroups
+        .split('\n')
+        .map((s) => s.trim())
+        .filter(Boolean),
+      rollingTracks: editRollingTracks
         .split('\n')
         .map((s) => s.trim())
         .filter(Boolean),
@@ -398,6 +404,19 @@ export function CurriculumTab() {
                     rows={3}
                     value={editTargetGroups}
                     onChange={(e) => setEditTargetGroups(e.target.value)}
+                    className="w-full px-3.5 py-2 rounded-xl border border-black/10 text-xs focus:border-[#2563EB] focus:outline-hidden font-mono"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">
+                    Featured Rolling Tracks &amp; Certifications (1 per line)
+                  </label>
+                  <textarea
+                    rows={4}
+                    placeholder="Software and AI Engineering Program&#10;Modern Data Science and ML with specialisation in AI&#10;AI Forward Deployed Engineer Program"
+                    value={editRollingTracks}
+                    onChange={(e) => setEditRollingTracks(e.target.value)}
                     className="w-full px-3.5 py-2 rounded-xl border border-black/10 text-xs focus:border-[#2563EB] focus:outline-hidden font-mono"
                   />
                 </div>
