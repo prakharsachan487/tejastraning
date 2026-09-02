@@ -1,4 +1,4 @@
-import { Phone, Sparkles, ArrowRight, TrendingUp, Calendar, ShieldCheck, UserCheck, Code2, Layers, Cpu, MessageSquare } from 'lucide-react';
+import { Phone, Sparkles, ArrowRight, TrendingUp, Calendar, ShieldCheck, UserCheck } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useEnquiry } from '../context/EnquiryContext';
 
@@ -13,41 +13,6 @@ export function ProfileEvaluationPage({ onBackToHome }: ProfileEvaluationPagePro
   // Dynamic user name
   const userName = user?.name ? user.name.split(' ')[0] : 'Engineer';
   const fullName = user?.name || 'Aspiring Tech Lead';
-
-  const skillPillars = [
-    {
-      name: 'Core DSA & Problem Solving',
-      icon: <Code2 size={16} className="text-[#2563EB]" />,
-      score: 82,
-      status: 'Strong Candidate',
-      badgeClass: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-      description: 'Solid intuition in graph traversals & dynamic programming. Ready for advanced concurrency & lock-free data structures.',
-    },
-    {
-      name: 'System Architecture & LLD',
-      icon: <Layers size={16} className="text-indigo-600" />,
-      score: 68,
-      status: 'Target Focus Area',
-      badgeClass: 'bg-amber-50 text-amber-700 border-amber-200',
-      description: 'Understands basic REST APIs. Key growth area: distributed caching (Redis), message queues (Kafka), and database indexing.',
-    },
-    {
-      name: 'AI Code Acceleration & Modern Tooling',
-      icon: <Cpu size={16} className="text-sky-600" />,
-      score: 74,
-      status: 'Above Average',
-      badgeClass: 'bg-blue-50 text-blue-700 border-blue-200',
-      description: 'Effective use of AI assistants for rapid boilerplate & unit test synthesis. Ready for production-grade prompt pipelines.',
-    },
-    {
-      name: 'Technical Communication & Mock Drives',
-      icon: <MessageSquare size={16} className="text-violet-600" />,
-      score: 78,
-      status: 'Good Articulation',
-      badgeClass: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-      description: 'Clear thought process during code walkthroughs. Practice needed on handling deep architectural trade-off questions.',
-    },
-  ];
 
   const matchedMentors = [
     {
@@ -138,12 +103,12 @@ export function ProfileEvaluationPage({ onBackToHome }: ProfileEvaluationPagePro
 
                   <button
                     onClick={() => {
-                      const el = document.getElementById('skill-breakdown');
+                      const el = document.getElementById('matched-mentors');
                       el?.scrollIntoView({ behavior: 'smooth' });
                     }}
                     className="btn-pill-secondary py-4 px-6 text-sm font-semibold text-slate-700 flex items-center justify-center gap-1.5 cursor-pointer"
                   >
-                    <span>View Skill Gaps</span>
+                    <span>View Matched Mentors</span>
                   </button>
                 </div>
 
@@ -208,70 +173,9 @@ export function ProfileEvaluationPage({ onBackToHome }: ProfileEvaluationPagePro
         </div>
 
         {/* ========================================================
-            SECTION 2: CORE SKILL BREAKDOWN (Clean & Clutter-Free)
+            SECTION: MATCHED INDUSTRY MENTORS FOR 1:1 CALL
         ======================================================== */}
-        <div id="skill-breakdown" className="space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 pb-2">
-            <div>
-              <span className="text-xs font-mono text-[#2563EB] font-bold uppercase tracking-wider">
-                DIAGNOSTIC PILLARS
-              </span>
-              <h2 className="text-2xl font-extrabold text-slate-900 font-[family-name:var(--font-display)] tracking-tight mt-0.5">
-                Your Engineering Benchmark Breakdown
-              </h2>
-            </div>
-            <p className="text-xs text-slate-500 font-mono">
-              Target Tier-1 Campus Benchmark: 85%+
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {skillPillars.map((pillar, idx) => (
-              <div
-                key={idx}
-                className="rounded-2xl bg-white border border-black/8 p-5 sm:p-6 shadow-xs space-y-4 hover:border-blue-400/50 hover:shadow-md transition-all"
-              >
-                <div className="flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-xl bg-slate-100 flex items-center justify-center">
-                      {pillar.icon}
-                    </div>
-                    <span className="text-sm font-bold text-slate-900 font-[family-name:var(--font-display)]">
-                      {pillar.name}
-                    </span>
-                  </div>
-
-                  <span className={`text-xs font-mono px-2.5 py-0.5 rounded-full border font-semibold ${pillar.badgeClass}`}>
-                    {pillar.status}
-                  </span>
-                </div>
-
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  {pillar.description}
-                </p>
-
-                {/* Progress bar */}
-                <div className="space-y-1">
-                  <div className="flex justify-between text-xs font-mono">
-                    <span className="text-slate-500 font-medium">Candidate Score:</span>
-                    <span className="text-slate-900 font-bold">{pillar.score}%</span>
-                  </div>
-                  <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-[#2563EB] rounded-full transition-all duration-700"
-                      style={{ width: `${pillar.score}%` }}
-                    />
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* ========================================================
-            SECTION 3: MATCHED INDUSTRY MENTORS FOR 1:1 CALL
-        ======================================================== */}
-        <div className="rounded-3xl bg-white border border-black/8 p-6 sm:p-10 shadow-sm space-y-6">
+        <div id="matched-mentors" className="rounded-3xl bg-white border border-black/8 p-6 sm:p-10 shadow-sm space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-black/6 pb-5">
             <div>
               <span className="text-xs font-mono text-[#2563EB] font-bold uppercase tracking-wider">
