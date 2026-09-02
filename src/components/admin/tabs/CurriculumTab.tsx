@@ -88,13 +88,13 @@ export function CurriculumTab() {
   // ── Model Handlers ──
   const handleOpenAddModel = () => {
     setEditingModel(null);
-    setModelTitle('New Delivery Model');
-    setModelBadge('Campus Specialization');
+    setModelTitle('');
+    setModelBadge('');
     setModelIconType('rocket');
-    setModelPoints('Audience: Final-year batches\nDuration: 40-60 Days\nFocus: Placement Preparation\nCoverage: All Degrees');
-    setModelDescription('High-impact structured training modules tailored for institutional placement velocity.');
+    setModelPoints('');
+    setModelDescription('');
     setModelTagsLabel('Mapped to recruiters like');
-    setModelTags('TCS, Infosys, Wipro, Accenture');
+    setModelTags('');
     setModelActive(true);
     setIsModelModalOpen(true);
   };
@@ -211,7 +211,7 @@ export function CurriculumTab() {
     setEditingPillar(null);
     setPillarNumber(String(currentCourse?.pillars.length ? currentCourse.pillars.length + 1 : 1).padStart(2, '0'));
     setPillarTitle('');
-    setPillarBadge('Core Module');
+    setPillarBadge('');
     setPillarColor('#2563EB');
     setPillarItems('');
     setIsPillarModalOpen(true);

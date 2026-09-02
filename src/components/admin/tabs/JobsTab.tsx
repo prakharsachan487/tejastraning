@@ -30,10 +30,10 @@ export function JobsTab() {
   const [formTitle, setFormTitle] = useState('');
   const [formDomain, setFormDomain] = useState<JobOpening['domain']>('Tech');
   const [formType, setFormType] = useState<JobOpening['type']>('Full-time');
-  const [formLocation, setFormLocation] = useState('Remote');
+  const [formLocation, setFormLocation] = useState('');
   const [formLocationCategory, setFormLocationCategory] = useState<JobOpening['locationCategory']>('Remote');
-  const [formSalary, setFormSalary] = useState('₹6,00,000 - ₹10,00,000 / year');
-  const [formOpenings, setFormOpenings] = useState(2);
+  const [formSalary, setFormSalary] = useState('');
+  const [formOpenings, setFormOpenings] = useState(1);
   const [formSummary, setFormSummary] = useState('');
   const [formSkills, setFormSkills] = useState('');
   const [formResponsibilities, setFormResponsibilities] = useState('');
@@ -44,10 +44,10 @@ export function JobsTab() {
     setFormTitle('');
     setFormDomain('Tech');
     setFormType('Full-time');
-    setFormLocation('Remote');
+    setFormLocation('');
     setFormLocationCategory('Remote');
-    setFormSalary('₹6,00,000 - ₹10,00,000 / year');
-    setFormOpenings(2);
+    setFormSalary('');
+    setFormOpenings(1);
     setFormSummary('');
     setFormSkills('');
     setFormResponsibilities('');

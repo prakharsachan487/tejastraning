@@ -20,9 +20,9 @@ export function MetricsTab() {
   const [editingItem, setEditingItem] = useState<MetricItem | null>(null);
 
   // Form State
-  const [value, setValue] = useState<number>(25);
+  const [value, setValue] = useState<number>(0);
   const [prefix, setPrefix] = useState<string>('');
-  const [suffix, setSuffix] = useState<string>('+');
+  const [suffix, setSuffix] = useState<string>('');
   const [label, setLabel] = useState<string>('');
   const [sub, setSub] = useState<string>('');
 
@@ -30,11 +30,11 @@ export function MetricsTab() {
 
   const handleOpenAdd = () => {
     setEditingItem(null);
-    setValue(50);
+    setValue(0);
     setPrefix('');
-    setSuffix('+');
-    setLabel('Metric Title');
-    setSub('Short description');
+    setSuffix('');
+    setLabel('');
+    setSub('');
     setIsModalOpen(true);
   };
 

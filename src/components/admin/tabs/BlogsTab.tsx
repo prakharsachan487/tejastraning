@@ -30,9 +30,9 @@ export function BlogsTab() {
   const [formDate, setFormDate] = useState(() =>
     new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
   );
-  const [formAuthor, setFormAuthor] = useState('Grow360 Academic Council');
+  const [formAuthor, setFormAuthor] = useState('');
   const [formSummary, setFormSummary] = useState('');
-  const [formImage, setFormImage] = useState('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=800&q=80');
+  const [formImage, setFormImage] = useState('');
   const [formContent, setFormContent] = useState('');
   const [formTags, setFormTags] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -40,11 +40,11 @@ export function BlogsTab() {
   const resetForm = () => {
     setFormTitle('');
     setFormCategory('Placement Strategy');
-    setFormReadTime('5 min read');
+    setFormReadTime('');
     setFormDate(new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }));
-    setFormAuthor('Grow360 Academic Council');
+    setFormAuthor('');
     setFormSummary('');
-    setFormImage('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=800&q=80');
+    setFormImage('');
     setFormContent('');
     setFormTags('');
   };

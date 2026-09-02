@@ -66,7 +66,7 @@ export function TestimonialsTab() {
     setInstitution('');
     setQuote('');
     setStats('');
-    setAvatar(PRESET_AVATARS[0]);
+    setAvatar('');
     setActive(true);
     setIsModalOpen(true);
   };

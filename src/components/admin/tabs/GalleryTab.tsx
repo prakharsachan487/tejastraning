@@ -36,9 +36,9 @@ export function GalleryTab() {
   const [formCategory, setFormCategory] = useState('Capstone Presentation');
   const [formCategoryColor, setFormCategoryColor] = useState('#2563EB');
   const [formDescription, setFormDescription] = useState('');
-  const [formStats, setFormStats] = useState('100% Placement Aligned');
-  const [formLocation, setFormLocation] = useState('Campus Innovation Hub');
-  const [formImage, setFormImage] = useState('/moments/moment_bi_dashboard_presentation.jpg');
+  const [formStats, setFormStats] = useState('');
+  const [formLocation, setFormLocation] = useState('');
+  const [formImage, setFormImage] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const resetForm = () => {
@@ -46,9 +46,9 @@ export function GalleryTab() {
     setFormCategory('Capstone Presentation');
     setFormCategoryColor('#2563EB');
     setFormDescription('');
-    setFormStats('100% Placement Aligned');
-    setFormLocation('Campus Innovation Hub');
-    setFormImage('/moments/moment_bi_dashboard_presentation.jpg');
+    setFormStats('');
+    setFormLocation('');
+    setFormImage('');
   };
 
   const handleOpenAdd = () => {

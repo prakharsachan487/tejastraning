@@ -63,10 +63,10 @@ export function TeamTab() {
     setName('');
     setRole('');
     setDepartment('Leadership & Founders');
-    setBadge('Founding Partner');
+    setBadge('');
     setBio('');
-    setPhoto(PRESET_AVATARS[0]);
-    setLinkedinUrl('https://linkedin.com');
+    setPhoto('');
+    setLinkedinUrl('');
     setEmail('');
     setActive(true);
     setIsModalOpen(true);

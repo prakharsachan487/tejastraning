@@ -43,10 +43,10 @@ export function MentorsTab() {
   const [company, setCompany] = useState('');
   const [companyColor, setCompanyColor] = useState('#2563EB');
   const [role, setRole] = useState('');
-  const [exp, setExp] = useState('80+ Sessions');
-  const [tag, setTag] = useState('System Design & Placement Sprint');
+  const [exp, setExp] = useState('');
+  const [tag, setTag] = useState('');
   const [quote, setQuote] = useState('');
-  const [image, setImage] = useState('/mentors/nandwana_abhishek.jpg');
+  const [image, setImage] = useState('');
   const [displayLocation, setDisplayLocation] = useState<'all' | 'landing' | 'evaluation' | 'hidden'>('all');
   const [order, setOrder] = useState<number>(1);
 
@@ -70,10 +70,10 @@ export function MentorsTab() {
     setCompany('');
     setCompanyColor('#2563EB');
     setRole('');
-    setExp('80+ Sessions');
-    setTag('System Design & Placement Sprint');
+    setExp('');
+    setTag('');
     setQuote('');
-    setImage('/mentors/nandwana_abhishek.jpg');
+    setImage('');
     setDisplayLocation('all');
     setOrder(mentors.length + 1);
     setEditingMentor(null);

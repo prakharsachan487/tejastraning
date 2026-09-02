@@ -40,8 +40,8 @@ export function AnnouncementsTab() {
 
   const handleOpenAdd = () => {
     setEditingItem(null);
-    setText('✨ ');
-    setHighlight('Explore Now');
+    setText('');
+    setHighlight('');
     setAction('programs');
     setLinkUrl('');
     setActive(true);
