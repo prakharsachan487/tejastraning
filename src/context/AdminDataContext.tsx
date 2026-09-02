@@ -77,6 +77,27 @@ export interface MentorItem {
   createdAt?: string;
 }
 
+export interface ModulePillar {
+  id: string;
+  number: string;
+  title: string;
+  badge: string;
+  color: string;
+  items: string[];
+}
+
+export interface CurriculumCourse {
+  id: string;
+  title: string;
+  shortTitle: string;
+  tagline: string;
+  badge: string;
+  order: number;
+  targetGroups: string[];
+  outcome: string;
+  pillars: ModulePillar[];
+}
+
 export interface JobApplication {
   id: string;
   jobId?: string | number;
@@ -99,6 +120,14 @@ interface AdminDataContextType {
   addMentor: (mentor: Omit<MentorItem, 'id'>) => void;
   updateMentor: (id: string, updated: Partial<MentorItem>) => void;
   deleteMentor: (id: string) => void;
+
+  // Curriculum Courses (Tech & Non-Tech)
+  curriculumCourses: CurriculumCourse[];
+  updateCurriculumCourse: (id: string, updated: Partial<CurriculumCourse>) => void;
+  addPillarToCourse: (courseId: string, pillar: Omit<ModulePillar, 'id'>) => void;
+  updateCoursePillar: (courseId: string, pillarId: string, updated: Partial<ModulePillar>) => void;
+  deleteCoursePillar: (courseId: string, pillarId: string) => void;
+  resetCurriculumToDefault: () => void;
 
   // Jobs
   jobs: JobOpening[];
@@ -607,10 +636,205 @@ const INITIAL_MENTORS: MentorItem[] = [
   },
 ];
 
+const INITIAL_CURRICULUM: CurriculumCourse[] = [
+  {
+    id: 'non-tech',
+    title: 'Non-Technical & Management Corporate Program',
+    shortTitle: 'Course 1: Management & Non-Technical',
+    tagline: 'Executive management capabilities, corporate communication, business ethics, and placement mastery designed for non-technical cohorts.',
+    badge: 'Management & Corporate Track',
+    order: 1,
+    targetGroups: ['Graduates (BBA, B.Com, BA, B.Sc)', 'Post-Graduates (MBA, PGDM, M.Com)', 'Management Students', 'Non-Technical Career Aspirants'],
+    outcome: 'Non-technical/management students ko corporate communication, management, leadership, professional etiquette aur placement readiness ke liye prepare karna.',
+    pillars: [
+      {
+        id: 'p-nt-1',
+        number: '01',
+        title: 'Management & Productivity',
+        badge: 'Operational Excellence',
+        color: '#D97706',
+        items: [
+          'Strategic Project Planning & Milestones',
+          'Time Management & Priority Matrix',
+          '80/20 Pareto Rule for High Business Impact',
+          'Agile Frameworks & Scrum Methodologies',
+          'People Management & Delegation Principles',
+          'Team Management & Conflict Navigation',
+          'Result & KPI-Driven Business Orientation',
+        ],
+      },
+      {
+        id: 'p-nt-2',
+        number: '02',
+        title: 'Management & Business Courses',
+        badge: 'Domain Specialization',
+        color: '#2563EB',
+        items: [
+          'Finance Leadership Program & Corporate FP&A',
+          'Human Resource Management & Talent Strategy',
+          'Marketing Strategy & Brand Growth',
+          'International Business & Cross-Border Trade',
+          'Professional Ethics on International Standards',
+        ],
+      },
+      {
+        id: 'p-nt-3',
+        number: '03',
+        title: 'Business Communication',
+        badge: 'Executive Voice',
+        color: '#8B5CF6',
+        items: [
+          'Workplace Emails & Executive Briefs',
+          'Active Listening & Client Empathy',
+          'Formal Business Presentations & Pitches',
+          'Effective & Impactful Communication',
+          'Corporate Storytelling & Stakeholder Influence',
+        ],
+      },
+      {
+        id: 'p-nt-4',
+        number: '04',
+        title: 'Professional Etiquette & Compliance',
+        badge: 'Workplace Standards',
+        color: '#10B981',
+        items: [
+          'Corporate Grooming & Professional Presence',
+          'Emotional Intelligence (EQ) & Self-Regulation',
+          'POSH Compliance & Sensitization Standards',
+          'International Business Etiquettes & Protocol',
+          'Professional Work Ethics & Corporate Integrity',
+        ],
+      },
+      {
+        id: 'p-nt-5',
+        number: '05',
+        title: 'Workplace & Leadership Skills',
+        badge: 'Leadership Mastery',
+        color: '#EC4899',
+        items: [
+          'Diversity & Inclusion in Modern Workplaces',
+          'Impact of Core Corporate Values',
+          'Decisive Decision Making Under Uncertainty',
+          'Assertiveness & Executive Confidence',
+          'Customer & Client-Centric Orientation',
+          'Conflict Resolution & Interpersonal Dynamics',
+          'Win-Win Negotiation Frameworks',
+          'Creative Problem Solving & Case Methodologies',
+          'High-Impact Presentation Skills',
+          'Stress Management & Workplace Resilience',
+        ],
+      },
+      {
+        id: 'p-nt-6',
+        number: '06',
+        title: 'Career & Placement Preparation',
+        badge: 'Placement Sprint',
+        color: '#0668E1',
+        items: [
+          'Personalized Career Guidance & Track Mapping',
+          'Corporate Resume & LinkedIn Profile Writing',
+          '1-on-1 Mock HR & Case Study Interviews',
+          'Group Discussions (GD) Leadership & Body Language',
+          'Final Interview Success Frameworks',
+          'Campus Placement Drive Simulation Rounds',
+        ],
+      },
+    ],
+  },
+  {
+    id: 'tech',
+    title: 'Technical Career & Corporate Readiness Program',
+    shortTitle: 'Course 2: Technical & Engineering',
+    tagline: 'Comprehensive technical domain upskilling integrated with Tier-1 campus placement training and professional corporate readiness.',
+    badge: 'Flagship Tech Track',
+    order: 2,
+    targetGroups: ['B.E / B.Tech', 'M.Tech', 'Ph.D', 'Engineering & CS Graduates', 'Post-Graduate Tech Aspirants'],
+    outcome: 'Technical students ko technical upskilling ke saath placement aur corporate environment ke liye end-to-end prepare karna.',
+    pillars: [
+      {
+        id: 'p-t-1',
+        number: '01',
+        title: 'Technical & Domain Upskilling',
+        badge: 'Core Competency',
+        color: '#2563EB',
+        items: [
+          'Artificial Intelligence & GenAI Workflows',
+          'Data Analytics & Business Intelligence',
+          'Core Engineering Workflows & Architecture',
+          'Power BI Dashboards & Enterprise Reporting',
+          'Advanced SQL Queries & Database Modeling',
+          'Advanced Excel & Data Analytics',
+          'SAP & Enterprise ERP Tools',
+          'Full-Stack Web Development (Modern Stacks)',
+          'Data Analysis & Statistical Techniques',
+          'Financial Modelling & Corporate Insights',
+        ],
+      },
+      {
+        id: 'p-t-2',
+        number: '02',
+        title: 'Technical Programs & Practice',
+        badge: 'Hands-On Applied',
+        color: '#0668E1',
+        items: [
+          'Engineering Leadership Program',
+          'Group Internship Program & Team Capstones',
+          'Technical Brush-up in Live Production Environments',
+          'Industrial Visits & Corporate Campus Immersions (Optional)',
+        ],
+      },
+      {
+        id: 'p-t-3',
+        number: '03',
+        title: 'Placement & Career Preparation',
+        badge: 'Hiring Sprints',
+        color: '#10B981',
+        items: [
+          'Getting Ready for Campus Placement Drives',
+          'Handling Online Assessments – Tips & Tricks',
+          'Aptitude Tests (Quantitative, Logical & Verbal)',
+          'Group Discussions (GD) Strategies & Round Table Drills',
+          'ATS-Compliant Resume & Portfolio Building',
+          '1-on-1 Mock Technical Interviews with Meta/Deloitte Mentors',
+          'Personalized Career Guidance & Profile Diagnostics',
+          'Final Interview Success Frameworks',
+        ],
+      },
+      {
+        id: 'p-t-4',
+        number: '04',
+        title: 'Corporate Readiness & Workplace Skills',
+        badge: 'Executive Presence',
+        color: '#8B5CF6',
+        items: [
+          'Executive Business Communication',
+          'Workplace Emails & Asynchronous Messaging',
+          'Active Listening & Corporate Empathy',
+          'Formal Presentations & Deck Storytelling',
+          'Cross-Functional Teamwork & Collaboration',
+          'Time Management & High-Velocity Execution',
+          'Professional Etiquette & Corporate Grooming',
+        ],
+      },
+    ],
+  },
+];
+
 const AdminDataContext = createContext<AdminDataContextType | null>(null);
 
 export function AdminDataProvider({ children }: { children: ReactNode }) {
-  // 0. Mentors State
+  // 0a. Curriculum Courses State
+  const [curriculumCourses, setCurriculumCourses] = useState<CurriculumCourse[]>(() => {
+    const saved = localStorage.getItem('grow360_admin_curriculum');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch {}
+    }
+    return INITIAL_CURRICULUM;
+  });
+
+  // 0b. Mentors State
   const [mentors, setMentors] = useState<MentorItem[]>(() => {
     const saved = localStorage.getItem('grow360_admin_mentors');
     if (saved) {
@@ -701,6 +925,81 @@ export function AdminDataProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     localStorage.setItem('grow360_admin_applications', JSON.stringify(applications));
   }, [applications]);
+
+  useEffect(() => {
+    localStorage.setItem('grow360_admin_curriculum', JSON.stringify(curriculumCourses));
+  }, [curriculumCourses]);
+
+  // ─── Curriculum Handlers ──────────────────────────────────
+
+  const updateCurriculumCourse = (id: string, updated: Partial<CurriculumCourse>) => {
+    setCurriculumCourses((prev) =>
+      prev.map((c) => (c.id === id ? { ...c, ...updated } : c))
+    );
+  };
+
+  const addPillarToCourse = (courseId: string, pillarData: Omit<ModulePillar, 'id'>) => {
+    const newPillar: ModulePillar = {
+      ...pillarData,
+      id: `p-${Date.now()}`,
+    };
+    setCurriculumCourses((prev) =>
+      prev.map((c) => {
+        if (c.id !== courseId) return c;
+        return {
+          ...c,
+          pillars: [...c.pillars, newPillar],
+        };
+      })
+    );
+  };
+
+  const updateCoursePillar = (courseId: string, pillarId: string, updated: Partial<ModulePillar>) => {
+    setCurriculumCourses((prev) =>
+      prev.map((c) => {
+        if (c.id !== courseId) return c;
+        return {
+          ...c,
+          pillars: c.pillars.map((p) => (p.id === pillarId ? { ...p, ...updated } : p)),
+        };
+      })
+    );
+  };
+
+  const deleteCoursePillar = (courseId: string, pillarId: string) => {
+    setCurriculumCourses((prev) =>
+      prev.map((c) => {
+        if (c.id !== courseId) return c;
+        return {
+          ...c,
+          pillars: c.pillars.filter((p) => p.id !== pillarId),
+        };
+      })
+    );
+  };
+
+  const resetCurriculumToDefault = () => {
+    setCurriculumCourses(INITIAL_CURRICULUM);
+    localStorage.removeItem('grow360_admin_curriculum');
+  };
+
+  // Reset to default seed
+  const resetAllToDefault = () => {
+    setCurriculumCourses(INITIAL_CURRICULUM);
+    setMentors(INITIAL_MENTORS);
+    setJobs(INITIAL_JOBS);
+    setGalleryItems(INITIAL_GALLERY);
+    setBlogPosts(INITIAL_BLOGS);
+    setEnquiries(INITIAL_ENQUIRIES);
+    setApplications(INITIAL_APPLICATIONS);
+    localStorage.removeItem('grow360_admin_curriculum');
+    localStorage.removeItem('grow360_admin_mentors');
+    localStorage.removeItem('grow360_admin_jobs');
+    localStorage.removeItem('grow360_admin_gallery');
+    localStorage.removeItem('grow360_admin_blogs');
+    localStorage.removeItem('grow360_admin_enquiries');
+    localStorage.removeItem('grow360_admin_applications');
+  };
 
   // ─── Sync with Supabase on Initial Load (if online/available) ─
 
@@ -991,25 +1290,15 @@ export function AdminDataProvider({ children }: { children: ReactNode }) {
     setMentors((prev) => prev.filter((m) => m.id !== id));
   };
 
-  // Reset to default seed
-  const resetAllToDefault = () => {
-    setMentors(INITIAL_MENTORS);
-    setJobs(INITIAL_JOBS);
-    setGalleryItems(INITIAL_GALLERY);
-    setBlogPosts(INITIAL_BLOGS);
-    setEnquiries(INITIAL_ENQUIRIES);
-    setApplications(INITIAL_APPLICATIONS);
-    localStorage.removeItem('grow360_admin_mentors');
-    localStorage.removeItem('grow360_admin_jobs');
-    localStorage.removeItem('grow360_admin_gallery');
-    localStorage.removeItem('grow360_admin_blogs');
-    localStorage.removeItem('grow360_admin_enquiries');
-    localStorage.removeItem('grow360_admin_applications');
-  };
-
   return (
     <AdminDataContext.Provider
       value={{
+        curriculumCourses,
+        updateCurriculumCourse,
+        addPillarToCourse,
+        updateCoursePillar,
+        deleteCoursePillar,
+        resetCurriculumToDefault,
         mentors,
         addMentor,
         updateMentor,

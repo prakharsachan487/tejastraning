@@ -20,219 +20,43 @@ import {
   ShieldCheck,
   Compass
 } from 'lucide-react';
+import { useAdminData } from '../context/AdminDataContext';
 import { useEnquiry } from '../context/EnquiryContext';
 
-interface ModulePillar {
-  number: string;
-  title: string;
-  badge: string;
-  icon: typeof Code2;
-  color: string;
-  items: string[];
-}
+// Helper icon resolver
+function getPillarIcon(title: string, index: number) {
+  const t = title.toLowerCase();
+  if (t.includes('ai') || t.includes('technical') || t.includes('domain') || t.includes('tech')) return Cpu;
+  if (t.includes('management') || t.includes('productivity')) return TrendingUp;
+  if (t.includes('finance') || t.includes('business courses') || t.includes('award')) return Award;
+  if (t.includes('communication') || t.includes('presentation')) return BookOpen;
+  if (t.includes('etiquette') || t.includes('posh') || t.includes('ethics')) return ShieldCheck;
+  if (t.includes('leadership') || t.includes('workplace') || t.includes('values')) return Compass;
+  if (t.includes('placement') || t.includes('interview') || t.includes('career') || t.includes('test')) return Target;
+  if (t.includes('program') || t.includes('internship') || t.includes('live')) return Layers;
+  if (t.includes('corporate')) return Building2;
 
-interface CourseData {
-  id: 'tech' | 'non-tech';
-  title: string;
-  shortTitle: string;
-  tagline: string;
-  badge: string;
-  icon: typeof Code2;
-  targetGroups: string[];
-  outcome: string;
-  pillars: ModulePillar[];
+  const icons = [Cpu, Layers, Target, Building2, TrendingUp, Award, BookOpen, ShieldCheck, Compass];
+  return icons[index % icons.length];
 }
-
-const COURSES: CourseData[] = [
-  {
-    id: 'tech',
-    title: 'Technical Career & Corporate Readiness Program',
-    shortTitle: 'Course 1: Technical & Engineering',
-    tagline: 'Comprehensive technical domain upskilling integrated with Tier-1 campus placement training and professional corporate readiness.',
-    badge: 'Flagship Tech Track',
-    icon: Code2,
-    targetGroups: ['B.E / B.Tech', 'M.Tech', 'Ph.D', 'Engineering & CS Graduates', 'Post-Graduate Tech Aspirants'],
-    outcome: 'Technical students ko technical upskilling ke saath placement aur corporate environment ke liye end-to-end prepare karna.',
-    pillars: [
-      {
-        number: '01',
-        title: 'Technical & Domain Upskilling',
-        badge: 'Core Competency',
-        icon: Cpu,
-        color: '#2563EB',
-        items: [
-          'Artificial Intelligence & GenAI Workflows',
-          'Data Analytics & Business Intelligence',
-          'Core Engineering Workflows & Architecture',
-          'Power BI Dashboards & Enterprise Reporting',
-          'Advanced SQL Queries & Database Modeling',
-          'Advanced Excel & Data Analytics',
-          'SAP & Enterprise ERP Tools',
-          'Full-Stack Web Development (Modern Stacks)',
-          'Data Analysis & Statistical Techniques',
-          'Financial Modelling & Corporate Insights',
-        ],
-      },
-      {
-        number: '02',
-        title: 'Technical Programs & Practice',
-        badge: 'Hands-On Applied',
-        icon: Layers,
-        color: '#0668E1',
-        items: [
-          'Engineering Leadership Program',
-          'Group Internship Program & Team Capstones',
-          'Technical Brush-up in Live Production Environments',
-          'Industrial Visits & Corporate Campus Immersions (Optional)',
-        ],
-      },
-      {
-        number: '03',
-        title: 'Placement & Career Preparation',
-        badge: 'Hiring Sprints',
-        icon: Target,
-        color: '#10B981',
-        items: [
-          'Getting Ready for Campus Placement Drives',
-          'Handling Online Assessments – Tips & Tricks',
-          'Aptitude Tests (Quantitative, Logical & Verbal)',
-          'Group Discussions (GD) Strategies & Round Table Drills',
-          'ATS-Compliant Resume & Portfolio Building',
-          '1-on-1 Mock Technical Interviews with Meta/Deloitte Mentors',
-          'Personalized Career Guidance & Profile Diagnostics',
-          'Final Interview Success Frameworks',
-        ],
-      },
-      {
-        number: '04',
-        title: 'Corporate Readiness & Workplace Skills',
-        badge: 'Executive Presence',
-        icon: Building2,
-        color: '#8B5CF6',
-        items: [
-          'Executive Business Communication',
-          'Workplace Emails & Asynchronous Messaging',
-          'Active Listening & Corporate Empathy',
-          'Formal Presentations & Deck Storytelling',
-          'Cross-Functional Teamwork & Collaboration',
-          'Time Management & High-Velocity Execution',
-          'Professional Etiquette & Corporate Grooming',
-        ],
-      },
-    ],
-  },
-  {
-    id: 'non-tech',
-    title: 'Non-Technical & Management Corporate Program',
-    shortTitle: 'Course 2: Management & Non-Technical',
-    tagline: 'Executive management capabilities, corporate communication, business ethics, and placement mastery designed for non-technical cohorts.',
-    badge: 'Management & Corporate Track',
-    icon: Briefcase,
-    targetGroups: ['Graduates (BBA, B.Com, BA, B.Sc)', 'Post-Graduates (MBA, PGDM, M.Com)', 'Management Students', 'Non-Technical Career Aspirants'],
-    outcome: 'Non-technical/management students ko corporate communication, management, leadership, professional etiquette aur placement readiness ke liye prepare karna.',
-    pillars: [
-      {
-        number: '01',
-        title: 'Management & Productivity',
-        badge: 'Operational Excellence',
-        icon: TrendingUp,
-        color: '#D97706',
-        items: [
-          'Strategic Project Planning & Milestones',
-          'Time Management & Priority Matrix',
-          '80/20 Pareto Rule for High Business Impact',
-          'Agile Frameworks & Scrum Methodologies',
-          'People Management & Delegation Principles',
-          'Team Management & Conflict Navigation',
-          'Result & KPI-Driven Business Orientation',
-        ],
-      },
-      {
-        number: '02',
-        title: 'Management & Business Courses',
-        badge: 'Domain Specialization',
-        icon: Award,
-        color: '#2563EB',
-        items: [
-          'Finance Leadership Program & Corporate FP&A',
-          'Human Resource Management & Talent Strategy',
-          'Marketing Strategy & Brand Growth',
-          'International Business & Cross-Border Trade',
-          'Professional Ethics on International Standards',
-        ],
-      },
-      {
-        number: '03',
-        title: 'Business Communication',
-        badge: 'Executive Voice',
-        icon: BookOpen,
-        color: '#8B5CF6',
-        items: [
-          'Workplace Emails & Executive Briefs',
-          'Active Listening & Client Empathy',
-          'Formal Business Presentations & Pitches',
-          'Effective & Impactful Communication',
-          'Corporate Storytelling & Stakeholder Influence',
-        ],
-      },
-      {
-        number: '04',
-        title: 'Professional Etiquette & Compliance',
-        badge: 'Workplace Standards',
-        icon: ShieldCheck,
-        color: '#10B981',
-        items: [
-          'Corporate Grooming & Professional Presence',
-          'Emotional Intelligence (EQ) & Self-Regulation',
-          'POSH Compliance & Sensitization Standards',
-          'International Business Etiquettes & Protocol',
-          'Professional Work Ethics & Corporate Integrity',
-        ],
-      },
-      {
-        number: '05',
-        title: 'Workplace & Leadership Skills',
-        badge: 'Leadership Mastery',
-        icon: Compass,
-        color: '#EC4899',
-        items: [
-          'Diversity & Inclusion in Modern Workplaces',
-          'Impact of Core Corporate Values',
-          'Decisive Decision Making Under Uncertainty',
-          'Assertiveness & Executive Confidence',
-          'Customer & Client-Centric Orientation',
-          'Conflict Resolution & Interpersonal Dynamics',
-          'Win-Win Negotiation Frameworks',
-          'Creative Problem Solving & Case Methodologies',
-          'High-Impact Presentation Skills',
-          'Stress Management & Workplace Resilience',
-        ],
-      },
-      {
-        number: '06',
-        title: 'Career & Placement Preparation',
-        badge: 'Placement Sprint',
-        icon: Target,
-        color: '#0668E1',
-        items: [
-          'Personalized Career Guidance & Track Mapping',
-          'Corporate Resume & LinkedIn Profile Writing',
-          '1-on-1 Mock HR & Case Study Interviews',
-          'Group Discussions (GD) Leadership & Body Language',
-          'Final Interview Success Frameworks',
-          'Campus Placement Drive Simulation Rounds',
-        ],
-      },
-    ],
-  },
-];
 
 export function ProgramsSection() {
-  const [activeCourseId, setActiveCourseId] = useState<'tech' | 'non-tech'>('tech');
+  const { curriculumCourses } = useAdminData();
   const { openEnquiry } = useEnquiry();
 
-  const currentCourse = COURSES.find((c) => c.id === activeCourseId) || COURSES[0];
-  const IconComponent = currentCourse.icon;
+  // Sort courses by order (Non-Tech #1, Tech #2)
+  const sortedCourses = [...curriculumCourses].sort((a, b) => (a.order || 0) - (b.order || 0));
+
+  const [activeCourseId, setActiveCourseId] = useState<string>(
+    sortedCourses[0]?.id || 'non-tech'
+  );
+
+  const currentCourse =
+    sortedCourses.find((c) => c.id === activeCourseId) || sortedCourses[0];
+
+  const CourseIcon = currentCourse?.id === 'tech' ? Code2 : Briefcase;
+
+  if (!currentCourse) return null;
 
   return (
     <section id="programs" className="pt-4 pb-20 lg:pb-28 bg-[#F8F9FB] relative overflow-hidden">
@@ -251,7 +75,7 @@ export function ProgramsSection() {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 font-[family-name:var(--font-display)] leading-tight">
             Specialized Programs for{' '}
             <span className="text-[#2563EB]">
-              Tech &amp; Non-Tech
+              Management &amp; Engineering
             </span>
           </h2>
           
@@ -260,11 +84,11 @@ export function ProgramsSection() {
           </p>
         </div>
 
-        {/* ── 2 Main Course Selector Tabs ── */}
+        {/* ── 2 Main Course Selector Tabs (Non-Tech First, Tech Second) ── */}
         <div className="flex justify-center">
           <div className="inline-flex p-1.5 bg-slate-200/80 rounded-2xl border border-black/10 gap-2 max-w-full overflow-x-auto shadow-inner">
-            {COURSES.map((course) => {
-              const Icon = course.icon;
+            {sortedCourses.map((course) => {
+              const TabIcon = course.id === 'tech' ? Code2 : Briefcase;
               const isActive = activeCourseId === course.id;
               return (
                 <button
@@ -276,7 +100,7 @@ export function ProgramsSection() {
                       : 'text-slate-700 hover:text-slate-900 hover:bg-white/50'
                   }`}
                 >
-                  <Icon size={17} className={isActive ? 'text-[#2563EB]' : 'text-slate-500'} />
+                  <TabIcon size={17} className={isActive ? 'text-[#2563EB]' : 'text-slate-500'} />
                   <span>{course.shortTitle}</span>
                 </button>
               );
@@ -299,7 +123,7 @@ export function ProgramsSection() {
               <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-100 pb-6">
                 <div className="space-y-2">
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-[#2563EB] text-xs font-mono font-bold border border-blue-200">
-                    <IconComponent size={13} />
+                    <CourseIcon size={13} />
                     <span>{currentCourse.badge}</span>
                   </div>
                   <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-[family-name:var(--font-display)] tracking-tight">
@@ -364,11 +188,11 @@ export function ProgramsSection() {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
-                {currentCourse.pillars.map((pillar) => {
-                  const PillarIcon = pillar.icon;
+                {currentCourse.pillars.map((pillar, idx) => {
+                  const PillarIcon = getPillarIcon(pillar.title, idx);
                   return (
                     <div
-                      key={pillar.number}
+                      key={pillar.id || pillar.number}
                       className="p-6 sm:p-7 rounded-3xl bg-white border border-black/8 shadow-2xs hover:shadow-md hover:border-blue-300/60 transition-all flex flex-col justify-between space-y-5 group"
                     >
                       <div className="space-y-4">
@@ -377,7 +201,7 @@ export function ProgramsSection() {
                           <div className="flex items-center gap-3">
                             <div
                               className="w-10 h-10 rounded-2xl flex items-center justify-center font-mono font-bold text-sm text-white shadow-xs"
-                              style={{ backgroundColor: pillar.color }}
+                              style={{ backgroundColor: pillar.color || '#2563EB' }}
                             >
                               {pillar.number}
                             </div>
@@ -386,7 +210,7 @@ export function ProgramsSection() {
                                 {pillar.title}
                               </h5>
                               <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 mt-0.5 inline-block">
-                                {pillar.badge}
+                                {pillar.badge || 'Core Module'}
                               </span>
                             </div>
                           </div>

@@ -20,6 +20,7 @@ import {
 import { useAdminAuth } from '../../context/AdminAuthContext';
 import { useAdminData } from '../../context/AdminDataContext';
 import { OverviewTab } from './tabs/OverviewTab';
+import { CurriculumTab } from './tabs/CurriculumTab';
 import { MentorsTab } from './tabs/MentorsTab';
 import { JobsTab } from './tabs/JobsTab';
 import { GalleryTab } from './tabs/GalleryTab';
@@ -27,7 +28,7 @@ import { BlogsTab } from './tabs/BlogsTab';
 import { EnquiriesTab } from './tabs/EnquiriesTab';
 import { ApplicationsTab } from './tabs/ApplicationsTab';
 
-type ActiveTab = 'overview' | 'mentors' | 'jobs' | 'gallery' | 'blogs' | 'enquiries' | 'applications';
+type ActiveTab = 'overview' | 'curriculum' | 'mentors' | 'jobs' | 'gallery' | 'blogs' | 'enquiries' | 'applications';
 
 interface AdminDashboardProps {
   onBackToHome: () => void;
@@ -82,6 +83,12 @@ export function AdminDashboard({ onBackToHome }: AdminDashboardProps) {
       label: 'Dashboard',
       icon: LayoutDashboard,
       badge: null,
+    },
+    {
+      id: 'curriculum' as const,
+      label: 'Curriculum & Courses',
+      icon: BookOpen,
+      badge: '2 Tracks',
     },
     {
       id: 'mentors' as const,
@@ -351,6 +358,8 @@ export function AdminDashboard({ onBackToHome }: AdminDashboardProps) {
               onOpenAddBlog={() => setActiveTab('blogs')}
             />
           )}
+
+          {activeTab === 'curriculum' && <CurriculumTab />}
 
           {activeTab === 'mentors' && <MentorsTab />}
 
