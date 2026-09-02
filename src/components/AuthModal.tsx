@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   X,
@@ -20,6 +20,7 @@ import { useAuth } from '../context/AuthContext';
 
 export function AuthModal() {
   const {
+    user,
     isAuthOpen,
     closeAuth,
     signInWithPassword,
@@ -30,6 +31,13 @@ export function AuthModal() {
     signInWithGoogle,
     isLoading
   } = useAuth();
+
+  useEffect(() => {
+    if (user && isAuthOpen) {
+      closeAuth();
+      window.location.hash = '#evaluation';
+    }
+  }, [user, isAuthOpen, closeAuth]);
 
   const [viewMode, setViewMode] = useState<'login' | 'signup' | 'forgot'>('login');
 

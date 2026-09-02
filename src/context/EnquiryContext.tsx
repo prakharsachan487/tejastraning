@@ -1,6 +1,14 @@
 import { createContext, useContext, useState, useCallback, type ReactNode } from 'react';
 
-type EnquirySource = 'PARTNERSHIP' | 'CONSULTATION' | 'PROPOSAL' | 'CONTACT';
+export type EnquirySource =
+  | 'PARTNERSHIP'
+  | 'CONSULTATION'
+  | 'PROPOSAL'
+  | 'CONTACT'
+  | 'CAREER_EVALUATION'
+  | 'CAREER_ROADMAP'
+  | 'MENTOR_MOCK_DRIVE'
+  | 'INSTANT_CALLBACK';
 
 interface EnquiryContextValue {
   isOpen: boolean;

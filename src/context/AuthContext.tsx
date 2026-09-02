@@ -58,6 +58,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         };
         setUser(profile);
         localStorage.setItem('tejas_user', JSON.stringify(profile));
+
+        // If on login or signup route, forward to evaluation report
+        const hash = window.location.hash;
+        if (
+          hash === '#login' ||
+          hash === '#signup' ||
+          hash === '#auth' ||
+          hash === '#signin' ||
+          hash.includes('access_token') ||
+          hash.includes('refresh_token')
+        ) {
+          window.location.hash = '#evaluation';
+        }
       }
     });
 
@@ -73,6 +86,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         };
         setUser(profile);
         localStorage.setItem('tejas_user', JSON.stringify(profile));
+
+        if (event === 'SIGNED_IN') {
+          const hash = window.location.hash;
+          if (
+            hash === '#login' ||
+            hash === '#signup' ||
+            hash === '#auth' ||
+            hash === '#signin' ||
+            hash.includes('access_token') ||
+            hash.includes('refresh_token')
+          ) {
+            window.location.hash = '#evaluation';
+          }
+        }
       } else if (event === 'SIGNED_OUT') {
         setUser(null);
         localStorage.removeItem('tejas_user');
@@ -99,7 +126,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(profile);
     localStorage.setItem('tejas_user', JSON.stringify(profile));
     closeAuth();
-    window.location.hash = '#dashboard';
+    window.location.hash = '#evaluation';
   }, [closeAuth]);
 
   const logout = useCallback(async () => {
@@ -148,7 +175,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         localStorage.setItem('tejas_user', JSON.stringify(profile));
         setIsLoading(false);
         closeAuth();
-        window.location.hash = '#dashboard';
+        window.location.hash = '#evaluation';
         return { success: true, requiresOtp: false };
       }
 
@@ -200,7 +227,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       localStorage.setItem('tejas_user', JSON.stringify(profile));
       setIsLoading(false);
       closeAuth();
-      window.location.hash = '#dashboard';
+      window.location.hash = '#evaluation';
       return { success: true };
     } catch (err: any) {
       setIsLoading(false);
@@ -236,7 +263,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         localStorage.setItem('tejas_user', JSON.stringify(profile));
         setIsLoading(false);
         closeAuth();
-        window.location.hash = '#dashboard';
+        window.location.hash = '#evaluation';
       }
 
       return { success: true };
@@ -308,7 +335,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${window.location.origin}${window.location.pathname}`,
+          redirectTo: `${window.location.origin}${window.location.pathname}#evaluation`,
           queryParams: {
             access_type: 'offline',
             prompt: 'consent',
@@ -325,6 +352,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         window.location.href = data.url;
       }
 
+      setIsLoading(false);
       return { success: true };
     } catch (err: any) {
       setIsLoading(false);

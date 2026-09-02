@@ -12,12 +12,12 @@ import { PartnersSection } from './components/PartnersSection';
 import { FinalCTA } from './components/FinalCTA';
 import { Footer } from './components/Footer';
 import { EnquiryProvider } from './context/EnquiryContext';
-import { AuthProvider } from './context/AuthContext';
+import { AuthProvider, useAuth } from './context/AuthContext';
 import { AdminAuthProvider, useAdminAuth } from './context/AdminAuthContext';
 import { AdminDataProvider } from './context/AdminDataContext';
 import { EnquiryModal } from './components/EnquiryModal';
 import { MentorPage } from './components/MentorPage';
-import { StudentDashboard } from './components/StudentDashboard';
+import { ProfileEvaluationPage } from './components/ProfileEvaluationPage';
 import { LegalPage } from './components/LegalPage';
 import { AuthPage } from './components/AuthPage';
 import { CareerPage } from './components/CareerPage';
@@ -37,6 +37,7 @@ function AdminView({ onBackToHome }: { onBackToHome: () => void }) {
 }
 
 function MainAppContent() {
+  const { user } = useAuth();
   const [currentPage, setCurrentPage] = useState<
     | 'home'
     | 'mentor'
@@ -44,7 +45,7 @@ function MainAppContent() {
     | 'training-programs'
     | 'login'
     | 'signup'
-    | 'dashboard'
+    | 'evaluation'
     | 'privacy'
     | 'terms'
     | 'cookies'
@@ -55,6 +56,7 @@ function MainAppContent() {
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash;
+
       if (
         hash === '#admin' ||
         hash === '#admin-login' ||
@@ -63,6 +65,16 @@ function MainAppContent() {
         hash === '#control-panel'
       ) {
         setCurrentPage('admin');
+      } else if (
+        hash === '#evaluation' ||
+        hash === '#profile' ||
+        hash === '#career-profile' ||
+        hash === '#career-evaluation' ||
+        hash === '#readiness' ||
+        hash === '#assessment' ||
+        hash === '#dashboard'
+      ) {
+        setCurrentPage('evaluation');
       } else if (
         hash.startsWith('#mentor') ||
         hash.startsWith('#become-a-mentor') ||
@@ -81,11 +93,19 @@ function MainAppContent() {
       } else if (hash === '#blog' || hash === '#blogs' || hash === '#articles') {
         setCurrentPage('blog');
       } else if (hash === '#login' || hash === '#signin' || hash === '#auth') {
-        setCurrentPage('login');
+        if (user) {
+          setCurrentPage('evaluation');
+          window.location.hash = '#evaluation';
+        } else {
+          setCurrentPage('login');
+        }
       } else if (hash === '#signup' || hash === '#register') {
-        setCurrentPage('signup');
-      } else if (hash === '#dashboard' || hash === '#profile') {
-        setCurrentPage('dashboard');
+        if (user) {
+          setCurrentPage('evaluation');
+          window.location.hash = '#evaluation';
+        } else {
+          setCurrentPage('signup');
+        }
       } else if (hash === '#privacy' || hash === '#privacy-policy') {
         setCurrentPage('privacy');
       } else if (hash === '#terms' || hash === '#terms-of-service') {
@@ -100,12 +120,12 @@ function MainAppContent() {
       document.body.scrollTop = 0;
     };
 
-    // Check initial hash
+    // Run on initial load and whenever hash or user state changes
     handleHashChange();
 
     window.addEventListener('hashchange', handleHashChange);
     return () => window.removeEventListener('hashchange', handleHashChange);
-  }, []);
+  }, [user]);
 
   const handleBackToHome = () => {
     window.location.hash = '';
@@ -126,7 +146,9 @@ function MainAppContent() {
       <Navbar />
 
       <div className="flex-1">
-        {currentPage === 'mentor' ? (
+        {currentPage === 'evaluation' ? (
+          <ProfileEvaluationPage onBackToHome={handleBackToHome} />
+        ) : currentPage === 'mentor' ? (
           <MentorPage onBackToHome={handleBackToHome} />
         ) : currentPage === 'career' ? (
           <CareerPage onBackToHome={handleBackToHome} />
@@ -134,8 +156,6 @@ function MainAppContent() {
           <TrainingProgramsPage onBackToHome={handleBackToHome} />
         ) : currentPage === 'login' || currentPage === 'signup' ? (
           <AuthPage />
-        ) : currentPage === 'dashboard' ? (
-          <StudentDashboard onBackToHome={handleBackToHome} />
         ) : currentPage === 'privacy' || currentPage === 'terms' || currentPage === 'cookies' ? (
           <LegalPage initialTab={currentPage} onBackToHome={handleBackToHome} />
         ) : currentPage === 'blog' ? (
@@ -176,7 +196,7 @@ function MainAppContent() {
       </div>
 
       {/* Global Universal Footer across Home, Mentor, Career, Training & Legal */}
-      {currentPage !== 'dashboard' && currentPage !== 'login' && currentPage !== 'signup' && (
+      {currentPage !== 'login' && currentPage !== 'signup' && (
         <Footer />
       )}
 

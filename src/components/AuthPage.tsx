@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import {
   ArrowLeft,
@@ -20,6 +20,7 @@ import { useAuth } from '../context/AuthContext';
 
 export function AuthPage() {
   const {
+    user,
     signInWithPassword,
     signUpWithEmailPassword,
     verifySignUpOtp,
@@ -28,6 +29,12 @@ export function AuthPage() {
     signInWithGoogle,
     isLoading
   } = useAuth();
+
+  useEffect(() => {
+    if (user) {
+      window.location.hash = '#evaluation';
+    }
+  }, [user]);
 
   // Mode: 'login' | 'signup' | 'forgot'
   const [viewMode, setViewMode] = useState<'login' | 'signup' | 'forgot'>('login');

@@ -179,10 +179,10 @@ export function Navbar() {
                 <div className="flex items-center gap-2.5 bg-white pl-2 pr-3 py-1.5 rounded-full border border-black/10 shadow-sm">
                   <div
                     onClick={() => {
-                      window.location.hash = '#dashboard';
+                      window.location.hash = '#evaluation';
                     }}
                     className="flex items-center gap-2 cursor-pointer group"
-                    title="Go to Dashboard"
+                    title="View Career Evaluation Report"
                   >
                     <img
                       src={user.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80'}
@@ -300,10 +300,11 @@ export function Navbar() {
                   <div className="flex items-center justify-between p-3 rounded-2xl bg-slate-50 border border-black/10">
                     <div
                       onClick={() => {
-                        window.location.hash = '#dashboard';
+                        window.location.hash = '#evaluation';
                         setIsMobileOpen(false);
                       }}
                       className="flex items-center gap-2.5 cursor-pointer flex-1"
+                      title="View Career Evaluation Report"
                     >
                       <img
                         src={user.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80'}
@@ -312,7 +313,7 @@ export function Navbar() {
                       />
                       <div className="text-left">
                         <div className="text-xs font-bold text-slate-900">{user.name}</div>
-                        <div className="text-[10px] text-[#2563EB] font-mono">{user.role} · Tap to open Dashboard</div>
+                        <div className="text-[10px] text-[#2563EB] font-mono">{user.role} · View Evaluation Report</div>
                       </div>
                     </div>
                     <button
