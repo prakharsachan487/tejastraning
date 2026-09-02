@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useEnquiry } from '../context/EnquiryContext';
-import { MapPin, Phone, Mail, Send, CheckCircle2, BookOpen, Users, GraduationCap, UserCheck } from 'lucide-react';
+import { MapPin, Phone, Mail, Send, CheckCircle2, BookOpen, Users, GraduationCap, UserCheck, Sparkles } from 'lucide-react';
 
 export function Footer() {
   const { openEnquiry } = useEnquiry();
@@ -14,6 +14,11 @@ export function Footer() {
     }
     if (href === '#training' || href === '#programs') {
       window.location.hash = '#training-programs';
+      return;
+    }
+    if (href === '#roadmap' || href === '#placement-roadmap' || href === '#7-stage') {
+      window.location.hash = '#roadmap';
+      window.scrollTo({ top: 0, behavior: 'instant' });
       return;
     }
     if (href === '#blog' || href === '#blogs' || href === '#articles') {
@@ -172,6 +177,15 @@ export function Footer() {
                 >
                   <GraduationCap size={14} className="text-[#2563EB] group-hover:scale-110 transition-transform" />
                   <span>Training &amp; Programs</span>
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => nav('#roadmap')}
+                  className="text-slate-600 hover:text-[#2563EB] transition-colors cursor-pointer text-left font-medium flex items-center gap-2 group"
+                >
+                  <Sparkles size={14} className="text-[#2563EB] group-hover:scale-110 transition-transform" />
+                  <span>The 7-Stage Roadmap</span>
                 </button>
               </li>
               <li>

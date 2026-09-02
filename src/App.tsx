@@ -22,6 +22,7 @@ import { LegalPage } from './components/LegalPage';
 import { AuthPage } from './components/AuthPage';
 import { CareerPage } from './components/CareerPage';
 import { TrainingProgramsPage } from './components/TrainingProgramsPage';
+import { RoadmapPage } from './components/RoadmapPage';
 import { BlogPage } from './components/BlogPage';
 import { AdminLogin } from './components/admin/AdminLogin';
 import { AdminDashboard } from './components/admin/AdminDashboard';
@@ -43,6 +44,7 @@ function MainAppContent() {
     | 'mentor'
     | 'career'
     | 'training-programs'
+    | 'roadmap'
     | 'login'
     | 'signup'
     | 'evaluation'
@@ -83,6 +85,13 @@ function MainAppContent() {
         hash.startsWith('#jobs')
       ) {
         setCurrentPage('mentor');
+      } else if (
+        hash.startsWith('#roadmap') ||
+        hash.startsWith('#placement-roadmap') ||
+        hash.startsWith('#placement-journey') ||
+        hash.startsWith('#7-stage')
+      ) {
+        setCurrentPage('roadmap');
       } else if (
         hash.startsWith('#training-programs') ||
         hash.startsWith('#training') ||
@@ -156,6 +165,8 @@ function MainAppContent() {
           <CareerPage onBackToHome={handleBackToHome} />
         ) : currentPage === 'training-programs' ? (
           <TrainingProgramsPage onBackToHome={handleBackToHome} />
+        ) : currentPage === 'roadmap' ? (
+          <RoadmapPage onBackToHome={handleBackToHome} />
         ) : currentPage === 'login' || currentPage === 'signup' ? (
           <AuthPage />
         ) : currentPage === 'privacy' || currentPage === 'terms' || currentPage === 'cookies' ? (

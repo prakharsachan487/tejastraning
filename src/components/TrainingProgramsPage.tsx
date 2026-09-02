@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { Sparkles, GraduationCap, Code2, Award, Users, CheckCircle2, ArrowRight } from 'lucide-react';
 import { TrainingSolutionsSection } from './TrainingSolutionsSection';
 import { ProgramsSection } from './ProgramsSection';
-import { PlacementJourneySection } from './PlacementJourneySection';
 import { useEnquiry } from '../context/EnquiryContext';
 
 interface TrainingProgramsPageProps {
@@ -28,7 +27,6 @@ export function TrainingProgramsPage({ onBackToHome: _ }: TrainingProgramsPagePr
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative text-center">
           
-          {/* Badge */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
@@ -38,7 +36,6 @@ export function TrainingProgramsPage({ onBackToHome: _ }: TrainingProgramsPagePr
             <span>CAMPUS TRAINING &amp; INDUSTRY CURRICULUM</span>
           </motion.div>
 
-          {/* Main Headline */}
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -99,12 +96,7 @@ export function TrainingProgramsPage({ onBackToHome: _ }: TrainingProgramsPagePr
         <ProgramsSection />
       </div>
 
-      {/* ── 05. Section 3: The 7-Stage Placement Journey Roadmap ── */}
-      <div id="placement-roadmap">
-        <PlacementJourneySection />
-      </div>
-
-      {/* ── 06. Institutional Consultation CTA Banner ── */}
+      {/* ── 05. Institutional Consultation CTA Banner ── */}
       <section className="py-20 bg-[#F1F4F9] border-t border-black/8 relative overflow-hidden">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2563EB]/10 border border-[#2563EB]/30 text-[#3B82F6] text-xs font-mono font-bold mb-4">
@@ -123,7 +115,7 @@ export function TrainingProgramsPage({ onBackToHome: _ }: TrainingProgramsPagePr
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <button
               onClick={() => openEnquiry('PARTNERSHIP')}
-              className="btn-pill-primary text-xs py-3.5 px-8 font-bold cursor-pointer shadow-lg shadow-[#2563EB]/ flex items-center gap-2"
+              className="btn-pill-primary text-xs py-3.5 px-8 font-bold cursor-pointer shadow-lg flex items-center gap-2"
             >
               <span>Schedule Campus Consultation</span>
               <ArrowRight size={14} />
@@ -131,14 +123,13 @@ export function TrainingProgramsPage({ onBackToHome: _ }: TrainingProgramsPagePr
 
             <button
               onClick={() => { window.location.hash = ''; }}
-              className="btn-pill-secondary text-xs py-3.5 px-6 font-bold cursor-pointer"
+              className="btn-pill-secondary text-xs py-3.5 px-6 font-bold cursor-pointer bg-white border border-slate-300"
             >
               <span>Return to Home</span>
             </button>
           </div>
         </div>
       </section>
-
     </div>
   );
 }
