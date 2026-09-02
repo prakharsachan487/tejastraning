@@ -322,22 +322,6 @@ export function CareerCallModal({ isOpen, onClose, defaultProgram }: CareerCallM
                     </select>
                   </div>
 
-                  {/* Select Program */}
-                  <div>
-                    <select
-                      required
-                      value={program}
-                      onChange={(e) => setProgram(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/10 transition-all bg-white"
-                    >
-                      <option value="" disabled>Select program *</option>
-                      <option value="AI-Powered Software Engineering (10x)">AI-Powered Software Engineering (10x)</option>
-                      <option value="Full Stack Web & Distributed Systems">Full Stack Web & Distributed Systems</option>
-                      <option value="Data Science, ML & Generative AI">Data Science, ML & Generative AI</option>
-                      <option value="1:1 Corporate Mock Drive & Placement Sprint">1:1 Corporate Mock Drive & Placement Sprint</option>
-                    </select>
-                  </div>
-
                   {/* Graduation Year */}
                   <div>
                     <select
@@ -354,18 +338,6 @@ export function CareerCallModal({ isOpen, onClose, defaultProgram }: CareerCallM
                       <option value="2023 or earlier">2023 or earlier</option>
                       <option value="Working Professional">Working Professional</option>
                     </select>
-                  </div>
-
-                  {/* Company / College Search Input */}
-                  <div>
-                    <input
-                      type="text"
-                      required
-                      placeholder="Search company or college *"
-                      value={companyCollege}
-                      onChange={(e) => setCompanyCollege(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/10 transition-all placeholder:text-slate-400"
-                    />
                   </div>
 
                   {/* CTA Button */}
@@ -429,16 +401,16 @@ export function CareerCallModal({ isOpen, onClose, defaultProgram }: CareerCallM
 
                 <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-left max-w-md mx-auto space-y-2 text-xs font-mono">
                   <div className="flex justify-between text-slate-600">
-                    <span>Program:</span>
-                    <span className="font-bold text-slate-900">{program}</span>
+                    <span>Role / Background:</span>
+                    <span className="font-bold text-slate-900">{jobTitle || 'Candidate'}</span>
                   </div>
                   <div className="flex justify-between text-slate-600">
                     <span>Session:</span>
                     <span className="font-bold text-emerald-600">1:1 Diagnostic (30 Mins Free)</span>
                   </div>
                   <div className="flex justify-between text-slate-600">
-                    <span>Organization:</span>
-                    <span className="font-bold text-slate-900">{companyCollege || 'N/A'}</span>
+                    <span>Graduation:</span>
+                    <span className="font-bold text-slate-900">{gradYear}</span>
                   </div>
                 </div>
 
