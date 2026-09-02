@@ -21,7 +21,7 @@ export function TrainingProgramsPage({ onBackToHome: _ }: TrainingProgramsPagePr
   return (
     <div className="min-h-screen bg-[#F8F9FB] text-slate-100 font-sans selection:bg-[#2563EB] selection:text-slate-900">
       {/* ── 02. Hero Banner ── */}
-      <section className="pt-32 pb-16 lg:pt-36 lg:pb-20 relative overflow-hidden border-b border-black/5 bg-[#F8F9FB]">
+      <section className="pt-28 pb-4 sm:pt-32 sm:pb-6 relative overflow-hidden bg-[#F8F9FB]">
         {/* Glow Spheres */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-[#2563EB]/10 blur-[130px] pointer-events-none rounded-full" />
 

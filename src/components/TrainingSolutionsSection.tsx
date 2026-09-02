@@ -3,7 +3,7 @@ import { Rocket, GraduationCap, Check } from 'lucide-react';
 
 export function TrainingSolutionsSection() {
   return (
-    <section id="training" className="py-12 lg:py-16 bg-[#F8F9FB] relative border-b border-black/5">
+    <section id="training" className="pt-2 pb-14 lg:pb-16 bg-[#F8F9FB] relative border-b border-black/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* 2 Clean & Impressive Cards (Impact Training & Semester-Integrated) */}
