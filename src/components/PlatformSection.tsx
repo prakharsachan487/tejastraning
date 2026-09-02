@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Mic, ArrowRight, Sparkles, Check, ChevronRight, Award, Share2 } from 'lucide-react';
+import { Mic, ArrowRight, Sparkles, Check, ChevronRight, Award, Share2, Gauge } from 'lucide-react';
 import { useEnquiry } from '../context/EnquiryContext';
 
 export function PlatformSection() {
@@ -122,7 +122,7 @@ export function PlatformSection() {
             </div>
           </motion.div>
 
-          {/* Card 2: Batch Readiness Dashboard (White Mockup in Dark Card) */}
+          {/* Card 2: Online Assessment & Batch Skill Diagnostics Meter */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -131,99 +131,123 @@ export function PlatformSection() {
             className="bento-card p-7 sm:p-9 flex flex-col justify-between group hover:border-[#2563EB]/50"
           >
             <div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-[#2563EB] text-xs font-mono font-bold border border-blue-200 mb-3">
+                <Gauge size={13} />
+                <span>Real-Time Skill Diagnostic Meter</span>
+              </div>
               <h3 className="text-2xl font-bold text-slate-900 mb-2">
-                Batch Readiness
+                Online Assessment &amp; Batch Readiness
               </h3>
-              <p className="text-sm text-slate-600 leading-relaxed max-w-lg mb-8">
-                Give TPOs a live view of skill gaps and placement readiness across the batch.
+              <p className="text-sm text-slate-600 leading-relaxed max-w-lg mb-6">
+                Diagnose the current status of student skills with real-time diagnostic meters, automated benchmarks, and cohort-level placement readiness tracking.
               </p>
             </div>
 
-            {/* Inner Dashboard UI Mockup (Light Slate Panel matching screenshot) */}
-            <div className="rounded-2xl bg-[#F8FAFC] p-4 sm:p-5 text-slate-800 shadow-2xl border border-slate-200">
+            {/* Inner Dashboard UI Mockup: Real-Time Diagnostic Meter */}
+            <div className="rounded-2xl bg-[#F8FAFC] p-4 sm:p-5 text-slate-800 shadow-2xl border border-slate-200 space-y-4">
               
-              {/* Dashboard Nav Bar */}
-              <div className="flex items-center justify-between pb-3 border-b border-slate-200 mb-4 text-[11px]">
-                <div className="flex items-center gap-3 overflow-x-auto">
-                  <span className="font-semibold text-slate-500">Assessments</span>
-                  <span className="font-bold text-[#2563EB] border-b-2 border-[#2563EB] pb-0.5">Readiness</span>
-                  <span className="font-semibold text-slate-500">Dashboards</span>
-                  <span className="font-semibold text-slate-500 hidden sm:inline">Repositories</span>
-                </div>
-                <div className="w-4 h-4 rounded-full bg-slate-300 flex items-center justify-center text-[9px] text-slate-600">
-                  ?
-                </div>
-              </div>
-
-              {/* Student Header */}
-              <div className="flex items-center justify-between mb-4">
+              {/* Dashboard Nav & Status Strip */}
+              <div className="flex items-center justify-between pb-3 border-b border-slate-200 text-[11px]">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-full bg-slate-300 border border-slate-400 overflow-hidden flex items-center justify-center text-xs font-bold text-slate-700">
-                    SC
-                  </div>
-                  <div>
-                    <div className="text-xs font-bold text-slate-900 leading-tight">Student Cohort</div>
-                    <div className="text-[10px] text-slate-500">B.Tech 2026 Batch • 480 Enrolled</div>
-                  </div>
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-600"></span>
+                  </span>
+                  <span className="font-bold text-slate-900">AI-Proctored Diagnostic Active</span>
                 </div>
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-700">
-                  94.2% Tracked
+                <span className="px-2 py-0.5 rounded-full bg-blue-100 text-[#2563EB] font-bold text-[10px] font-mono">
+                  Batch: 2026 (480 Evaluated)
                 </span>
               </div>
 
-              {/* Learning Path Roadmap Nodes */}
-              <div className="p-3 bg-white rounded-xl border border-slate-200 shadow-xs mb-3">
-                <div className="flex items-center justify-between text-[11px] font-bold text-slate-800 mb-2.5">
-                  <span>Learning Path Roadmap</span>
-                  <span className="text-[10px] text-slate-500 font-normal">Cohort A1</span>
+              {/* Central Overall Score Dial & Gauge Meter */}
+              <div className="p-3.5 bg-white rounded-xl border border-slate-200 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="flex items-center gap-3.5">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white flex flex-col items-center justify-center font-bold shadow-md shadow-blue-500/25 shrink-0">
+                    <span className="text-lg leading-none">89</span>
+                    <span className="text-[8.5px] font-mono opacity-80 uppercase tracking-tighter">/ 100</span>
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-bold text-slate-900">Overall Diagnostic Status</span>
+                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 font-mono font-bold">Grade A+</span>
+                    </div>
+                    <p className="text-[11px] text-slate-500 mt-0.5">Tier-1 Product &amp; Consulting Placement Ready</p>
+                  </div>
                 </div>
 
-                {/* Connected Flowchart Nodes */}
-                <div className="grid grid-cols-5 gap-1.5 text-center text-[10px]">
-                  <div className="p-2 rounded-lg bg-blue-50 border border-blue-200">
-                    <div className="w-4 h-4 mx-auto mb-1 rounded-full bg-[#2563EB] text-slate-900 flex items-center justify-center text-[8px] font-bold">
-                      ✓
-                    </div>
-                    <div className="font-bold text-blue-900 text-[9px]">Basics</div>
-                  </div>
+                <div className="text-right shrink-0 hidden sm:block">
+                  <span className="text-xs font-mono font-bold text-emerald-600 block">94.2% Pass Rate</span>
+                  <span className="text-[10px] text-slate-400">Campus Benchmark Met</span>
+                </div>
+              </div>
 
-                  <div className="p-2 rounded-lg bg-slate-50 border border-slate-200">
-                    <div className="w-4 h-4 mx-auto mb-1 rounded-full bg-emerald-500 text-slate-900 flex items-center justify-center text-[8px] font-bold">
-                      ✓
-                    </div>
-                    <div className="font-bold text-slate-700 text-[9px]">Core CS</div>
+              {/* 4 Multi-Dimension Skill Meters */}
+              <div className="space-y-2.5 pt-1">
+                {/* Meter 1: DSA */}
+                <div>
+                  <div className="flex items-center justify-between text-[11px] font-semibold mb-1">
+                    <span className="text-slate-800 flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-blue-600"></span>
+                      <span>DSA &amp; Problem Solving</span>
+                    </span>
+                    <span className="font-mono text-blue-600 font-bold">92% (Advanced)</span>
                   </div>
-
-                  <div className="p-2 rounded-lg bg-slate-50 border border-slate-200">
-                    <div className="w-4 h-4 mx-auto mb-1 rounded-full bg-emerald-500 text-slate-900 flex items-center justify-center text-[8px] font-bold">
-                      ✓
-                    </div>
-                    <div className="font-bold text-slate-700 text-[9px]">Full Stack</div>
+                  <div className="w-full h-2 rounded-full bg-slate-200 overflow-hidden">
+                    <div className="h-full bg-blue-600 rounded-full transition-all duration-1000" style={{ width: '92%' }} />
                   </div>
+                </div>
 
-                  <div className="p-2 rounded-lg bg-slate-50 border border-slate-200">
-                    <div className="w-4 h-4 mx-auto mb-1 rounded-full bg-emerald-500 text-slate-900 flex items-center justify-center text-[8px] font-bold">
-                      ✓
-                    </div>
-                    <div className="font-bold text-slate-700 text-[9px]">Cloud AWS</div>
+                {/* Meter 2: Core CS & Systems */}
+                <div>
+                  <div className="flex items-center justify-between text-[11px] font-semibold mb-1">
+                    <span className="text-slate-800 flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-indigo-600"></span>
+                      <span>System Design &amp; Architecture</span>
+                    </span>
+                    <span className="font-mono text-indigo-600 font-bold">86% (Proficient)</span>
                   </div>
+                  <div className="w-full h-2 rounded-full bg-slate-200 overflow-hidden">
+                    <div className="h-full bg-indigo-600 rounded-full transition-all duration-1000" style={{ width: '86%' }} />
+                  </div>
+                </div>
 
-                  <div className="p-2 rounded-lg bg-[#2563EB]/10 border border-[#2563EB]/30">
-                    <div className="w-4 h-4 mx-auto mb-1 rounded-full bg-[#2563EB] text-slate-900 flex items-center justify-center text-[8px] font-bold">
-                      ★
-                    </div>
-                    <div className="font-bold text-[#2563EB] text-[9px]">Drive Ready</div>
+                {/* Meter 3: Full Stack & AI */}
+                <div>
+                  <div className="flex items-center justify-between text-[11px] font-semibold mb-1">
+                    <span className="text-slate-800 flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-emerald-600"></span>
+                      <span>Full-Stack &amp; Applied AI Workflows</span>
+                    </span>
+                    <span className="font-mono text-emerald-600 font-bold">88% (High)</span>
+                  </div>
+                  <div className="w-full h-2 rounded-full bg-slate-200 overflow-hidden">
+                    <div className="h-full bg-emerald-600 rounded-full transition-all duration-1000" style={{ width: '88%' }} />
+                  </div>
+                </div>
+
+                {/* Meter 4: Soft Skills & Corporate Etiquette */}
+                <div>
+                  <div className="flex items-center justify-between text-[11px] font-semibold mb-1">
+                    <span className="text-slate-800 flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-purple-600"></span>
+                      <span>Corporate Readiness &amp; Soft Skills</span>
+                    </span>
+                    <span className="font-mono text-purple-600 font-bold">84% (Job Ready)</span>
+                  </div>
+                  <div className="w-full h-2 rounded-full bg-slate-200 overflow-hidden">
+                    <div className="h-full bg-purple-600 rounded-full transition-all duration-1000" style={{ width: '84%' }} />
                   </div>
                 </div>
               </div>
 
               {/* Lower Status Bar */}
-              <div className="flex items-center justify-between text-[10px] text-slate-600 pt-1">
+              <div className="flex items-center justify-between text-[10px] text-slate-600 pt-2 border-t border-slate-200">
                 <span className="flex items-center gap-1 font-semibold text-emerald-700">
                   <Check size={12} />
                   <span>380 Students Verified for Tier-1 Drives</span>
                 </span>
-                <span className="font-bold text-slate-700">Batch Score: 88/100</span>
+                <span className="font-mono font-bold text-[#2563EB]">Live Meter Active →</span>
               </div>
 
             </div>
