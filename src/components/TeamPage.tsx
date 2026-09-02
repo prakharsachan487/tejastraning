@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Users,
@@ -13,36 +12,20 @@ import {
   ChevronRight,
   UserPlus
 } from 'lucide-react';
-import { useAdminData, type TeamMember } from '../context/AdminDataContext';
+import { useAdminData } from '../context/AdminDataContext';
 import { useEnquiry } from '../context/EnquiryContext';
 
 interface TeamPageProps {
   onBackToHome?: () => void;
 }
 
-type DepartmentFilter = 'ALL' | TeamMember['department'];
-
-const DEPARTMENTS: { label: string; value: DepartmentFilter }[] = [
-  { label: 'All Team Members', value: 'ALL' },
-  { label: 'Leadership & Founders', value: 'Leadership & Founders' },
-  { label: 'Engineering & AI', value: 'Engineering & AI' },
-  { label: 'Placements & Corporate', value: 'Placements & Corporate Relations' },
-  { label: 'Academic Curriculum', value: 'Academic Curriculum' },
-];
-
 export function TeamPage({ onBackToHome }: TeamPageProps) {
   const { teamMembers } = useAdminData();
   const { openEnquiry } = useEnquiry();
-  const [activeDept, setActiveDept] = useState<DepartmentFilter>('ALL');
 
   const activeMembers = teamMembers
     .filter((m) => m.active !== false)
     .sort((a, b) => (a.order || 0) - (b.order || 0));
-
-  const filteredMembers =
-    activeDept === 'ALL'
-      ? activeMembers
-      : activeMembers.filter((m) => m.department === activeDept);
 
   const handleBack = () => {
     if (onBackToHome) {
@@ -123,35 +106,11 @@ export function TeamPage({ onBackToHome }: TeamPageProps) {
         </div>
       </section>
 
-      {/* ── 03. Department Filter Navigation ── */}
-      <section className="sticky top-20 z-20 bg-white/95 backdrop-blur-md border-y border-black/8 py-3 shadow-2xs">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
-            {DEPARTMENTS.map((dept) => {
-              const isActive = activeDept === dept.value;
-              return (
-                <button
-                  key={dept.value}
-                  onClick={() => setActiveDept(dept.value)}
-                  className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer whitespace-nowrap border ${
-                    isActive
-                      ? 'bg-slate-900 text-white border-slate-900 shadow-sm'
-                      : 'bg-white text-slate-700 border-black/10 hover:border-black/25 hover:bg-slate-50'
-                  }`}
-                >
-                  {dept.label}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* ── 04. Team Members Grid ── */}
+      {/* ── 03. Team Members Grid ── */}
       <section className="py-12 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           <AnimatePresence mode="popLayout">
-            {filteredMembers.map((member) => (
+            {activeMembers.map((member) => (
               <motion.div
                 key={member.id}
                 layout
@@ -242,11 +201,11 @@ export function TeamPage({ onBackToHome }: TeamPageProps) {
           </AnimatePresence>
         </div>
 
-        {filteredMembers.length === 0 && (
+        {activeMembers.length === 0 && (
           <div className="text-center py-20 bg-white rounded-3xl border border-black/8 p-8">
             <Users size={36} className="mx-auto text-slate-400 mb-3" />
-            <h3 className="text-lg font-bold text-slate-900">No members found</h3>
-            <p className="text-xs text-slate-500 mt-1">Try selecting another department filter above.</p>
+            <h3 className="text-lg font-bold text-slate-900">No team members added yet</h3>
+            <p className="text-xs text-slate-500 mt-1">Check back soon for team updates.</p>
           </div>
         )}
       </section>
