@@ -142,6 +142,8 @@ export interface JobApplication {
 interface AdminDataContextType {
   // Announcements (Top Marquee Ticker)
   announcements: AnnouncementItem[];
+  tickerSpeed: 'fast' | 'normal' | 'slow';
+  setTickerSpeed: (speed: 'fast' | 'normal' | 'slow') => void;
   addAnnouncement: (item: Omit<AnnouncementItem, 'id'>) => void;
   updateAnnouncement: (id: string, updated: Partial<AnnouncementItem>) => void;
   deleteAnnouncement: (id: string) => void;
@@ -1036,7 +1038,7 @@ export function AdminDataProvider({ children }: { children: ReactNode }) {
     return INITIAL_TEAM_MEMBERS;
   });
 
-  // 00. Announcements (Top Marquee Ticker) State
+  // 00. Announcements (Top Marquee Ticker) State & Dynamic Speed
   const [announcements, setAnnouncements] = useState<AnnouncementItem[]>(() => {
     const saved = localStorage.getItem('grow360_admin_announcements');
     if (saved) {
@@ -1046,6 +1048,19 @@ export function AdminDataProvider({ children }: { children: ReactNode }) {
     }
     return INITIAL_ANNOUNCEMENTS;
   });
+
+  const [tickerSpeed, setTickerSpeedState] = useState<'fast' | 'normal' | 'slow'>(() => {
+    const saved = localStorage.getItem('grow360_admin_ticker_speed');
+    if (saved === 'fast' || saved === 'normal' || saved === 'slow') {
+      return saved;
+    }
+    return 'fast';
+  });
+
+  const setTickerSpeed = (speed: 'fast' | 'normal' | 'slow') => {
+    setTickerSpeedState(speed);
+    localStorage.setItem('grow360_admin_ticker_speed', speed);
+  };
 
   // 0a. Curriculum Courses State
   const [curriculumCourses, setCurriculumCourses] = useState<CurriculumCourse[]>(() => {
@@ -1617,6 +1632,8 @@ export function AdminDataProvider({ children }: { children: ReactNode }) {
     <AdminDataContext.Provider
       value={{
         announcements,
+        tickerSpeed,
+        setTickerSpeed,
         addAnnouncement,
         updateAnnouncement,
         deleteAnnouncement,

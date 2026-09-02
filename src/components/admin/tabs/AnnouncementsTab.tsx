@@ -9,13 +9,17 @@ import {
   ArrowUp,
   ArrowDown,
   Eye,
-  EyeOff
+  EyeOff,
+  Zap,
+  Gauge
 } from 'lucide-react';
 import { useAdminData, type AnnouncementItem } from '../../../context/AdminDataContext';
 
 export function AnnouncementsTab() {
   const {
     announcements,
+    tickerSpeed,
+    setTickerSpeed,
     addAnnouncement,
     updateAnnouncement,
     deleteAnnouncement,
@@ -147,6 +151,58 @@ export function AnnouncementsTab() {
             {sortedAnnouncements.filter((a) => a.active).length === 0 && (
               <span className="text-xs text-slate-500 italic">No active announcements.</span>
             )}
+          </div>
+        </div>
+      </div>
+
+      {/* ── Dynamic Ticker Speed Controller ── */}
+      <div className="bg-white rounded-3xl border border-black/8 p-6 shadow-sm space-y-3">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="space-y-0.5">
+            <div className="flex items-center gap-2 text-slate-900 font-bold text-sm font-[family-name:var(--font-display)]">
+              <Gauge size={16} className="text-[#2563EB]" />
+              <span>Marquee Rolling Speed &amp; Dynamic Flow</span>
+            </div>
+            <p className="text-xs text-slate-500">
+              Auto-adapts dynamically based on the number of active announcements (fewer items = brisk, more items = balanced).
+            </p>
+          </div>
+
+          {/* Speed Preset Switcher */}
+          <div className="flex items-center gap-1.5 bg-slate-100 p-1.5 rounded-2xl border border-black/5">
+            <button
+              onClick={() => setTickerSpeed('fast')}
+              className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                tickerSpeed === 'fast'
+                  ? 'bg-blue-600 text-white shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
+              }`}
+            >
+              <Zap size={13} />
+              <span>Fast (Dynamic)</span>
+            </button>
+
+            <button
+              onClick={() => setTickerSpeed('normal')}
+              className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                tickerSpeed === 'normal'
+                  ? 'bg-slate-900 text-white shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
+              }`}
+            >
+              <span>Normal</span>
+            </button>
+
+            <button
+              onClick={() => setTickerSpeed('slow')}
+              className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                tickerSpeed === 'slow'
+                  ? 'bg-slate-900 text-white shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
+              }`}
+            >
+              <span>Gentle / Slow</span>
+            </button>
           </div>
         </div>
       </div>

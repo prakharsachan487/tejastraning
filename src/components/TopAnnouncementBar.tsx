@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { useAdminData } from '../context/AdminDataContext';
 
@@ -7,12 +8,38 @@ interface TopAnnouncementBarProps {
 }
 
 export function TopAnnouncementBar({ onOpenCareerCall, onNavigateToPrograms }: TopAnnouncementBarProps) {
-  const { announcements } = useAdminData();
+  const { announcements, tickerSpeed } = useAdminData();
 
   // Filter active and sort
-  const activeAnnouncements = announcements
-    .filter((a) => a.active !== false)
-    .sort((a, b) => (a.order || 0) - (b.order || 0));
+  const activeAnnouncements = useMemo(() => {
+    return announcements
+      .filter((a) => a.active !== false)
+      .sort((a, b) => (a.order || 0) - (b.order || 0));
+  }, [announcements]);
+
+  // Dynamic Speed Calculation based on item count & admin speed preset:
+  // "kam items me speed jyada (low duration), jyada items me speed steady"
+  const dynamicDuration = useMemo(() => {
+    const count = activeAnnouncements.length;
+    if (count === 0) return 10;
+
+    let multiplier = 2.4; // fast (default)
+    let minDur = 8;
+    let maxDur = 22;
+
+    if (tickerSpeed === 'normal') {
+      multiplier = 3.6;
+      minDur = 12;
+      maxDur = 32;
+    } else if (tickerSpeed === 'slow') {
+      multiplier = 5.2;
+      minDur = 16;
+      maxDur = 45;
+    }
+
+    const calculated = count * multiplier;
+    return Math.max(minDur, Math.min(maxDur, calculated));
+  }, [activeAnnouncements.length, tickerSpeed]);
 
   if (activeAnnouncements.length === 0) return null;
 
@@ -44,8 +71,9 @@ export function TopAnnouncementBar({ onOpenCareerCall, onNavigateToPrograms }: T
       <div className="absolute left-0 top-0 bottom-0 w-10 sm:w-16 bg-gradient-to-r from-[#0B1120] via-[#0B1120]/90 to-transparent z-10 pointer-events-none" />
       <div className="absolute right-0 top-0 bottom-0 w-10 sm:w-16 bg-gradient-to-l from-[#0B1120] via-[#0B1120]/90 to-transparent z-10 pointer-events-none" />
 
-      {/* Infinite Rolling Marquee */}
+      {/* Infinite Dynamic Speed Rolling Marquee */}
       <motion.div
+        key={`marquee-${activeAnnouncements.length}-${tickerSpeed}-${dynamicDuration}`}
         className="flex items-center gap-6 sm:gap-10 w-max"
         animate={{
           x: ['0%', '-50%'],
@@ -54,7 +82,7 @@ export function TopAnnouncementBar({ onOpenCareerCall, onNavigateToPrograms }: T
           x: {
             repeat: Infinity,
             repeatType: 'loop',
-            duration: 35,
+            duration: dynamicDuration,
             ease: 'linear',
           },
         }}
