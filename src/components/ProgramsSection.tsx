@@ -186,20 +186,7 @@ export function ProgramsSection() {
                 </div>
               </div>
 
-              {/* Outcome Highlight Box */}
-              <div className="p-4 rounded-2xl bg-gradient-to-r from-blue-50/80 via-indigo-50/50 to-blue-50/80 border border-blue-200/80 flex items-start gap-3">
-                <CheckCircle2 size={18} className="text-[#2563EB] shrink-0 mt-0.5" />
-                <div>
-                  <span className="text-xs font-mono font-bold text-[#2563EB] uppercase tracking-wide">
-                    Program Core Outcome:
-                  </span>
-                  <p className="text-xs sm:text-sm font-semibold text-slate-800 mt-0.5 leading-relaxed">
-                    {currentCourse.outcome}
-                  </p>
-                </div>
-              </div>
-
-              {/* ── Continuous Rolling Specialization Courses Ticker (Directly Below Outcome) ── */}
+              {/* ── Continuous Rolling Specialization Courses Ticker (Reference Image Style) ── */}
               {rollingTracks.length > 0 && (
                 <div className="space-y-2.5 pt-2 border-t border-slate-100">
                   <div className="flex items-center gap-2">
