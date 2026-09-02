@@ -4,6 +4,7 @@ import { Menu, X, ChevronRight, LogOut, Mail, Phone } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useEnquiry } from '../context/EnquiryContext';
 import { CareerCallModal } from './CareerCallModal';
+import { TopAnnouncementBar } from './TopAnnouncementBar';
 
 interface NavItem {
   label: string;
@@ -58,35 +59,16 @@ export function Navbar() {
     setIsMobileOpen(false);
 
     if (href === '#become-a-mentor' || href === '#mentor') {
-      const prevHash = window.location.hash;
-      window.location.hash = '#become-a-mentor';
-      if (prevHash === '#become-a-mentor') {
-        window.dispatchEvent(new HashChangeEvent('hashchange'));
-      }
-      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
+      window.location.hash = '#mentor';
       return;
     }
 
-    if (
-      href === '#training-programs' ||
-      href === '#careers' ||
-      href === '#career' ||
-      href === '#login'
-    ) {
-      window.location.hash = href;
-      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
+    if (href === '#training-programs' || href === '#training') {
+      window.location.hash = '#training-programs';
       return;
     }
 
     if (href === '#about') {
-      if (window.location.hash && window.location.hash !== '#about') {
-        window.location.hash = '#about';
-        return;
-      }
       const element = document.getElementById('about') || document.querySelector(href);
       if (element) {
         element.scrollIntoView({ behavior: 'instant' });
@@ -109,14 +91,20 @@ export function Navbar() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? 'bg-white/90 backdrop-blur-xl border-b border-black/8 shadow-sm'
-            : 'bg-white/80 backdrop-blur-md border-b border-black/5'
+            ? 'bg-white/95 backdrop-blur-xl border-b border-black/8 shadow-sm'
+            : 'bg-white/90 backdrop-blur-md border-b border-black/5'
         }`}
       >
+        {/* ── Top Rolling Announcement Bar (Courses & Website Highlights) ── */}
+        <TopAnnouncementBar
+          onOpenCareerCall={() => setIsCareerCallOpen(true)}
+          onNavigateToPrograms={() => handleNavClick('#training-programs')}
+        />
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div
             className={`flex items-center justify-between transition-all duration-300 ${
-              isScrolled ? 'h-16' : 'h-20'
+              isScrolled ? 'h-16' : 'h-18 sm:h-20'
             }`}
           >
             {/* Brand Logo - Grow360 */}
