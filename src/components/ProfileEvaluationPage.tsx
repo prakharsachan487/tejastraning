@@ -1,6 +1,7 @@
+import { useState } from 'react';
 import { Phone, Sparkles, ArrowRight, TrendingUp, Calendar, ShieldCheck, UserCheck } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-import { useEnquiry } from '../context/EnquiryContext';
+import { CareerCallModal } from './CareerCallModal';
 
 interface ProfileEvaluationPageProps {
   onBackToHome: () => void;
@@ -8,7 +9,8 @@ interface ProfileEvaluationPageProps {
 
 export function ProfileEvaluationPage({ onBackToHome }: ProfileEvaluationPageProps) {
   const { user } = useAuth();
-  const { openEnquiry } = useEnquiry();
+  const [isCareerCallOpen, setIsCareerCallOpen] = useState(false);
+  const [selectedProgram, setSelectedProgram] = useState('AI-Powered Software Engineering (10x)');
 
   // Dynamic user name
   const userName = user?.name ? user.name.split(' ')[0] : 'Engineer';
@@ -93,7 +95,10 @@ export function ProfileEvaluationPage({ onBackToHome }: ProfileEvaluationPagePro
               <div className="pt-2 space-y-3">
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5">
                   <button
-                    onClick={() => openEnquiry('CAREER_EVALUATION')}
+                    onClick={() => {
+                      setSelectedProgram('AI-Powered Software Engineering (10x)');
+                      setIsCareerCallOpen(true);
+                    }}
                     className="btn-pill-primary py-4 px-8 text-sm font-bold flex items-center justify-center gap-2.5 shadow-lg shadow-blue-500/25 cursor-pointer group"
                   >
                     <Phone size={16} className="group-hover:rotate-12 transition-transform" />
@@ -161,7 +166,10 @@ export function ProfileEvaluationPage({ onBackToHome }: ProfileEvaluationPagePro
                     Verified Rubric
                   </span>
                   <button
-                    onClick={() => openEnquiry('CAREER_EVALUATION')}
+                    onClick={() => {
+                      setSelectedProgram('1:1 Placement & Mock Drive Sprint');
+                      setIsCareerCallOpen(true);
+                    }}
                     className="text-[#2563EB] font-bold hover:underline cursor-pointer"
                   >
                     Discuss in 1:1 Call →
@@ -190,8 +198,11 @@ export function ProfileEvaluationPage({ onBackToHome }: ProfileEvaluationPagePro
             </div>
 
             <button
-              onClick={() => openEnquiry('MENTOR_MOCK_DRIVE')}
-              className="btn-pill-primary py-2.5 px-5 text-xs font-bold shrink-0 flex items-center gap-1.5 shadow-sm"
+              onClick={() => {
+                setSelectedProgram('1:1 Corporate Mock Drive & Placement Sprint');
+                setIsCareerCallOpen(true);
+              }}
+              className="btn-pill-primary py-2.5 px-5 text-xs font-bold shrink-0 flex items-center gap-1.5 shadow-sm cursor-pointer"
             >
               <UserCheck size={14} />
               <span>Book Mock Session</span>
@@ -229,7 +240,10 @@ export function ProfileEvaluationPage({ onBackToHome }: ProfileEvaluationPagePro
                 </div>
 
                 <button
-                  onClick={() => openEnquiry('MENTOR_MOCK_DRIVE')}
+                  onClick={() => {
+                    setSelectedProgram(`1:1 Mentorship with ${mentor.name} (${mentor.company})`);
+                    setIsCareerCallOpen(true);
+                  }}
                   className="w-full py-2 px-3 rounded-xl bg-white hover:bg-[#2563EB] hover:text-white border border-black/10 text-xs font-bold text-slate-800 transition-all cursor-pointer flex items-center justify-center gap-1.5 shadow-2xs"
                 >
                   <span>Connect with {mentor.name.split(' ')[0]}</span>
@@ -254,7 +268,10 @@ export function ProfileEvaluationPage({ onBackToHome }: ProfileEvaluationPagePro
           </div>
 
           <button
-            onClick={() => openEnquiry('CAREER_EVALUATION')}
+            onClick={() => {
+              setSelectedProgram('AI-Powered Software Engineering (10x)');
+              setIsCareerCallOpen(true);
+            }}
             className="px-8 py-4 rounded-full bg-white hover:bg-slate-50 text-[#2563EB] text-xs sm:text-sm font-bold shadow-lg transition-all hover:scale-105 shrink-0 cursor-pointer flex items-center gap-2"
           >
             <Phone size={15} />
@@ -262,6 +279,14 @@ export function ProfileEvaluationPage({ onBackToHome }: ProfileEvaluationPagePro
           </button>
         </div>
       </div>
+
+      {/* Render the 2-step Career Call Modal */}
+      <CareerCallModal
+        isOpen={isCareerCallOpen}
+        onClose={() => setIsCareerCallOpen(false)}
+        defaultProgram={selectedProgram}
+      />
     </div>
   );
 }
+
