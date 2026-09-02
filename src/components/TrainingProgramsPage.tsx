@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, GraduationCap, Code2, Award, Users, CheckCircle2, ArrowRight } from 'lucide-react';
+import { GraduationCap, CheckCircle2, ArrowRight } from 'lucide-react';
 import { TrainingSolutionsSection } from './TrainingSolutionsSection';
 import { ProgramsSection } from './ProgramsSection';
 import { useEnquiry } from '../context/EnquiryContext';
@@ -56,32 +56,6 @@ export function TrainingProgramsPage({ onBackToHome: _ }: TrainingProgramsPagePr
           >
             Explore our comprehensive delivery models and specialized technology tracks designed to elevate student hiring outcomes in top product &amp; consulting companies.
           </motion.p>
-
-          {/* Quick Metrics Bar */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto"
-          >
-            {[
-              { label: 'Partner Campuses', val: '50+', icon: Users, color: '#38BDF8' },
-              { label: 'Placement Rate', val: '92%', icon: Award, color: '#22C55E' },
-              { label: 'Patterns & Drills', val: '700+', icon: Code2, color: '#3B82F6' },
-              { label: 'Highest Package', val: '₹44 LPA', icon: Sparkles, color: '#2563EB' },
-            ].map((metric, i) => {
-              const Icon = metric.icon;
-              return (
-                <div key={i} className="p-4 rounded-2xl bg-white shadow-sm border border-black/8 text-left">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-xl sm:text-2xl font-extrabold text-slate-900 font-mono">{metric.val}</span>
-                    <Icon size={16} style={{ color: metric.color }} />
-                  </div>
-                  <div className="text-xs text-slate-600 font-medium">{metric.label}</div>
-                </div>
-              );
-            })}
-          </motion.div>
 
         </div>
       </section>
