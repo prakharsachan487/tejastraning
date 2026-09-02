@@ -72,6 +72,8 @@ export interface MentorItem {
   exp?: string;
   tag?: string;
   tilt?: string;
+  displayLocation?: 'all' | 'landing' | 'evaluation' | 'hidden';
+  order?: number;
   createdAt?: string;
 }
 
@@ -502,6 +504,8 @@ const INITIAL_MENTORS: MentorItem[] = [
     exp: '85+ Sessions',
     tag: 'Corporate Strategy & FP&A',
     tilt: '-0.8deg',
+    displayLocation: 'all',
+    order: 1,
   },
   {
     id: 'mentor-2',
@@ -514,6 +518,8 @@ const INITIAL_MENTORS: MentorItem[] = [
     exp: '60+ Sessions',
     tag: 'Problem Solving & Mock Drives',
     tilt: '0.6deg',
+    displayLocation: 'all',
+    order: 2,
   },
   {
     id: 'mentor-3',
@@ -526,6 +532,8 @@ const INITIAL_MENTORS: MentorItem[] = [
     exp: '95+ Sessions',
     tag: 'System Design & Distributed Tech',
     tilt: '-1.2deg',
+    displayLocation: 'all',
+    order: 3,
   },
   {
     id: 'mentor-4',
@@ -538,6 +546,8 @@ const INITIAL_MENTORS: MentorItem[] = [
     exp: '110+ Sessions',
     tag: 'Tech Leadership & Product Vision',
     tilt: '0.9deg',
+    displayLocation: 'all',
+    order: 4,
   },
   {
     id: 'mentor-5',
@@ -550,6 +560,8 @@ const INITIAL_MENTORS: MentorItem[] = [
     exp: '75+ Sessions',
     tag: 'Commercial Analytics & BI',
     tilt: '-0.6deg',
+    displayLocation: 'all',
+    order: 5,
   },
   {
     id: 'mentor-6',
@@ -562,6 +574,8 @@ const INITIAL_MENTORS: MentorItem[] = [
     exp: '50+ Sessions',
     tag: 'Fundraising & Strategic Advisory',
     tilt: '0.8deg',
+    displayLocation: 'all',
+    order: 6,
   },
   {
     id: 'mentor-7',
@@ -574,6 +588,8 @@ const INITIAL_MENTORS: MentorItem[] = [
     exp: '80+ Sessions',
     tag: 'Full-Stack & Cloud Architecture',
     tilt: '-1.0deg',
+    displayLocation: 'all',
+    order: 7,
   },
   {
     id: 'mentor-8',
@@ -586,6 +602,8 @@ const INITIAL_MENTORS: MentorItem[] = [
     exp: '90+ Sessions',
     tag: 'Agentic AI, LLMs & Full-Stack',
     tilt: '0.7deg',
+    displayLocation: 'all',
+    order: 8,
   },
 ];
 

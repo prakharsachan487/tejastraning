@@ -18,6 +18,10 @@ export function ProfileEvaluationPage({ onBackToHome }: ProfileEvaluationPagePro
   const userName = user?.name ? user.name.split(' ')[0] : 'Engineer';
   const fullName = user?.name || 'Aspiring Tech Lead';
 
+  const evalMentors = mentors
+    .filter((m) => m.displayLocation === 'all' || m.displayLocation === 'evaluation' || !m.displayLocation)
+    .sort((a, b) => (a.order || 0) - (b.order || 0));
+
   return (
     <div className="min-h-screen bg-[#F8F9FB] text-[#0F172A] font-sans selection:bg-[#2563EB] selection:text-white pb-20">
       {/* Dedicated Evaluation Header (Clean & Minimal) */}
@@ -240,7 +244,7 @@ export function ProfileEvaluationPage({ onBackToHome }: ProfileEvaluationPagePro
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-            {mentors.map((mentor) => (
+            {evalMentors.map((mentor) => (
               <div
                 key={mentor.id}
                 className="rounded-2xl bg-slate-50/80 border border-black/6 p-5 flex flex-col justify-between space-y-4 hover:bg-white hover:border-blue-400/40 hover:shadow-md transition-all group"

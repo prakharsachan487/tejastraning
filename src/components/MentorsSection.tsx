@@ -7,8 +7,13 @@ export function MentorsSection() {
   const { mentors } = useAdminData();
   const [currentPage, setCurrentPage] = useState(0);
   const mentorsPerPage = 4;
-  const totalPages = Math.max(1, Math.ceil(mentors.length / mentorsPerPage));
-  const visibleMentors = mentors.slice(currentPage * mentorsPerPage, (currentPage + 1) * mentorsPerPage);
+
+  const landingMentors = mentors
+    .filter((m) => m.displayLocation === 'all' || m.displayLocation === 'landing' || !m.displayLocation)
+    .sort((a, b) => (a.order || 0) - (b.order || 0));
+
+  const totalPages = Math.max(1, Math.ceil(landingMentors.length / mentorsPerPage));
+  const visibleMentors = landingMentors.slice(currentPage * mentorsPerPage, (currentPage + 1) * mentorsPerPage);
 
   return (
     <section className="py-20 lg:py-28 bg-[#F8F9FB] relative border-b border-black/5 overflow-hidden">
@@ -79,9 +84,9 @@ export function MentorsSection() {
 
         {/* ── MOBILE VIEW (< sm): Smooth Horizontal Swipe Scroll with All Mentors ── */}
         <div className="sm:hidden -mx-4 px-4 overflow-x-auto snap-x snap-mandatory flex gap-4 pb-4 scrollbar-none touch-pan-x">
-          {mentors.map((mentor) => (
+          {landingMentors.map((mentor) => (
             <div
-              key={`mobile-${mentor.name}`}
+              key={`mobile-${mentor.id || mentor.name}`}
               className="w-[82vw] max-w-[300px] shrink-0 snap-center bento-card overflow-hidden flex flex-col justify-between bg-white border border-black/8 rounded-2xl shadow-sm"
             >
               <div>
