@@ -14,14 +14,14 @@ interface NavItem {
 const navItems: NavItem[] = [
   { label: 'About Us', href: '#about' },
   { label: 'Training & Programs', href: '#training-programs' },
-  { label: 'Become a Mentor', href: '#become-a-mentor' },
+  { label: 'Become a Mentor', href: '#mentor' },
 ];
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isCareerCallOpen, setIsCareerCallOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('');
+  const [activeSection, setActiveSection] = useState('about');
   const { user, logout } = useAuth();
   const { openEnquiry } = useEnquiry();
 
@@ -33,26 +33,40 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Synchronize active section highlight with URL hash and page routing
   useEffect(() => {
-    const sectionIds = navItems.map((item) => item.href.replace('#', ''));
-    const observers: IntersectionObserver[] = [];
+    const updateActiveFromHash = () => {
+      const hash = window.location.hash.toLowerCase();
+      if (
+        hash.startsWith('#training-programs') ||
+        hash.startsWith('#training') ||
+        hash.startsWith('#programs') ||
+        hash.startsWith('#courses')
+      ) {
+        setActiveSection('training-programs');
+      } else if (
+        hash.startsWith('#mentor') ||
+        hash.startsWith('#become-a-mentor') ||
+        hash.startsWith('#career') ||
+        hash.startsWith('#jobs')
+      ) {
+        setActiveSection('mentor');
+      } else if (
+        hash.startsWith('#team') ||
+        hash.startsWith('#our-team') ||
+        hash.startsWith('#leadership')
+      ) {
+        setActiveSection('team');
+      } else if (hash === '#about' || hash === '' || hash === '#') {
+        setActiveSection('about');
+      } else {
+        setActiveSection(hash.replace('#', ''));
+      }
+    };
 
-    sectionIds.forEach((id) => {
-      const element = document.getElementById(id);
-      if (!element) return;
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setActiveSection(id);
-          }
-        },
-        { threshold: 0.25, rootMargin: '-70px 0px -40% 0px' }
-      );
-      observer.observe(element);
-      observers.push(observer);
-    });
-
-    return () => observers.forEach((obs) => obs.disconnect());
+    updateActiveFromHash();
+    window.addEventListener('hashchange', updateActiveFromHash);
+    return () => window.removeEventListener('hashchange', updateActiveFromHash);
   }, []);
 
   const handleNavClick = useCallback((href: string) => {
@@ -60,27 +74,36 @@ export function Navbar() {
 
     if (href === '#become-a-mentor' || href === '#mentor') {
       window.location.hash = '#mentor';
+      setActiveSection('mentor');
+      window.scrollTo({ top: 0, behavior: 'instant' });
       return;
     }
 
     if (href === '#training-programs' || href === '#training') {
       window.location.hash = '#training-programs';
+      setActiveSection('training-programs');
+      window.scrollTo({ top: 0, behavior: 'instant' });
       return;
     }
 
     if (href === '#about') {
-      const element = document.getElementById('about') || document.querySelector(href);
+      if (window.location.hash && window.location.hash !== '#about') {
+        window.location.hash = '';
+      }
+      setActiveSection('about');
+      const element = document.getElementById('about');
       if (element) {
-        element.scrollIntoView({ behavior: 'instant' });
+        element.scrollIntoView({ behavior: 'smooth' });
       } else {
-        window.location.hash = '#about';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
       return;
     }
 
     const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: 'instant' });
+      element.scrollIntoView({ behavior: 'smooth' });
+      setActiveSection(href.replace('#', ''));
     } else {
       window.location.hash = href;
     }
@@ -138,7 +161,11 @@ export function Navbar() {
             {/* Desktop Navigation Links */}
             <nav className="hidden md:flex items-center gap-1.5 bg-slate-100/90 p-1.5 rounded-full border border-black/5 shadow-inner">
               {navItems.map((item) => {
-                const isActive = activeSection === item.href.replace('#', '');
+                const targetKey = item.href.replace('#', '');
+                const isActive =
+                  activeSection === targetKey ||
+                  (targetKey === 'mentor' && activeSection === 'become-a-mentor') ||
+                  (targetKey === 'become-a-mentor' && activeSection === 'mentor');
                 return (
                   <button
                     key={item.href}
@@ -258,17 +285,28 @@ export function Navbar() {
                   </button>
                 </div>
 
-                <div className="py-6 flex flex-col gap-1">
-                  {navItems.map((item) => (
-                    <button
-                      key={item.href}
-                      onClick={() => handleNavClick(item.href)}
-                      className="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:text-[#2563EB] hover:bg-slate-50 transition-colors text-left"
-                    >
-                      <span>{item.label}</span>
-                      <ChevronRight size={16} className="text-slate-400" />
-                    </button>
-                  ))}
+                <div className="py-6 flex flex-col gap-1.5">
+                  {navItems.map((item) => {
+                    const targetKey = item.href.replace('#', '');
+                    const isActive =
+                      activeSection === targetKey ||
+                      (targetKey === 'mentor' && activeSection === 'become-a-mentor') ||
+                      (targetKey === 'become-a-mentor' && activeSection === 'mentor');
+                    return (
+                      <button
+                        key={item.href}
+                        onClick={() => handleNavClick(item.href)}
+                        className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-semibold transition-all text-left ${
+                          isActive
+                            ? 'bg-blue-50 text-[#2563EB] font-bold'
+                            : 'text-slate-700 hover:text-[#2563EB] hover:bg-slate-50'
+                        }`}
+                      >
+                        <span>{item.label}</span>
+                        <ChevronRight size={16} className={isActive ? 'text-[#2563EB]' : 'text-slate-400'} />
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
 
