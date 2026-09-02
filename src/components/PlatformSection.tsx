@@ -1,9 +1,11 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mic, ArrowRight, Sparkles, Check, ChevronRight, Award, Share2, Gauge } from 'lucide-react';
+import { Mic, ArrowRight, Sparkles, Check, ChevronRight, Award, Share2, Gauge, Briefcase, Code } from 'lucide-react';
 import { useEnquiry } from '../context/EnquiryContext';
 
 export function PlatformSection() {
   const { openEnquiry } = useEnquiry();
+  const [diagnosticTrack, setDiagnosticTrack] = useState<'NON_TECH' | 'TECH'>('NON_TECH');
 
   return (
     <section id="solutions" className="py-20 lg:py-28 bg-[#F8F9FB] relative obsidian-grid border-b border-black/5">
@@ -122,7 +124,7 @@ export function PlatformSection() {
             </div>
           </motion.div>
 
-          {/* Card 2: Online Assessment & Batch Skill Diagnostics Meter */}
+          {/* Card 2: Online Assessment & Batch Skill Diagnostics Meter (Tech & Non-Tech) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -131,15 +133,44 @@ export function PlatformSection() {
             className="bento-card p-7 sm:p-9 flex flex-col justify-between group hover:border-[#2563EB]/50"
           >
             <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-[#2563EB] text-xs font-mono font-bold border border-blue-200 mb-3">
-                <Gauge size={13} />
-                <span>Real-Time Skill Diagnostic Meter</span>
+              <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-[#2563EB] text-xs font-mono font-bold border border-blue-200">
+                  <Gauge size={13} />
+                  <span>Dual Track Skill Diagnostic Meter</span>
+                </div>
+
+                {/* Tech / Non-Tech Interactive Tab Switcher */}
+                <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl border border-black/5">
+                  <button
+                    onClick={() => setDiagnosticTrack('NON_TECH')}
+                    className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all cursor-pointer flex items-center gap-1 ${
+                      diagnosticTrack === 'NON_TECH'
+                        ? 'bg-white text-[#2563EB] shadow-xs'
+                        : 'text-slate-600 hover:text-slate-900'
+                    }`}
+                  >
+                    <Briefcase size={12} />
+                    <span>Non-Tech</span>
+                  </button>
+                  <button
+                    onClick={() => setDiagnosticTrack('TECH')}
+                    className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all cursor-pointer flex items-center gap-1 ${
+                      diagnosticTrack === 'TECH'
+                        ? 'bg-slate-900 text-white shadow-xs'
+                        : 'text-slate-600 hover:text-slate-900'
+                    }`}
+                  >
+                    <Code size={12} />
+                    <span>Tech</span>
+                  </button>
+                </div>
               </div>
+
               <h3 className="text-2xl font-bold text-slate-900 mb-2">
                 Online Assessment &amp; Batch Readiness
               </h3>
               <p className="text-sm text-slate-600 leading-relaxed max-w-lg mb-6">
-                Diagnose the current status of student skills with real-time diagnostic meters, automated benchmarks, and cohort-level placement readiness tracking.
+                Diagnose the real-time skill status of student cohorts across technical and business domains with standardized benchmark meters and hiring rubrics.
               </p>
             </div>
 
@@ -153,99 +184,183 @@ export function PlatformSection() {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-600"></span>
                   </span>
-                  <span className="font-bold text-slate-900">AI-Proctored Diagnostic Active</span>
+                  <span className="font-bold text-slate-900">
+                    {diagnosticTrack === 'NON_TECH'
+                      ? 'Business & Consulting Benchmark Live'
+                      : 'Tech & Engineering Benchmark Live'}
+                  </span>
                 </div>
                 <span className="px-2 py-0.5 rounded-full bg-blue-100 text-[#2563EB] font-bold text-[10px] font-mono">
-                  Batch: 2026 (480 Evaluated)
+                  {diagnosticTrack === 'NON_TECH'
+                    ? 'Cohort: MBA / BBA / B.Com (320 Evaluated)'
+                    : 'Cohort: B.Tech / M.Tech / BCA (480 Evaluated)'}
                 </span>
               </div>
 
               {/* Central Overall Score Dial & Gauge Meter */}
               <div className="p-3.5 bg-white rounded-xl border border-slate-200 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div className="flex items-center gap-3.5">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white flex flex-col items-center justify-center font-bold shadow-md shadow-blue-500/25 shrink-0">
-                    <span className="text-lg leading-none">89</span>
+                  <div className={`w-14 h-14 rounded-2xl text-white flex flex-col items-center justify-center font-bold shadow-md shrink-0 ${
+                    diagnosticTrack === 'NON_TECH'
+                      ? 'bg-gradient-to-tr from-blue-600 to-indigo-600 shadow-blue-500/25'
+                      : 'bg-gradient-to-tr from-slate-900 to-blue-700 shadow-slate-900/25'
+                  }`}>
+                    <span className="text-lg leading-none">{diagnosticTrack === 'NON_TECH' ? '91' : '89'}</span>
                     <span className="text-[8.5px] font-mono opacity-80 uppercase tracking-tighter">/ 100</span>
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-bold text-slate-900">Overall Diagnostic Status</span>
+                      <span className="text-xs font-bold text-slate-900">
+                        {diagnosticTrack === 'NON_TECH' ? 'Management Readiness Status' : 'Engineering Readiness Status'}
+                      </span>
                       <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 font-mono font-bold">Grade A+</span>
                     </div>
-                    <p className="text-[11px] text-slate-500 mt-0.5">Tier-1 Product &amp; Consulting Placement Ready</p>
+                    <p className="text-[11px] text-slate-500 mt-0.5">
+                      {diagnosticTrack === 'NON_TECH'
+                        ? 'Big 4, MNC Consulting & Analytics Drive Ready'
+                        : 'Tier-1 Product, AI & Cloud Systems Drive Ready'}
+                    </p>
                   </div>
                 </div>
 
                 <div className="text-right shrink-0 hidden sm:block">
-                  <span className="text-xs font-mono font-bold text-emerald-600 block">94.2% Pass Rate</span>
+                  <span className="text-xs font-mono font-bold text-emerald-600 block">
+                    {diagnosticTrack === 'NON_TECH' ? '96.4% Pass Rate' : '94.2% Pass Rate'}
+                  </span>
                   <span className="text-[10px] text-slate-400">Campus Benchmark Met</span>
                 </div>
               </div>
 
-              {/* 4 Multi-Dimension Skill Meters */}
+              {/* 4 Multi-Dimension Skill Meters (Dynamically switches Tech / Non-Tech) */}
               <div className="space-y-2.5 pt-1">
-                {/* Meter 1: DSA */}
-                <div>
-                  <div className="flex items-center justify-between text-[11px] font-semibold mb-1">
-                    <span className="text-slate-800 flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-blue-600"></span>
-                      <span>DSA &amp; Problem Solving</span>
-                    </span>
-                    <span className="font-mono text-blue-600 font-bold">92% (Advanced)</span>
-                  </div>
-                  <div className="w-full h-2 rounded-full bg-slate-200 overflow-hidden">
-                    <div className="h-full bg-blue-600 rounded-full transition-all duration-1000" style={{ width: '92%' }} />
-                  </div>
-                </div>
+                {diagnosticTrack === 'NON_TECH' ? (
+                  <>
+                    {/* Non-Tech Meter 1 */}
+                    <div>
+                      <div className="flex items-center justify-between text-[11px] font-semibold mb-1">
+                        <span className="text-slate-800 flex items-center gap-1.5">
+                          <span className="w-2 h-2 rounded-full bg-blue-600"></span>
+                          <span>Financial Modelling &amp; Advanced Excel</span>
+                        </span>
+                        <span className="font-mono text-blue-600 font-bold">94% (Advanced)</span>
+                      </div>
+                      <div className="w-full h-2 rounded-full bg-slate-200 overflow-hidden">
+                        <div className="h-full bg-blue-600 rounded-full transition-all duration-700" style={{ width: '94%' }} />
+                      </div>
+                    </div>
 
-                {/* Meter 2: Core CS & Systems */}
-                <div>
-                  <div className="flex items-center justify-between text-[11px] font-semibold mb-1">
-                    <span className="text-slate-800 flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-indigo-600"></span>
-                      <span>System Design &amp; Architecture</span>
-                    </span>
-                    <span className="font-mono text-indigo-600 font-bold">86% (Proficient)</span>
-                  </div>
-                  <div className="w-full h-2 rounded-full bg-slate-200 overflow-hidden">
-                    <div className="h-full bg-indigo-600 rounded-full transition-all duration-1000" style={{ width: '86%' }} />
-                  </div>
-                </div>
+                    {/* Non-Tech Meter 2 */}
+                    <div>
+                      <div className="flex items-center justify-between text-[11px] font-semibold mb-1">
+                        <span className="text-slate-800 flex items-center gap-1.5">
+                          <span className="w-2 h-2 rounded-full bg-indigo-600"></span>
+                          <span>Business Analytics (Power BI &amp; SQL)</span>
+                        </span>
+                        <span className="font-mono text-indigo-600 font-bold">89% (Proficient)</span>
+                      </div>
+                      <div className="w-full h-2 rounded-full bg-slate-200 overflow-hidden">
+                        <div className="h-full bg-indigo-600 rounded-full transition-all duration-700" style={{ width: '89%' }} />
+                      </div>
+                    </div>
 
-                {/* Meter 3: Full Stack & AI */}
-                <div>
-                  <div className="flex items-center justify-between text-[11px] font-semibold mb-1">
-                    <span className="text-slate-800 flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-emerald-600"></span>
-                      <span>Full-Stack &amp; Applied AI Workflows</span>
-                    </span>
-                    <span className="font-mono text-emerald-600 font-bold">88% (High)</span>
-                  </div>
-                  <div className="w-full h-2 rounded-full bg-slate-200 overflow-hidden">
-                    <div className="h-full bg-emerald-600 rounded-full transition-all duration-1000" style={{ width: '88%' }} />
-                  </div>
-                </div>
+                    {/* Non-Tech Meter 3 */}
+                    <div>
+                      <div className="flex items-center justify-between text-[11px] font-semibold mb-1">
+                        <span className="text-slate-800 flex items-center gap-1.5">
+                          <span className="w-2 h-2 rounded-full bg-emerald-600"></span>
+                          <span>Corporate Communication &amp; GD Dynamics</span>
+                        </span>
+                        <span className="font-mono text-emerald-600 font-bold">93% (Job Ready)</span>
+                      </div>
+                      <div className="w-full h-2 rounded-full bg-slate-200 overflow-hidden">
+                        <div className="h-full bg-emerald-600 rounded-full transition-all duration-700" style={{ width: '93%' }} />
+                      </div>
+                    </div>
 
-                {/* Meter 4: Soft Skills & Corporate Etiquette */}
-                <div>
-                  <div className="flex items-center justify-between text-[11px] font-semibold mb-1">
-                    <span className="text-slate-800 flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-purple-600"></span>
-                      <span>Corporate Readiness &amp; Soft Skills</span>
-                    </span>
-                    <span className="font-mono text-purple-600 font-bold">84% (Job Ready)</span>
-                  </div>
-                  <div className="w-full h-2 rounded-full bg-slate-200 overflow-hidden">
-                    <div className="h-full bg-purple-600 rounded-full transition-all duration-1000" style={{ width: '84%' }} />
-                  </div>
-                </div>
+                    {/* Non-Tech Meter 4 */}
+                    <div>
+                      <div className="flex items-center justify-between text-[11px] font-semibold mb-1">
+                        <span className="text-slate-800 flex items-center gap-1.5">
+                          <span className="w-2 h-2 rounded-full bg-purple-600"></span>
+                          <span>GTM Strategy, Case Analysis &amp; ERP</span>
+                        </span>
+                        <span className="font-mono text-purple-600 font-bold">88% (High)</span>
+                      </div>
+                      <div className="w-full h-2 rounded-full bg-slate-200 overflow-hidden">
+                        <div className="h-full bg-purple-600 rounded-full transition-all duration-700" style={{ width: '88%' }} />
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    {/* Tech Meter 1 */}
+                    <div>
+                      <div className="flex items-center justify-between text-[11px] font-semibold mb-1">
+                        <span className="text-slate-800 flex items-center gap-1.5">
+                          <span className="w-2 h-2 rounded-full bg-blue-600"></span>
+                          <span>DSA &amp; Problem Solving Patterns</span>
+                        </span>
+                        <span className="font-mono text-blue-600 font-bold">92% (Advanced)</span>
+                      </div>
+                      <div className="w-full h-2 rounded-full bg-slate-200 overflow-hidden">
+                        <div className="h-full bg-blue-600 rounded-full transition-all duration-700" style={{ width: '92%' }} />
+                      </div>
+                    </div>
+
+                    {/* Tech Meter 2 */}
+                    <div>
+                      <div className="flex items-center justify-between text-[11px] font-semibold mb-1">
+                        <span className="text-slate-800 flex items-center gap-1.5">
+                          <span className="w-2 h-2 rounded-full bg-indigo-600"></span>
+                          <span>System Design &amp; Cloud Microservices</span>
+                        </span>
+                        <span className="font-mono text-indigo-600 font-bold">86% (Proficient)</span>
+                      </div>
+                      <div className="w-full h-2 rounded-full bg-slate-200 overflow-hidden">
+                        <div className="h-full bg-indigo-600 rounded-full transition-all duration-700" style={{ width: '86%' }} />
+                      </div>
+                    </div>
+
+                    {/* Tech Meter 3 */}
+                    <div>
+                      <div className="flex items-center justify-between text-[11px] font-semibold mb-1">
+                        <span className="text-slate-800 flex items-center gap-1.5">
+                          <span className="w-2 h-2 rounded-full bg-emerald-600"></span>
+                          <span>Full-Stack &amp; Applied AI Workflows</span>
+                        </span>
+                        <span className="font-mono text-emerald-600 font-bold">88% (High)</span>
+                      </div>
+                      <div className="w-full h-2 rounded-full bg-slate-200 overflow-hidden">
+                        <div className="h-full bg-emerald-600 rounded-full transition-all duration-700" style={{ width: '88%' }} />
+                      </div>
+                    </div>
+
+                    {/* Tech Meter 4 */}
+                    <div>
+                      <div className="flex items-center justify-between text-[11px] font-semibold mb-1">
+                        <span className="text-slate-800 flex items-center gap-1.5">
+                          <span className="w-2 h-2 rounded-full bg-purple-600"></span>
+                          <span>Architecture Code Reviews &amp; Soft Skills</span>
+                        </span>
+                        <span className="font-mono text-purple-600 font-bold">85% (Job Ready)</span>
+                      </div>
+                      <div className="w-full h-2 rounded-full bg-slate-200 overflow-hidden">
+                        <div className="h-full bg-purple-600 rounded-full transition-all duration-700" style={{ width: '85%' }} />
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
 
               {/* Lower Status Bar */}
               <div className="flex items-center justify-between text-[10px] text-slate-600 pt-2 border-t border-slate-200">
                 <span className="flex items-center gap-1 font-semibold text-emerald-700">
                   <Check size={12} />
-                  <span>380 Students Verified for Tier-1 Drives</span>
+                  <span>
+                    {diagnosticTrack === 'NON_TECH'
+                      ? '275 Students Shortlisted for Big 4 & MNC Consulting'
+                      : '380 Students Verified for Tier-1 Product & Tech Drives'}
+                  </span>
                 </span>
                 <span className="font-mono font-bold text-[#2563EB]">Live Meter Active →</span>
               </div>
