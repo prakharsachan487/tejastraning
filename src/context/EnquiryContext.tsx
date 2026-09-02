@@ -8,7 +8,8 @@ export type EnquirySource =
   | 'CAREER_EVALUATION'
   | 'CAREER_ROADMAP'
   | 'MENTOR_MOCK_DRIVE'
-  | 'INSTANT_CALLBACK';
+  | 'INSTANT_CALLBACK'
+  | 'LEADERSHIP_PAGE';
 
 interface EnquiryContextValue {
   isOpen: boolean;

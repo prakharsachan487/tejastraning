@@ -21,6 +21,7 @@ import { useAdminAuth } from '../../context/AdminAuthContext';
 import { useAdminData } from '../../context/AdminDataContext';
 import { OverviewTab } from './tabs/OverviewTab';
 import { AnnouncementsTab } from './tabs/AnnouncementsTab';
+import { TeamTab } from './tabs/TeamTab';
 import { CurriculumTab } from './tabs/CurriculumTab';
 import { MentorsTab } from './tabs/MentorsTab';
 import { JobsTab } from './tabs/JobsTab';
@@ -29,7 +30,7 @@ import { BlogsTab } from './tabs/BlogsTab';
 import { EnquiriesTab } from './tabs/EnquiriesTab';
 import { ApplicationsTab } from './tabs/ApplicationsTab';
 
-type ActiveTab = 'overview' | 'announcements' | 'curriculum' | 'mentors' | 'jobs' | 'gallery' | 'blogs' | 'enquiries' | 'applications';
+type ActiveTab = 'overview' | 'announcements' | 'team' | 'curriculum' | 'mentors' | 'jobs' | 'gallery' | 'blogs' | 'enquiries' | 'applications';
 
 interface AdminDashboardProps {
   onBackToHome: () => void;
@@ -37,7 +38,7 @@ interface AdminDashboardProps {
 
 export function AdminDashboard({ onBackToHome }: AdminDashboardProps) {
   const { adminUser, logoutAdmin, updateAdminPassword } = useAdminAuth();
-  const { enquiries, applications, mentors, jobs, galleryItems, blogPosts, announcements } = useAdminData();
+  const { enquiries, applications, mentors, jobs, galleryItems, blogPosts, announcements, teamMembers } = useAdminData();
 
   const [activeTab, setActiveTab] = useState<ActiveTab>('overview');
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
@@ -89,6 +90,12 @@ export function AdminDashboard({ onBackToHome }: AdminDashboardProps) {
       label: 'Top Marquee Ticker',
       icon: Sparkles,
       badge: announcements.filter((a) => a.active).length > 0 ? `${announcements.filter((a) => a.active).length} Active` : null,
+    },
+    {
+      id: 'team' as const,
+      label: 'Team & Leadership',
+      icon: Users,
+      badge: teamMembers.length > 0 ? String(teamMembers.length) : null,
     },
     {
       id: 'curriculum' as const,
@@ -355,6 +362,8 @@ export function AdminDashboard({ onBackToHome }: AdminDashboardProps) {
           )}
 
           {activeTab === 'announcements' && <AnnouncementsTab />}
+
+          {activeTab === 'team' && <TeamTab />}
 
           {activeTab === 'curriculum' && <CurriculumTab />}
 

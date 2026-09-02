@@ -21,6 +21,11 @@ export function Footer() {
       window.scrollTo({ top: 0, behavior: 'instant' });
       return;
     }
+    if (href === '#team' || href === '#our-team' || href === '#leadership') {
+      window.location.hash = '#team';
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      return;
+    }
     if (href === '#blog' || href === '#blogs' || href === '#articles') {
       window.location.hash = '#blog';
       window.scrollTo({ top: 0, behavior: 'instant' });
@@ -186,6 +191,15 @@ export function Footer() {
                 >
                   <Sparkles size={14} className="text-[#2563EB] group-hover:scale-110 transition-transform" />
                   <span>The 7-Stage Roadmap</span>
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => nav('#team')}
+                  className="text-slate-600 hover:text-[#2563EB] transition-colors cursor-pointer text-left font-medium flex items-center gap-2 group"
+                >
+                  <Users size={14} className="text-[#2563EB] group-hover:scale-110 transition-transform" />
+                  <span>Our Team &amp; Leadership</span>
                 </button>
               </li>
               <li>

@@ -109,6 +109,20 @@ export interface AnnouncementItem {
   order: number;
 }
 
+export interface TeamMember {
+  id: string;
+  name: string;
+  role: string;
+  department: 'Leadership & Founders' | 'Engineering & AI' | 'Placements & Corporate Relations' | 'Academic Curriculum';
+  badge?: string;
+  bio: string;
+  photo: string;
+  linkedinUrl?: string;
+  email?: string;
+  active: boolean;
+  order: number;
+}
+
 export interface JobApplication {
   id: string;
   jobId?: string | number;
@@ -132,6 +146,13 @@ interface AdminDataContextType {
   updateAnnouncement: (id: string, updated: Partial<AnnouncementItem>) => void;
   deleteAnnouncement: (id: string) => void;
   toggleAnnouncementActive: (id: string) => void;
+
+  // Team Members
+  teamMembers: TeamMember[];
+  addTeamMember: (member: Omit<TeamMember, 'id'>) => void;
+  updateTeamMember: (id: string, updated: Partial<TeamMember>) => void;
+  deleteTeamMember: (id: string) => void;
+  toggleTeamMemberActive: (id: string) => void;
 
   // Mentors
   mentors: MentorItem[];
@@ -920,9 +941,101 @@ const INITIAL_ANNOUNCEMENTS: AnnouncementItem[] = [
   },
 ];
 
+const INITIAL_TEAM_MEMBERS: TeamMember[] = [
+  {
+    id: 'team-1',
+    name: 'Prakhar Sachan',
+    role: 'Founder & Chief Executive Officer',
+    department: 'Leadership & Founders',
+    badge: 'Founding Partner',
+    bio: 'Pioneering scalable institutional readiness frameworks, transforming engineering & management cohorts into day-one billable corporate talent across 50+ campuses.',
+    photo: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
+    linkedinUrl: 'https://linkedin.com',
+    email: 'prakhar@grow360.in',
+    active: true,
+    order: 1,
+  },
+  {
+    id: 'team-2',
+    name: 'Ananya Sharma',
+    role: 'Head of Engineering & AI Curriculum',
+    department: 'Engineering & AI',
+    badge: 'Ex-Google · IIT Delhi',
+    bio: 'Architecting cutting-edge AI, Agentic Workflows, and Distributed Systems curriculum tailored for tier-1 campus hiring benchmarks.',
+    photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80',
+    linkedinUrl: 'https://linkedin.com',
+    email: 'ananya@grow360.in',
+    active: true,
+    order: 2,
+  },
+  {
+    id: 'team-3',
+    name: 'Rohan Verma',
+    role: 'Director of Corporate Relations & Placements',
+    department: 'Placements & Corporate Relations',
+    badge: 'Ex-Deloitte Advisory',
+    bio: 'Overseeing placement drives, corporate liaison partnerships, and institutional mock interview rubrics with leading MNCs and unicorns.',
+    photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80',
+    linkedinUrl: 'https://linkedin.com',
+    email: 'rohan@grow360.in',
+    active: true,
+    order: 3,
+  },
+  {
+    id: 'team-4',
+    name: 'Dr. Arvind Mehta',
+    role: 'Dean of Academic & Institutional Partnerships',
+    department: 'Academic Curriculum',
+    badge: 'Ph.D. Education Strategy',
+    bio: 'Aligning university credit structures, NBA/NAAC compliance, and semester-integrated delivery models with academic boards across India.',
+    photo: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80',
+    linkedinUrl: 'https://linkedin.com',
+    email: 'arvind@grow360.in',
+    active: true,
+    order: 4,
+  },
+  {
+    id: 'team-5',
+    name: 'Priya Nambiar',
+    role: 'Lead Corporate Etiquette & Executive Presence Coach',
+    department: 'Leadership & Founders',
+    badge: 'Ex-McKinsey Coach',
+    bio: 'Mentoring thousands of engineering & MBA graduates in boardroom presence, high-stakes communication, and technical interview diplomacy.',
+    photo: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80',
+    linkedinUrl: 'https://linkedin.com',
+    email: 'priya@grow360.in',
+    active: true,
+    order: 5,
+  },
+  {
+    id: 'team-6',
+    name: 'Sameer Kulkarni',
+    role: 'Lead Cloud & Systems Architect',
+    department: 'Engineering & AI',
+    badge: 'Ex-AWS Solutions Architect',
+    bio: 'Guiding live enterprise architecture capstones, CI/CD platform pipelines, and multi-cloud container orchestration drills for pre-final year students.',
+    photo: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80',
+    linkedinUrl: 'https://linkedin.com',
+    email: 'sameer@grow360.in',
+    active: true,
+    order: 6,
+  },
+];
+
 const AdminDataContext = createContext<AdminDataContextType | null>(null);
 
 export function AdminDataProvider({ children }: { children: ReactNode }) {
+  // 00a. Team Members State
+  const [teamMembers, setTeamMembers] = useState<TeamMember[]>(() => {
+    const saved = localStorage.getItem('grow360_admin_team');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch {}
+    }
+    return INITIAL_TEAM_MEMBERS;
+  });
+
   // 00. Announcements (Top Marquee Ticker) State
   const [announcements, setAnnouncements] = useState<AnnouncementItem[]>(() => {
     const saved = localStorage.getItem('grow360_admin_announcements');
@@ -1044,6 +1157,36 @@ export function AdminDataProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     localStorage.setItem('grow360_admin_announcements', JSON.stringify(announcements));
   }, [announcements]);
+
+  useEffect(() => {
+    localStorage.setItem('grow360_admin_team', JSON.stringify(teamMembers));
+  }, [teamMembers]);
+
+  // ─── Team Member Handlers ─────────────────────────────────
+
+  const addTeamMember = (memberData: Omit<TeamMember, 'id'>) => {
+    const newMember: TeamMember = {
+      ...memberData,
+      id: `team-${Date.now()}`,
+    };
+    setTeamMembers((prev) => [...prev, newMember]);
+  };
+
+  const updateTeamMember = (id: string, updated: Partial<TeamMember>) => {
+    setTeamMembers((prev) =>
+      prev.map((m) => (m.id === id ? { ...m, ...updated } : m))
+    );
+  };
+
+  const deleteTeamMember = (id: string) => {
+    setTeamMembers((prev) => prev.filter((m) => m.id !== id));
+  };
+
+  const toggleTeamMemberActive = (id: string) => {
+    setTeamMembers((prev) =>
+      prev.map((m) => (m.id === id ? { ...m, active: !m.active } : m))
+    );
+  };
 
   // ─── Announcement Handlers ────────────────────────────────
 
@@ -1478,6 +1621,11 @@ export function AdminDataProvider({ children }: { children: ReactNode }) {
         updateAnnouncement,
         deleteAnnouncement,
         toggleAnnouncementActive,
+        teamMembers,
+        addTeamMember,
+        updateTeamMember,
+        deleteTeamMember,
+        toggleTeamMemberActive,
         curriculumCourses,
         updateCurriculumCourse,
         addRollingTrackToCourse,
