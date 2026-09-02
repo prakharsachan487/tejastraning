@@ -123,6 +123,16 @@ export interface TeamMember {
   order: number;
 }
 
+export interface MetricItem {
+  id: string;
+  value: number;
+  prefix?: string;
+  suffix?: string;
+  label: string;
+  sub: string;
+  order?: number;
+}
+
 export interface JobApplication {
   id: string;
   jobId?: string | number;
@@ -140,6 +150,12 @@ export interface JobApplication {
 }
 
 interface AdminDataContextType {
+  // Verified Track Record Metrics
+  metricsData: MetricItem[];
+  addMetric: (item: Omit<MetricItem, 'id'>) => void;
+  updateMetric: (id: string, updated: Partial<MetricItem>) => void;
+  deleteMetric: (id: string) => void;
+
   // Announcements (Top Marquee Ticker)
   announcements: AnnouncementItem[];
   tickerSpeed: 'fast' | 'normal' | 'slow';
@@ -884,6 +900,15 @@ const INITIAL_CURRICULUM: CurriculumCourse[] = [
   },
 ];
 
+const INITIAL_METRICS: MetricItem[] = [
+  { id: 'm-1', value: 25, suffix: '+', label: 'Partner Campuses', sub: 'Institutional Pilots', order: 1 },
+  { id: 'm-2', value: 5, suffix: 'K+', label: 'Students Trained', sub: 'Assessed & Upskilled', order: 2 },
+  { id: 'm-3', value: 40, suffix: '+', label: 'Hiring Partners', sub: 'Corporate Recruiters', order: 3 },
+  { id: 'm-4', value: 150, suffix: '+', label: 'Curriculum Hours', sub: 'Hands-on Live Labs', order: 4 },
+  { id: 'm-5', value: 30, suffix: '+', label: 'Live Projects', sub: 'Industry Capstones', order: 5 },
+  { id: 'm-6', value: 7, prefix: '₹', suffix: '.2 LPA', label: 'Avg Package', sub: 'Campus Hires', order: 6 },
+];
+
 const INITIAL_ANNOUNCEMENTS: AnnouncementItem[] = [
   {
     id: 'ann-1',
@@ -1027,6 +1052,46 @@ const INITIAL_TEAM_MEMBERS: TeamMember[] = [
 const AdminDataContext = createContext<AdminDataContextType | null>(null);
 
 export function AdminDataProvider({ children }: { children: ReactNode }) {
+  // 000. Verified Track Record Metrics State
+  const [metricsData, setMetricsData] = useState<MetricItem[]>(() => {
+    const saved = localStorage.getItem('grow360_admin_metrics');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch {}
+    }
+    return INITIAL_METRICS;
+  });
+
+  const updateMetric = (id: string, updated: Partial<MetricItem>) => {
+    setMetricsData((prev) => {
+      const next = prev.map((m) => (m.id === id ? { ...m, ...updated } : m));
+      localStorage.setItem('grow360_admin_metrics', JSON.stringify(next));
+      return next;
+    });
+  };
+
+  const addMetric = (item: Omit<MetricItem, 'id'>) => {
+    const newMetric: MetricItem = {
+      ...item,
+      id: 'metric-' + Date.now(),
+      order: metricsData.length + 1,
+    };
+    setMetricsData((prev) => {
+      const next = [...prev, newMetric];
+      localStorage.setItem('grow360_admin_metrics', JSON.stringify(next));
+      return next;
+    });
+  };
+
+  const deleteMetric = (id: string) => {
+    setMetricsData((prev) => {
+      const next = prev.filter((m) => m.id !== id);
+      localStorage.setItem('grow360_admin_metrics', JSON.stringify(next));
+      return next;
+    });
+  };
+
   // 00a. Team Members State
   const [teamMembers, setTeamMembers] = useState<TeamMember[]>(() => {
     const saved = localStorage.getItem('grow360_admin_team');
@@ -1631,6 +1696,10 @@ export function AdminDataProvider({ children }: { children: ReactNode }) {
   return (
     <AdminDataContext.Provider
       value={{
+        metricsData,
+        addMetric,
+        updateMetric,
+        deleteMetric,
         announcements,
         tickerSpeed,
         setTickerSpeed,

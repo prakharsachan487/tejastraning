@@ -1,14 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
-
-const metrics = [
-  { value: 25, suffix: '+', label: 'Partner Campuses', sub: 'Institutional Pilots' },
-  { value: 5, suffix: 'K+', label: 'Students Trained', sub: 'Assessed & Upskilled' },
-  { value: 40, suffix: '+', label: 'Hiring Partners', sub: 'Corporate Recruiters' },
-  { value: 150, suffix: '+', label: 'Curriculum Hours', sub: 'Hands-on Live Labs' },
-  { value: 30, suffix: '+', label: 'Live Projects', sub: 'Industry Capstones' },
-  { value: 7, prefix: '₹', suffix: '.2 LPA', label: 'Avg Package', sub: 'Campus Hires' },
-];
+import { useAdminData } from '../context/AdminDataContext';
 
 function AnimatedCounter({
   value,
@@ -50,6 +42,9 @@ function AnimatedCounter({
 export function MetricsSection() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: '-60px' });
+  const { metricsData } = useAdminData();
+
+  const sortedMetrics = [...metricsData].sort((a, b) => (a.order || 0) - (b.order || 0));
 
   return (
     <section ref={ref} className="py-20 lg:py-24 bg-[#F2F4F7] border-y border-black/5 relative">
@@ -74,11 +69,11 @@ export function MetricsSection() {
           </h2>
         </motion.div>
 
-        {/* 6 Metric Badges */}
+        {/* Dynamic Metric Badges */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
-          {metrics.map((m, i) => (
+          {sortedMetrics.map((m, i) => (
             <motion.div
-              key={m.label}
+              key={m.id}
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
