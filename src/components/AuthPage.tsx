@@ -192,30 +192,30 @@ export function AuthPage() {
   };
 
   return (
-    <div className="min-h-screen w-full bg-[#F7F4EC] text-[#1E1E24] flex flex-col lg:flex-row relative font-sans selection:bg-[#2563EB] selection:text-white">
+    <div className="min-h-screen w-full bg-[#F8F9FB] text-[#0F172A] flex flex-col lg:flex-row relative font-sans selection:bg-[#2563EB] selection:text-white">
       {/* ========================================================
           LEFT HALF: AUTHENTICATION CONTAINER
       ======================================================== */}
-      <div className="w-full lg:w-1/2 min-h-screen flex flex-col justify-between p-6 sm:p-10 lg:p-14 bg-gradient-to-b from-[#FAF8F3] via-[#F4F0E6] to-[#ECE5D8] relative z-10">
+      <div className="w-full lg:w-1/2 min-h-screen flex flex-col justify-between p-6 sm:p-10 lg:p-14 bg-white border-r border-black/8 relative z-10">
         {/* Top Header Row with Back to Home & Brand Logo */}
         <div className="flex items-center justify-between w-full">
           <button
             onClick={() => {
               window.location.hash = '';
             }}
-            className="inline-flex items-center gap-2 text-xs font-semibold text-slate-700 hover:text-black transition-colors bg-black/5 hover:bg-black/10 px-4 py-2 rounded-full border border-black/10 cursor-pointer"
+            className="inline-flex items-center gap-2 text-xs font-semibold text-slate-700 hover:text-[#2563EB] transition-colors bg-slate-100 hover:bg-slate-200 px-4 py-2 rounded-full border border-black/8 cursor-pointer"
           >
             <ArrowLeft size={15} />
             <span>Back to Home</span>
           </button>
 
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-black/15 bg-white/80 shadow-xs">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-black/8 bg-slate-50 shadow-2xs">
             <img
-              src="/grow360-logo.png"
+              src="/grow360_logo.jpg"
               alt="Grow360 Logo"
-              className="h-4 w-auto object-contain rounded"
+              className="h-5 w-auto object-contain rounded"
             />
-            <span className="text-xs font-extrabold text-[#1E1E24] tracking-tight">
+            <span className="text-xs font-extrabold text-slate-900 tracking-tight">
               GROW<span className="text-[#2563EB]">360°</span>
             </span>
           </div>
@@ -225,7 +225,7 @@ export function AuthPage() {
         <div className="max-w-md w-full mx-auto my-auto py-6">
           {/* Header Title */}
           <div className="text-center mb-6">
-            <h1 className="text-3xl sm:text-4xl font-extrabold text-[#1A1A1F] tracking-tight font-[family-name:var(--font-display)]">
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-[family-name:var(--font-display)]">
               {viewMode === 'signup'
                 ? 'Create an account'
                 : viewMode === 'forgot'
@@ -753,57 +753,60 @@ export function AuthPage() {
       </div>
 
       {/* ========================================================
-          RIGHT HALF: EDITORIAL BRAND SHOWCASE
+          RIGHT HALF: EDITORIAL BRAND SHOWCASE (Light Theme)
       ======================================================== */}
-      <div className="hidden lg:flex w-1/2 bg-gradient-to-br from-[#0A1024] via-[#0D1836] to-[#1E3A8A] text-white flex-col justify-between p-14 relative overflow-hidden">
+      <div className="hidden lg:flex w-1/2 bg-[#F8F9FB] text-slate-900 flex-col justify-between p-14 relative overflow-hidden">
         {/* Background ambient lighting */}
-        <div className="absolute top-1/4 right-10 w-96 h-96 bg-[#2563EB]/25 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-10 left-10 w-80 h-80 bg-indigo-600/20 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:28px_28px] pointer-events-none" />
+        <div className="absolute top-1/4 right-10 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-10 left-10 w-80 h-80 bg-indigo-500/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000005_1px,transparent_1px),linear-gradient(to_bottom,#00000005_1px,transparent_1px)] bg-[size:28px_28px] pointer-events-none" />
 
         <div className="relative z-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/15 border border-blue-400/30 text-blue-300 text-xs font-mono font-semibold">
-            <Sparkles size={13} className="text-blue-400" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-[#2563EB] text-xs font-mono font-bold">
+            <Sparkles size={13} />
             <span>Grow360 — Decoding the Corporate World</span>
           </div>
         </div>
 
         <div className="relative z-10 max-w-lg space-y-6">
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight font-[family-name:var(--font-display)] leading-tight">
-            Turn Students into Industry-Ready Corporate Leaders.
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight font-[family-name:var(--font-display)] leading-tight text-slate-900">
+            Turn Students into{' '}
+            <span className="text-[#2563EB]">
+              Industry-Ready Corporate Leaders.
+            </span>
           </h2>
 
-          <p className="text-sm text-slate-300 leading-relaxed font-normal">
+          <p className="text-sm text-slate-600 leading-relaxed font-normal">
             Access 1-on-1 mock technical interviews, production system design rubrics, and tailored placement mentorship led by engineering and business practitioners from Meta, Google, Accenture, and Deloitte.
           </p>
 
-          <div className="grid grid-cols-2 gap-6 pt-4 border-t border-white/10">
-            <div>
-              <span className="text-3xl font-extrabold text-white font-[family-name:var(--font-display)]">
+          <div className="grid grid-cols-2 gap-4 pt-2">
+            <div className="bg-white border border-black/8 rounded-2xl p-5 shadow-xs">
+              <span className="text-3xl font-extrabold text-slate-900 font-[family-name:var(--font-display)]">
                 90%+
               </span>
-              <p className="text-xs text-slate-400 mt-1 font-mono">Tier-1 Placement Rate</p>
+              <p className="text-xs text-slate-500 mt-1 font-mono font-semibold">Tier-1 Placement Rate</p>
             </div>
-            <div>
-              <span className="text-3xl font-extrabold text-blue-400 font-[family-name:var(--font-display)]">
+            <div className="bg-white border border-black/8 rounded-2xl p-5 shadow-xs">
+              <span className="text-3xl font-extrabold text-[#2563EB] font-[family-name:var(--font-display)]">
                 120+
               </span>
-              <p className="text-xs text-slate-400 mt-1 font-mono">Corporate Mentors</p>
+              <p className="text-xs text-slate-500 mt-1 font-mono font-semibold">Corporate Mentors</p>
             </div>
           </div>
         </div>
 
-        <div className="relative z-10 p-5 rounded-2xl bg-white/10 border border-white/15 backdrop-blur-md shadow-lg">
-          <p className="text-xs text-slate-200 italic mb-3 leading-relaxed">
+        <div className="relative z-10 p-5 rounded-2xl bg-white border border-black/8 shadow-xs">
+          <p className="text-xs text-slate-700 italic mb-3 leading-relaxed">
             &ldquo;Grow360 mock drives and 1-on-1 mentorship helped our batch master real-world corporate interview questions and clear top campus placements with confidence.&rdquo;
           </p>
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-500 to-indigo-500 flex items-center justify-center font-bold text-xs text-white shadow-xs">
+            <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center font-bold text-xs text-white shadow-xs">
               V
             </div>
             <div>
-              <p className="text-xs font-bold text-white">Parul University Cohort</p>
-              <p className="text-[10px] font-mono text-blue-300">Placed at Tier-1 MNC</p>
+              <p className="text-xs font-bold text-slate-900">Parul University Cohort</p>
+              <p className="text-[10px] font-mono text-[#2563EB] font-bold">Placed at Tier-1 MNC</p>
             </div>
           </div>
         </div>
