@@ -796,19 +796,10 @@ export function AuthPage() {
           </div>
         </div>
 
-        <div className="relative z-10 p-5 rounded-2xl bg-white border border-black/8 shadow-xs">
-          <p className="text-xs text-slate-700 italic mb-3 leading-relaxed">
-            &ldquo;Grow360 mock drives and 1-on-1 mentorship helped our batch master real-world corporate interview questions and clear top campus placements with confidence.&rdquo;
-          </p>
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center font-bold text-xs text-white shadow-xs">
-              V
-            </div>
-            <div>
-              <p className="text-xs font-bold text-slate-900">Parul University Cohort</p>
-              <p className="text-[10px] font-mono text-[#2563EB] font-bold">Placed at Tier-1 MNC</p>
-            </div>
-          </div>
+        {/* Bottom Trust Note */}
+        <div className="relative z-10 pt-6 border-t border-black/6 flex items-center justify-between text-xs text-slate-500 font-mono">
+          <span>Enterprise Grade Career Diagnostics</span>
+          <span>100% Confidential</span>
         </div>
       </div>
     </div>
